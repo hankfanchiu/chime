@@ -1,28 +1,27 @@
-var SessionActions = require("../actions/session_actions");
-
 var WebAPIUtils = {
-  signup: function (email, password) {
-    var data = {email: email, password: password};
-
-    $.post("/users", {user: data}, function (response) {
-      SessionActions.receiveSignUp(response);
+  signUp: function (userData, actionCallback) {
+    $.ajax({
+      url: "/users",
+      type: "POST",
+      data: {user: userData},
+      success: function (response) {
+        actionCallback(response);
+      }
     });
   },
 
-  login: function (email, password) {
-    var data = {email: email, password: password};
-
-    $.post("/session", {user: data}, function (response) {
-      SessionActions.receiveLogin(response);
+  login: function (userData, actionCallback) {
+    $.post("/session", {user: userData}, function (response) {
+      actionCallback(response);
     });
   },
 
-  logout: function () {
+  logout: function (actionCallback) {
     $.ajax({
       url: "/session",
       type: "DELETE",
       success: function (response) {
-        SessionActions.receiveLogout(response);
+        actionCallback(response);
       }
     });
   }

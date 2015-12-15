@@ -3,20 +3,40 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
-  validates :email, :session_token, uniqueness: true
-  validates :password_digest, presence: true
-  validates :password, length: { min: 8, allow_nil: true }
+  before_save { self.email = email.downcase }
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :email,
+    presence: true,
+    uniqueness: { case_sensitive: false },
+    format: { with: VALID_EMAIL_REGEX }
+
+  validates :password,
+    confirmation: true,
+    length: { minimum: 8, maximum: 20, allow_nil: true }
+
+  validates :password_confirmation,
+    presence: true,
+    allow_nil: true
+
+  validates :session_token,
+    presence: true,
+    uniqueness: true
+
+  validates_presence_of :password_digest
+
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
 
-  def self.find_by_credentials(email, password)
-    user = self.find_by(email: email)
+  def self.find_by_credentials(email, maybe_password)
+    user = self.find_by(email: email.downcase)
 
     return nil unless user
 
-    user.is_password?(password) ? user : nil
+    user.is_password?(maybe_password) ? user : nil
   end
 
   def reset_session_token!
@@ -30,15 +50,15 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  private
-
-  def ensure_session_token
-    self.session_token ||= self.class.generate_session_token
-  end
-
   def is_password?(password)
     saved_password = BCrypt::Password.new(self.password_digest)
 
     saved_password.is_password?(password)
+  end
+
+  private
+
+  def ensure_session_token
+    self.session_token ||= self.class.generate_session_token
   end
 end

@@ -1,19 +1,18 @@
 class SessionsController < ApplicationController
   def create
-    user = User.find_by_credentials(
-      params[:user][:email],
-      params[:user][:password]
-    )
+    email, password = params[:user][:email], params[:user][:password]
+    user = User.find_by_credentials(email, password)
 
     if user
-      sign_in!(user)
-      render json: @user.username
+      login!(user)
+      render :login
     else
-      render json: ["Incorrect username or password"]
+      render json: { error: "Invalid username or password" }
     end
   end
 
   def destroy
-    sign_out!
+    logout!
+    render json: {}
   end
 end

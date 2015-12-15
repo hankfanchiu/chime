@@ -3,21 +3,21 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      sign_in!(@user)
-      render json: @user.username
+      login!(@user)
+
+      render "/sessions/login"
     else
-      render json: @user.errors.full_messages
+      render json: { error: @user.errors.full_messages }
     end
   end
 
   def show
-    @user = current_user
-    render json: @user.username
+    render json: { user: current_user.email }
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

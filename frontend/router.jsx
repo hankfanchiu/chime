@@ -11,10 +11,10 @@ var SignUp = require("./components/session/sign_up");
 
 module.exports = (
   <Router>
-    <Route name="app" path="/" component={App}>
-      <IndexRoute component={Explore} />
-      <Route name="login" path="/login" component={Login} />
-      <Route name="signup" path="/signup" component={SignUp} />
+    <Route name="app" path="/" component={ App }>
+      <IndexRoute component={ Explore } />
+      <Route name="login" path="/login" component={ Login } />
+      <Route name="signup" path="/signup" component={ SignUp } />
     </Route>
   </Router>
 );
