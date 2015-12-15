@@ -5,7 +5,11 @@ var History = require("react-router").History;
 var Nav = React.createClass({
   mixins: [History],
 
-  handleHeaderClick: function (e) {
+  _pushRoot: function (e) {
+    this.history.pushState(null, "/", {});
+  },
+
+  _pushExplore: function (e) {
     this.history.pushState(null, "/", {});
   },
 
@@ -13,8 +17,12 @@ var Nav = React.createClass({
     return (
       <div className="nav">
         <header>
-          <h1 onClick={ this.handleHeaderClick }>Chime</h1>
+          <h1 onClick={ this._pushRoot }>Chime</h1>
         </header>
+
+        <ul className="nav-links">
+          <li><a onClick={ this._pushExplore }>Explore</a></li>
+        </ul>
 
         <SessionNav email={ this.props.email }
           isLoggedIn={ this.props.isLoggedIn } />
