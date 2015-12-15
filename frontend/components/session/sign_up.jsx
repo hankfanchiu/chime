@@ -2,9 +2,10 @@ var React = require("react");
 var SessionActions = require("../../actions/session_actions");
 var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
+var History = require("react-router").History;
 
 var SignUp = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
     return { email: "", errors: [] };
@@ -19,7 +20,11 @@ var SignUp = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ errors: SessionStore.getErrors() });
+    if (SessionStore.isLoggedIn()) {
+      this.history.pushState(null, "/", {});
+    } else {
+      this.setState({ errors: SessionStore.getErrors() });
+    }
   },
 
   _onSubmit: function (e) {
