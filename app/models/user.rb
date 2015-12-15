@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password_digest
 
+  has_many :tracks, foreign_key: :arist_id
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
