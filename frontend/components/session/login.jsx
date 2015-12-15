@@ -8,7 +8,7 @@ var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { email: "", password: "", errors: [] };
+    return { email: "", errors: [] };
   },
 
   componentDidMount: function () {
@@ -34,7 +34,7 @@ var Login = React.createClass({
 
     var userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.refs.password.value
     };
 
     SessionActions.login(userData);
@@ -78,6 +78,7 @@ var Login = React.createClass({
             <label htmlFor="login-email">Email</label>
 
             <input type="text"
+              name="email"
               className="form-control"
               id="login-email"
               valueLink={ this.linkState("email") } />
@@ -87,9 +88,10 @@ var Login = React.createClass({
             <label htmlFor="login-password">Password</label>
 
             <input type="password"
+              name="password"
               className="form-control"
-              id="login-password"
-              valueLink={ this.linkState("password") } />
+              ref="password"
+              id="login-password" />
           </div>
 
           <button type="submit">Login</button>

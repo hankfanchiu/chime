@@ -8,12 +8,7 @@ var SignUp = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return {
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      errors: []
-    };
+    return { email: "", errors: [] };
   },
 
   componentDidMount: function () {
@@ -39,8 +34,8 @@ var SignUp = React.createClass({
 
     var userData = {
       email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.passwordConfirmation
+      password: this.refs.password.value,
+      password_confirmation: this.refs.passwordConfirmation.value
     };
 
     SessionActions.signUp(userData);
@@ -85,6 +80,7 @@ var SignUp = React.createClass({
             <label htmlFor="signup-email">Email</label>
 
             <input type="text"
+              name="email"
               className="form-control"
               id="signup-email"
               valueLink={ this.linkState("email") } />
@@ -94,9 +90,10 @@ var SignUp = React.createClass({
             <label htmlFor="signup-password">Password</label>
 
             <input type="password"
+              name="password"
               className="form-control"
-              id="signup-password"
-              valueLink={ this.linkState("password") } />
+              ref="password"
+              id="signup-password" />
           </div>
 
           <div className="form-group">
@@ -105,9 +102,10 @@ var SignUp = React.createClass({
             </label>
 
             <input type="password"
+              name="passwordConfirmation"
               className="form-control"
-              id="signup-password-confirmation"
-              valueLink={ this.linkState("passwordConfirmation") } />
+              ref="passwordConfirmation"
+              id="signup-password-confirmation" />
           </div>
 
           <button type="submit">Sign Up</button>

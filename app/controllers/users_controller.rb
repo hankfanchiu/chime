@@ -3,11 +3,15 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:show]
 
   def create
+    if User.find_by(email: params[:user][:email])
+      render json: { errors: ["Email has been taken"] }
+      return
+    end
+
     @user = User.new(user_params)
 
     if @user.save
       login!(@user)
-
       render "/sessions/login"
     else
       render json: { errors: @user.errors.full_messages }
