@@ -20,5 +20,17 @@
   "bugs": {
     "url": "https://github.com/hankfanchiu/chime/issues"
   },
-  "homepage": "https://github.com/hankfanchiu/chime#readme"
+  "homepage": "https://github.com/hankfanchiu/chime#readme",
+  "dependencies": {
+    "babel-core": "^6.3.17",
+    "babel-loader": "^6.2.0",
+    "babel-preset-react": "^6.3.13",
+    "flux": "^2.1.1",
+    "history": "1.13.x",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-router": "^1.0.2",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {}
 }
