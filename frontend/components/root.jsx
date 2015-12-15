@@ -1,10 +1,10 @@
 var React = require("react");
 
-var App = React.createClass({
+var Root = React.createClass({
   render: function () {
     return (
       <div>
-        Hello from App
+        Hello from Root
 
         { this.props.children }
       </div>
@@ -12,4 +12,4 @@ var App = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = Root;
