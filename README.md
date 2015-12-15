@@ -11,8 +11,8 @@ and React.js. Chime allows users to:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
-- [ ] Create an account
-- [ ] Sign In / Sign Out
+- [x] Create an account
+- [x] Sign In / Sign Out
 - [ ] Search and follow other users
 - [ ] Upload and delete sound files
 - [ ] Stream uploaded tracks without interruption
