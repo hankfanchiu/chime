@@ -5,38 +5,38 @@ var History = require("react-router").History;
 var SessionNav = React.createClass({
   mixins: [History],
 
-  handleSignUp: function (e) {
+  _signUp: function (e) {
     this.history.pushState(null, "/signup", {});
   },
 
-  handleLogin: function (e) {
+  _login: function (e) {
     this.history.pushState(null, "/login", {});
   },
 
-  handleLogout: function (e) {
+  _logout: function (e) {
     SessionActions.logout();
     this.history.pushState(null, "/", {});
   },
 
-  LoggedIn: function () {
+  loggedIn: function () {
     return (
       <ul className="session-links">
         <li>{ this.props.email }</li>
         <li>
-          <a onClick={ this.handleLogout }>Logout</a>
+          <a onClick={ this._logout }>Logout</a>
         </li>
       </ul>
     );
   },
 
-  LoggedOut: function () {
+  loggedOut: function () {
     return (
       <ul className="session-links">
         <li>
-          <a onClick={ this.handleSignUp }>Sign Up</a>
+          <a onClick={ this._signUp }>Sign Up</a>
         </li>
         <li>
-          <a onClick={ this.handleLogin }>Login</a>
+          <a onClick={ this._login }>Login</a>
         </li>
       </ul>
     );
@@ -45,7 +45,7 @@ var SessionNav = React.createClass({
   render: function () {
     return (
       <div className="session-nav">
-        { this.props.isLoggedIn ? this.LoggedIn() : this.LoggedOut() }
+        { this.props.isLoggedIn ? this.loggedIn() : this.loggedOut() }
       </div>
     );
   }
