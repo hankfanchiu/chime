@@ -1,14 +1,14 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
 
-var SignIn = React.createClass({
+var Login = React.createClass({
   render: function () {
     return (
       <div>
-        Hello from Sign In
+        Hello from Login
       </div>
     );
   }
 });
 
-module.exports = SignIn;
+module.exports = Login;
