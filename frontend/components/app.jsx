@@ -24,6 +24,10 @@ var App = React.createClass({
   },
 
   _onChange: function () {
+    if (SessionStore.isLoggedIn) {
+      this.props.history.pushState(null, "/", {});
+    }
+
     this.setState(this.getStateFromStore());
   },
 

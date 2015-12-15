@@ -2,10 +2,9 @@ var React = require("react");
 var SessionActions = require("../../actions/session_actions");
 var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
-var History = require("react-router").History;
 
 var Login = React.createClass({
-  mixins: [LinkedStateMixin, History],
+  mixins: [LinkedStateMixin],
 
   getInitialState: function () {
     return { email: "", errors: [] };
