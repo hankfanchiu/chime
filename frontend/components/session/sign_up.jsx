@@ -1,5 +1,6 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
+var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
@@ -7,11 +8,42 @@ var SignUp = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { email: "", password: "", passwordConfirmation: "" };
+    return {
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+      errors: []
+    };
   },
 
-  resetState: function () {
-    this.setState({ email: "", password: "", passwordConfirmation: "" });
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState({ errors: SessionStore.getErrors() });
+  },
+
+  _onSubmit: function (e) {
+    e.preventDefault();
+
+    if (this.isIncomplete()) {
+      return this.handleIncompleteSubmit();
+    }
+
+    this.setState({ errors: [] });
+
+    var userData = {
+      email: this.state.email,
+      password: this.state.password,
+      password_confirmation: this.state.passwordConfirmation
+    };
+
+    SessionActions.signUp(userData);
   },
 
   isIncomplete: function () {
@@ -23,63 +55,65 @@ var SignUp = React.createClass({
   },
 
   handleIncompleteSubmit: function () {
-    alert("Please fill out all fields!");
-  },
-
-  handleSubmit: function (e) {
-    e.preventDefault();
-
-    if (this.isIncomplete()) {
-      return this.handleIncompleteSubmit();
-    }
-
-    var userData = {
-      email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.passwordConfirmation
-    };
-
-    SessionActions.signUp(userData);
-    this.resetState();
+    alert("Missing required fields");
   },
 
   render: function () {
+    var errors;
+
+    if (this.state.errors.length > 0) {
+
+      var errorMessages = this.state.errors.map(function (error, idx) {
+        return <div key={ idx }>{ error }</div>
+      });
+
+      errors = <div>{ errorMessages }</div>;
+
+    } else {
+      errors = <div></div>
+    }
+
     return (
-      <form className="signup-form" onSubmit={ this.handleSubmit }>
+      <div>
+        { errors }
 
-        <h2>Create Your Account</h2>
+        <form className="signup-form" onSubmit={ this._onSubmit }>
 
-        <div className="form-group">
-          <label htmlFor="signup-email">Email</label>
+          <h2>Create Your Account</h2>
 
-          <input type="text"
-            className="form-control"
-            id="signup-email"
-            valueLink={ this.linkState("email") } />
-        </div>
+          <div className="form-group">
+            <label htmlFor="signup-email">Email</label>
 
-        <div className="form-group">
-          <label htmlFor="signup-password">Password</label>
+            <input type="text"
+              className="form-control"
+              id="signup-email"
+              valueLink={ this.linkState("email") } />
+          </div>
 
-          <input type="password"
-            className="form-control"
-            id="signup-password"
-            valueLink={ this.linkState("password") } />
-        </div>
+          <div className="form-group">
+            <label htmlFor="signup-password">Password</label>
 
-        <div className="form-group">
-          <label htmlFor="signup-password-confirmation">
-            Password Confirmation
-          </label>
+            <input type="password"
+              className="form-control"
+              id="signup-password"
+              valueLink={ this.linkState("password") } />
+          </div>
 
-          <input type="password"
-            className="form-control"
-            id="signup-password-confirmation"
-            valueLink={ this.linkState("passwordConfirmation") } />
-        </div>
+          <div className="form-group">
+            <label htmlFor="signup-password-confirmation">
+              Password Confirmation
+            </label>
 
-        <button type="submit">Sign Up</button>
-      </form>
+            <input type="password"
+              className="form-control"
+              id="signup-password-confirmation"
+              valueLink={ this.linkState("passwordConfirmation") } />
+          </div>
+
+          <button type="submit">Sign Up</button>
+        </form>
+
+      </div>
     );
   }
 });

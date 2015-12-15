@@ -10,18 +10,21 @@ var _errors = [];
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
-  switch (payload.actionType) {
+  var actionType = payload.actionType;
+  var response = payload.response;
+
+  switch (actionType) {
 
     case ActionTypes.LOGIN_RESPONSE:
-      if (payload.errors) {
-        _errors = action.errors;
+      if (response.errors) {
+        setErrors(response.errors);
       } else {
-        setSessionStorage(payload.response);
+        setSessionStorage(response);
       }
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:
-      removeSessionStorage(payload.response);
+      removeSessionStorage(response);
       break;
 
   };
@@ -59,6 +62,12 @@ var removeSessionStorage = function (response) {
 
   sessionStorage.removeItem("session_token");
   sessionStorage.removeItem("email");
+
+  SessionStore.__emitChange();
+};
+
+var setErrors = function (errors) {
+  _errors = errors;
 
   SessionStore.__emitChange();
 };

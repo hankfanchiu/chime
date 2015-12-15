@@ -1,17 +1,43 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
+var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
 var Login = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { email: "", password: "" };
+    return { email: "", password: "", errors: [] };
   },
 
-  resetState: function () {
-    this.setState({ email: "", password: "" });
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState({ errors: SessionStore.getErrors() });
+  },
+
+  _onSubmit: function (e) {
+    e.preventDefault();
+
+    if (this.isIncomplete()) {
+      return this.handleIncompleteSubmit();
+    }
+
+    this.setState({ errors: [] });
+
+    var userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    SessionActions.login(userData);
   },
 
   isIncomplete: function () {
@@ -25,48 +51,51 @@ var Login = React.createClass({
     alert("Please fill out all fields!");
   },
 
-  handleSubmit: function (e) {
-    e.preventDefault();
+  render: function () {
+    var errors;
 
-    if (this.isIncomplete()) {
-      return this.handleIncompleteSubmit();
+    if (this.state.errors.length > 0) {
+
+      var errorMessages = this.state.errors.map(function (error, idx) {
+        return <div key={ idx }>{ error }</div>
+      });
+
+      errors = <div>{ errorMessages }</div>;
+
+    } else {
+      errors = <div></div>
     }
 
-    var userData = {
-      email: this.state.email,
-      password: this.state.password
-    };
-
-    SessionActions.login(userData);
-    this.resetState();
-  },
-
-  render: function () {
     return (
-      <form className="login-form" onSubmit={ this.handleSubmit }>
+      <div>
+        { errors }
 
-        <h2>Login</h2>
+        <form className="login-form" onSubmit={ this._onSubmit }>
 
-        <div className="form-group">
-          <label htmlFor="login-email">Email</label>
+          <h2>Login</h2>
 
-          <input type="text"
-            className="form-control"
-            id="login-email"
-            valueLink={ this.linkState("email") } />
-        </div>
+          <div className="form-group">
+            <label htmlFor="login-email">Email</label>
 
-        <div className="form-group">
-          <label htmlFor="login-password">Password</label>
+            <input type="text"
+              className="form-control"
+              id="login-email"
+              valueLink={ this.linkState("email") } />
+          </div>
 
-          <input type="password"
-            className="form-control"
-            id="login-password"
-            valueLink={ this.linkState("password") } />
-        </div>
+          <div className="form-group">
+            <label htmlFor="login-password">Password</label>
 
-        <button type="submit">Login</button>
-      </form>
+            <input type="password"
+              className="form-control"
+              id="login-password"
+              valueLink={ this.linkState("password") } />
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+
+      </div>
     );
   }
 });

@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :prevent_if_logged_in, only: [:create]
+  before_action :require_login, only: [:destroy]
+
   def create
     email, password = params[:user][:email], params[:user][:password]
     user = User.find_by_credentials(email, password)
@@ -7,7 +10,7 @@ class SessionsController < ApplicationController
       login!(user)
       render :login
     else
-      render json: { error: "Invalid username or password" }
+      render json: { errors: ["Invalid username or password"] }
     end
   end
 

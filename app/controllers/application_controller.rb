@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
     current_user.try(:reset_session_token!)
     session[:token] = nil
   end
+
+  def prevent_if_logged_in
+    render json: { errors: ["Already logged in"] } if logged_in?
+  end
+
+  def require_login
+    render json: { errors: ["Login required"] } unless logged_in?
+  end
 end

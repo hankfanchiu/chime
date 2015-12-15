@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :prevent_if_logged_in, only: [:create]
+  before_action :require_login, only: [:show]
+
   def create
     @user = User.new(user_params)
 
@@ -7,7 +10,7 @@ class UsersController < ApplicationController
 
       render "/sessions/login"
     else
-      render json: { error: @user.errors.full_messages }
+      render json: { errors: @user.errors.full_messages }
     end
   end
 
