@@ -27,12 +27,10 @@ var Discover = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
-        <div className="col-xs-10 col-xs-offset-1 explore">
-          <h1>Discover</h1>
+      <div className="container discover">
+        <h1>Discover</h1>
 
-          <DiscoverIndex tracks={ this.state.tracks } />
-        </div>
+        <DiscoverIndex tracks={ this.state.tracks } />
       </div>
     );
   }

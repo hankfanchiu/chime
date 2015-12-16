@@ -1,25 +1,26 @@
 var React = require("react");
 
 var Discover = React.createClass({
-  _mouseDown: function (e) {
+  _addClass: function (e) {
     var $box = $(e.currentTarget);
     $box.addClass("mousedown");
   },
 
-  _mouseUp: function (e) {
+  _removeClass: function (e) {
     var $box = $(e.currentTarget);
     $box.removeClass("mousedown");
   },
 
   render: function () {
     return (
-      <div className="col-xs-3 discover-index-item">
+      <div className="discover-index-item">
         <div className="box"
-          onMouseDown={ this._mouseDown }
-          onMouseUp={ this._mouseUp }>
+          onMouseDown={ this._addClass }
+          onMouseUp={ this._removeClass }
+          onMouseOut={ this._removeClass }>
 
           <div className="image">
-            <img src="/assets/corgi.jpg" />
+            <img src={ this.props.track.img_url } />
           </div>
 
           <div className="title">

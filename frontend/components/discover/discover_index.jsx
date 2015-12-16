@@ -10,7 +10,7 @@ var Discover = React.createClass({
 
   render: function () {
     return (
-      <div className="row discover-index">
+      <div className="discover-index">
         { this.renderIndexItems() }
       </div>
     );

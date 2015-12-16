@@ -16,38 +16,3 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-
-div.discover-index-item {
-  text-align: center;
-  vertical-align: center;
-  height: 280px;
-
-  div.box {
-    position: absolute;
-    width: 230px;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-
-  .mousedown {
-    -moz-box-shadow: 0 2px 3px 0 #b3b3b3;
-    -webkit-box-shadow: 0 2px 3px 0 #b3b3b3;
-  }
-
-  img {
-    height: 200px;
-  }
-
-  div.title {
-    text-align: center;
-    padding-bottom: 10px;
-  }
-}
-
-div.discover-index-item:hover {
-  div.box{
-    border: 2px solid #eee;
-    border-radius: 10px;
-  }
-}

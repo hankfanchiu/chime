@@ -6,7 +6,8 @@
 #  artist_id   :integer          not null
 #  title       :string           not null
 #  track_url   :string           not null
-#  description :text
+#  img_url     :string
+#  description :text             default("")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
