@@ -116,7 +116,7 @@ var SignUp = React.createClass({
 
               <p>
                 <a onClick={ this._goToLogin }>
-                  Already have an account with us?
+                  Already have an account?
                 </a>
               </p>
 
