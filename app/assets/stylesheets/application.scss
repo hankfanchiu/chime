@@ -20,3 +20,9 @@
 main {
   padding-bottom: 100px;
 }
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+}

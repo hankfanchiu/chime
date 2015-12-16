@@ -3,7 +3,7 @@ var React = require("react");
 var DiscoverListItem = React.createClass({
   render: function () {
     return (
-      <div className="discover-list-item">
+      <div className="discover-list-item clear">
         <div className="image">
           <img src={ this.props.track.img_url } />
         </div>
