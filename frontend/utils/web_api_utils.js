@@ -24,6 +24,16 @@ var WebAPIUtils = {
         actionCallback(response);
       }
     });
+  },
+
+  fetchTracks: function (data, actionCallback) {
+    $.ajax({
+      url: "/api/tracks",
+      type: "GET",
+      success: function (tracks) {
+        actionCallback(tracks);
+      }
+    })
   }
 };
 
