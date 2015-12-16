@@ -8,6 +8,10 @@ var Explore = React.createClass({
     return this.getStateFromStore();
   },
 
+  getStateFromStore: function () {
+    return { tracks: TrackStore.all() };
+  },
+
   componentDidMount: function () {
     this.listenerToken = TrackStore.addListener(this._onChange);
     TrackActions.fetchTracks();
@@ -18,11 +22,7 @@ var Explore = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(getStateFromStore());
-  },
-
-  getStateFromStore: function () {
-    return { tracks: TrackStore.all() };
+    this.setState(this.getStateFromStore());
   },
 
   render: function () {

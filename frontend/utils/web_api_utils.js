@@ -26,7 +26,7 @@ var WebAPIUtils = {
     });
   },
 
-  fetchTracks: function (data, actionCallback) {
+  fetchTracks: function (actionCallback) {
     $.ajax({
       url: "/api/tracks",
       type: "GET",

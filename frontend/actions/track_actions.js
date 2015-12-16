@@ -4,8 +4,8 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var TrackActions = {
-  fetchTracks: function (data) {
-    WebAPIUtils.fetchTracks(data, SessionActions.receiveTracks);
+  fetchTracks: function () {
+    WebAPIUtils.fetchTracks(TrackActions.receiveTracks);
   },
 
   receiveTracks: function (tracks) {
