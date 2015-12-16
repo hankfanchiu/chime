@@ -28,7 +28,7 @@ var Index = React.createClass({
   render: function () {
     return (
       <div className="container index">
-        <h1>Index</h1>
+        <h1>See what's trending</h1>
 
         <IndexList tracks={ this.state.tracks } />
       </div>

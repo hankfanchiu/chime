@@ -15,7 +15,7 @@ and React.js. Chime allows users to:
 - [x] Sign In / Sign Out
 - [ ] Search and follow other users
 - [ ] Upload and delete sound files
-- [ ] Stream uploaded tracks without interruption
+- [x] Stream uploaded tracks without interruption
 - [ ] Search for tracks by name and by category
 - [ ] Comment on tracks at specific times
 - [ ] Like tracks
