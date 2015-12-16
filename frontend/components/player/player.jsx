@@ -25,20 +25,34 @@ var Player = React.createClass({
     audioPlayer.play();
   },
 
+  renderStatus: function () {
+    if (this.state.track.title) {
+      return (
+        <div className="status">
+          <p className="playing">Currently Playing:</p>
+          <p className="title">{ this.state.track.title }</p>
+        </div>
+      );
+
+    } else {
+      return (
+        <div className="status"></div>
+      );
+    }
+  },
+
   render: function () {
     return (
       <div className="player">
         <div className="audio">
 
-          <audio id="audio-player" preload="auto" controls>
-            <source src=""></source>
-
+          <audio id="audio-player" src="">
             <p>
               Your browser does not support the <code>audio</code> element.
             </p>
           </audio>
 
-          <p className="audio-player-title">{ this.state.track.title }</p>
+          { this.renderStatus() }
         </div>
       </div>
     );

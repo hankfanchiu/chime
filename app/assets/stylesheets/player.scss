@@ -19,9 +19,17 @@ div.player {
   height: 100%;
   margin: auto;
   text-align: center;
-}
 
-div.audio p.audio-player-title {
-  font-size: 12px;
-  font-weight: bolder;
+  div.status {
+    padding-top: 10px;
+  }
+
+  p.playing {
+    font-size: 11px;
+    line-height: 50%;
+  }
+
+  p.title {
+    font-weight: bolder;
+  }
 }
