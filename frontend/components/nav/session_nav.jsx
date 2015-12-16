@@ -46,7 +46,6 @@ var SessionNav = React.createClass({
   },
 
   render: function () {
-    debugger;
     return (
       <div className="session-nav">
         { this.props.isLoggedIn ? this.loggedIn() : this.loggedOut() }

@@ -1,4 +1,5 @@
 var React = require("react");
+var PlaybackActions = require("../../actions/playback_actions");
 
 var Discover = React.createClass({
   _addClass: function (e) {
@@ -11,13 +12,18 @@ var Discover = React.createClass({
     $box.removeClass("mousedown");
   },
 
+  _playTrack: function (e) {
+    PlaybackActions.playTrack(this.props.track);
+  },
+
   render: function () {
     return (
       <div className="discover-index-item">
         <div className="box"
           onMouseDown={ this._addClass }
           onMouseUp={ this._removeClass }
-          onMouseOut={ this._removeClass }>
+          onMouseOut={ this._removeClass }
+          onClick={ this._playTrack }>
 
           <div className="image">
             <img src={ this.props.track.img_url } />

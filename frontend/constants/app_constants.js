@@ -8,7 +8,10 @@ module.exports = {
     LOGOUT_RESPONSE: null,
 
     // Tracks
-    TRACKS_RECEIVED: null
+    TRACKS_RECEIVED: null,
+
+    // Playback (player)
+    PLAYBACK_TRACK_RECEIVED: null
   })
 
 };
