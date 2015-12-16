@@ -19,13 +19,30 @@
 
 div.explore-index-item {
   text-align: center;
+  vertical-align: center;
+  height: 280px;
+
+  div.box {
+    position: absolute;
+    width: 230px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
 
   img {
-    height: 120px;
+    height: 200px;
   }
 
   div.title {
     text-align: center;
-    font-weight: bolder;
+    padding-bottom: 10px;
+  }
+}
+
+div.explore-index-item:hover {
+  div.box{
+    border: 2px solid #eee;
+    border-radius: 10px;
   }
 }
