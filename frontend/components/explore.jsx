@@ -4,7 +4,7 @@ var Explore = React.createClass({
   render: function () {
     return (
       <div className="container">
-        <div>Hello from Explore</div>
+        <h1>Explore</h1>
       </div>
     );
   }

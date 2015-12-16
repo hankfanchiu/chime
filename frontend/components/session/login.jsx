@@ -1,8 +1,9 @@
 var React = require("react");
-var SessionActions = require("../../actions/session_actions");
-var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
+var SessionActions = require("../../actions/session_actions");
+var SessionStore = require("../../stores/session_store");
+var ErrorNotice = require("../error_notice");
 
 var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
@@ -55,28 +56,23 @@ var Login = React.createClass({
     alert("Please fill out all fields!");
   },
 
-  render: function () {
-    var errors;
-
+  renderErrorNotice: function () {
     if (this.state.errors.length > 0) {
-
-      var errorMessages = this.state.errors.map(function (error, idx) {
-        return <div key={ idx }>{ error }</div>
-      });
-
-      errors = <div>{ errorMessages }</div>;
-
+      return <ErrorNotice errors={ this.state.errors } />;
     } else {
-      errors = <div></div>
+      return <ul className="error-notice" />
     }
+  },
 
+  render: function () {
     return (
       <div className="container">
-        { errors }
+
+        { this.renderErrorNotice() }
+
+        <h1>Login</h1>
 
         <form className="login-form" onSubmit={ this._onSubmit }>
-
-          <h2>Login</h2>
 
           <div className="form-group">
             <label htmlFor="login-email">Email</label>
