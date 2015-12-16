@@ -23,10 +23,9 @@ var Discover = React.createClass({
             <img src={ this.props.track.img_url } />
           </div>
 
-          <div className="title">
-            { this.props.track.title }
-          </div>
+          <p className="title">{ this.props.track.title }</p>
 
+          <p className="user">{ this.props.track.user }</p>
         </div>
       </div>
     );
