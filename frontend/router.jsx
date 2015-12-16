@@ -6,6 +6,7 @@ var IndexRoute = ReactRouter.IndexRoute;
 
 var App = require("./components/app");
 var Index = require("./components/index/index");
+var Discover = require("./components/discover/discover");
 var Login = require("./components/session/login");
 var SignUp = require("./components/session/sign_up");
 
@@ -13,6 +14,7 @@ module.exports = (
   <Router>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ Index } />
+      <Route name="discover" path="/discover" component={ Discover } />
       <Route name="login" path="/login" component={ Login } />
       <Route name="signup" path="/signup" component={ SignUp } />
     </Route>
