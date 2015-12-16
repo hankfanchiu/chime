@@ -45,6 +45,10 @@ var Login = React.createClass({
     SessionActions.login(userData);
   },
 
+  _onClick: function (e) {
+    this.history.pushState(null, "/signup", {});
+  },
+
   isIncomplete: function () {
     if (this.state.email === "") { return true; }
     if (this.state.password === "") { return true; }
@@ -66,38 +70,46 @@ var Login = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
+      <div className="row">
+        <div className="col-sm-6 col-sm-offset-3">
 
-        { this.renderErrorNotice() }
+          { this.renderErrorNotice() }
 
-        <h1>Login</h1>
+          <h1>Login</h1>
 
-        <form className="login-form" onSubmit={ this._onSubmit }>
+          <form className="login-form" onSubmit={ this._onSubmit }>
 
-          <div className="form-group">
-            <label htmlFor="login-email">Email</label>
+            <div className="form-group">
+              <label htmlFor="login-email">Email</label>
 
-            <input type="text"
-              name="email"
-              className="form-control"
-              id="login-email"
-              valueLink={ this.linkState("email") } />
-          </div>
+              <input type="text"
+                name="email"
+                className="form-control"
+                id="login-email"
+                valueLink={ this.linkState("email") } />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="login-password">Password</label>
+            <div className="form-group">
+              <label htmlFor="login-password">Password</label>
 
-            <input type="password"
-              name="password"
-              className="form-control"
-              ref="password"
-              id="login-password" />
-          </div>
+              <input type="password"
+                name="password"
+                className="form-control"
+                ref="password"
+                id="login-password" />
+            </div>
 
-          <button className="btn btn-default"
-            type="submit">Login</button>
-        </form>
+            <p>
+              <a onClick={ this._onClick }>
+                Don't have an account?
+              </a>
+            </p>
 
+            <button className="btn btn-default"
+              type="submit">Login</button>
+          </form>
+
+        </div>
       </div>
     );
   }

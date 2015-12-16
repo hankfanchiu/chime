@@ -46,6 +46,10 @@ var SignUp = React.createClass({
     SessionActions.signUp(userData);
   },
 
+  _onClick: function (e) {
+    this.history.pushState(null, "/login", {});
+  },
+
   isIncomplete: function () {
     if (this.state.email === "") { return true; }
     if (this.state.password === "") { return true; }
@@ -68,50 +72,58 @@ var SignUp = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
+      <div className="row">
+        <div className="col-sm-6 col-sm-offset-3">
 
-        { this.renderErrorNotice() }
+          { this.renderErrorNotice() }
 
-        <h1>Create Your Account</h1>
+          <h1>Create Account</h1>
 
-        <form className="signup-form" onSubmit={ this._onSubmit }>
+          <form className="signup-form" onSubmit={ this._onSubmit }>
 
-          <div className="form-group">
-            <label htmlFor="signup-email">Email</label>
+            <div className="form-group">
+              <label htmlFor="signup-email">Email</label>
 
-            <input type="text"
-              name="email"
-              className="form-control"
-              id="signup-email"
-              valueLink={ this.linkState("email") } />
-          </div>
+              <input type="text"
+                name="email"
+                className="form-control"
+                id="signup-email"
+                valueLink={ this.linkState("email") } />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="signup-password">Password</label>
+            <div className="form-group">
+              <label htmlFor="signup-password">Password</label>
 
-            <input type="password"
-              name="password"
-              className="form-control"
-              ref="password"
-              id="signup-password" />
-          </div>
+              <input type="password"
+                name="password"
+                className="form-control"
+                ref="password"
+                id="signup-password" />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="signup-password-confirmation">
-              Password Confirmation
-            </label>
+            <div className="form-group">
+              <label htmlFor="signup-password-confirmation">
+                Password Confirmation
+              </label>
 
-            <input type="password"
-              name="passwordConfirmation"
-              className="form-control"
-              ref="passwordConfirmation"
-              id="signup-password-confirmation" />
-          </div>
+              <input type="password"
+                name="passwordConfirmation"
+                className="form-control"
+                ref="passwordConfirmation"
+                id="signup-password-confirmation" />
+            </div>
 
-          <button className="btn btn-default"
-            type="submit">Sign Up</button>
-        </form>
+            <p>
+              <a onClick={ this._onClick }>
+                Already have an account with us?
+              </a>
+            </p>
 
+            <button className="btn btn-default"
+              type="submit">Sign Up</button>
+          </form>
+
+        </div>
       </div>
     );
   }
