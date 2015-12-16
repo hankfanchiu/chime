@@ -25,7 +25,7 @@ var Player = React.createClass({
     audioPlayer.play();
   },
 
-  renderStatus: function () {
+  playerStatus: function () {
     if (this.state.track.title) {
       return (
         <div className="status">
@@ -52,7 +52,7 @@ var Player = React.createClass({
             </p>
           </audio>
 
-          { this.renderStatus() }
+          { this.playerStatus() }
         </div>
       </div>
     );
