@@ -20,19 +20,26 @@ var SessionNav = React.createClass({
 
   loggedIn: function () {
     return (
-      <ul className="nav navbar-nav navbar-right session-links">
-        <li><a>{ this.props.email }</a></li>
-        <li><a onClick={ this._logout }>Logout</a></li>
-      </ul>
+      <div className="nav navbar-right session-btns">
+        <p className="navbar-text">{ this.props.email }</p>
+
+        <button className="btn btn-default navbar-btn"
+          onClick={ this._logout }>Logout</button>
+      </div>
     );
   },
 
   loggedOut: function () {
     return (
-      <ul className="nav navbar-nav navbar-right session-links">
-        <li><a onClick={ this._signUp }>Sign Up</a></li>
-        <li><a onClick={ this._login }>Login</a></li>
-      </ul>
+      <div className="nav navbar-right session-btns">
+        <button className="btn btn-default navbar-btn"
+          onClick={ this._signUp }>Sign Up</button>
+
+        &nbsp;
+
+        <button className="btn btn-default navbar-btn btn-primary"
+          onClick={ this._login }>Login</button>
+      </div>
     );
   },
 

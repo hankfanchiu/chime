@@ -5,11 +5,11 @@ var History = require("react-router").History;
 var Nav = React.createClass({
   mixins: [History],
 
-  _pushRoot: function (e) {
+  _root: function (e) {
     this.history.pushState(null, "/", {});
   },
 
-  _pushExplore: function (e) {
+  _explore: function (e) {
     this.history.pushState(null, "/", {});
   },
 
@@ -19,15 +19,12 @@ var Nav = React.createClass({
         <div className="container">
 
           <div className="navbar-header">
-
-            <a className="navbar-brand"
-              onClick={ this._pushRoot }>Chime</a>
-
+            <a className="navbar-brand" onClick={ this._root }>Chime</a>
           </div>
 
           <ul className="nav navbar-nav nav-links">
             <li>
-              <a onClick={ this._pushExplore }>Explore</a>
+              <a onClick={ this._explore }>Explore</a>
             </li>
           </ul>
 
