@@ -11,8 +11,13 @@ var WebAPIUtils = {
   },
 
   login: function (userData, actionCallback) {
-    $.post("/session", {user: userData}, function (response) {
-      actionCallback(response);
+    $.ajax({
+      url: "/session",
+      type: "POST",
+      data: {user: userData},
+      success: function (response) {
+        actionCallback(response);
+      }
     });
   },
 
