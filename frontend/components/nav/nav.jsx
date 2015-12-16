@@ -19,12 +19,16 @@ var Nav = React.createClass({
         <div className="container">
 
           <div className="navbar-header">
+
             <a className="navbar-brand"
               onClick={ this._pushRoot }>Chime</a>
+
           </div>
 
           <ul className="nav navbar-nav nav-links">
-            <li><a onClick={ this._pushExplore }>Explore</a></li>
+            <li>
+              <a onClick={ this._pushExplore }>Explore</a>
+            </li>
           </ul>
 
           <SessionNav email={ this.props.email }

@@ -28,7 +28,7 @@ var Login = React.createClass({
     }
   },
 
-  _onSubmit: function (e) {
+  _login: function (e) {
     e.preventDefault();
 
     if (this.isIncomplete()) {
@@ -45,7 +45,7 @@ var Login = React.createClass({
     SessionActions.login(userData);
   },
 
-  _onClick: function (e) {
+  _goToSignUp: function (e) {
     this.history.pushState(null, "/signup", {});
   },
 
@@ -77,7 +77,7 @@ var Login = React.createClass({
 
           <h1>Login</h1>
 
-          <form className="login-form" onSubmit={ this._onSubmit }>
+          <form className="login-form" onSubmit={ this._login }>
 
             <div className="form-group">
               <label htmlFor="login-email">Email</label>
@@ -100,7 +100,7 @@ var Login = React.createClass({
             </div>
 
             <p>
-              <a onClick={ this._onClick }>
+              <a onClick={ this._goToSignUp }>
                 Don't have an account?
               </a>
             </p>
