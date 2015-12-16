@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tracks
+#
+#  id          :integer          not null, primary key
+#  artist_id   :integer          not null
+#  title       :string           not null
+#  track_url   :string           not null
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Track < ActiveRecord::Base
   validates_presence_of :artist_id, :title
 
