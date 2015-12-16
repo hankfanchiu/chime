@@ -20,8 +20,8 @@ var SessionNav = React.createClass({
 
   loggedIn: function () {
     return (
-      <ul className="session-links">
-        <li>{ this.props.email }</li>
+      <ul className="nav navbar-nav navbar-right session-links">
+        <li><a>{ this.props.email }</a></li>
         <li><a onClick={ this._logout }>Logout</a></li>
       </ul>
     );
@@ -29,7 +29,7 @@ var SessionNav = React.createClass({
 
   loggedOut: function () {
     return (
-      <ul className="session-links">
+      <ul className="nav navbar-nav navbar-right session-links">
         <li><a onClick={ this._signUp }>Sign Up</a></li>
         <li><a onClick={ this._login }>Login</a></li>
       </ul>

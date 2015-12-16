@@ -33,7 +33,9 @@ var App = React.createClass({
         <Nav isLoggedIn={ this.state.isLoggedIn }
           email={ this.state.email } />
 
-        { this.props.children }
+        <div className="container">
+          { this.props.children }
+        </div>
       </div>
     );
   }

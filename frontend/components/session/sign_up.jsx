@@ -73,7 +73,7 @@ var SignUp = React.createClass({
     }
 
     return (
-      <div>
+      <div className="container">
         { errors }
 
         <form className="signup-form" onSubmit={ this._onSubmit }>
@@ -112,7 +112,8 @@ var SignUp = React.createClass({
               id="signup-password-confirmation" />
           </div>
 
-          <button type="submit">Sign Up</button>
+          <button className="btn btn-default"
+            type="submit">Sign Up</button>
         </form>
 
       </div>

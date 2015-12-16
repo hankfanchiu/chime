@@ -15,18 +15,23 @@ var Nav = React.createClass({
 
   render: function () {
     return (
-      <div className="nav">
-        <header>
-          <h1 onClick={ this._pushRoot }>Chime</h1>
-        </header>
+      <nav className="navbar navbar-default navbar-static-top">
+        <div className="container">
 
-        <ul className="nav-links">
-          <li><a onClick={ this._pushExplore }>Explore</a></li>
-        </ul>
+          <div className="navbar-header">
+            <a className="navbar-brand"
+              onClick={ this._pushRoot }>Chime</a>
+          </div>
 
-        <SessionNav email={ this.props.email }
-          isLoggedIn={ this.props.isLoggedIn } />
-      </div>
+          <ul className="nav navbar-nav nav-links">
+            <li><a onClick={ this._pushExplore }>Explore</a></li>
+          </ul>
+
+          <SessionNav email={ this.props.email }
+            isLoggedIn={ this.props.isLoggedIn } />
+
+        </div>
+      </nav>
     );
   }
 });

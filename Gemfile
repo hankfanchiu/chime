@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
 gem 'rename'
 gem 'pry-rails'
 gem 'bcrypt', require: 'bcrypt'

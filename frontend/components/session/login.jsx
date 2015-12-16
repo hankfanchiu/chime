@@ -71,7 +71,7 @@ var Login = React.createClass({
     }
 
     return (
-      <div>
+      <div className="container">
         { errors }
 
         <form className="login-form" onSubmit={ this._onSubmit }>
@@ -98,7 +98,8 @@ var Login = React.createClass({
               id="login-password" />
           </div>
 
-          <button type="submit">Login</button>
+          <button className="btn btn-default"
+            type="submit">Login</button>
         </form>
 
       </div>
