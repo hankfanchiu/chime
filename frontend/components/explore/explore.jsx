@@ -1,13 +1,28 @@
 var React = require("react");
-var Feed = require("./feed");
+var ExploreIndex = require("./explore_index");
+var TrackStore = require("../../stores/track_store");
+var TrackActions = require("../../actions/track_actions");
 
 var Explore = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
 
-  getStateFromStore: function () {
+  componentDidMount: function () {
+    this.listenerToken = TrackStore.addListener(this._onChange);
+    TrackActions.fetchTracks();
+  },
 
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState(getStateFromStore());
+  },
+
+  getStateFromStore: function () {
+    return { tracks: TrackStore.all() };
   },
 
   render: function () {
@@ -15,7 +30,7 @@ var Explore = React.createClass({
       <div className="container">
         <h1>Explore</h1>
 
-        <Feed />
+        <ExploreIndex tracks={ this.state.tracks } />
       </div>
     );
   }
