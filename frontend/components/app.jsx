@@ -29,14 +29,13 @@ var App = React.createClass({
 
   render: function () {
     return (
-      <div className="app">
-        <Nav isLoggedIn={ this.state.isLoggedIn }
-          email={ this.state.email } />
+      <main className="app">
+        <Nav isLoggedIn={ this.state.isLoggedIn } email={ this.state.email } />
 
         <div className="container">
           { this.props.children }
         </div>
-      </div>
+      </main>
     );
   }
 });
