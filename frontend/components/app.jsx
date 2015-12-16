@@ -2,6 +2,7 @@ var React = require("react");
 var SessionActions = require("../actions/session_actions");
 var SessionStore = require("../stores/session_store");
 var Nav = require("./nav/nav");
+var Player = require("./player/player");
 
 var App = React.createClass({
   getInitialState: function () {
@@ -36,6 +37,10 @@ var App = React.createClass({
         <main>
           { this.props.children }
         </main>
+
+        <footer>
+          <Player />
+        </footer>
       </div>
     );
   }
