@@ -13,8 +13,11 @@
 /tmp
 
 # npm packages
-node_modules
+/node_modules
 
 # webpack bundle
 bundle.js
 bundle.js.map
+
+# Sample tracks
+/public/assets/tracks/**
