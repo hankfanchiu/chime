@@ -3,7 +3,7 @@
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
-#  artist_id   :integer          not null
+#  user_id     :integer          not null
 #  title       :string           not null
 #  track_url   :string           not null
 #  img_url     :string
@@ -15,15 +15,13 @@
 class Track < ActiveRecord::Base
   before_save :ensure_img_url
 
-  validates_presence_of :artist_id, :title
+  validates_presence_of :user_id, :title
 
   validates :track_url,
     presence: true,
     uniqueness: true
 
-  belongs_to :user,
-    foreign_key: :artist_id,
-    class_name: "User"
+  belongs_to :user
 
   private
 

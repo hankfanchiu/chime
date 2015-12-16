@@ -19,9 +19,12 @@ class User < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+  validates :username,
+    presence: true,
+    uniqueness: { case_sensitive: false }
+
   validates :email,
     presence: true,
-    uniqueness: { case_sensitive: false },
     format: { with: VALID_EMAIL_REGEX }
 
   validates :password,
@@ -38,14 +41,14 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password_digest
 
-  has_many :tracks, foreign_key: :artist_id
+  has_many :tracks
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
 
-  def self.find_by_credentials(email, maybe_password)
-    user = self.find_by(email: email.downcase)
+  def self.find_by_credentials(username, maybe_password)
+    user = self.find_by(username: username)
 
     return nil unless user
 

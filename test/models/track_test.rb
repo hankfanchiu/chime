@@ -3,7 +3,7 @@
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
-#  artist_id   :integer          not null
+#  user_id     :integer          not null
 #  title       :string           not null
 #  track_url   :string           not null
 #  img_url     :string

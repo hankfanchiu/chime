@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:show]
 
   def create
-    if User.find_by(email: params[:user][:email])
-      render json: { errors: ["Email has been taken"] }
+    if User.find_by(username: params[:user][:username])
+      render json: { errors: ["Username is not available"] }
       return
     end
 
@@ -19,12 +19,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: { user: current_user.email }
+    render json: { user: current_user.username }
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    attributes = [:username, :email, :password, :password_confirmation]
+    params.require(:user).permit(*attributes)
   end
 end

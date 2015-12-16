@@ -9,7 +9,7 @@ var SignUp = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { email: "", errors: [] };
+    return { username: "", email: "", errors: [] };
   },
 
   componentDidMount: function () {
@@ -38,6 +38,7 @@ var SignUp = React.createClass({
     this.setState({ errors: [] });
 
     var userData = {
+      username: this.state.username,
       email: this.state.email,
       password: this.refs.password.value,
       password_confirmation: this.refs.passwordConfirmation.value
@@ -51,6 +52,7 @@ var SignUp = React.createClass({
   },
 
   isIncomplete: function () {
+    if (this.state.username === "") { return true; }
     if (this.state.email === "") { return true; }
     if (this.state.password === "") { return true; }
     if (this.state.passwordConfirmation === "") { return true; }
@@ -59,7 +61,7 @@ var SignUp = React.createClass({
   },
 
   handleIncompleteSubmit: function () {
-    alert("Missing required fields");
+    alert("Required fields missing");
   },
 
   renderErrorNotice: function () {
@@ -81,6 +83,16 @@ var SignUp = React.createClass({
             <h1>Create Account</h1>
 
             <form className="signup-form" onSubmit={ this._signUp }>
+
+              <div className="form-group">
+                <label htmlFor="signup-username">Username</label>
+
+                <input type="text"
+                  name="username"
+                  className="form-control"
+                  id="signup-username"
+                  valueLink={ this.linkState("username") } />
+              </div>
 
               <div className="form-group">
                 <label htmlFor="signup-email">Email</label>

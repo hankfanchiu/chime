@@ -3,7 +3,7 @@ class Api::TracksController < ApplicationController
   before_action :require_arist, only: [:update, :destroy]
 
   def index
-    @tracks = Track.all
+    @tracks = Track.all.includes(:user)
     render :index
   end
 
@@ -28,7 +28,7 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id])
+    @track = Track.find(params[:id]).includes(:user)
     render :show
   end
 

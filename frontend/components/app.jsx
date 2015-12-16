@@ -11,7 +11,7 @@ var App = React.createClass({
   getStateFromStore: function () {
     return {
       isLoggedIn: SessionStore.isLoggedIn(),
-      email: SessionStore.getEmail()
+      username: SessionStore.getUsername()
     };
   },
 
@@ -30,7 +30,8 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="app">
-        <Nav isLoggedIn={ this.state.isLoggedIn } email={ this.state.email } />
+        <Nav isLoggedIn={ this.state.isLoggedIn }
+          username={ this.state.username } />
 
         <main>
           { this.props.children }

@@ -21,7 +21,7 @@ var SessionNav = React.createClass({
   loggedIn: function () {
     return (
       <div className="nav navbar-right session-btns">
-        <p className="navbar-text">{ this.props.email }</p>
+        <p className="navbar-text">{ this.props.username }</p>
 
         <button className="btn btn-default navbar-btn"
           onClick={ this._logout }>Logout</button>

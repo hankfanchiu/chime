@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151215234703) do
   enable_extension "plpgsql"
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "artist_id",                null: false
+    t.integer  "user_id",                  null: false
     t.string   "title",                    null: false
     t.string   "track_url",                null: false
     t.string   "img_url"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20151215234703) do
   add_index "tracks", ["track_url"], name: "index_tracks_on_track_url", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "username",        null: false
     t.string   "email",           null: false
     t.string   "session_token",   null: false
     t.string   "password_digest", null: false
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20151215234703) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

@@ -1,4 +1,8 @@
-test = User.create!(email: "test@test.com", password: "password")
+test = User.create!(
+  username: "test",
+  email: "test@test.com",
+  password: "password"
+)
 
 test.tracks.create!(
   title: "Canon in D",

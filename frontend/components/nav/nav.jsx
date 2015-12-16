@@ -28,7 +28,7 @@ var Nav = React.createClass({
             </li>
           </ul>
 
-          <SessionNav email={ this.props.email }
+          <SessionNav email={ this.props.username }
             isLoggedIn={ this.props.isLoggedIn } />
 
         </div>

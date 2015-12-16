@@ -9,7 +9,7 @@ var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { email: "", errors: [] };
+    return { username: "", errors: [] };
   },
 
   componentDidMount: function () {
@@ -38,7 +38,7 @@ var Login = React.createClass({
     this.setState({ errors: [] });
 
     var userData = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.refs.password.value
     };
 
@@ -50,7 +50,7 @@ var Login = React.createClass({
   },
 
   isIncomplete: function () {
-    if (this.state.email === "") { return true; }
+    if (this.state.username === "") { return true; }
     if (this.state.password === "") { return true; }
 
     return false;
@@ -81,13 +81,13 @@ var Login = React.createClass({
             <form className="login-form" onSubmit={ this._login }>
 
               <div className="form-group">
-                <label htmlFor="login-email">Email</label>
+                <label htmlFor="login-username">Username</label>
 
                 <input type="text"
-                  name="email"
+                  name="username"
                   className="form-control"
-                  id="login-email"
-                  valueLink={ this.linkState("email") } />
+                  id="login-username"
+                  valueLink={ this.linkState("username") } />
               </div>
 
               <div className="form-group">
