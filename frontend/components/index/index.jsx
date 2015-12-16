@@ -1,7 +1,7 @@
 var React = require("react");
-var IndexList = require("./index_list");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
+var IndexList = require("./index_list");
 
 var Index = React.createClass({
   getInitialState: function () {
