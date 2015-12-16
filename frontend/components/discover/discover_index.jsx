@@ -1,20 +1,20 @@
 var React = require("react");
-var ExploreIndexItem = require("./explore_index_item");
+var DiscoverIndexItem = require("./discover_index_item");
 
-var ExploreIndex = React.createClass({
+var Discover = React.createClass({
   renderIndexItems: function () {
     return this.props.tracks.map(function (track, idx) {
-      return <ExploreIndexItem key={ idx } track={ track } />;
+      return <DiscoverIndexItem key={ idx } track={ track } />;
     });
   },
 
   render: function () {
     return (
-      <div className="row explore-index">
+      <div className="row discover-index">
         { this.renderIndexItems() }
       </div>
     );
   }
 });
 
-module.exports = ExploreIndex;
+module.exports = Discover;

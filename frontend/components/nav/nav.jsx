@@ -9,7 +9,7 @@ var Nav = React.createClass({
     this.history.pushState(null, "/", {});
   },
 
-  _explore: function (e) {
+  _discover: function (e) {
     this.history.pushState(null, "/", {});
   },
 
@@ -24,7 +24,7 @@ var Nav = React.createClass({
 
           <ul className="nav navbar-nav nav-links">
             <li>
-              <a onClick={ this._explore }>Explore</a>
+              <a onClick={ this._discover }>Discover</a>
             </li>
           </ul>
 

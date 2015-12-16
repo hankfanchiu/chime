@@ -17,7 +17,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
-div.explore-index-item {
+div.discover-index-item {
   text-align: center;
   vertical-align: center;
   height: 280px;
@@ -40,7 +40,7 @@ div.explore-index-item {
   }
 }
 
-div.explore-index-item:hover {
+div.discover-index-item:hover {
   div.box{
     border: 2px solid #eee;
     border-radius: 10px;

@@ -1,11 +1,11 @@
 var React = require("react");
 
-var ExploreIndexItem = React.createClass({
+var Discover = React.createClass({
   render: function () {
     return (
-      <div className="col-xs-3 explore-index-item">
+      <div className="col-xs-3 discover-index-item">
         <div className="box">
-          
+
           <div className="image">
             <img src="/assets/corgi.jpg" />
           </div>
@@ -20,4 +20,4 @@ var ExploreIndexItem = React.createClass({
   }
 });
 
-module.exports = ExploreIndexItem;
+module.exports = Discover;
