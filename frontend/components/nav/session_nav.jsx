@@ -37,7 +37,7 @@ var SessionNav = React.createClass({
 
         &nbsp;
 
-        <button className="btn btn-default navbar-btn btn-primary"
+        <button className="btn btn-default navbar-btn"
           onClick={ this._login }>Login</button>
       </div>
     );

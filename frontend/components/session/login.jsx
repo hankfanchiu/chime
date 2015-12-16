@@ -70,45 +70,47 @@ var Login = React.createClass({
 
   render: function () {
     return (
-      <div className="row">
-        <div className="col-sm-6 col-sm-offset-3">
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-4 col-xs-offset-4">
 
-          { this.renderErrorNotice() }
+            { this.renderErrorNotice() }
 
-          <h1>Login</h1>
+            <h1>Login</h1>
 
-          <form className="login-form" onSubmit={ this._login }>
+            <form className="login-form" onSubmit={ this._login }>
 
-            <div className="form-group">
-              <label htmlFor="login-email">Email</label>
+              <div className="form-group">
+                <label htmlFor="login-email">Email</label>
 
-              <input type="text"
-                name="email"
-                className="form-control"
-                id="login-email"
-                valueLink={ this.linkState("email") } />
-            </div>
+                <input type="text"
+                  name="email"
+                  className="form-control"
+                  id="login-email"
+                  valueLink={ this.linkState("email") } />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="login-password">Password</label>
+              <div className="form-group">
+                <label htmlFor="login-password">Password</label>
 
-              <input type="password"
-                name="password"
-                className="form-control"
-                ref="password"
-                id="login-password" />
-            </div>
+                <input type="password"
+                  name="password"
+                  className="form-control"
+                  ref="password"
+                  id="login-password" />
+              </div>
 
-            <p>
-              <a onClick={ this._goToSignUp }>
-                Don't have an account?
-              </a>
-            </p>
+              <p>
+                <a onClick={ this._goToSignUp }>
+                  Don't have an account?
+                </a>
+              </p>
 
-            <button className="btn btn-default"
-              type="submit">Login</button>
-          </form>
+              <button className="btn btn-default"
+                type="submit">Login</button>
+            </form>
 
+          </div>
         </div>
       </div>
     );
