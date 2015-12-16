@@ -28,9 +28,11 @@ var Explore = React.createClass({
   render: function () {
     return (
       <div className="container">
-        <h1>Explore</h1>
+        <div className="col-xs-10 col-xs-offset-1 explore">
+          <h1>Explore</h1>
 
-        <ExploreIndex tracks={ this.state.tracks } />
+          <ExploreIndex tracks={ this.state.tracks } />
+        </div>
       </div>
     );
   }

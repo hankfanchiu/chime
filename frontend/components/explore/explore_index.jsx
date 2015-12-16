@@ -10,7 +10,7 @@ var ExploreIndex = React.createClass({
 
   render: function () {
     return (
-      <div className="explore-index">
+      <div className="row explore-index">
         { this.renderIndexItems() }
       </div>
     );

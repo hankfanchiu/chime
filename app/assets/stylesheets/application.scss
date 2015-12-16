@@ -16,3 +16,16 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+div.explore-index-item {
+  text-align: center;
+
+  img {
+    height: 120px;
+  }
+
+  div.title {
+    text-align: center;
+    font-weight: bolder;
+  }
+}

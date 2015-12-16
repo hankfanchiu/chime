@@ -20,4 +20,4 @@ bundle.js
 bundle.js.map
 
 # Sample tracks
-/public/assets/tracks/**
+/public/assets/**
