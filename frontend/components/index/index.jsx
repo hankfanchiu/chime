@@ -1,9 +1,9 @@
 var React = require("react");
-var DiscoverIndex = require("./discover_index");
+var IndexList = require("./index_list");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
 
-var Discover = React.createClass({
+var Index = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -27,13 +27,13 @@ var Discover = React.createClass({
 
   render: function () {
     return (
-      <div className="container discover">
-        <h1>Discover</h1>
+      <div className="container index">
+        <h1>Index</h1>
 
-        <DiscoverIndex tracks={ this.state.tracks } />
+        <IndexList tracks={ this.state.tracks } />
       </div>
     );
   }
 });
 
-module.exports = Discover;
+module.exports = Index;

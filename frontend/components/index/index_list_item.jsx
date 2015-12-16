@@ -1,7 +1,7 @@
 var React = require("react");
 var PlaybackActions = require("../../actions/playback_actions");
 
-var Discover = React.createClass({
+var IndexListItem = React.createClass({
   _addClass: function (e) {
     var $box = $(e.currentTarget);
     $box.addClass("mousedown");
@@ -18,7 +18,7 @@ var Discover = React.createClass({
 
   render: function () {
     return (
-      <div className="discover-index-item">
+      <div className="index-list-item">
         <div className="box"
           onMouseDown={ this._addClass }
           onMouseUp={ this._removeClass }
@@ -38,4 +38,4 @@ var Discover = React.createClass({
   }
 });
 
-module.exports = Discover;
+module.exports = IndexListItem;

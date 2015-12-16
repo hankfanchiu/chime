@@ -1,14 +1,14 @@
-div.discover {
+div.index {
   text-align: center;
 }
 
-div.discover-index:after {
+div.index-list:after {
   content: "";
   display: block;
   clear: both;
 }
 
-div.discover-index-item {
+div.index-list-item {
   float: left;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@ div.discover-index-item {
   }
 }
 
-div.discover-index-item:hover {
+div.index-list-item:hover {
   div.box{
     border: 2px solid #eee;
     border-radius: 10px;
