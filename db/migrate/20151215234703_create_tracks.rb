@@ -4,6 +4,7 @@ class CreateTracks < ActiveRecord::Migration
       t.integer :artist_id, null: false
       t.string :title, null: false
       t.string :track_url, null: false
+      t.text :description
 
       t.timestamps null: false
     end
