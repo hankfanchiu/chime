@@ -30,7 +30,7 @@ var Discover = React.createClass({
       <div className="container discover">
         <h1>Discover new chimes</h1>
 
-        <DiscoverList />
+        <DiscoverList tracks={ this.state.tracks } />
       </div>
     );
   }
