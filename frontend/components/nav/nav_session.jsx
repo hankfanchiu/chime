@@ -1,8 +1,9 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
+var NavSessionLinks = require("./nav_session_links");
 var History = require("react-router").History;
 
-var SessionNav = React.createClass({
+var NavSession = React.createClass({
   mixins: [History],
 
   _signUp: function (e) {
@@ -20,10 +21,8 @@ var SessionNav = React.createClass({
 
   loggedIn: function () {
     return (
-      <div className="nav navbar-right session-btns">
-        <p className="navbar-text">
-          Signed in as <a>{ this.props.username }</a>
-        </p>
+      <div className="nav navbar-right">
+        <NavSessionLinks history={ this.history } />
 
         <button className="btn btn-default navbar-btn"
           onClick={ this._logout }>Logout</button>
@@ -33,11 +32,11 @@ var SessionNav = React.createClass({
 
   loggedOut: function () {
     return (
-      <div className="nav navbar-right session-btns">
+      <div className="nav navbar-right">
         <button className="btn btn-default navbar-btn"
           onClick={ this._signUp }>Sign Up</button>
 
-        &nbsp;
+        <span> </span>
 
         <button className="btn btn-default navbar-btn"
           onClick={ this._login }>Login</button>
@@ -47,11 +46,11 @@ var SessionNav = React.createClass({
 
   render: function () {
     return (
-      <div className="session-nav">
+      <div className="collapse navbar-collapse">
         { this.props.isLoggedIn ? this.loggedIn() : this.loggedOut() }
       </div>
     );
   }
 });
 
-module.exports = SessionNav;
+module.exports = NavSession;

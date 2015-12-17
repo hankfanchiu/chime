@@ -1,5 +1,5 @@
 var React = require("react");
-var SessionNav = require("./session_nav");
+var NavSession = require("./nav_session");
 var History = require("react-router").History;
 
 var Nav = React.createClass({
@@ -20,10 +20,12 @@ var Nav = React.createClass({
   render: function () {
     return (
       <nav className="navbar navbar-default navbar-static-top">
-        <div className="container">
+        <div className="container container-fluid">
 
           <div className="navbar-header">
-            <a className="navbar-brand" onClick={ this._root }>Chime</a>
+            <a className="navbar-brand" onClick={ this._root }>
+              Chime
+            </a>
           </div>
 
           <ul className="nav navbar-nav nav-links">
@@ -36,7 +38,7 @@ var Nav = React.createClass({
             </li>
           </ul>
 
-          <SessionNav username={ this.props.username }
+          <NavSession username={ this.props.username }
             isLoggedIn={ this.props.isLoggedIn } />
 
         </div>
