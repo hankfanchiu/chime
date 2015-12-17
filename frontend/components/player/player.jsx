@@ -4,7 +4,11 @@ var PlaybackActions = require("../../actions/playback_actions");
 
 var Player = React.createClass({
   getInitialState: function () {
-    return { track: {} };
+    return this.getStateFromStore();
+  },
+
+  getStateFromStore: function () {
+    return { track: PlaybackStore.getTrack() };
   },
 
   componentDidMount: function () {
@@ -15,14 +19,17 @@ var Player = React.createClass({
     this.listenerToken.remove();
   },
 
-  _onChange: function () {
-    var track = PlaybackStore.getTrack();
-    this.setState({ track: track });
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return this.state.track !== nextState;
+  },
 
-    var audioPlayer = document.getElementById("audio-player");
-    audioPlayer.src = track.track_url;
-    audioPlayer.load();
-    audioPlayer.play();
+  componentDidUpdate: function () {
+    this.refs.audio.load();
+    this.refs.audio.play();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
   },
 
   playerStatus: function () {
@@ -33,7 +40,6 @@ var Player = React.createClass({
           <p className="title">{ this.state.track.title }</p>
         </div>
       );
-
     } else {
       return (
         <div className="status"></div>
@@ -44,16 +50,13 @@ var Player = React.createClass({
   render: function () {
     return (
       <div className="player">
-        <div className="audio">
+        <audio ref="audio" src={ this.state.track.track_url }>
+          <p>
+            Your browser does not support the <code>audio</code> element.
+          </p>
+        </audio>
 
-          <audio id="audio-player" src="">
-            <p>
-              Your browser does not support the <code>audio</code> element.
-            </p>
-          </audio>
-
-          { this.playerStatus() }
-        </div>
+        { this.playerStatus() }
       </div>
     );
   }
