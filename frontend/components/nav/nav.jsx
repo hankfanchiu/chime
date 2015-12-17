@@ -5,15 +5,15 @@ var History = require("react-router").History;
 var Nav = React.createClass({
   mixins: [History],
 
-  _root: function (e) {
+  _root: function () {
     this.history.pushState(null, "/", {});
   },
 
-  _discover: function (e) {
+  _discover: function () {
     this.history.pushState(null, "/discover", {});
   },
 
-  _search: function (e) {
+  _search: function () {
     this.history.pushState(null, "/search", {});
   },
 
@@ -31,7 +31,7 @@ var Nav = React.createClass({
             <li><a onClick={ this._search }>Search</a></li>
           </ul>
 
-          <NavSession isLoggedIn={ this.props.isLoggedIn } />
+          <NavSession />
         </div>
       </nav>
     );

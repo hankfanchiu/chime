@@ -1,5 +1,6 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
+var SessionStore = require("../../stores/session_store");
 var NavSessionLinks = require("./nav_session_links");
 var History = require("react-router").History;
 
@@ -47,7 +48,7 @@ var NavSession = React.createClass({
   render: function () {
     return (
       <div className="collapse navbar-collapse">
-        { this.props.isLoggedIn ? this.loggedIn() : this.loggedOut() }
+        { SessionStore.isLoggedIn() ? this.loggedIn() : this.loggedOut() }
       </div>
     );
   }

@@ -31,7 +31,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="app">
-        <Nav isLoggedIn={ this.state.isLoggedIn } />
+        <Nav />
 
         <main>
           { this.props.children }
