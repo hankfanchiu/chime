@@ -2,15 +2,15 @@ var React = require("react");
 
 var NavSessionLinks = React.createClass({
   _profile: function () {
-    this.props.history.pushState(null, "/", {});
+    this.props.history.pushState(null, "/profile", {});
   },
 
   _tracks: function () {
-    this.props.history.pushState(null, "/", {});
+    this.props.history.pushState(null, "/tracks", {});
   },
 
   _playlists: function () {
-    this.props.history.pushState(null, "/", {});
+    this.props.history.pushState(null, "/playlists", {});
   },
 
   render: function () {

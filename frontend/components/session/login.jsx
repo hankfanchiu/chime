@@ -12,6 +12,12 @@ var Login = React.createClass({
     return { username: "", errors: [] };
   },
 
+  componentWillMount: function () {
+    if (SessionStore.isLoggedIn()) {
+      this.history.pushState(null, "/", {});
+    }
+  },
+
   componentDidMount: function () {
     this.listenerToken = SessionStore.addListener(this._onChange);
   },

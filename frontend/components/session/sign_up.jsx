@@ -12,6 +12,12 @@ var SignUp = React.createClass({
     return { username: "", email: "", errors: [] };
   },
 
+  componentWillMount: function () {
+    if (SessionStore.isLoggedIn()) {
+      this.history.pushState(null, "/", {});
+    }
+  },
+
   componentDidMount: function () {
     this.listenerToken = SessionStore.addListener(this._onChange);
   },

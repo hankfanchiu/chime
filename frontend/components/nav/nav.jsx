@@ -23,24 +23,16 @@ var Nav = React.createClass({
         <div className="container container-fluid">
 
           <div className="navbar-header">
-            <a className="navbar-brand" onClick={ this._root }>
-              Chime
-            </a>
+            <a className="navbar-brand" onClick={ this._root }>Chime</a>
           </div>
 
           <ul className="nav navbar-nav nav-links">
-            <li>
-              <a onClick={ this._discover }>Discover</a>
-            </li>
-
-            <li>
-              <a onClick={ this._search }>Search</a>
-            </li>
+            <li><a onClick={ this._discover }>Discover</a></li>
+            <li><a onClick={ this._search }>Search</a></li>
           </ul>
 
           <NavSession username={ this.props.username }
             isLoggedIn={ this.props.isLoggedIn } />
-
         </div>
       </nav>
     );
