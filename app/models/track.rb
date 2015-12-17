@@ -22,6 +22,8 @@ class Track < ActiveRecord::Base
     uniqueness: true
 
   belongs_to :user
+  has_many :playlistings
+  has_many :playlists, through: :playlistings
 
   private
 
