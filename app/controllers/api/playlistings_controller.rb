@@ -3,7 +3,7 @@ class Api::PlaylistingsController < ApplicationController
     @playlisting = Playlisting.new(playlisting_params)
 
     if @playlisting.save
-
+      render json: @playlisting
     else
       render json: { errors: @playlisting.errors.full_messages }
     end
