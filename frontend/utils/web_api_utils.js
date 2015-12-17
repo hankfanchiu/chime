@@ -33,7 +33,7 @@ var WebAPIUtils = {
 
   fetchProfile: function (actionCallback) {
     $.ajax({
-      url: "/fetch/profile",
+      url: "/profile/fetch",
       type: "GET",
       success: function (user) {
         actionCallback(user);
@@ -43,7 +43,7 @@ var WebAPIUtils = {
 
   updateProfile: function (userData, actionCallback) {
     $.ajax({
-      url: "/users/1",
+      url: "/profile/update",
       type: "PATCH",
       data: {user: userData},
       success: function (user) {
