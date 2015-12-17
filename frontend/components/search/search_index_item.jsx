@@ -1,7 +1,7 @@
 var React = require("react");
 var PlaybackActions = require("../../actions/playback_actions");
 
-var SearchListItem = React.createClass({
+var SearchIndexItem = React.createClass({
   _playTrack: function (e) {
     PlaybackActions.playTrack(this.props.track);
   },
@@ -35,4 +35,4 @@ var SearchListItem = React.createClass({
   }
 });
 
-module.exports = SearchListItem;
+module.exports = SearchIndexItem;

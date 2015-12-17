@@ -1,7 +1,7 @@
 var React = require("react");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
-var SearchList = require("./search_list");
+var SearchIndex = require("./search_index");
 
 var Search = React.createClass({
   getInitialState: function () {
@@ -30,7 +30,7 @@ var Search = React.createClass({
       <div className="container search">
         <h1>Search chimes</h1>
 
-        <SearchList tracks={ this.state.tracks } />
+        <SearchIndex tracks={ this.state.tracks } />
       </div>
     );
   }
