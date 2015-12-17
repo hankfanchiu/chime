@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
+#  username        :string           not null
 #  email           :string           not null
 #  session_token   :string           not null
 #  password_digest :string           not null
@@ -42,6 +43,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password_digest
 
   has_many :tracks
+  has_many :playlists
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
