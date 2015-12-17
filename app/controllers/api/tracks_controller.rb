@@ -1,5 +1,5 @@
 class Api::TracksController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, only: [:create, :update, :destroy]
   before_action :require_user, only: [:update, :destroy]
 
   def index
@@ -29,7 +29,6 @@ class Api::TracksController < ApplicationController
 
   def show
     @track = Track.find(params[:id])
-
     render :show
   end
 
