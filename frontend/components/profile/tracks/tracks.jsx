@@ -1,10 +1,10 @@
 var React = require("react");
-var SessionStore = require("../../stores/session_store");
-var ProfileStore = require("../../stores/profile_store");
-var ProfileActions = require("../../actions/profile_actions");
-var ProfileTracksList = require("./profile_tracks_list");
+var SessionStore = require("../../../stores/session_store");
+var ProfileStore = require("../../../stores/profile_store");
+var ProfileActions = require("../../../actions/profile_actions");
+var TracksIndex = require("./tracks_index");
 
-var ProfileTracks = React.createClass({
+var Tracks = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -36,11 +36,11 @@ var ProfileTracks = React.createClass({
     return this.state.tracks.length === 0;
   },
 
-  renderTracksList: function () {
+  renderTracksIndex: function () {
     if (this.tracksEmpty()) {
       return <p>You have no tracks!</p>;
     } else {
-      return <ProfileTracksList tracks={ this.state.tracks } />;
+      return <TracksIndex tracks={ this.state.tracks } />;
     }
   },
 
@@ -49,10 +49,10 @@ var ProfileTracks = React.createClass({
       <div className="container">
         <h1>Tracks</h1>
 
-        { this.renderTracksList() }
+        { this.renderTracksIndex() }
       </div>
     );
   }
 });
 
-module.exports = ProfileTracks;
+module.exports = Tracks;

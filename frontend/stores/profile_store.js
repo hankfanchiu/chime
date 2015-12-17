@@ -45,13 +45,15 @@ ProfileStore.getProfile = function () {
 };
 
 ProfileStore.getTracks = function () {
-  var tracks = _user.tracks;
-
-  if (tracks === undefined) {
-    tracks = [];
-  }
+  var tracks = (_user.tracks ? _user.tracks : []);
 
   return tracks.slice();
+},
+
+ProfileStore.getPlaylists = function () {
+  var playlists = (_user.playlists ? _user.playlists : []);
+
+  return playlists.slice();
 },
 
 ProfileStore.getErrors = function () {

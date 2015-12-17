@@ -9,8 +9,8 @@ var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
 var Search = require("./components/search/search");
 var Profile = require("./components/profile/profile");
-var ProfileTracks = require("./components/profile/profile_tracks");
-var ProfilePlaylists = require("./components/profile/profile_playlists");
+var ProfileTracks = require("./components/profile/tracks/tracks");
+var ProfilePlaylists = require("./components/profile/playlists/playlists");
 var Login = require("./components/session/login");
 var SignUp = require("./components/session/sign_up");
 

@@ -12,6 +12,7 @@
 
 class Playlist < ActiveRecord::Base
   after_initialize :ensure_playlist_title
+  after_initialize :ensure_playlist_description
 
   validates :user_id, :title, presence: true
 
@@ -23,5 +24,9 @@ class Playlist < ActiveRecord::Base
 
   def ensure_playlist_title
     self.title = "Untitled" if self.title.nil?
+  end
+
+  def ensure_playlist_description
+    self.description = "No description" if self.description.nil?
   end
 end
