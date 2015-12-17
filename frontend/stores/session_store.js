@@ -15,17 +15,16 @@ SessionStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.LOGIN_RESPONSE:
-
       if (response.errors) {
         setErrors(response.errors);
       } else {
-        setSessionStorage(response);
+        setSessionStorage(response.session_token);
       }
 
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:
-      removeSessionStorage(response);
+      removeSessionStorage();
       break;
 
   };
@@ -43,14 +42,14 @@ SessionStore.getErrors = function () {
   return _errors.slice();
 };
 
-var setSessionStorage = function (response) {
-  _sessionToken = response.session_token;
+var setSessionStorage = function (sessionToken) {
+  _sessionToken = sessionToken;
   sessionStorage.setItem("session_token", _sessionToken);
 
   SessionStore.__emitChange();
 };
 
-var removeSessionStorage = function (response) {
+var removeSessionStorage = function () {
   _sessionToken = null;
   sessionStorage.removeItem("session_token");
 

@@ -3,7 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _userProfile = {};
+var _user = {};
 var _errors = [];
 
 var ProfileStore = new Store(AppDispatcher);
@@ -14,33 +14,42 @@ ProfileStore.__onDispatch = function (payload) {
 
   switch (actionType) {
 
+    case ActionTypes.LOGIN_RESPONSE:
+      if (response.errors) {
+        setErrors(response.errors);
+      } else {
+        setUser(response.user);
+      }
+
+    break;
+
     case ActionTypes.PROFILE_RECEIVED:
       if (response.errors) {
         setErrors(response.errors);
       } else {
-        setUserProfile(response);
+        setUser(response);
       }
 
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:
-      _userProfile = null;
+      _user = null;
       break;
   };
 };
 
 ProfileStore.getProfile = function () {
-  var userProfileCopy = jQuery.extend({}, _userProfile);
+  var userCopy = jQuery.extend({}, _user);
 
-  return userProfileCopy;
+  return userCopy;
 };
 
 ProfileStore.getErrors = function () {
   return _errors.slice();
 };
 
-var setUserProfile = function (userProfile) {
-  _userProfile = userProfile;
+var setUser = function (user) {
+  _user = user;
 
   ProfileStore.__emitChange();
 };

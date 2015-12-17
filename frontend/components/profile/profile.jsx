@@ -22,13 +22,12 @@ var Profile = React.createClass({
   componentWillMount: function () {
     if (!SessionStore.isLoggedIn()) {
       this.props.history.pushState(null, "/", {});
-    } else {
-      ProfileActions.fetchProfile();
     }
   },
 
   componentDidMount: function () {
     this.listenerToken = ProfileStore.addListener(this._onChange);
+    ProfileActions.fetchProfile();
   },
 
   componentWillUnmount: function () {
@@ -49,15 +48,17 @@ var Profile = React.createClass({
     this.setState({ errors: [] });
 
     var userData = {
+      username: this.state.username,
       email: this.state.email,
       password: this.refs.password.value,
     };
 
-    ProfileActions.updateProfile(userData);
     this.refs.password.value = "";
+    ProfileActions.updateProfile(userData);
   },
 
   isIncomplete: function () {
+    if (this.state.username === "") { return true; }
     if (this.state.email === "") { return true; }
     if (this.refs.password.value === "") { return true; }
 
