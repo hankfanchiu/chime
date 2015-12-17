@@ -1,8 +1,3 @@
 json.array! @tracks do |track|
-  json.id           track.id
-  json.user         track.user.username
-  json.title        track.title
-  json.track_url    track.track_url
-  json.img_url      track.img_url
-  json.description  track.description
+  json.partial! "api/tracks/track", track: track, user: track.user
 end

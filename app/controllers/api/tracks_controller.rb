@@ -1,6 +1,6 @@
 class Api::TracksController < ApplicationController
   before_action :require_login, except: [:index, :show]
-  before_action :require_arist, only: [:update, :destroy]
+  before_action :require_user, only: [:update, :destroy]
 
   def index
     @tracks = Track.all.includes(:user)
@@ -28,7 +28,8 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id]).includes(:user)
+    @track = Track.find(params[:id])
+
     render :show
   end
 
@@ -48,8 +49,11 @@ class Api::TracksController < ApplicationController
     params.require(:track).permit(:title, :description)
   end
 
-  def require_artist
+  def require_user
     own_track = current_user.tracks.find(params[:id])
-    render json: { errors: ["You do not own this track!"] } unless own_track
+
+    unless own_track
+      render json: { errors: ["You do not own this track!"] }
+    end
   end
 end

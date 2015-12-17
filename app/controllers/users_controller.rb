@@ -19,7 +19,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: { user: current_user.username }
+    @user = current_user
+    @playlists = current_user.playlists.includes(:tracks)
+
+    render :show
   end
 
   private

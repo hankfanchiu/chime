@@ -13,7 +13,7 @@
 #
 
 class Track < ActiveRecord::Base
-  before_save :ensure_img_url
+  after_initialize :ensure_img_url
 
   validates_presence_of :user_id, :title
 

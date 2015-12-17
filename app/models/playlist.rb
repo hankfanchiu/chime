@@ -11,7 +11,7 @@
 #
 
 class Playlist < ActiveRecord::Base
-  before_save :ensure_playlist_title
+  after_initialize :ensure_playlist_title
 
   validates :user_id, :title, presence: true
 
