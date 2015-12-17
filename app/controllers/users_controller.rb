@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :prevent_if_logged_in, only: [:create]
-  before_action :require_login, only: [:show]
 
   def create
     if User.find_by(username: params[:user][:username])
@@ -19,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @playlists = current_user.playlists.includes(:tracks)
+    @user = User.find(params[:id])
+    @playlists = @user.playlists.includes(:tracks)
 
     render :show
   end
