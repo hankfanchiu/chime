@@ -31,8 +31,7 @@ var Nav = React.createClass({
             <li><a onClick={ this._search }>Search</a></li>
           </ul>
 
-          <NavSession username={ this.props.username }
-            isLoggedIn={ this.props.isLoggedIn } />
+          <NavSession isLoggedIn={ this.props.isLoggedIn } />
         </div>
       </nav>
     );
