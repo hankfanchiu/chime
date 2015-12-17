@@ -1,5 +1,5 @@
 var React = require("react");
-var TracksIndex = require("../tracks/tracks_index");
+var PlaylistTrack = require("./playlist_track");
 
 var PlaylistsIndexItem = React.createClass({
   getInitialState: function () {
@@ -10,9 +10,15 @@ var PlaylistsIndexItem = React.createClass({
     this.setState({ isExpanded: !this.state.isExpanded });
   },
 
-  renderTracksIndex: function () {
+  renderPlaylistTracks: function () {
     if (this.state.isExpanded) {
-      return <TracksIndex tracks={ this.props.playlist.tracks } />;
+      var playlist = this.props.playlist;
+      var tracks = playlist.tracks;
+
+      return tracks.map(function (track, idx) {
+        return <PlaylistTrack key={ idx }
+          track={ track } playlistId={ playlist.id }/>;
+      });
     } else {
       return <div></div>;
     }
@@ -25,10 +31,11 @@ var PlaylistsIndexItem = React.createClass({
     return (
       <div className="playlists-index-item clear">
         <p>
-          { playlist.title }: { playlist.description } | <a onClick={ this._toggle }>{ option }</a>
+          { playlist.title }: { playlist.description }&nbsp;
+          | <a onClick={ this._toggle }>{ option }</a>
         </p>
 
-        { this.renderTracksIndex() }
+        { this.renderPlaylistTracks() }
       </div>
     );
   }

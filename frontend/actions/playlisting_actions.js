@@ -11,6 +11,14 @@ var PlaylistingActions = {
     );
   },
 
+  deletePlaylisting: function (playlistId, trackId) {
+    PlaylistingAPIUtils.deletePlaylisting(
+      playlistId,
+      trackId,
+      PlaylistingActions.receivePlaylisting
+    );
+  },
+
   receivePlaylisting: function (response) {
     AppDispatcher.dispatch({
       actionType: AppConstants.PLAYLISTING_RECEIVED,
