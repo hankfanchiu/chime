@@ -18,7 +18,7 @@ ProfileStore.__onDispatch = function (payload) {
       if (response.errors) {
         setErrors(response.errors);
       } else {
-        setUser(response.user);
+        setUser(response);
       }
 
       break;
@@ -27,7 +27,7 @@ ProfileStore.__onDispatch = function (payload) {
       _user = null;
       break;
 
-    case ActionTypes.PROFILE_RECEIVED:
+    case ActionTypes.USER_RECEIVED:
       if (response.errors) {
         setErrors(response.errors);
       } else {

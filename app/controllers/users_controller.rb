@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :prevent_if_logged_in, only: [:create]
-  before_action :require_login, only: [:fetch, :update]
+  before_action :require_login, only: [:update]
 
   def create
     if User.find_by(username: params[:user][:username])
@@ -16,13 +16,6 @@ class UsersController < ApplicationController
     else
       render json: { errors: @user.errors.full_messages }
     end
-  end
-
-  def fetch
-    @user = current_user
-    @playlists = @user.playlists
-
-    render :fetch
   end
 
   def fetch_playlists
@@ -51,7 +44,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @playlists = @user.playlists
 
     render :show
   end

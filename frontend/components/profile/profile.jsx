@@ -27,7 +27,7 @@ var Profile = React.createClass({
 
   componentDidMount: function () {
     this.listenerToken = ProfileStore.addListener(this._onChange);
-    ProfileActions.fetchProfile();
+    ProfileActions.fetchUser(SessionStore.getUserId());
   },
 
   componentWillUnmount: function () {

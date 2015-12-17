@@ -3,7 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _session = false;
+var _currentUserId = null;
 var _errors = [];
 
 var SessionStore = new Store(AppDispatcher);
@@ -17,29 +17,38 @@ SessionStore.__onDispatch = function (payload) {
       if (response.errors) {
         _errors = response.errors;
       } else {
-        _session = true;
+        _currentUserId = response.id;
       }
 
       SessionStore.__emitChange();
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:
-      window.currentUserId = null;
-      _session = false;
-      SessionStore.__emitChange();
+      removeSession();
       break;
 
   };
 };
 
 SessionStore.isLoggedIn = function () {
-  if (window.currentUserId) { _session = true; }
+  if (window.currentUserId) { _currentUserId = window.currentUserId; }
 
-  return _session;
+  return (_currentUserId ? true : false);
+};
+
+SessionStore.getUserId = function () {
+  return _currentUserId;
 };
 
 SessionStore.getErrors = function () {
   return _errors.slice();
+};
+
+var removeSession = function () {
+  window.currentUserId = null;
+  _currentUserId = null;
+
+  SessionStore.__emitChange();
 };
 
 module.exports = SessionStore;

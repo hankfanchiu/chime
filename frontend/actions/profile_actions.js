@@ -1,21 +1,22 @@
-var AppDispatcher = require("../dispatcher/dispatcher");
 var WebAPIUtils = require("../utils/web_api_utils");
+var UserAPIUtils = require("../utils/user_api_utils");
+var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var ProfileActions = {
   // Current user profile
-  fetchProfile: function () {
-    WebAPIUtils.fetchProfile(ProfileActions.receiveProfile);
+  fetchUser: function (userId) {
+    UserAPIUtils.fetchUser(userId, ProfileActions.receiveUser);
   },
 
-  updateProfile: function (userData) {
-    WebAPIUtils.updateProfile(userData, ProfileActions.receiveProfile);
+  updateUser: function (userId, userData) {
+    UserAPIUtils.updateUser(userData, ProfileActions.receiveUser);
   },
 
-  receiveProfile: function (response) {
+  receiveUser: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.PROFILE_RECEIVED,
+      actionType: ActionTypes.USER_RECEIVED,
       response: response
     });
   },
