@@ -13,6 +13,10 @@ var Nav = React.createClass({
     this.history.pushState(null, "/discover", {});
   },
 
+  _search: function (e) {
+    this.history.pushState(null, "/search", {});
+  },
+
   render: function () {
     return (
       <nav className="navbar navbar-default navbar-static-top">
@@ -25,6 +29,10 @@ var Nav = React.createClass({
           <ul className="nav navbar-nav nav-links">
             <li>
               <a onClick={ this._discover }>Discover</a>
+            </li>
+
+            <li>
+              <a onClick={ this._search }>Search</a>
             </li>
           </ul>
 

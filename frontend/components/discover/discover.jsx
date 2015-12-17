@@ -28,7 +28,7 @@ var Discover = React.createClass({
   render: function () {
     return (
       <div className="container discover">
-        <h1>Discover new chimes</h1>
+        <h1>Discover New Chimes</h1>
 
         <DiscoverList tracks={ this.state.tracks } />
       </div>

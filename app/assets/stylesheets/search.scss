@@ -1,0 +1,21 @@
+div.search {
+}
+
+div.search-list-item {
+  div.image {
+    float: left;
+  }
+
+  div.detail {
+    float: left;
+
+    p.user {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    p.title {
+      font-weight: bolder;
+    }
+  }
+}

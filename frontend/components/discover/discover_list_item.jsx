@@ -2,31 +2,36 @@ var React = require("react");
 var PlaybackActions = require("../../actions/playback_actions");
 
 var DiscoverListItem = React.createClass({
+  _addClass: function (e) {
+    var $box = $(e.currentTarget);
+    $box.addClass("mousedown");
+  },
+
+  _removeClass: function (e) {
+    var $box = $(e.currentTarget);
+    $box.removeClass("mousedown");
+  },
+
   _playTrack: function (e) {
     PlaybackActions.playTrack(this.props.track);
   },
 
   render: function () {
     return (
-      <div className="discover-list-item clear">
-        <div className="image" onClick={ this._playTrack }>
-          <img src={ this.props.track.img_url } />
-        </div>
+      <div className="discover-list-item">
+        <div className="box"
+          onMouseDown={ this._addClass }
+          onMouseUp={ this._removeClass }
+          onMouseOut={ this._removeClass }
+          onClick={ this._playTrack }>
 
-        <div className="detail">
+          <div className="image">
+            <img src={ this.props.track.img_url } />
+          </div>
 
-          <p className="user">
-            <a>{ this.props.track.user }</a>
-          </p>
+          <p className="title">{ this.props.track.title }</p>
 
-          <p className="title">
-            { this.props.track.title }
-          </p>
-
-          <p>
-            <a>(+) Add to playlist</a>
-          </p>
-
+          <p className="user">{ this.props.track.user }</p>
         </div>
       </div>
     );

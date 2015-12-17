@@ -10,10 +10,8 @@ var DiscoverList = React.createClass({
 
   render: function () {
     return (
-      <div className="discover-list clear">
-
+      <div className="discover-list">
         { this.discoverListItems() }
-
       </div>
     );
   }

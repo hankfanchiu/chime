@@ -1,21 +1,55 @@
 div.discover {
+  text-align: center;
+}
+
+div.discover-list:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 div.discover-list-item {
-  div.image {
-    float: left;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  width: 220px;
+
+  div.box {
+    background: white;
+    width: 200px;
+    top: 50%;
+    left: 50%;
   }
 
-  div.detail {
-    float: left;
+  div.mousedown {
+    -moz-box-shadow: 0 2px 3px 0 #b3b3b3;
+    -webkit-box-shadow: 0 2px 3px 0 #b3b3b3;
+  }
 
-    p.user {
-      font-size: 12px;
-      color: #ccc;
-    }
+  img {
+    height: 150px;
+    width: 150px;
+  }
 
-    p.title {
-      font-weight: bolder;
-    }
+  p.title {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+  }
+
+  p.user {
+    font-size: 11px;
+    font-weight: lighter;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+div.discover-list-item:hover {
+  div.box{
+    border: 2px solid #eee;
+    border-radius: 10px;
   }
 }
