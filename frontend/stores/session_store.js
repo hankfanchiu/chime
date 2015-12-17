@@ -3,63 +3,43 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _sessionToken = sessionStorage.getItem("session_token");
+var _session = false;
 var _errors = [];
 
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
-  var actionType = payload.actionType;
   var response = payload.response;
 
-  switch (actionType) {
+  switch (payload.actionType) {
 
     case ActionTypes.LOGIN_RESPONSE:
       if (response.errors) {
-        setErrors(response.errors);
+        _errors = response.errors;
       } else {
-        setSessionStorage(response.session_token);
+        _session = true;
       }
 
+      SessionStore.__emitChange();
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:
-      removeSessionStorage();
+      window.currentUserId = null;
+      _session = false;
+      SessionStore.__emitChange();
       break;
 
   };
 };
 
 SessionStore.isLoggedIn = function () {
-  return _sessionToken ? true : false;
-};
+  if (window.currentUserId) { _session = true; }
 
-SessionStore.getSessionToken = function () {
-  return _sessionToken;
+  return _session;
 };
 
 SessionStore.getErrors = function () {
   return _errors.slice();
-};
-
-var setSessionStorage = function (sessionToken) {
-  _sessionToken = sessionToken;
-  sessionStorage.setItem("session_token", _sessionToken);
-
-  SessionStore.__emitChange();
-};
-
-var removeSessionStorage = function () {
-  _sessionToken = null;
-  sessionStorage.removeItem("session_token");
-
-  SessionStore.__emitChange();
-};
-
-var setErrors = function (errors) {
-  _errors = errors;
-
-  SessionStore.__emitChange();
 };
 
 module.exports = SessionStore;

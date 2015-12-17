@@ -1,19 +1,19 @@
+var SessionAPIUtils = require("../utils/session_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
-var WebAPIUtils = require("../utils/web_api_utils");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var SessionActions = {
   signUp: function (userData) {
-    WebAPIUtils.signUp(userData, SessionActions.receiveLogin);
+    SessionAPIUtils.signUp(userData, SessionActions.receiveLogin);
   },
 
   login: function (userData) {
-    WebAPIUtils.login(userData, SessionActions.receiveLogin);
+    SessionAPIUtils.login(userData, SessionActions.receiveLogin);
   },
 
   logout: function () {
-    WebAPIUtils.logout(SessionActions.receiveLogout);
+    SessionAPIUtils.logout(SessionActions.receiveLogout);
   },
 
   receiveLogin: function (response) {

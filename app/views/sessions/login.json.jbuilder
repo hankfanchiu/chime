@@ -1,5 +1,3 @@
-json.session_token current_user.session_token
-
 json.extract! @user, :id, :username, :email
 
 json.playlists @user.playlists do |playlist|
