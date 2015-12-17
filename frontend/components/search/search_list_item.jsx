@@ -7,20 +7,22 @@ var SearchListItem = React.createClass({
   },
 
   render: function () {
+    var track = this.props.track;
+
     return (
       <div className="search-list-item clear">
         <div className="image" onClick={ this._playTrack }>
-          <img src={ this.props.track.img_url } />
+          <img src={ track.img_url } />
         </div>
 
         <div className="detail">
 
           <p className="user">
-            <a>{ this.props.track.user }</a>
+            <a>{ track.user.username }</a>
           </p>
 
           <p className="title">
-            { this.props.track.title }
+            { track.title }
           </p>
 
           <p>

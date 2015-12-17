@@ -4,6 +4,7 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _track = {};
+
 var PlaybackStore = new Store(AppDispatcher);
 
 PlaybackStore.__onDispatch = function (payload) {
@@ -20,6 +21,7 @@ PlaybackStore.__onDispatch = function (payload) {
 
 PlaybackStore.getTrack = function () {
   var trackCopy = jQuery.extend({}, _track);
+  
   return trackCopy;
 };
 

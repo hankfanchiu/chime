@@ -17,6 +17,8 @@ var DiscoverListItem = React.createClass({
   },
 
   render: function () {
+    var track = this.props.track;
+
     return (
       <div className="discover-list-item">
         <div className="box"
@@ -26,12 +28,12 @@ var DiscoverListItem = React.createClass({
           onClick={ this._playTrack }>
 
           <div className="image">
-            <img src={ this.props.track.img_url } />
+            <img src={ track.img_url } />
           </div>
 
-          <p className="title">{ this.props.track.title }</p>
+          <p className="title">{ track.title }</p>
 
-          <p className="user">{ this.props.track.user }</p>
+          <p className="user">{ track.user.username }</p>
         </div>
       </div>
     );
