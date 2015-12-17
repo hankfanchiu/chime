@@ -11,7 +11,7 @@ var ProfileActions = {
   },
 
   updateUser: function (userId, userData) {
-    UserAPIUtils.updateUser(userData, ProfileActions.receiveUser);
+    UserAPIUtils.updateUser(userId, userData, ProfileActions.receiveUser);
   },
 
   receiveUser: function (response) {

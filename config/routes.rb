@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     defaults: { format: :json }
 
   get "profile/fetch_playlists", to: "users#fetch_playlists", defaults: { format: :json }
-  patch "profile/update", to: "users#update", defaults: { format: :json }
 
   namespace :api, defaults: { format: :json } do
     resources :tracks, except: [:new, :edit]

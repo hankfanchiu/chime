@@ -54,7 +54,9 @@ var Profile = React.createClass({
     };
 
     this.refs.password.value = "";
-    ProfileActions.updateProfile(userData);
+    var userId = SessionStore.getUserId();
+    
+    ProfileActions.updateUser(userId, userData);
   },
 
   isIncomplete: function () {

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     end
 
     if @user.update(user_params.except(:password))
-      render :fetch
+      render :show
     else
       render json: { errors: @user.errors.full_messages }
     end
