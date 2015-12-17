@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :tracks, except: [:new, :edit]
     resources :playlists, except: [:new, :edit]
+    resources :playlistings, only: [:create]
   end
 end

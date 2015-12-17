@@ -1,6 +1,6 @@
 var React = require("react");
 var ProfileStore = require("../../stores/profile_store");
-var ProfileActions = require("../../actions/profile_actions");
+var Playlist = require("./playlist");
 
 var Dropdown = React.createClass({
   getInitialState: function () {
@@ -8,8 +8,13 @@ var Dropdown = React.createClass({
   },
 
   renderPlaylists: function () {
+    var trackId = this.props.trackId;
+
     return this.state.playlists.map(function (playlist, idx) {
-      return <li key={ idx }>{ playlist.title }</li>;
+      return (
+        <Playlist key={ idx }
+          playlist={ playlist } trackId={ trackId }/>
+      );
     });
   },
 

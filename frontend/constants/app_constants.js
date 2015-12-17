@@ -16,6 +16,9 @@ module.exports = {
     // Playlists
     PLAYLISTS_RECEIVED: null,
 
+    // Playlistings
+    PLAYLISTING_RECEIVED: null,
+
     // Playback (player)
     PLAYBACK_TRACK_RECEIVED: null
   })

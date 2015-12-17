@@ -11,7 +11,7 @@ class Api::PlaylistsController < ApplicationController
     @playlist = current_user.playlists.new(playlist_params)
 
     if @playlist.save
-      render json: { success: ["Playlist created"] }
+      render json: @playlist
     else
       render json: { errors: @playlist.errors.full_messages }
     end
@@ -21,7 +21,7 @@ class Api::PlaylistsController < ApplicationController
     @playlist = Playlist.find(params[:id])
 
     if @playlist.update(playlist_params)
-      render json: { success: ["Track updated"] }
+      render json: @playlist
     else
       render json: { errors: @playlist.errors.full_messages }
     end
@@ -45,7 +45,7 @@ class Api::PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(:playlist).permit(:title, :description, :tracks)
+    params.require(:playlist).permit(:title, :description)
   end
 
   def require_user

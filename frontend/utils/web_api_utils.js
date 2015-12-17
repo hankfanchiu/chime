@@ -70,6 +70,17 @@ var WebAPIUtils = {
         actionCallback(playlists);
       }
     })
+  },
+
+  createPlaylisting: function (playlistingData, actionCallback) {
+    $.ajax({
+      url: "/api/playlistings",
+      type: "POST",
+      data: {playlisting: playlistingData},
+      success: function (playlisting) {
+        actionCallback(playlisting);
+      }
+    })
   }
 };
 

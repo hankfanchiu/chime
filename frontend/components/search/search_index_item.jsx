@@ -17,7 +17,7 @@ var SearchIndexItem = React.createClass({
 
   renderDropdown: function () {
     if (this.state.isDropdownVisible) {
-      return <PlaylistDropdown />;
+      return <PlaylistDropdown trackId={ this.props.track.id }/>;
     } else {
       return <div></div>
     }
