@@ -36,8 +36,6 @@ class UsersController < ApplicationController
       return
     end
 
-    @playlists = @user.playlists
-
     if @user.update(user_params.except(:password))
       render :fetch
     else

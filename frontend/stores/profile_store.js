@@ -44,6 +44,16 @@ ProfileStore.getProfile = function () {
   return userCopy;
 };
 
+ProfileStore.getTracks = function () {
+  var tracks = _user.tracks;
+
+  if (tracks === undefined) {
+    tracks = [];
+  }
+
+  return tracks.slice();
+},
+
 ProfileStore.getErrors = function () {
   return _errors.slice();
 };
