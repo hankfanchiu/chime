@@ -60,6 +60,16 @@ var WebAPIUtils = {
         actionCallback(tracks);
       }
     })
+  },
+
+  fetchPlaylists: function (actionCallback) {
+    $.ajax({
+      url: "/profile/fetch_playlists",
+      type: "GET",
+      success: function (playlists) {
+        actionCallback(playlists);
+      }
+    })
   }
 };
 

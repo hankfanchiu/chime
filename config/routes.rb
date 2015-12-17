@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     only: [:create, :show, :update],
     defaults: { format: :json }
 
+  get "profile/fetch_playlists", to: "users#fetch_playlists", defaults: { format: :json }
   patch "profile/update", to: "users#update", defaults: { format: :json }
   get "profile/fetch", to: "users#fetch", defaults: { format: :json }
 

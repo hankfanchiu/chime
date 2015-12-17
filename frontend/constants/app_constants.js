@@ -13,6 +13,9 @@ module.exports = {
     // Tracks
     TRACKS_RECEIVED: null,
 
+    // Playlists
+    PLAYLISTS_RECEIVED: null,
+
     // Playback (player)
     PLAYBACK_TRACK_RECEIVED: null
   })

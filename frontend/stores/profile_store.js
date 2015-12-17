@@ -21,7 +21,11 @@ ProfileStore.__onDispatch = function (payload) {
         setUser(response.user);
       }
 
-    break;
+      break;
+
+    case ActionTypes.LOGOUT_RESPONSE:
+      _user = null;
+      break;
 
     case ActionTypes.PROFILE_RECEIVED:
       if (response.errors) {
@@ -32,8 +36,8 @@ ProfileStore.__onDispatch = function (payload) {
 
       break;
 
-    case ActionTypes.LOGOUT_RESPONSE:
-      _user = null;
+    case ActionTypes.PLAYLISTS_RECEIVED:
+      updatePlaylists(response);
       break;
   };
 };
@@ -70,6 +74,12 @@ var setErrors = function (errors) {
   _errors = errors;
 
   ProfileStore.__emitChange();
-}
+};
+
+var updatePlaylists = function (playlists) {
+  _user.playlists = playlists;
+
+  ProfileStore.__emitChange();
+};
 
 module.exports = ProfileStore;

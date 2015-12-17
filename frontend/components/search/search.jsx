@@ -1,6 +1,8 @@
 var React = require("react");
+var SessionStore = require("../../stores/session_store");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
+var ProfileActions = require("../../actions/profile_actions");
 var SearchIndex = require("./search_index");
 
 var Search = React.createClass({
@@ -15,6 +17,10 @@ var Search = React.createClass({
   componentDidMount: function () {
     this.listenerToken = TrackStore.addListener(this._onChange);
     TrackActions.fetchTracks();
+
+    if (SessionStore.isLoggedIn()) {
+      ProfileActions.fetchPlaylists();
+    }
   },
 
   componentWillUnmount: function () {

@@ -25,6 +25,12 @@ class UsersController < ApplicationController
     render :fetch
   end
 
+  def fetch_playlists
+    @playlists = current_user.playlists
+
+    render "api/playlists/index"
+  end
+
   def update
     username = current_user.username
     password = user_params[:password]

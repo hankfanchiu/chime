@@ -1,9 +1,26 @@
 var React = require("react");
 var PlaybackActions = require("../../actions/playback_actions");
+var PlaylistDropdown = require("../playlist_dropdown/dropdown");
 
 var SearchIndexItem = React.createClass({
-  _playTrack: function (e) {
+  getInitialState: function () {
+    return { isDropdownVisible: false };
+  },
+
+  _playTrack: function () {
     PlaybackActions.playTrack(this.props.track);
+  },
+
+  _showDropdown: function () {
+    this.setState({ isDropdownVisible: true })
+  },
+
+  renderDropdown: function () {
+    if (this.state.isDropdownVisible) {
+      return <PlaylistDropdown />;
+    } else {
+      return <div></div>
+    }
   },
 
   render: function () {
@@ -26,8 +43,10 @@ var SearchIndexItem = React.createClass({
           </p>
 
           <p>
-            <a>(+) Add to playlist</a>
+            <a onClick={ this._showDropdown }>(+) Add to playlist</a>
           </p>
+
+          { this.renderDropdown() }
 
         </div>
       </div>
