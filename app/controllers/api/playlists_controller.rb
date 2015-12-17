@@ -1,4 +1,4 @@
-class PlaylistsController < ApplicationController
+class Api::PlaylistsController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
   before_action :require_user, only: [:update, :destroy]
 
