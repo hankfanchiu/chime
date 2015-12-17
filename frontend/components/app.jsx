@@ -6,14 +6,7 @@ var Player = require("./player/player");
 
 var App = React.createClass({
   getInitialState: function () {
-    return this.getStateFromStore();
-  },
-
-  getStateFromStore: function () {
-    return {
-      isLoggedIn: SessionStore.isLoggedIn(),
-      user: SessionStore.getUser()
-    };
+    return { isLoggedIn: SessionStore.isLoggedIn() };
   },
 
   componentDidMount: function () {
@@ -25,7 +18,7 @@ var App = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getStateFromStore());
+    this.setState({ isLoggedIn: SessionStore.isLoggedIn() });
   },
 
   render: function () {

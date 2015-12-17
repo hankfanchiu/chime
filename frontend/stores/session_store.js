@@ -4,7 +4,6 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _sessionToken = sessionStorage.getItem("session_token");
-var _user = sessionStorage.getItem("user");
 var _errors = [];
 
 var SessionStore = new Store(AppDispatcher);
@@ -40,30 +39,20 @@ SessionStore.getSessionToken = function () {
   return _sessionToken;
 };
 
-SessionStore.getUser = function () {
-  return _user;
-};
-
 SessionStore.getErrors = function () {
   return _errors.slice();
 };
 
 var setSessionStorage = function (response) {
   _sessionToken = response.session_token;
-  _user = response.user;
-
   sessionStorage.setItem("session_token", _sessionToken);
-  sessionStorage.setItem("user", _user);
 
   SessionStore.__emitChange();
 };
 
 var removeSessionStorage = function (response) {
   _sessionToken = null;
-  _user = null;
-
   sessionStorage.removeItem("session_token");
-  sessionStorage.removeItem("user");
 
   SessionStore.__emitChange();
 };

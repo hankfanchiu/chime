@@ -7,6 +7,9 @@ module.exports = {
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
 
+    // User
+    USER_RECEIVED: null,
+
     // Tracks
     TRACKS_RECEIVED: null,
 

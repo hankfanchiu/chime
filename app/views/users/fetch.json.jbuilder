@@ -1,4 +1,4 @@
-json.extract! @user, :id, :username
+json.extract! @user, :id, :username, :email
 
 json.playlists @playlists do |playlist|
   json.partial! "api/playlists/playlist", playlist: playlist

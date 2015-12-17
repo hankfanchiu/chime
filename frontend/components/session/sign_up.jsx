@@ -122,7 +122,7 @@ var SignUp = React.createClass({
 
               <div className="form-group">
                 <label htmlFor="signup-password-confirmation">
-                  { "Password Confirmation" }
+                  Password Confirmation
                 </label>
 
                 <input type="password"

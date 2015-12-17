@@ -31,6 +31,27 @@ var WebAPIUtils = {
     });
   },
 
+  fetchProfile: function (actionCallback) {
+    $.ajax({
+      url: "/fetch/profile",
+      type: "GET",
+      success: function (user) {
+        actionCallback(user);
+      }
+    })
+  },
+
+  updateProfile: function (userData, actionCallback) {
+    $.ajax({
+      url: "/users/1",
+      type: "PATCH",
+      data: {user: userData},
+      success: function (user) {
+        actionCallback(user);
+      }
+    })
+  },
+
   fetchTracks: function (actionCallback) {
     $.ajax({
       url: "/api/tracks",
