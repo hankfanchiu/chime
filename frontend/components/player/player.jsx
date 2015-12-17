@@ -20,7 +20,7 @@ var Player = React.createClass({
   },
 
   shouldComponentUpdate: function (nextProps, nextState) {
-    return this.state.track !== nextState;
+    return this.state.track.id !== nextState.track.id;
   },
 
   componentDidUpdate: function () {
