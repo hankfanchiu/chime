@@ -10,7 +10,7 @@ var SearchIndex = React.createClass({
 
   render: function () {
     return (
-      <div className="search-list clear">
+      <div className="search-index clear">
 
         { this.searchIndexItems() }
 
