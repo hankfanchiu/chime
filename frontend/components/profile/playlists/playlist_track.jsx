@@ -4,7 +4,7 @@ var PlaylistingActions = require("../../../actions/playlisting_actions");
 
 var PlaylistTrack = React.createClass({
   _playTrack: function (e) {
-    PlayerActions.playTrack(this.props.track);
+    PlayerActions.playTrackNow(this.props.track);
   },
 
   _deletePlaylisting: function () {

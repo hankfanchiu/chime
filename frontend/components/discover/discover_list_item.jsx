@@ -13,7 +13,7 @@ var DiscoverListItem = React.createClass({
   },
 
   _playTrack: function (e) {
-    PlayerActions.playTrack(this.props.track);
+    PlayerActions.playTrackNow(this.props.track);
   },
 
   render: function () {

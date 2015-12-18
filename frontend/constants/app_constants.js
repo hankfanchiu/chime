@@ -10,17 +10,19 @@ module.exports = {
     // User
     USER_RECEIVED: null,
 
-    // Tracks
+    // Track
     TRACKS_RECEIVED: null,
 
-    // Playlists
+    // Playlist
     PLAYLISTS_RECEIVED: null,
 
-    // Playlistings
+    // Playlisting
     PLAYLISTING_RECEIVED: null,
 
-    // Playback (player)
-    PLAYBACK_TRACK_RECEIVED: null
+    // Player
+    PLAY_TRACK_NOW: null,
+    ADD_TRACK_TO_QUEUE: null,
+    PLAY_NEXT_TRACK: null
   })
 
 };

@@ -1,5 +1,6 @@
 var React = require("react");
-var PlaybackStore = require("../../stores/playback_store");
+var PlayerActions = require("../../actions/player_actions");
+var PlayerStore = require("../../stores/player_store");
 
 var Player = React.createClass({
   getInitialState: function () {
@@ -7,11 +8,11 @@ var Player = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { track: PlaybackStore.getTrack() };
+    return { track: PlayerStore.getTrack() };
   },
 
   componentDidMount: function () {
-    this.listenerToken = PlaybackStore.addListener(this._onChange);
+    this.listenerToken = PlayerStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -31,12 +32,18 @@ var Player = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  _playNextTrack: function () {
+    PlayerActions.playNextTrack();
+  },
+
   playerStatus: function () {
     if (this.state.track.title) {
       return (
         <div className="status">
           <p className="playing">Currently Playing:</p>
           <p className="title">{ this.state.track.title }</p>
+
+          <p><a onClick={ this._playNextTrack }>Next Track</a></p>
         </div>
       );
     } else {

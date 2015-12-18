@@ -3,7 +3,11 @@ var PlayerActions = require("../../../actions/player_actions");
 
 var TracksIndexItem = React.createClass({
   _playTrack: function (e) {
-    PlayerActions.playTrack(this.props.track);
+    PlayerActions.playTrackNow(this.props.track);
+  },
+
+  _addTrackToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
   },
 
   render: function () {
@@ -22,7 +26,7 @@ var TracksIndexItem = React.createClass({
           </p>
 
           <p>
-            <a>(+) Add to playlist</a>
+            <a onClick={ this._addTrackToQueue }>(+) Add to queue</a>
           </p>
 
         </div>

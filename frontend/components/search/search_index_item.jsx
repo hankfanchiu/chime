@@ -8,7 +8,7 @@ var SearchIndexItem = React.createClass({
   },
 
   _playTrack: function () {
-    PlayerActions.playTrack(this.props.track);
+    PlayerActions.playTrackNow(this.props.track);
   },
 
   _showDropdown: function () {
