@@ -1,11 +1,11 @@
+var TrackAPIUtils = require("../utils/track_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
-var WebAPIUtils = require("../utils/web_api_utils");
 var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = AppConstants;
 
 var TrackActions = {
   fetchTracks: function () {
-    WebAPIUtils.fetchTracks(TrackActions.receiveTracks);
+    TrackAPIUtils.fetchTracks(TrackActions.receiveTracks);
   },
 
   receiveTracks: function (tracks) {
