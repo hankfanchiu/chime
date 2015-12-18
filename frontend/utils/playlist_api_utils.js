@@ -9,8 +9,18 @@ var PlaylistAPIUtils = {
     $.ajax({
       url: url,
       type: "GET",
-      success: function (playlists) {
-        actionCallback(playlists);
+      success: function (response) {
+        actionCallback(response);
+      }
+    });
+  },
+
+  fetchPlaylist: function (playlistId, actionCallback) {
+    $.ajax({
+      url: "/api/playlists/" + playlistId,
+      type: "GET",
+      success: function (response) {
+        actionCallback(response);
       }
     });
   },
@@ -33,16 +43,6 @@ var PlaylistAPIUtils = {
       data: {playlist: playlistData}
       success: function (response) {
         actionCallback(response);
-      }
-    });
-  },
-
-  fetchPlaylist: function (playlistId, actionCallback) {
-    $.ajax({
-      url: "/api/playlists/" + playlistId,
-      type: "GET",
-      success: function (playlist) {
-        actionCallback(playlist);
       }
     });
   },
