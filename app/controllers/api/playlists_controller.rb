@@ -49,10 +49,8 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def require_owner
-    own_playlist = current_user.playlists.find(params[:id])
+    owned_playlist = current_user.playlists.find(params[:id])
 
-    unless own_playlist
-      render json: {}, status: 403
-    end
+    render json: {}, status: 403 unless owned_playlist
   end
 end

@@ -31,11 +31,9 @@ class Api::PlaylistingsController < ApplicationController
   end
 
   def require_owner
-    own_playlisting = current_user.playlistings
+    owned_playlisting = current_user.playlistings
       .where(playlist_id: params[:playlist_id], track_id: params[:track_id])
 
-    unless own_playlisting
-      render json: {}, status: 403
-    end
+    render json: {}, status: 403 unless own_playlisting
   end
 end

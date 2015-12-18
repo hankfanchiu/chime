@@ -49,10 +49,8 @@ class Api::TracksController < ApplicationController
   end
 
   def require_owner
-    own_track = current_user.tracks.find(params[:id])
+    owned_track = current_user.tracks.find(params[:id])
 
-    unless own_track
-      render json: { errors: ["You do not own this track!"] }
-    end
+    render json: {}, status: 403 unless owned_track
   end
 end
