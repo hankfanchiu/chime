@@ -1,10 +1,10 @@
 var React = require("react");
-var PlaybackActions = require("../../../actions/playback_actions");
+var PlayerActions = require("../../../actions/player_actions");
 var PlaylistingActions = require("../../../actions/playlisting_actions");
 
 var PlaylistTrack = React.createClass({
   _playTrack: function (e) {
-    PlaybackActions.playTrack(this.props.track);
+    PlayerActions.playTrack(this.props.track);
   },
 
   _deletePlaylisting: function () {

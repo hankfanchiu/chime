@@ -2,7 +2,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var PlaybackActions = {
+var PlayerActions = {
   playTrack: function (track) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAYBACK_TRACK_RECEIVED,
@@ -11,4 +11,4 @@ var PlaybackActions = {
   }
 };
 
-module.exports = PlaybackActions;
+module.exports = PlayerActions;

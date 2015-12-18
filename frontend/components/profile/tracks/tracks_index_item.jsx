@@ -1,9 +1,9 @@
 var React = require("react");
-var PlaybackActions = require("../../../actions/playback_actions");
+var PlayerActions = require("../../../actions/player_actions");
 
 var TracksIndexItem = React.createClass({
   _playTrack: function (e) {
-    PlaybackActions.playTrack(this.props.track);
+    PlayerActions.playTrack(this.props.track);
   },
 
   render: function () {

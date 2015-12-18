@@ -1,5 +1,5 @@
 var React = require("react");
-var PlaybackActions = require("../../actions/playback_actions");
+var PlayerActions = require("../../actions/player_actions");
 var PlaylistDropdown = require("../playlist_dropdown/dropdown");
 
 var SearchIndexItem = React.createClass({
@@ -8,7 +8,7 @@ var SearchIndexItem = React.createClass({
   },
 
   _playTrack: function () {
-    PlaybackActions.playTrack(this.props.track);
+    PlayerActions.playTrack(this.props.track);
   },
 
   _showDropdown: function () {

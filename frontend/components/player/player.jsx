@@ -1,6 +1,5 @@
 var React = require("react");
 var PlaybackStore = require("../../stores/playback_store");
-var PlaybackActions = require("../../actions/playback_actions");
 
 var Player = React.createClass({
   getInitialState: function () {
