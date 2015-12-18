@@ -6,7 +6,7 @@ var TrackAPIUtils = {
       success: function (tracks) {
         actionCallback(tracks);
       }
-    })
+    });
   }
 };
 

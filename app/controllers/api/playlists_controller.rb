@@ -52,7 +52,7 @@ class Api::PlaylistsController < ApplicationController
     own_playlist = current_user.playlists.find(params[:id])
 
     unless own_playlist
-      render json: { errors: ["You do not own this playlist!"] }
+      render json: {}, status: 403
     end
   end
 end

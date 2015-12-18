@@ -6,7 +6,7 @@ var UserAPIUtils = {
       success: function (user) {
         actionCallback(user);
       }
-    })
+    });
   },
 
   updateUser: function (userId, userData, actionCallback) {
@@ -17,7 +17,7 @@ var UserAPIUtils = {
       success: function (user) {
         actionCallback(user);
       }
-    })
+    });
   }
 };
 

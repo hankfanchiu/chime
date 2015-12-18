@@ -1,6 +1,6 @@
 class Api::PlaylistingsController < ApplicationController
   before_action :require_login
-  before_action :require_user, only: [:destroy]
+  before_action :require_owner, only: [:destroy]
 
   def create
     @playlisting = Playlisting.new(playlisting_params)
@@ -12,13 +12,12 @@ class Api::PlaylistingsController < ApplicationController
     end
   end
 
-  def destroy
-    @playlisting = Playlisting.find_by(
-      playlist_id: params[:playlist_id],
-      track_id: params[:track_id]
-    )
+  def remove
+    @playlisting = Playlisting.find_by(playlisting_params)
 
-    if @playlisting.destroy
+    if @playlisting.nil?
+      render json: {}, status: 404
+    elsif @playlisting.destroy
       render json: @playlisting
     else
       render json: { errors: @playlisting.errors.full_messages }
@@ -36,7 +35,7 @@ class Api::PlaylistingsController < ApplicationController
       .where(playlist_id: params[:playlist_id], track_id: params[:track_id])
 
     unless own_playlisting
-      render json: { errors: ["You do not own this playlisting!"] }
+      render json: {}, status: 403
     end
   end
 end

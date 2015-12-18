@@ -8,10 +8,12 @@ var PlaylistTrack = React.createClass({
   },
 
   _deletePlaylisting: function () {
-    var playlistId = this.props.playlistId;
-    var trackId = this.props.track.id;
+    var data = {
+      playlist_id: this.props.playlistId,
+      track_id: this.props.track.id
+    };
 
-    PlaylistingActions.deletePlaylisting(playlistId, trackId);
+    PlaylistingActions.deletePlaylisting(data);
   },
 
   render: function () {

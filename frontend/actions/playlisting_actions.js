@@ -11,10 +11,9 @@ var PlaylistingActions = {
     );
   },
 
-  deletePlaylisting: function (playlistId, trackId) {
+  deletePlaylisting: function (ids) {
     PlaylistingAPIUtils.deletePlaylisting(
-      playlistId,
-      trackId,
+      ids,
       PlaylistingActions.receivePlaylisting
     );
   },

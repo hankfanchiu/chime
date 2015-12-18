@@ -1,1 +1,9 @@
-json.partial! "api/playlists/playlist", playlist: @playlist
+json.extract! playlist, :id, :title, :description
+
+json.tracks playlist.tracks do |track|
+  json.extract! track, :id, :title, :track_url, :img_url, :description
+
+  json.user do
+    json.extract! track.user, :id, :username
+  end
+end

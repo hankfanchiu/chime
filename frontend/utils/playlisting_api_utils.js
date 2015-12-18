@@ -10,12 +10,11 @@ var PlaylistingAPIUtils = {
     });
   },
 
-  deletePlaylisting: function (playlistId, trackId, actionCallback) {
-    var query = "?playlist_id=" + playlistId + "&track_id=" + trackId;
-
+  deletePlaylisting: function (ids, actionCallback) {
     $.ajax({
-      url: "/api/playlistings" + query,
-      type: "DELETE",
+      url: "/api/remove_track_from_playlist",
+      type: "POST",
+      data: { playlisting: ids },
       success: function (playlisting) {
         actionCallback(playlisting);
       }

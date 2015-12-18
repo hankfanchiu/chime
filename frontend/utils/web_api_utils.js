@@ -6,7 +6,7 @@ var WebAPIUtils = {
       success: function (playlists) {
         actionCallback(playlists);
       }
-    })
+    });
   }
 };
 
