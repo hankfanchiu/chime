@@ -14,7 +14,7 @@ var PlaylistingAPIUtils = {
     $.ajax({
       url: "/api/remove_track_from_playlist",
       type: "POST",
-      data: { playlisting: ids },
+      data: {playlisting: ids},
       success: function (playlisting) {
         actionCallback(playlisting);
       }
