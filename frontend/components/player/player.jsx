@@ -36,6 +36,10 @@ var Player = React.createClass({
     PlayerActions.playNextTrack();
   },
 
+  _playPreviousTrack: function () {
+    PlayerActions.playPreviousTrack();
+  },
+
   playerStatus: function () {
     if (this.state.track.title) {
       return (
@@ -43,7 +47,10 @@ var Player = React.createClass({
           <p className="playing">Currently Playing:</p>
           <p className="title">{ this.state.track.title }</p>
 
-          <p><a onClick={ this._playNextTrack }>Next Track</a></p>
+          <p>
+            <a onClick={ this._playPreviousTrack }>Previous Track</a>&nbsp;
+            | <a onClick={ this._playNextTrack }>Next Track</a>
+          </p>
         </div>
       );
     } else {

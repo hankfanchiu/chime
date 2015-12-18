@@ -24,6 +24,13 @@ var PlayerActions = {
     });
   },
 
+  playPreviousTrack: function (track) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAY_PREVIOUS_TRACK,
+      track: track
+    });
+  },
+
   loadPlaylist: function (playlist) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.LOAD_PLAYLIST,

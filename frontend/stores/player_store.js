@@ -17,19 +17,23 @@ PlayerStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.PLAY_TRACK_NOW:
-      resetTrack(track);
+      resetTrackAndQueue(track);
       break;
 
     case ActionTypes.ADD_TRACK_TO_QUEUE:
-      addTrack(track);
+      pushTrackToQueue(track);
       break;
 
     case ActionTypes.PLAY_NEXT_TRACK:
-      playNextTrack();
+      loadNextTrackInQueue();
+      break;
+
+    case ActionTypes.PLAY_PREVIOUS_TRACK:
+      loadPreviousTrackInQueue();
       break;
 
     case ActionTypes.LOAD_PLAYLIST:
-      loadPlaylist(playlist);
+      loadPlaylistToQueue(playlist);
       break;
   };
 };
@@ -42,12 +46,11 @@ PlayerStore.getTrack = function () {
 
 PlayerStore.getNextTrack = function () {
   var nextTrack = _queue[_queueIndex + 1];
+  var nextTrackCopy;
 
-  if (nextTrack === undefined) {
-    return null;
-  }
+  if (nextTrack === undefined) { return null; }
 
-  var nextTrackCopy = jQuery.extend({}, nextTrack);
+  nextTrackCopy = jQuery.extend({}, nextTrack);
 
   return nextTrackCopy;
 }
@@ -56,34 +59,49 @@ PlayerStore.queueIsEmpty = function () {
   return _queue.length === 0;
 };
 
-var resetTrack = function (track) {
+var resetTrackAndQueue = function (track) {
   _queue = [track];
   _queueIndex = 0;
   _track = track;
+
   PlayerStore.__emitChange();
 };
 
-var addTrack = function (track) {
+var pushTrackToQueue = function (track) {
   _queue.push(track);
+
   PlayerStore.__emitChange();
 };
 
-var playNextTrack = function () {
-  if (_queue.length === 0) {
-    return;
-  }
+var loadNextTrackInQueue = function () {
+  if (_queue.length === 0 || _queue.length === 1) { return; }
 
-  if (_queueIndex === _queue.length) {
+  if (_queueIndex === _queue.length - 1) {
     _queueIndex = 0;
+  } else {
+    _queueIndex += 1;
   }
 
   _track = _queue[_queueIndex];
-  _queueIndex += 1;
 
   PlayerStore.__emitChange();
 };
 
-var loadPlaylist = function (playlist) {
+var loadPreviousTrackInQueue = function () {
+  if (_queue.length === 0 || _queue.length === 1) { return; }
+
+  if (_queueIndex === 0) {
+    _queueIndex = _queue.length - 1;
+  } else {
+    _queueIndex -= 1;
+  }
+
+  _track = _queue[_queueIndex];
+
+  PlayerStore.__emitChange();
+};
+
+var loadPlaylistToQueue = function (playlist) {
   _queue = playlist.tracks;
   _queueIndex = 0;
   _track = _queue[_queueIndex];
