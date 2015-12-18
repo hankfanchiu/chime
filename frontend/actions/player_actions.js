@@ -10,23 +10,27 @@ var PlayerActions = {
     });
   },
 
+  playNextTrack: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAY_NEXT_TRACK
+    });
+  },
+
+  playPreviousTrack: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAY_PREVIOUS_TRACK
+    });
+  },
+
+  autoPlayNextTrack: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.AUTO_PLAY_TRACK
+    });
+  },
+
   addTrackToQueue: function (track) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.ADD_TRACK_TO_QUEUE,
-      track: track
-    });
-  },
-
-  playNextTrack: function (track) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.PLAY_NEXT_TRACK,
-      track: track
-    });
-  },
-
-  playPreviousTrack: function (track) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.PLAY_PREVIOUS_TRACK,
       track: track
     });
   },

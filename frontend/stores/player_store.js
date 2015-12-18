@@ -20,16 +20,20 @@ PlayerStore.__onDispatch = function (payload) {
       resetTrackAndQueue(track);
       break;
 
-    case ActionTypes.ADD_TRACK_TO_QUEUE:
-      pushTrackToQueue(track);
-      break;
-
     case ActionTypes.PLAY_NEXT_TRACK:
       loadNextTrackInQueue();
       break;
 
     case ActionTypes.PLAY_PREVIOUS_TRACK:
       loadPreviousTrackInQueue();
+      break;
+
+    case ActionTypes.AUTO_PLAY_TRACK:
+      loadNextTrackUntilEnd();
+      break;
+
+    case ActionTypes.ADD_TRACK_TO_QUEUE:
+      pushTrackToQueue(track);
       break;
 
     case ActionTypes.LOAD_PLAYLIST:
@@ -67,14 +71,8 @@ var resetTrackAndQueue = function (track) {
   PlayerStore.__emitChange();
 };
 
-var pushTrackToQueue = function (track) {
-  _queue.push(track);
-
-  PlayerStore.__emitChange();
-};
-
 var loadNextTrackInQueue = function () {
-  if (_queue.length === 0 || _queue.length === 1) { return; }
+  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
 
   if (_queueIndex === _queue.length - 1) {
     _queueIndex = 0;
@@ -88,7 +86,7 @@ var loadNextTrackInQueue = function () {
 };
 
 var loadPreviousTrackInQueue = function () {
-  if (_queue.length === 0 || _queue.length === 1) { return; }
+  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
 
   if (_queueIndex === 0) {
     _queueIndex = _queue.length - 1;
@@ -97,6 +95,23 @@ var loadPreviousTrackInQueue = function () {
   }
 
   _track = _queue[_queueIndex];
+
+  PlayerStore.__emitChange();
+};
+
+var loadNextTrackUntilEnd = function () {
+  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
+  if (_queueIndex === _queue.length - 1) { return; }
+
+  _queueIndex += 1;
+
+  _track = _queue[_queueIndex];
+
+  PlayerStore.__emitChange();
+};
+
+var pushTrackToQueue = function (track) {
+  _queue.push(track);
 
   PlayerStore.__emitChange();
 };

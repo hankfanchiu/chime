@@ -21,9 +21,10 @@ module.exports = {
 
     // Player
     PLAY_TRACK_NOW: null,
-    ADD_TRACK_TO_QUEUE: null,
     PLAY_NEXT_TRACK: null,
     PLAY_PREVIOUS_TRACK: null,
+    AUTO_PLAY_TRACK: null,
+    ADD_TRACK_TO_QUEUE: null,
     LOAD_PLAYLIST: null
   })
 
