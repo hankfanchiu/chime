@@ -1,3 +1,7 @@
 json.array! @tracks do |track|
-  json.partial! "api/tracks/track", track: track
+  json.extract! track, :id, :title, :track_url, :img_url, :description
+
+  json.user do
+    json.extract! track.user, :id, :username
+  end
 end

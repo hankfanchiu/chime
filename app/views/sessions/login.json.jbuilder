@@ -5,5 +5,5 @@ json.playlists @user.playlists do |playlist|
 end
 
 json.tracks @user.tracks do |track|
-  json.partial! "api/tracks/track", track: track
+  json.extract! track, :id, :title, :track_url, :img_url, :description
 end
