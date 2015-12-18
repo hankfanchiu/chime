@@ -13,10 +13,12 @@ var Player = React.createClass({
 
   componentDidMount: function () {
     this.listenerToken = PlayerStore.addListener(this._onChange);
+    this.refs.audio.addEventListener("ended", PlayerActions.autoPlay);
   },
 
   componentWillUnmount: function () {
     this.listenerToken.remove();
+    this.refs.audio.removeEventListener("ended", PlayerActions.autoPlay);
   },
 
   shouldComponentUpdate: function (nextProps, nextState) {
@@ -32,15 +34,7 @@ var Player = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
-  _playNextTrack: function () {
-    PlayerActions.playNextTrack();
-  },
-
-  _playPreviousTrack: function () {
-    PlayerActions.playPreviousTrack();
-  },
-
-  playerStatus: function () {
+  renderPlayerControls: function () {
     if (this.state.track.title) {
       return (
         <div className="status">
@@ -48,8 +42,15 @@ var Player = React.createClass({
           <p className="title">{ this.state.track.title }</p>
 
           <p>
-            <a onClick={ this._playPreviousTrack }>Previous Track</a>&nbsp;
-            | <a onClick={ this._playNextTrack }>Next Track</a>
+            <a onClick={ PlayerActions.playPreviousTrack }>
+              Previous Track
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a onClick={ PlayerActions.playNextTrack }>
+              Next Track
+            </a>
           </p>
         </div>
       );
@@ -69,7 +70,7 @@ var Player = React.createClass({
           </p>
         </audio>
 
-        { this.playerStatus() }
+        { this.renderPlayerControls() }
       </div>
     );
   }

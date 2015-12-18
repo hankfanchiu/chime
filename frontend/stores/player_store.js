@@ -43,7 +43,11 @@ PlayerStore.__onDispatch = function (payload) {
 };
 
 PlayerStore.getTrack = function () {
-  var trackCopy = jQuery.extend({}, _track);
+  var trackCopy;
+
+  if (_track === {}) { return null; }
+
+  trackCopy = jQuery.extend({}, _track);
 
   return trackCopy;
 };
@@ -61,6 +65,10 @@ PlayerStore.getNextTrack = function () {
 
 PlayerStore.queueIsEmpty = function () {
   return _queue.length === 0;
+};
+
+PlayerStore.queueIsEnded = function () {
+  return _queueIndex === _queue.length - 1;
 };
 
 var resetTrackAndQueue = function (track) {

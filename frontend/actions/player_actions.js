@@ -22,7 +22,7 @@ var PlayerActions = {
     });
   },
 
-  autoPlayNextTrack: function () {
+  autoPlay: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.AUTO_PLAY_TRACK
     });
