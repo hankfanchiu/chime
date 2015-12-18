@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
 
   has_many :tracks
   has_many :playlists
+  has_many :playlistings, through: :playlists
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
