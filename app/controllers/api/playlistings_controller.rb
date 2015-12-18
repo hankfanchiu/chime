@@ -10,12 +10,9 @@ class Api::PlaylistingsController < ApplicationController
   end
 
   def destroy
-    playlist_id = params[:playlist_id]
-    track_id = params[:track_id]
-
     @playlisting = Playlisting.find_by(
-      playlist_id: playlist_id,
-      track_id: track_id
+      playlist_id: params[:playlist_id],
+      track_id: params[:track_id]
     )
 
     if @playlisting.destroy

@@ -3,9 +3,10 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
 
   def create
-    username = params[:user][:username]
-    password = params[:user][:password]
-    @user = User.find_by_credentials(username, password)
+    @user = User.find_by_credentials(
+      params[:user][:username],
+      params[:user][:password]
+    )
 
     if @user
       login!(@user)
