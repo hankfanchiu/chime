@@ -1,6 +1,6 @@
 class Api::TracksController < ApplicationController
   before_action :require_login, only: [:create, :update, :destroy]
-  before_action :require_user, only: [:update, :destroy]
+  before_action :require_owner, only: [:update, :destroy]
 
   def index
     @tracks = Track.all.includes(:user)
@@ -48,7 +48,7 @@ class Api::TracksController < ApplicationController
     params.require(:track).permit(:title, :description)
   end
 
-  def require_user
+  def require_owner
     own_track = current_user.tracks.find(params[:id])
 
     unless own_track

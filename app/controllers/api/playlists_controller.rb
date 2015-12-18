@@ -1,6 +1,6 @@
 class Api::PlaylistsController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
-  before_action :require_user, only: [:update, :destroy]
+  before_action :require_owner, only: [:update, :destroy]
 
   def index
     @playlists = Playlist.all.includes(:tracks)
@@ -48,7 +48,7 @@ class Api::PlaylistsController < ApplicationController
     params.require(:playlist).permit(:title, :description)
   end
 
-  def require_user
+  def require_owner
     own_playlist = current_user.playlists.find(params[:id])
 
     unless own_playlist

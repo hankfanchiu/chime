@@ -31,7 +31,7 @@ class Api::PlaylistingsController < ApplicationController
     params.require(:playlisting).permit(:playlist_id, :track_id)
   end
 
-  def require_user
+  def require_owner
     own_playlisting = current_user.playlistings
       .where(playlist_id: params[:playlist_id], track_id: params[:track_id])
 
