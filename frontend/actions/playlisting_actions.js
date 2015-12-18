@@ -4,6 +4,8 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var PlaylistingActions = {
+  // Request actions
+
   createPlaylisting: function (playlistingData) {
     PlaylistingAPIUtils.createPlaylisting(
       playlistingData,
@@ -17,6 +19,8 @@ var PlaylistingActions = {
       PlaylistingActions.receivePlaylisting
     );
   },
+
+  // Response actions
 
   receivePlaylisting: function (response) {
     AppDispatcher.dispatch({

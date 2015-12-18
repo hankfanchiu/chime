@@ -6,6 +6,7 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var ProfileActions = {
   // Current user profile
+  
   fetchUser: function (userId) {
     UserAPIUtils.fetchUser(userId, ProfileActions.receiveUser);
   },

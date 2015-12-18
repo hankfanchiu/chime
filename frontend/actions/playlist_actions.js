@@ -4,6 +4,8 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var PlaylistingActions = {
+  // Request actions
+
   fetchPlaylists: function (userId) {
     PlaylistAPIUtils.fetchPlaylists(
       userId,
@@ -39,6 +41,8 @@ var PlaylistingActions = {
       PlaylistActions.receivePlaylist
     );
   },
+
+  // Response actions
 
   receivePlaylist: function (response) {
     AppDispatcher.dispatch({

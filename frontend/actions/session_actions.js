@@ -4,6 +4,8 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var SessionActions = {
+  // Request actions
+
   signUp: function (userData) {
     SessionAPIUtils.signUp(userData, SessionActions.receiveLogin);
   },
@@ -15,6 +17,8 @@ var SessionActions = {
   logout: function () {
     SessionAPIUtils.logout(SessionActions.receiveLogout);
   },
+
+  // Response actions
 
   receiveLogin: function (response) {
     AppDispatcher.dispatch({
