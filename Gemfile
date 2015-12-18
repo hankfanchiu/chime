@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 gem 'rename'
 gem 'pry-rails'
 gem 'bcrypt', require: 'bcrypt'
@@ -51,4 +52,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

@@ -43,11 +43,7 @@ PlayerStore.__onDispatch = function (payload) {
 };
 
 PlayerStore.getTrack = function () {
-  var trackCopy;
-
-  if (_track === {}) { return null; }
-
-  trackCopy = jQuery.extend({}, _track);
+  var trackCopy = jQuery.extend({}, _track);
 
   return trackCopy;
 };
@@ -64,11 +60,15 @@ PlayerStore.getNextTrack = function () {
 }
 
 PlayerStore.queueIsEmpty = function () {
-  return _queue.length === 0;
+  return (_queue.length === 0);
 };
 
 PlayerStore.queueIsEnded = function () {
-  return _queueIndex === _queue.length - 1;
+  return (_queueIndex === _queue.length - 1);
+};
+
+PlayerStore.isInQueue = function (track) {
+  return (_queue.indexOf(track) !== -1);
 };
 
 var resetTrackAndQueue = function (track) {
@@ -119,7 +119,7 @@ var loadNextTrackUntilEnd = function () {
 };
 
 var pushTrackToQueue = function (track) {
-  _queue.push(track);
+  if (!PlayerStore.isInQueue(track)) { _queue.push(track); }
 
   PlayerStore.__emitChange();
 };
