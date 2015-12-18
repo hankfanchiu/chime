@@ -12,7 +12,7 @@ var PlayerStore = new Store(AppDispatcher);
 PlayerStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var track = payload.track;
-  var queue = payload.queue;
+  var playlist = payload.playlist;
 
   switch (actionType) {
 
@@ -28,8 +28,8 @@ PlayerStore.__onDispatch = function (payload) {
       playNextTrack();
       break;
 
-    case ActionTypes.PLAY_QUEUE_RECEIVED:
-      resetQueue(queue);
+    case ActionTypes.LOAD_PLAYLIST:
+      loadPlaylist(playlist);
       break;
   };
 };
@@ -83,9 +83,10 @@ var playNextTrack = function () {
   PlayerStore.__emitChange();
 };
 
-var resetQueue = function (queue) {
-  _queue = queue;
-  _track = _queue[0];
+var loadPlaylist = function (playlist) {
+  _queue = playlist.tracks;
+  _queueIndex = 0;
+  _track = _queue[_queueIndex];
 
   PlayerStore.__emitChange();
 };

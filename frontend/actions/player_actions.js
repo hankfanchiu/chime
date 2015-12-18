@@ -24,10 +24,10 @@ var PlayerActions = {
     });
   },
 
-  loadQueue: function (queue) {
+  loadPlaylist: function (playlist) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.PLAY_QUEUE_RECEIVED,
-      queue: queue
+      actionType: ActionTypes.LOAD_PLAYLIST,
+      playlist: playlist
     });
   }
 };

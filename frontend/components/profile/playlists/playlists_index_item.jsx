@@ -1,13 +1,18 @@
 var React = require("react");
 var PlaylistTrack = require("./playlist_track");
+var PlayerActions = require("../../../actions/player_actions");
 
 var PlaylistsIndexItem = React.createClass({
   getInitialState: function () {
     return { isExpanded: false };
   },
 
-  _toggle: function (e) {
+  _toggle: function () {
     this.setState({ isExpanded: !this.state.isExpanded });
+  },
+
+  _playPlaylist: function () {
+    PlayerActions.loadPlaylist(this.props.playlist);
   },
 
   renderPlaylistTracks: function () {
@@ -31,7 +36,7 @@ var PlaylistsIndexItem = React.createClass({
     return (
       <div className="playlists-index-item clear">
         <p>
-          { playlist.title }: { playlist.description }&nbsp;
+          <a onClick={ this._playPlaylist }>Play</a> { playlist.title }: { playlist.description }&nbsp;
           | <a onClick={ this._toggle }>{ option }</a>
         </p>
 
