@@ -26,7 +26,9 @@ var TracksIndexItem = React.createClass({
           </p>
 
           <p>
-            <a onClick={ this._addTrackToQueue }>(+) Add to queue</a>
+            <a onClick={ this._addTrackToQueue }>
+              <i className="fa fa-plus"></i> Add to queue
+            </a>
           </p>
 
         </div>

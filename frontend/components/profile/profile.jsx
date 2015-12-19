@@ -8,7 +8,14 @@ var Profile = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
-    return ProfileStore.getProfile();
+    var user = ProfileStore.getProfile();
+
+    return {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      password: ""
+    }
   },
 
   componentWillMount: function () {
@@ -27,31 +34,40 @@ var Profile = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(ProfileStore.getProfile());
+    var user = ProfileStore.getProfile();
+
+    this.setState({
+      username: user.username,
+      email: user.email,
+      password: ""
+    });
   },
 
-  _updateProfile: function (e) {
+  _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) { return this._handleIncompleteSubmit(); }
+    if (this.isIncomplete()) { this._handleIncompleteSubmit(); }
 
-    var userId = SessionStore.getUserId();
+    this._updateUser();
+    this.refs.password.value = "";
+  },
+
+  _updateUser: function () {
     var userData = {
       username: this.state.username,
       email: this.state.email,
       password: this.refs.password.value,
     };
 
-    this.refs.password.value = "";
-    ProfileActions.updateUser(userId, userData);
+    ProfileActions.updateUser(this.state.id, userData);
   },
 
   isIncomplete: function () {
-    if (this.state.username === "") { return true; }
-    if (this.state.email === "") { return true; }
-    if (this.refs.password.value === "") { return true; }
-
-    return false;
+    return (
+      (this.state.username === "") ||
+      (this.state.email === "") ||
+      (this.refs.password.value === "")
+    );
   },
 
   _handleIncompleteSubmit: function () {
@@ -65,13 +81,12 @@ var Profile = React.createClass({
           <div className="col-xs-4 col-xs-offset-4">
             <h1>Profile</h1>
 
-            <form className="profile-form" onSubmit={ this._updateProfile }>
+            <form className="profile-form" onSubmit={ this._handleSubmit }>
 
               <div className="form-group">
                 <label htmlFor="profile-username">Username</label>
 
                 <input type="text"
-                  name="username"
                   className="form-control"
                   id="profile-username"
                   valueLink={ this.linkState("username") } />
@@ -81,24 +96,24 @@ var Profile = React.createClass({
                 <label htmlFor="profile-email">Email</label>
 
                 <input type="text"
-                  name="email"
                   className="form-control"
                   id="profile-email"
                   valueLink={ this.linkState("email") } />
               </div>
 
               <div className="form-group">
-                <label htmlFor="profile-password">Password Confirmation</label>
+                <label htmlFor="profile-password">
+                  Password Confirmation
+                </label>
 
                 <input type="password"
-                  name="password"
                   className="form-control"
                   ref="password"
                   id="profile-password" />
               </div>
 
-              <button className="btn btn-default"
-                type="submit">Update Profile</button>
+              <button type="submit"
+                className="btn btn-default">Update Profile</button>
             </form>
 
           </div>
