@@ -7,14 +7,14 @@ var Audio = React.createClass({
     this.isPlaying = false;
 
     this.refs.audio.addEventListener("ended", this._handleEnded);
-    this.refs.audio.addEventListener("playing", this._handlePlayingOrPause);
-    this.refs.audio.addEventListener("pause", this._handlePlayingOrPause);
+    this.refs.audio.addEventListener("playing", this._handlePlaying);
+    this.refs.audio.addEventListener("pause", this._handlePause);
   },
 
   componentWillUnmount: function () {
     this.refs.audio.removeEventListener("ended", this._handleEnded);
-    this.refs.audio.removeEventListener("playing", this._handlePlayingOrPause);
-    this.refs.audio.removeEventListener("pause", this._handlePlayingOrPause);
+    this.refs.audio.removeEventListener("playing", this._handlePlaying);
+    this.refs.audio.removeEventListener("pause", this._handlePause);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -41,9 +41,17 @@ var Audio = React.createClass({
     setTimeout(PlayerActions.autoPlayNextTrack, 1000);
   },
 
-  _handlePlayingOrPause: function () {
-    this.isPlaying = !this.isPlaying;
-    
+  _handlePlaying: function () {
+    if (this.isPlaying) { return; }
+
+    this.isPlaying = true;
+    this.props.setIsPlaying(this.isPlaying);
+  },
+
+  _handlePause: function () {
+    if (!this.isPlaying) { return; }
+
+    this.isPlaying = false;
     this.props.setIsPlaying(this.isPlaying);
   },
 

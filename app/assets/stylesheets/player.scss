@@ -11,7 +11,7 @@ footer {
 div.player {
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 100%;
   height: 100%;
   margin: auto;
   text-align: center;
@@ -21,7 +21,6 @@ div.player {
     height: 100%;
     padding: 10px;
     background-color: #eee;
-    border-radius: 10px;
   }
 
   span.playing {

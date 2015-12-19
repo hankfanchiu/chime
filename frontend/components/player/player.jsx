@@ -23,6 +23,7 @@ var Player = React.createClass({
   _onChange: function () {
     this.setState({
       track: PlayerStore.getTrack(),
+      isPlaying: true,
       playRequested: true
     });
   },
