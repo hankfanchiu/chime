@@ -4,6 +4,7 @@ class Api::TracksController < ApplicationController
 
   def index
     @tracks = Track.all.includes(:user)
+
     render :index
   end
 
@@ -20,7 +21,9 @@ class Api::TracksController < ApplicationController
   def update
     @track = Track.find(params[:id])
 
-    if @track.update(track_params)
+    if @track.nil?
+      not_found
+    elsif @track.update(track_params)
       render json: { success: ["Track updated"] }
     else
       render json: { errors: @track.errors.full_messages }
@@ -29,13 +32,20 @@ class Api::TracksController < ApplicationController
 
   def show
     @track = Track.find(params[:id])
-    render :show
+
+    if @track.nil?
+      not_found
+    else
+      render :show
+    end
   end
 
   def destroy
     @track = Track.find(params[:id])
 
-    if @track.destroy
+    if @track.nil?
+      not_found
+    elsif @track.destroy
       render json: { success: ["Track deleted"] }
     else
       render json: { errors: @track.errors.full_messages }
@@ -49,8 +59,8 @@ class Api::TracksController < ApplicationController
   end
 
   def require_owner
-    owned_track = current_user.tracks.find(params[:id])
+    track_owned = current_user.tracks.exists?(id: params[:id])
 
-    render json: {}, status: 403 unless owned_track
+    forbidden unless track_owned
   end
 end

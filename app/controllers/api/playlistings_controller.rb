@@ -16,7 +16,7 @@ class Api::PlaylistingsController < ApplicationController
     @playlisting = Playlisting.find_by(playlisting_params)
 
     if @playlisting.nil?
-      render json: {}, status: 404
+      not_found
     elsif @playlisting.destroy
       render json: @playlisting
     else
@@ -31,9 +31,11 @@ class Api::PlaylistingsController < ApplicationController
   end
 
   def require_owner
-    owned_playlisting = current_user.playlistings
-      .where(playlist_id: params[:playlist_id], track_id: params[:track_id])
+    playlisting_owned = current_user.playlistings.exists?(
+      playlist_id: params[:playlist_id],
+      track_id: params[:track_id]
+    )
 
-    render json: {}, status: 403 unless own_playlisting
+    forbidden unless playlisting_owned
   end
 end

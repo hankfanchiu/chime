@@ -3,7 +3,12 @@ class Api::PlaylistsController < ApplicationController
   before_action :require_owner, only: [:update, :destroy]
 
   def index
-    @playlists = Playlist.all.includes(:tracks)
+    if params[:user_id] === current_user.id
+      @playlists = current_user.playlists.includes(:tracks)
+    else
+      @playlists = Playlist.all.includes(:tracks)
+    end
+
     render :index
   end
 
@@ -20,7 +25,9 @@ class Api::PlaylistsController < ApplicationController
   def update
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.update(playlist_params)
+    if @playlist.nil?
+      not_found
+    elsif @playlist.update(playlist_params)
       render json: @playlist
     else
       render json: { errors: @playlist.errors.full_messages }
@@ -28,14 +35,21 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def show
-    @playlist = Playlist.includes(:playlistings).find(params[:id])
-    render :show
+    @playlist = Playlist.find(params[:id])
+
+    if @playlist.nil?
+      not_found
+    else
+      render :show
+    end
   end
 
   def destroy
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.destroy
+    if @playlist.nil?
+      not_found
+    elsif @playlist.destroy
       render json: { success: ["Playlist deleted"] }
     else
       render json: { errors: @playlist.errors.full_messages }
@@ -49,8 +63,8 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def require_owner
-    owned_playlist = current_user.playlists.find(params[:id])
+    playlist_owned = current_user.playlists.exists?(id: params[:id])
 
-    render json: {}, status: 403 unless owned_playlist
+    forbidden unless playlist_owned
   end
 end

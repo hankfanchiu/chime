@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # protect_from_forgery with: :exception
+  protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?
 
@@ -23,10 +23,18 @@ class ApplicationController < ActionController::Base
   end
 
   def prevent_if_logged_in
-    render json: { errors: ["Already logged in"] } if logged_in?
+    render_forbidden if logged_in?
   end
 
   def require_login
-    render json: { errors: ["Login required"] } unless logged_in?
+    render_forbidden unless logged_in?
+  end
+
+  def forbidden
+    render json: {}, status: 403
+  end
+
+  def not_found
+    render json: {}, status: 404
   end
 end

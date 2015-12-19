@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login!(@user)
-      render "/sessions/login"
+      render "api/sessions/login"
     else
       render json: { errors: @user.errors.full_messages }
     end
@@ -45,7 +45,11 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    render :show
+    if @user.nil?
+      not_found
+    else
+      render :show
+    end
   end
 
   private
