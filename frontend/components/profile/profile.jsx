@@ -35,6 +35,7 @@ var Profile = React.createClass({
 
     if (this.isIncomplete()) { return this._handleIncompleteSubmit(); }
 
+    var userId = SessionStore.getUserId();
     var userData = {
       username: this.state.username,
       email: this.state.email,
@@ -42,8 +43,6 @@ var Profile = React.createClass({
     };
 
     this.refs.password.value = "";
-    var userId = SessionStore.getUserId();
-
     ProfileActions.updateUser(userId, userData);
   },
 

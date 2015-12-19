@@ -1,25 +1,14 @@
 var React = require("react");
-var SessionActions = require("../actions/session_actions");
 var SessionStore = require("../stores/session_store");
-var PlayerStore = require("../stores/player_store");
+var ProfileActions = require("../actions/profile_actions");
 var Nav = require("./nav/nav");
 var Player = require("./player/player");
 
 var App = React.createClass({
-  getInitialState: function () {
-    return { isLoggedIn: SessionStore.isLoggedIn() };
-  },
+  componentWillMount: function () {
+    if (!SessionStore.isLoggedIn()) { return; }
 
-  componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
-  },
-
-  componentWillUnmount: function () {
-    this.listenerToken.remove();
-  },
-
-  _onChange: function () {
-    this.setState({ isLoggedIn: SessionStore.isLoggedIn() });
+    ProfileActions.fetchUser(SessionStore.getUserId());
   },
 
   render: function () {
