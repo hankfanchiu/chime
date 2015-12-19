@@ -9,7 +9,7 @@ var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { username: "", errors: [] };
+    return { username: "", password: "", errors: [] };
   },
 
   componentWillMount: function () {
@@ -34,25 +34,35 @@ var Login = React.createClass({
     }
   },
 
-  _login: function (e) {
+  _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) {
-      return this.handleIncompleteSubmit();
-    }
+    if (this.isIncomplete()) { return this.handleIncompleteSubmit(); }
 
     this.setState({ errors: [] });
+    this.login();
+  },
 
+  _goToSignUp: function (e) {
+    this.history.pushState(null, "/signup", {});
+  },
+
+  _loginDemo: function (e) {
+    e.preventDefault();
+
+    var demoData = { username: "test", password: "password" };
+
+    this.setState(demoData);
+    SessionActions.login(demoData);
+  },
+
+  login: function () {
     var userData = {
       username: this.state.username,
       password: this.refs.password.value
     };
 
     SessionActions.login(userData);
-  },
-
-  _goToSignUp: function (e) {
-    this.history.pushState(null, "/signup", {});
   },
 
   isIncomplete: function () {
@@ -84,7 +94,7 @@ var Login = React.createClass({
 
             <h1>Login</h1>
 
-            <form className="login-form" onSubmit={ this._login }>
+            <form className="login-form" onSubmit={ this._handleSubmit }>
 
               <div className="form-group">
                 <label htmlFor="login-username">Username</label>
@@ -103,7 +113,8 @@ var Login = React.createClass({
                   name="password"
                   className="form-control"
                   ref="password"
-                  id="login-password" />
+                  id="login-password"
+                  valueLink={ this.linkState("password") } />
               </div>
 
               <p>
@@ -112,11 +123,13 @@ var Login = React.createClass({
                 </a>
               </p>
 
-              <button className="btn btn-default"
+              <button className="btn btn-default btn-primary"
                 type="submit">Login</button>
 
+              <span style={{ paddingRight: "10px" }}></span>
+
               <button className="btn btn-default"
-                type="submit">Login</button>
+                onClick={ this._loginDemo }>Demo</button>
             </form>
 
           </div>
