@@ -114,6 +114,9 @@ var Login = React.createClass({
 
               <button className="btn btn-default"
                 type="submit">Login</button>
+
+              <button className="btn btn-default"
+                type="submit">Login</button>
             </form>
 
           </div>

@@ -7,6 +7,22 @@ var History = require("react-router").History;
 var NavSession = React.createClass({
   mixins: [History],
 
+  getInitialState: function () {
+    return { isLoggedIn: SessionStore.isLoggedIn() };
+  },
+
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState({ isLoggedIn: SessionStore.isLoggedIn() });
+  },
+
   _signUp: function (e) {
     this.history.pushState(null, "/signup", {});
   },
@@ -48,7 +64,7 @@ var NavSession = React.createClass({
   render: function () {
     return (
       <div className="collapse navbar-collapse">
-        { SessionStore.isLoggedIn() ? this.loggedIn() : this.loggedOut() }
+        { this.state.isLoggedIn ? this.loggedIn() : this.loggedOut() }
       </div>
     );
   }
