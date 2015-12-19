@@ -1,7 +1,7 @@
 var UserAPIUtils = {
   fetchUser: function (userId, actionCallback) {
     $.ajax({
-      url: "/users/" + userId,
+      url: "/api/users/" + userId,
       type: "GET",
       success: function (user) {
         actionCallback(user);
@@ -11,7 +11,7 @@ var UserAPIUtils = {
 
   updateUser: function (userId, userData, actionCallback) {
     $.ajax({
-      url: "/users/" + userId,
+      url: "/api/users/" + userId,
       type: "PATCH",
       data: {user: userData},
       success: function (user) {

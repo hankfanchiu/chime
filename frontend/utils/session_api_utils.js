@@ -1,7 +1,7 @@
 var SessionAPIUtils = {
   signUp: function (userData, actionCallback) {
     $.ajax({
-      url: "/users",
+      url: "/api/users",
       type: "POST",
       data: {user: userData},
       success: function (response) {
@@ -12,7 +12,7 @@ var SessionAPIUtils = {
 
   login: function (userData, actionCallback) {
     $.ajax({
-      url: "/session",
+      url: "/api/session",
       type: "POST",
       data: {user: userData},
       success: function (response) {
@@ -23,7 +23,7 @@ var SessionAPIUtils = {
 
   logout: function (actionCallback) {
     $.ajax({
-      url: "/session",
+      url: "/api/session",
       type: "DELETE",
       success: function (response) {
         actionCallback(response);

@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Api::SessionsController < ApplicationController
   before_action :prevent_if_logged_in, only: [:create]
   before_action :require_login, only: [:destroy]
 
