@@ -1,6 +1,7 @@
 var React = require("react");
 var SessionActions = require("../actions/session_actions");
 var SessionStore = require("../stores/session_store");
+var PlayerStore = require("../stores/player_store");
 var Nav = require("./nav/nav");
 var Player = require("./player/player");
 

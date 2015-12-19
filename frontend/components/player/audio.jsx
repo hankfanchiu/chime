@@ -7,14 +7,14 @@ var Audio = React.createClass({
     this.isPlaying = false;
 
     this.refs.audio.addEventListener("ended", this._handleEnded);
-    this.refs.audio.addEventListener("playing",this._handlePlaying);
-    this.refs.audio.addEventListener("pause", this._handlePause);
+    this.refs.audio.addEventListener("playing", this._handlePlayingOrPause);
+    this.refs.audio.addEventListener("pause", this._handlePlayingOrPause);
   },
 
   componentWillUnmount: function () {
     this.refs.audio.removeEventListener("ended", this._handleEnded);
-    this.refs.audio.removeEventListener("playing", this._handlePlaying);
-    this.refs.audio.removeEventListener("pause", this._handlePause);
+    this.refs.audio.removeEventListener("playing", this._handlePlayingOrPause);
+    this.refs.audio.removeEventListener("pause", this._handlePlayingOrPause);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -37,22 +37,14 @@ var Audio = React.createClass({
     playRequested ? this.refs.audio.play() : this.refs.audio.pause();
   },
 
-  _handlePlaying: function () {
-    if (!this.isPlaying) {
-      this.isPlaying = true;
-      this.props.setIsPlaying(true);
-    }
-  },
-
-  _handlePause: function () {
-    if (this.isPlaying) {
-      this.isPlaying = false;
-      this.props.setIsPlaying(false);
-    }
-  },
-
   _handleEnded: function () {
     setTimeout(PlayerActions.autoPlayNextTrack, 1000);
+  },
+
+  _handlePlayingOrPause: function () {
+    this.isPlaying = !this.isPlaying;
+    
+    this.props.setIsPlaying(this.isPlaying);
   },
 
   render: function () {

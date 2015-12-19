@@ -11,15 +11,17 @@ footer {
 div.player {
   display: flex;
   align-items: center;
-  background-color: #eee;
-  border-radius: 10px;
   width: 400px;
   height: 100%;
   margin: auto;
   text-align: center;
 
   div.controller {
+    width: 100%;
+    height: 100%;
     padding: 10px;
+    background-color: #eee;
+    border-radius: 10px;
   }
 
   span.playing {

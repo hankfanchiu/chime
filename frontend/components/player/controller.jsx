@@ -1,13 +1,18 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
+var PlayerStore = require("../../stores/player_store");
 
 var Controller = React.createClass({
   _togglePlayPause: function () {
     this.props.setPlayRequest(!this.props.isPlaying);
   },
 
+  playPauseClass: function () {
+    return (this.props.isPlaying ? "fa fa-pause" : "fa fa-play");
+  },
+
   render: function () {
-    var playPauseCls = (this.props.isPlaying ? "fa fa-pause" : "fa fa-play");
+    if (PlayerStore.queueIsEmpty()) { return <div />; }
 
     return (
       <div className="controller">
@@ -22,7 +27,7 @@ var Controller = React.createClass({
           </a>
 
           <a onClick={ this._togglePlayPause }>
-            <i className={ playPauseCls }></i>
+            <i className={ this.playPauseClass() }></i>
           </a>
 
           <a onClick={ PlayerActions.playNextTrack }>
