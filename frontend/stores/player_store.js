@@ -6,6 +6,7 @@ var ActionTypes = AppConstants.ActionTypes;
 var _queue = [];
 var _queueIndex = 0;
 var _track = {};
+var _playlist = {};
 
 var PlayerStore = new Store(AppDispatcher);
 
@@ -108,7 +109,7 @@ var loadPreviousTrackInQueue = function () {
 };
 
 var loadNextTrackUntilEnd = function () {
-  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
+  if (_queue.length === 0) { return; }
   if (_queueIndex === _queue.length - 1) { return; }
 
   _queueIndex += 1;
@@ -125,6 +126,7 @@ var pushTrackToQueue = function (track) {
 };
 
 var loadPlaylistToQueue = function (playlist) {
+  _playlist = playlist;
   _queue = playlist.tracks;
   _queueIndex = 0;
   _track = _queue[_queueIndex];

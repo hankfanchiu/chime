@@ -17,23 +17,28 @@ var Controller = React.createClass({
     return (
       <div className="controller">
         <p>
-          <span className="playing">Currently playing: </span>
           <span className="title">{ this.props.track.title }</span>
         </p>
 
-        <p className="controller">
-          <a onClick={ PlayerActions.playPreviousTrack }>
-            <i className="fa fa-backward"></i>
-          </a>
+        <div className="controller-buttons">
+          <div className="controller-button">
+            <a onClick={ PlayerActions.playPreviousTrack }>
+              <i className="fa fa-backward"></i>
+            </a>
+          </div>
 
-          <a onClick={ this._togglePlayPause }>
-            <i className={ this.playPauseClass() }></i>
-          </a>
+          <div className="controller-button">
+            <a onClick={ this._togglePlayPause }>
+              <i className={ this.playPauseClass() }></i>
+            </a>
+          </div>
 
-          <a onClick={ PlayerActions.playNextTrack }>
-            <i className="fa fa-forward"></i>
-          </a>
-        </p>
+          <div className="controller-button">
+            <a onClick={ PlayerActions.playNextTrack }>
+              <i className="fa fa-forward"></i>
+            </a>
+          </div>
+        </div>
       </div>
     );
   }

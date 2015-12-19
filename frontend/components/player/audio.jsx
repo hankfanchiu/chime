@@ -38,6 +38,9 @@ var Audio = React.createClass({
   },
 
   _handleEnded: function () {
+    this.isPlaying = false;
+    this.props.setIsPlaying(this.isPlaying);
+    
     setTimeout(PlayerActions.autoPlayNextTrack, 1000);
   },
 
