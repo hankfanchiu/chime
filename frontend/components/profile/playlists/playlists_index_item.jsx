@@ -36,8 +36,21 @@ var PlaylistsIndexItem = React.createClass({
     return (
       <div className="playlists-index-item clear">
         <p>
-          <a onClick={ this._playPlaylist }>Play</a> { playlist.title }: { playlist.description }&nbsp;
-          | <a onClick={ this._toggle }>{ option }</a>
+          <a onClick={ this._playPlaylist }>
+            <i className="fa fa-play"></i>
+          </a>
+
+          <span>&nbsp;</span>
+
+          { playlist.title }
+
+          <span>:&nbsp;</span>
+
+          { playlist.description }
+
+          <span>&nbsp;|&nbsp;</span>
+
+          <a onClick={ this._toggle }>{ option }</a>
         </p>
 
         <ul>

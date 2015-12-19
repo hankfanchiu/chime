@@ -12,7 +12,7 @@ class Api::PlaylistingsController < ApplicationController
     end
   end
 
-  def remove
+  def delete
     @playlisting = Playlisting.find_by(playlisting_params)
 
     if @playlisting.nil?

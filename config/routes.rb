@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     resources :tracks, except: [:new, :edit]
 
     resources :playlists, except: [:new, :edit]
-    
+
     resources :playlistings, only: [:create]
-    post "remove_track_from_playlist", to: "playlistings#remove"
+    post "remove_track_from_playlist", to: "playlistings#delete"
   end
 end

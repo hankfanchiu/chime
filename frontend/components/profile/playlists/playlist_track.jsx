@@ -17,8 +17,12 @@ var PlaylistTrack = React.createClass({
 
     return (
       <li className="tracks-index-item clear">
-        { track.title } | <a onClick={ this._deletePlaylisting }>
-          Remove from playlist
+        { track.title }
+
+        <span>&nbsp;</span>
+
+        <a onClick={ this._deletePlaylisting }>
+          <i className="fa fa-times"></i>
         </a>
       </li>
     );
