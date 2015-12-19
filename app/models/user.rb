@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password_digest
 
-  has_many :tracks
-  has_many :playlists
+  has_many :tracks, dependent: :destroy
+  has_many :playlists, dependent: :destroy
   has_many :playlistings, through: :playlists
 
   def self.generate_session_token

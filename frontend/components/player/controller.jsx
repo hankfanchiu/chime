@@ -2,21 +2,17 @@ var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 
 var Controller = React.createClass({
+  _togglePlayPause: function () {
+    this.props.setPlayRequest(!this.props.isPlaying);
+  },
+
   render: function () {
-    var playPauseClass = "fa ";
-
-    if (this.props.isPlaying) {
-      playPauseClass += "fa-pause";
-    } else {
-      playPauseClass += "fa-play";
-    }
-
-    console.log(playPauseClass);
+    var playPauseCls = (this.props.isPlaying ? "fa fa-pause" : "fa fa-play");
 
     return (
       <div className="controller">
         <p>
-          <span className="playing">Currently playing:&nbsp;</span>
+          <span className="playing">Currently playing: </span>
           <span className="title">{ this.props.track.title }</span>
         </p>
 
@@ -25,8 +21,8 @@ var Controller = React.createClass({
             <i className="fa fa-backward"></i>
           </a>
 
-          <a onClick={ this.props.togglePlayPause }>
-            <i className={ playPauseClass }></i>
+          <a onClick={ this._togglePlayPause }>
+            <i className={ playPauseCls }></i>
           </a>
 
           <a onClick={ PlayerActions.playNextTrack }>

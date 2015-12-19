@@ -17,7 +17,7 @@ class Playlist < ActiveRecord::Base
   validates :user_id, :title, presence: true
 
   belongs_to :user
-  has_many :playlistings
+  has_many :playlistings, dependent: :destroy
   has_many :tracks, through: :playlistings
 
   private

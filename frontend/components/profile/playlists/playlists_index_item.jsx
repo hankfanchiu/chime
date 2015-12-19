@@ -40,7 +40,9 @@ var PlaylistsIndexItem = React.createClass({
           | <a onClick={ this._toggle }>{ option }</a>
         </p>
 
-        { this.renderPlaylistTracks() }
+        <ul>
+          { this.renderPlaylistTracks() }
+        </ul>
       </div>
     );
   }
