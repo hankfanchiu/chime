@@ -27,8 +27,9 @@ var TracksIndex = React.createClass({
     if (this.state.tracks.length === 0) {
       return (
         <h4>
-          You have no tracks! <a onClick={ this._goToForm }>Add a track to get started.</a>
-      </h4>
+          You have no tracks!&nbsp;
+          <a onClick={ this._goToForm }>Chime in to get started.</a>
+        </h4>
       );
     } else {
       return (
@@ -53,7 +54,6 @@ var TracksIndex = React.createClass({
         { this.renderIndexStatus() }
 
         { this.renderTracksIndexItems() }
-
       </div>
     );
   }

@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def prevent_if_logged_in
-    render_forbidden if logged_in?
+    forbidden if logged_in?
   end
 
   def require_login
-    render_forbidden unless logged_in?
+    forbidden unless logged_in?
   end
 
   def forbidden

@@ -9,6 +9,7 @@ var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
 var Search = require("./components/search/search");
 var Profile = require("./components/profile/profile");
+var ProfileIndex = require("./components/profile/profile_index");
 var TracksIndex = require("./components/profile/tracks/tracks_index");
 var PlaylistsIndex = require("./components/profile/playlists/playlists_index");
 var Settings = require("./components/profile/settings");
@@ -24,12 +25,12 @@ module.exports = (
       <Route name="search" path="/search" component={ Search } />
 
       <Route name="profile" path="/profile" component={ Profile }>
+        <IndexRoute component={ ProfileIndex } />
         <Route name="tracks" path="/tracks" component={ TracksIndex } />
         <Route name="playlists" path="/playlists"
           component={ PlaylistsIndex } />
+        <Route name="settings" path="/settings" component={ Settings } />
       </Route>
-
-      <Route name="settings" path="/settings" component={ Settings } />
 
       <Route name="login" path="/login" component={ Login } />
       <Route name="signup" path="/signup" component={ SignUp } />

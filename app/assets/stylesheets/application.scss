@@ -23,6 +23,18 @@ main {
   padding-bottom: 120px;
 }
 
+a {
+  cursor: pointer;
+}
+
+span.spacer {
+  padding: 0 10px 0 10px;
+}
+
+span.spacer-large {
+  padding: 0 20px 0 20px;
+}
+
 .clear:after {
   content: "";
   display: block;

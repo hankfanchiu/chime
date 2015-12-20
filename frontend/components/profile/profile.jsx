@@ -3,7 +3,7 @@ var SessionStore = require("../../stores/session_store");
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return { page: this.props.location.pathname };
+    return { path: this.props.location.pathname };
   },
 
   componentWillMount: function () {
@@ -18,21 +18,26 @@ var Profile = React.createClass({
 
   _goToProfile: function () {
     this.props.history.pushState(null, "/profile", {});
-    this.setState({ page: "/profile" });
+    this.setState({ path: "/profile" });
   },
 
   _goToTracks: function () {
     this.props.history.pushState(null, "/tracks", {});
-    this.setState({ page: "/tracks" });
+    this.setState({ path: "/tracks" });
   },
 
   _goToPlaylists: function () {
     this.props.history.pushState(null, "/playlists", {});
-    this.setState({ page: "/playlists" });
+    this.setState({ path: "/playlists" });
+  },
+
+  _goToSettings: function () {
+    this.props.history.pushState(null, "/settings", {});
+    this.setState({ path: "/settings" });
   },
 
   renderProfileLink: function () {
-    if (this.state.page === "/profile") {
+    if (this.state.path === "/profile") {
       return <span>Profile</span>;
     } else {
       return <span><a onClick={ this._goToProfile }>Profile</a></span>;
@@ -40,7 +45,7 @@ var Profile = React.createClass({
   },
 
   renderTracksLink: function () {
-    if (this.state.page === "/tracks") {
+    if (this.state.path === "/tracks") {
       return <span>Tracks</span>;
     } else {
       return <span><a onClick={ this._goToTracks }>Tracks</a></span>;
@@ -48,10 +53,18 @@ var Profile = React.createClass({
   },
 
   renderPlaylistsLink: function () {
-    if (this.state.page === "/playlists") {
+    if (this.state.path === "/playlists") {
       return <span>Playlists</span>;
     } else {
       return <span><a onClick={ this._goToPlaylists }>Playlists</a></span>;
+    }
+  },
+
+  renderSettingsLink: function () {
+    if (this.state.path === "/settings") {
+      return <span>Settings</span>;
+    } else {
+      return <span><a onClick={ this._goToSettings }>Settings</a></span>;
     }
   },
 
@@ -62,13 +75,17 @@ var Profile = React.createClass({
           <h3>
             { this.renderProfileLink() }
 
-            <span style={{ padding: "0 20px 0 20px" }}>|</span>
+            <span className="spacer spacer-large">|</span>
 
             { this.renderTracksLink() }
 
-            <span style={{ padding: "0 20px 0 20px" }}>|</span>
+            <span className="spacer spacer-large">|</span>
 
             { this.renderPlaylistsLink() }
+
+            <span className="spacer spacer-large">|</span>
+
+            { this.renderSettingsLink() }
           </h3>
         </div>
 

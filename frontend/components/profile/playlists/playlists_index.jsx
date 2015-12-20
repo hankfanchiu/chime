@@ -19,22 +19,39 @@ var PlaylistsIndex = React.createClass({
     this.setState({ playlists: ProfileStore.getPlaylists() });
   },
 
-  renderPlaylistsIndexItems: function () {
+  renderIndexStatus: function () {
     if (this.state.playlists.length === 0) {
-      return <p>You have no playlists!</p>;
+      return (
+        <h4>
+          You have no playlists!&nbsp;
+          <a onClick={ this._goToForm }>
+            Create a playlist.
+          </a>
+        </h4>
+      );
     } else {
-      return this.state.playlists.map(function (playlist, idx) {
-        return <PlaylistsIndexItem key={ idx } playlist={ playlist } />;
-      });
+      return (
+        <h4>
+          <a onClick={ this._goToForm }>
+            <i className="fa fa-plus"></i> Create a Playlist
+          </a>
+        </h4>
+      )
     }
+  },
+
+  renderPlaylistsIndexItems: function () {
+    return this.state.playlists.map(function (playlist, idx) {
+      return <PlaylistsIndexItem key={ idx } playlist={ playlist } />;
+    });
   },
 
   render: function () {
     return (
       <div className="playlists-index clear">
+        { this.renderIndexStatus() }
 
         { this.renderPlaylistsIndexItems() }
-
       </div>
     );
   }

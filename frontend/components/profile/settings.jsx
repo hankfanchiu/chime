@@ -78,9 +78,9 @@ var Settings = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-4 col-xs-offset-4">
-            <h1>Account Settings</h1>
+          <h1>Account Settings</h1>
 
+          <div className="col-xs-4">
             <form className="profile-form" onSubmit={ this._handleSubmit }>
 
               <div className="form-group">
@@ -115,7 +115,6 @@ var Settings = React.createClass({
               <button type="submit"
                 className="btn btn-default">Update Profile</button>
             </form>
-
           </div>
         </div>
       </div>
