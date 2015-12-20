@@ -4,7 +4,7 @@ var ProfileStore = require("../../stores/profile_store");
 var ProfileActions = require("../../actions/profile_actions");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 
-var Profile = React.createClass({
+var Settings = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
@@ -79,7 +79,7 @@ var Profile = React.createClass({
       <div className="container">
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <h1>Profile</h1>
+            <h1>Account Settings</h1>
 
             <form className="profile-form" onSubmit={ this._handleSubmit }>
 
@@ -123,4 +123,4 @@ var Profile = React.createClass({
   }
 });
 
-module.exports = Profile;
+module.exports = Settings;

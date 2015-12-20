@@ -46,9 +46,7 @@ var Playlists = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
-        <h1>Playlists</h1>
-
+      <div className="row">
         { this.renderPlaylistsIndex() }
       </div>
     );

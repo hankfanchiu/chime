@@ -46,9 +46,7 @@ var Tracks = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
-        <h1>Tracks</h1>
-
+      <div className="row">
         { this.renderTracksIndex() }
       </div>
     );
