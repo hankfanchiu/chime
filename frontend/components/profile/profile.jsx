@@ -3,7 +3,7 @@ var SessionStore = require("../../stores/session_store");
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return { page: "Profile" };
+    return { page: this.props.location.pathname };
   },
 
   componentWillMount: function () {
@@ -18,21 +18,21 @@ var Profile = React.createClass({
 
   _goToProfile: function () {
     this.props.history.pushState(null, "/profile", {});
-    this.setState({ page: "Profile" });
+    this.setState({ page: "/profile" });
   },
 
   _goToTracks: function () {
     this.props.history.pushState(null, "/tracks", {});
-    this.setState({ page: "Tracks" });
+    this.setState({ page: "/tracks" });
   },
 
   _goToPlaylists: function () {
     this.props.history.pushState(null, "/playlists", {});
-    this.setState({ page: "Playlists" });
+    this.setState({ page: "/playlists" });
   },
 
   renderProfileLink: function () {
-    if (this.state.page === "Profile") {
+    if (this.state.page === "/profile") {
       return <span>Profile</span>;
     } else {
       return <span><a onClick={ this._goToProfile }>Profile</a></span>;
@@ -40,7 +40,7 @@ var Profile = React.createClass({
   },
 
   renderTracksLink: function () {
-    if (this.state.page === "Tracks") {
+    if (this.state.page === "/tracks") {
       return <span>Tracks</span>;
     } else {
       return <span><a onClick={ this._goToTracks }>Tracks</a></span>;
@@ -48,7 +48,7 @@ var Profile = React.createClass({
   },
 
   renderPlaylistsLink: function () {
-    if (this.state.page === "Playlists") {
+    if (this.state.page === "/playlists") {
       return <span>Playlists</span>;
     } else {
       return <span><a onClick={ this._goToPlaylists }>Playlists</a></span>;
