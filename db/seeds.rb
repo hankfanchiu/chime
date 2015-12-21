@@ -5,7 +5,7 @@ demo_user = User.create!(
 )
 
 saviours = User.create!(
-  username: "SavioursOfTheSpace",
+  username: "SavioursOfTheUniverse",
   email: "spaceinvader@chime.audio",
   password: "password"
 )
