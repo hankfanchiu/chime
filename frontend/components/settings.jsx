@@ -29,6 +29,10 @@ var Settings = React.createClass({
     ProfileActions.fetchUser(SessionStore.getUserId());
   },
 
+  shouldComponentUpdate: function () {
+    return SessionStore.isLoggedIn();
+  },
+
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },

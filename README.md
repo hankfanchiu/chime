@@ -9,8 +9,6 @@
 Chime is a web application inspired by SoundCloud built using Ruby on Rails
 and React.js. Chime allows users to:
 
-<!-- This is a Markdown checklist. Use it to keep track of your progress! -->
-
 - [x] Create an account
 - [x] Sign In / Sign Out
 - [ ] Search and follow other users
@@ -19,7 +17,7 @@ and React.js. Chime allows users to:
 - [ ] Search for tracks by name and by category
 - [ ] Comment on tracks at specific times
 - [ ] Like tracks
-- [ ] Add tracks to playlists
+- [x] Add tracks to playlists
 
 ## Design Docs
 * [DB schema][schema]

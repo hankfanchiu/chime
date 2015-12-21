@@ -27,14 +27,14 @@ ProfileStore.__onDispatch = function (payload) {
       _user = null;
       break;
 
-    case ActionTypes.USER_RECEIVED:
-      if (response.errors) {
-        setErrors(response.errors);
-      } else {
-        setUser(response);
-      }
-
-      break;
+    // case ActionTypes.USER_RECEIVED:
+    //   if (response.errors) {
+    //     setErrors(response.errors);
+    //   } else {
+    //     setUser(response);
+    //   }
+    //
+    //   break;
 
     case ActionTypes.PLAYLISTS_RECEIVED:
       updatePlaylists(response);

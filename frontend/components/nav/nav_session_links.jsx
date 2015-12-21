@@ -3,15 +3,15 @@ var ProfileStore = require("../../stores/profile_store");
 
 var NavSessionLinks = React.createClass({
   _goToUserProfile: function () {
-    this.props.history.pushState(null, "/profile", {});
+    // this.props.history.pushState(null, "/profile", {});
   },
 
   _goToTracks: function () {
-    this.props.history.pushState(null, "/tracks", {});
+    // this.props.history.pushState(null, "/tracks", {});
   },
 
   _goToPlaylists: function () {
-    this.props.history.pushState(null, "/playlists", {});
+    // this.props.history.pushState(null, "/playlists", {});
   },
 
   _goToSettings: function () {

@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
   before_action :require_login, only: [:update]
 
   def create
-    if User.find_by(username: params[:user][:username])
+    if User.friendly.find(params[:user][:username])
       render json: { errors: ["Username is not available"] }
       return
     end
@@ -43,7 +43,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
 
     if @user.nil?
       not_found

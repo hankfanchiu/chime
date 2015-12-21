@@ -1,7 +1,7 @@
 var React = require("react");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
-var SessionActions = require("../../actions/session_actions");
+var UserActions = require("../../actions/user_actions");
 var SessionStore = require("../../stores/session_store");
 var ErrorNotice = require("../error_notice");
 
@@ -50,7 +50,7 @@ var SignUp = React.createClass({
       password_confirmation: this.refs.passwordConfirmation.value
     };
 
-    SessionActions.signUp(userData);
+    UserActions.createUser(userData);
   },
 
   _goToLogin: function (e) {

@@ -6,10 +6,6 @@ var ActionTypes = AppConstants.ActionTypes;
 var SessionActions = {
   // Request actions
 
-  signUp: function (userData) {
-    SessionAPIUtils.signUp(userData, SessionActions.receiveLogin);
-  },
-
   login: function (userData) {
     SessionAPIUtils.login(userData, SessionActions.receiveLogin);
   },

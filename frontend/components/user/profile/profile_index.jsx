@@ -1,13 +1,13 @@
 var React = require("react");
-var ProfileStore = require("../../stores/profile_store");
+var UserStore = require("../../../stores/user_store");
 
 var ProfileIndex = React.createClass({
   getInitialState: function () {
-    return { user: ProfileStore.getProfile() };
+    return { user: UserStore.getUser() };
   },
 
   componentDidMount: function () {
-    this.listenerToken = ProfileStore.addListener(this._onChange);
+    this.listenerToken = UserStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -15,13 +15,15 @@ var ProfileIndex = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ user: ProfileStore.getProfile() });
+    this.setState({ user: UserStore.getUser() });
   },
 
   render: function () {
     return (
       <div className="profile-index clear">
-        { this.state.user.username }
+        Detailed profile information about the user.
+
+        Email: { this.state.user.email }
       </div>
     )
   }

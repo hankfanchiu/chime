@@ -12,6 +12,9 @@
 #
 
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+  
   attr_reader :password
 
   after_initialize :ensure_session_token

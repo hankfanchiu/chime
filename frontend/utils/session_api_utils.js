@@ -1,15 +1,4 @@
 var SessionAPIUtils = {
-  signUp: function (userData, actionCallback) {
-    $.ajax({
-      url: "/api/users",
-      type: "POST",
-      data: {user: userData},
-      success: function (response) {
-        actionCallback(response);
-      }
-    });
-  },
-
   login: function (userData, actionCallback) {
     $.ajax({
       url: "/api/session",
