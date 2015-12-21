@@ -3,7 +3,7 @@ var UserActions = require("../../actions/user_actions");
 
 var User = React.createClass({
   getInitialState: function () {
-    return { path: this.props.location.pathname };
+    return { pathname: this.props.location.pathname };
   },
 
   componentWillMount: function () {
@@ -16,48 +16,56 @@ var User = React.createClass({
     }
   },
 
-  _goToProfile: function () {
-    var path = "/" + this.props.params.user;
-
-    this.props.history.pushState(null, path, {});
-    this.setState({ path: path });
-  },
-
-  _goToTracks: function () {
-    var path = "/" + this.props.params.user + "/tracks";
-
-    this.props.history.pushState(null, path, {});
-    this.setState({ path: path });
-  },
-
-  _goToPlaylists: function () {
-    var path = "/" + this.props.params.user + "/playlists";
-
-    this.props.history.pushState(null, path, {});
-    this.setState({ path: path });
+  _pushState: function (pathname) {
+    this.props.history.pushState(null, pathname);
+    this.setState({ pathname: pathname });
   },
 
   renderProfileLink: function () {
-    if (this.state.path === "/" + this.props.params.user) {
+    var pathname = "/" + this.props.params.user;
+
+    if (this.state.pathname === pathname) {
       return <span>Profile</span>;
     } else {
-      return <span><a onClick={ this._goToProfile }>Profile</a></span>;
+      return (
+        <span>
+          <a onClick={ this._pushState.bind(null, pathname) }>
+            Profile
+          </a>
+        </span>
+      );
     }
   },
 
   renderTracksLink: function () {
-    if (this.state.path === "/" + this.props.params.user + "/tracks") {
+    var pathname = "/" + this.props.params.user + "/tracks";
+
+    if (this.state.pathname === pathname) {
       return <span>Tracks</span>;
     } else {
-      return <span><a onClick={ this._goToTracks }>Tracks</a></span>;
+      return (
+        <span>
+          <a onClick={ this._pushState.bind(null, pathname) }>
+            Tracks
+          </a>
+        </span>
+      );
     }
   },
 
   renderPlaylistsLink: function () {
-    if (this.state.path === "/" + this.props.params.user + "/playlists") {
+    var pathname = "/" + this.props.params.user + "/playlists";
+
+    if (this.state.pathname === pathname) {
       return <span>Playlists</span>;
     } else {
-      return <span><a onClick={ this._goToPlaylists }>Playlists</a></span>;
+      return (
+        <span>
+          <a onClick={ this._pushState.bind(null, pathname) }>
+            Playlists
+          </a>
+        </span>
+      );
     }
   },
 
