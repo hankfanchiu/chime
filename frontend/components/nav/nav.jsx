@@ -1,6 +1,7 @@
 var React = require("react");
 var SessionStore = require("../../stores/session_store");
 var NavSession = require("./nav_session");
+var NavSearch = require("./nav_search");
 
 var Nav = React.createClass({
   getInitialState: function () {
@@ -53,6 +54,8 @@ var Nav = React.createClass({
               </a>
             </li>
           </ul>
+
+          <NavSearch />
 
           <NavSession isLoggedIn={ this.state.isLoggedIn }
             username={ this.state.username }
