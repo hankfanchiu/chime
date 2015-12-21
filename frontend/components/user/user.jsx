@@ -2,10 +2,6 @@ var React = require("react");
 var UserActions = require("../../actions/user_actions");
 
 var User = React.createClass({
-  getInitialState: function () {
-    return { pathname: this.props.location.pathname };
-  },
-
   componentWillMount: function () {
     UserActions.fetchUser(this.props.params.user);
   },
@@ -24,7 +20,7 @@ var User = React.createClass({
   renderProfileLink: function () {
     var pathname = "/" + this.props.params.user;
 
-    if (this.state.pathname === pathname) {
+    if (this.props.location.pathname === pathname) {
       return <span>Profile</span>;
     } else {
       return (
@@ -40,7 +36,7 @@ var User = React.createClass({
   renderTracksLink: function () {
     var pathname = "/" + this.props.params.user + "/tracks";
 
-    if (this.state.pathname === pathname) {
+    if (this.props.location.pathname === pathname) {
       return <span>Tracks</span>;
     } else {
       return (
@@ -56,7 +52,7 @@ var User = React.createClass({
   renderPlaylistsLink: function () {
     var pathname = "/" + this.props.params.user + "/playlists";
 
-    if (this.state.pathname === pathname) {
+    if (this.props.location.pathname === pathname) {
       return <span>Playlists</span>;
     } else {
       return (
