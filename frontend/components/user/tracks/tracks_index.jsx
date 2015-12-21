@@ -1,11 +1,19 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var TracksIndexItem = require("./tracks_index_item");
 var UserPageNav = require("../user_page_nav");
+var UserPageSidebar = require("../user_page_sidebar");
+var TracksIndexItem = require("./tracks_index_item");
 
 var TracksIndex = React.createClass({
   getInitialState: function () {
-    return { tracks: UserStore.getTracks() };
+    return this.getStatesFromStore();
+  },
+
+  getStatesFromStore: function () {
+    return {
+      user: UserStore.getUser(),
+      tracks: UserStore.getTracks()
+    };
   },
 
   componentDidMount: function () {
@@ -17,7 +25,7 @@ var TracksIndex = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ tracks: UserStore.getTracks() });
+    this.setState(this.getStatesFromStore());
   },
 
   renderTracks: function () {
@@ -41,9 +49,7 @@ var TracksIndex = React.createClass({
     return (
       <div className="row">
 
-        <div className="col-xs-4">
-          User information goes here
-        </div>
+        <UserPageSidebar user={ this.state.user } />
 
         <div className="col-xs-8">
           <UserPageNav pathname={ this.props.location.pathname }

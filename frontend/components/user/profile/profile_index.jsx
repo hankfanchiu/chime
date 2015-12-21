@@ -1,9 +1,14 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
 var UserPageNav = require("../user_page_nav");
+var UserPageSidebar = require("../user_page_sidebar");
 
 var ProfileIndex = React.createClass({
   getInitialState: function () {
+    return this.getStateFromStore();
+  },
+
+  getStateFromStore: function () {
     return { user: UserStore.getUser() };
   },
 
@@ -16,16 +21,14 @@ var ProfileIndex = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ user: UserStore.getUser() });
+    this.setState(this.getStateFromStore());
   },
 
   render: function () {
     return (
       <div className="row">
 
-        <div className="col-xs-4">
-          User information goes here
-        </div>
+        <UserPageSidebar user={ this.state.user } />
 
         <div className="col-xs-8">
           <UserPageNav pathname={ this.props.location.pathname }
@@ -34,9 +37,7 @@ var ProfileIndex = React.createClass({
 
           <div className="row">
             <div className="profile-index clear">
-              Detailed profile information about the user.
-
-              Email: { this.state.user.email }
+              Detailed profile information about { this.state.user.username }.
             </div>
           </div>
 

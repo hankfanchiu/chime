@@ -1,11 +1,19 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var PlaylistsIndexItem = require("./playlists_index_item");
 var UserPageNav = require("../user_page_nav");
+var UserPageSidebar = require("../user_page_sidebar");
+var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
   getInitialState: function () {
-    return { playlists: UserStore.getPlaylists() };
+    return this.getStatesFromStore();
+  },
+
+  getStatesFromStore: function () {
+    return {
+      user: UserStore.getUser(),
+      playlists: UserStore.getPlaylists()
+    };
   },
 
   componentDidMount: function () {
@@ -17,7 +25,7 @@ var PlaylistsIndex = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ playlists: UserStore.getPlaylists() });
+    this.setState(this.getStatesFromStore());
   },
 
   renderPlaylistsIndexItems: function () {
@@ -38,9 +46,7 @@ var PlaylistsIndex = React.createClass({
     return (
       <div className="row">
 
-        <div className="col-xs-4">
-          User information goes here
-        </div>
+        <UserPageSidebar user={ this.state.user } />
 
         <div className="col-xs-8">
           <UserPageNav pathname={ this.props.location.pathname }
