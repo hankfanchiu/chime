@@ -3,7 +3,11 @@ class Api::TracksController < ApplicationController
   before_action :require_owner, only: [:update, :destroy]
 
   def index
-    @tracks = Track.all.includes(:user)
+    if params[:user_id] == current_user.id
+      @tracks = current_user.tracks
+    else
+      @tracks = Track.all
+    end
 
     render :index
   end
@@ -12,7 +16,7 @@ class Api::TracksController < ApplicationController
     @track = current_user.tracks.new(track_params)
 
     if @track.save
-      render json: { success: ["Track created"] }
+      render json: @track
     else
       render json: { errors: @track.errors.full_messages }
     end
@@ -24,7 +28,7 @@ class Api::TracksController < ApplicationController
     if @track.nil?
       not_found
     elsif @track.update(track_params)
-      render json: { success: ["Track updated"] }
+      render json: @track
     else
       render json: { errors: @track.errors.full_messages }
     end

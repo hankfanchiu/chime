@@ -44,16 +44,16 @@ var PlaylistingActions = {
 
   // Response actions
 
-  receivePlaylist: function (response) {
+  receivePlaylists: function (response) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.PLAYLIST_RECEIVED,
+      actionType: AppConstants.PLAYLISTS_RECEIVED,
       response: response
     });
   },
 
-  receivePlaylists: function (response) {
+  receivePlaylist: function (response) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.PLAYLISTS_RECEIVED,
+      actionType: AppConstants.PLAYLIST_RECEIVED,
       response: response
     });
   }

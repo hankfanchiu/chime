@@ -7,6 +7,18 @@ var PlaylistsIndex = React.createClass({
     return { playlists: UserStore.getPlaylists() };
   },
 
+  componentDidMount: function () {
+    this.listenerToken = UserStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState({ playlists: UserStore.getPlaylists() });
+  },
+
   renderPlaylistsIndexItems: function () {
     if (this.state.playlists.length === 0) {
       return (

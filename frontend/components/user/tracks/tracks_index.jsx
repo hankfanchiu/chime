@@ -7,7 +7,19 @@ var TracksIndex = React.createClass({
     return { tracks: UserStore.getTracks() };
   },
 
-  renderTracksIndexItems: function () {
+  componentDidMount: function () {
+    this.listenerToken = UserStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState({ tracks: UserStore.getTracks() });
+  },
+
+  renderTracks: function () {
     if (this.state.tracks.length === 0) {
       return (
         <div className="tracks-index-item clear">
@@ -15,8 +27,8 @@ var TracksIndex = React.createClass({
         </div>
       );
     } else {
-      return this.state.tracks.map(function (track, idx) {
-        return <TracksIndexItem key={ idx } track={ track } />;
+      return this.state.tracks.map(function (track) {
+        return <TracksIndexItem key={ track.id } track={ track } />;
       });
     }
   },
@@ -24,7 +36,7 @@ var TracksIndex = React.createClass({
   render: function () {
     return (
       <div className="tracks-index clear">
-        { this.renderTracksIndexItems() }
+        { this.renderTracks() }
       </div>
     );
   }

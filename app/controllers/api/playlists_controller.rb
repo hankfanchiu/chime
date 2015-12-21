@@ -1,12 +1,12 @@
 class Api::PlaylistsController < ApplicationController
-  before_action :require_login, only: [:create, :destroy]
+  before_action :require_login, only: [:create, :update, :destroy]
   before_action :require_owner, only: [:update, :destroy]
 
   def index
-    if params[:user_id] === current_user.id
-      @playlists = current_user.playlists.includes(:tracks)
+    if params[:user_id] == current_user.id
+      @playlists = current_user.playlists
     else
-      @playlists = Playlist.all.includes(:tracks)
+      @playlists = Playlist.all
     end
 
     render :index

@@ -2,7 +2,7 @@ var React = require("react");
 var DiscoverIndexItem = require("./discover_index_item");
 
 var DiscoverIndex = React.createClass({
-  discoverListItems: function () {
+  renderDiscoverIndexItems: function () {
     var tracks = this.props.tracks;
     var track;
 
@@ -18,7 +18,7 @@ var DiscoverIndex = React.createClass({
   render: function () {
     return (
       <div className="discover-list">
-        { this.discoverListItems() }
+        { this.renderDiscoverIndexItems() }
       </div>
     );
   }

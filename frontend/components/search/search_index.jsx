@@ -2,7 +2,7 @@ var React = require("react");
 var SearchIndexItem = require("./search_index_item");
 
 var SearchIndex = React.createClass({
-  searchIndexItems: function () {
+  renderSearchIndexItems: function () {
     var tracks = this.props.tracks;
     var track;
 
@@ -18,7 +18,7 @@ var SearchIndex = React.createClass({
   render: function () {
     return (
       <div className="search-index clear">
-        { this.searchIndexItems() }
+        { this.renderSearchIndexItems() }
       </div>
     );
   }
