@@ -36,7 +36,7 @@ var SearchIndexItem = React.createClass({
     var track = this.props.track;
 
     return (
-      <div className="search-index-item clear">
+      <div className="tracks tracks-index-item clear">
         <div className="image" onClick={ this._playTrack }>
           <img src={ track.img_url } />
         </div>
