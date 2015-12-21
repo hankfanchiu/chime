@@ -1,6 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 var PlaylistDropdown = require("../playlist_dropdown/dropdown");
+var History = require("react-router").History;
 
 var SearchIndexItem = React.createClass({
   getInitialState: function () {
@@ -13,6 +14,12 @@ var SearchIndexItem = React.createClass({
 
   _showDropdown: function () {
     this.setState({ isDropdownVisible: true })
+  },
+
+  _goToUser: function () {
+    var pathname = "/" + this.props.track.user.username;
+
+    this.history.pushState(null, pathname);
   },
 
   renderDropdown: function () {
@@ -35,7 +42,7 @@ var SearchIndexItem = React.createClass({
         <div className="detail">
 
           <p className="user">
-            <a>{ track.user.username }</a>
+            <a onClick={ this._goToUser }>{ track.user.username }</a>
           </p>
 
           <p className="title">

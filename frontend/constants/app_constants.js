@@ -13,6 +13,7 @@ module.exports = {
 
     // Track
     TRACKS_RECEIVED: null,
+    TRACK_RECEIVED: null,
 
     // Playlist
     PLAYLISTS_RECEIVED: null,

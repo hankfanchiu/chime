@@ -14,7 +14,7 @@ var Search = React.createClass({
 
   componentDidMount: function () {
     this.listenerToken = TrackStore.addListener(this._onChange);
-    TrackActions.fetchTracks();
+    TrackActions.fetchTracks(null);
   },
 
   componentWillUnmount: function () {

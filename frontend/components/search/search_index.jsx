@@ -3,9 +3,16 @@ var SearchIndexItem = require("./search_index_item");
 
 var SearchIndex = React.createClass({
   searchIndexItems: function () {
-    return this.props.tracks.map(function (track, idx) {
-      return <SearchIndexItem key={ idx } track={ track } />;
+    var tracks = this.props.tracks;
+    var track;
+
+    var searchIndexItems = Object.keys(tracks).map(function (title) {
+      track = tracks[title];
+
+      return <SearchIndexItem key={ track.id } track={ track } />;
     });
+
+    return searchIndexItems;
   },
 
   render: function () {
