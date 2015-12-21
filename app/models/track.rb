@@ -42,6 +42,15 @@ class Track < ActiveRecord::Base
     user ? user.tracks.friendly.find(slug) : nil
   end
 
+  def self.search(query)
+    conditions = ["%#{query}%", "%#{query}", "#{query}%"]
+
+    self.where(
+      "(title LIKE ?) OR (title LIKE ?) OR (title LIKE ?)",
+      *conditions
+    )
+  end
+
   private
 
   def ensure_track_data

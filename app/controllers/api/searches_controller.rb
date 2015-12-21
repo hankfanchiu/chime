@@ -1,7 +1,7 @@
 class Api::SearchesController < ApplicationController
   def show
-    @user_matches = User.find_by(username: params[:query])
-    @track_matches = Track.find_by(title: params[:query])
+    @user_matches = User.search(params[:q])
+    @track_matches = Track.includes(:user).search(params[:q])
 
     render :show
   end

@@ -65,6 +65,15 @@ class User < ActiveRecord::Base
     user.is_password?(maybe_password) ? user : nil
   end
 
+  def self.search(query)
+    conditions = ["%#{query}%", "%#{query}", "#{query}%"]
+
+    self.where(
+      "(username LIKE ?) OR (username LIKE ?) OR (username LIKE ?)",
+      *conditions
+    )
+  end
+
   def reset_session_token!
     self.session_token = self.class.generate_session_token
     self.save!
