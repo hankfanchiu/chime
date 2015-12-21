@@ -1,6 +1,6 @@
 var TrackAPIUtils = {
   fetchTracks: function (user, actionCallback) {
-    var url = (user ? "/api/tracks?user=" + user : "/api/tracks");
+    var url = (user ? "/api/tracks?user_id=" + user : "/api/tracks");
 
     $.ajax({
       url: url,

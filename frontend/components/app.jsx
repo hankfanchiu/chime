@@ -7,14 +7,16 @@ var Player = require("./player/player");
 var App = React.createClass({
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
-      SessionActions.fetchCurrentUser(SessionStore.getCurrentUserId());
+      var currentUserId = SessionStore.getCurrentUserId();
+
+      SessionActions.fetchCurrentUser(currentUserId);
     }
   },
 
   render: function () {
     return (
       <div className="app">
-        <Nav />
+        <Nav history={ this.props.history } />
 
         <main>
           { this.props.children }

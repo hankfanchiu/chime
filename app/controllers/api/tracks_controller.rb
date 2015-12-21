@@ -3,11 +3,7 @@ class Api::TracksController < ApplicationController
   before_action :require_owner, only: [:update, :destroy]
 
   def index
-    if params[:user_id] == current_user.id
-      @tracks = current_user.tracks.includes(:user)
-    else
-      @tracks = Track.all.includes(:user)
-    end
+    @tracks = Track.all.includes(:user)
 
     render :index
   end

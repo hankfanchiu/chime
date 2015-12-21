@@ -10,20 +10,20 @@ var TrackActions = {
     TrackAPIUtils.fetchTracks(user, TrackActions.receiveTracks);
   },
 
-  fetchTrack: function (title) {
-    TrackAPIUtils.fetchTrack(title, TrackActions.receiveTrack);
+  fetchTrack: function (id) {
+    TrackAPIUtils.fetchTrack(id, TrackActions.receiveTrack);
   },
 
   createTrack: function (data) {
     TrackAPIUtils.createTrack(data, TrackActions.receiveTrack);
   },
 
-  updateTrack: function (title, data) {
-    TrackAPIUtils.updateTrack(title, data, TrackActions.receiveTrack);
+  updateTrack: function (id, data) {
+    TrackAPIUtils.updateTrack(id, data, TrackActions.receiveTrack);
   },
 
-  deleteTrack: function (title) {
-    TrackAPIUtils.deleteTrack(title, TrackActions.receiveTrack);
+  deleteTrack: function (id) {
+    TrackAPIUtils.deleteTrack(id, TrackActions.receiveTrack);
   },
 
   // Response actions

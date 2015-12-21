@@ -1,12 +1,33 @@
 var React = require("react");
+var SessionStore = require("../../stores/session_store");
 var NavSession = require("./nav_session");
-var History = require("react-router").History;
 
 var Nav = React.createClass({
-  mixins: [History],
+  getInitialState: function () {
+    return this.getStatesFromStore();
+  },
+
+  getStatesFromStore: function () {
+    return {
+      isLoggedIn: SessionStore.isLoggedIn(),
+      username: SessionStore.getCurrentUserUsername()
+    };
+  },
+
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStatesFromStore());
+  },
 
   _pushState: function (pathname) {
-    this.history.pushState(null, pathname);
+    this.props.history.pushState(null, pathname);
   },
 
   render: function () {
@@ -33,7 +54,9 @@ var Nav = React.createClass({
             </li>
           </ul>
 
-          <NavSession />
+          <NavSession isLoggedIn={ this.state.isLoggedIn }
+            username={ this.state.username }
+            pushState={ this._pushState } />
         </div>
       </nav>
     );

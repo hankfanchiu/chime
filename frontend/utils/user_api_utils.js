@@ -1,7 +1,7 @@
 var UserAPIUtils = {
-  fetchUser: function (username, actionCallback) {
+  fetchUser: function (userId, actionCallback) {
     $.ajax({
-      url: "/api/users/" + username,
+      url: "/api/users/" + userId,
       type: "GET",
       success: function (user) {
         actionCallback(user);

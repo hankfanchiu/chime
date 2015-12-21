@@ -3,11 +3,7 @@ class Api::PlaylistsController < ApplicationController
   before_action :require_owner, only: [:update, :destroy]
 
   def index
-    if params[:user_id] == current_user.id
-      @playlists = current_user.playlists
-    else
-      @playlists = Playlist.all
-    end
+    @playlists = Playlist.all.includes(:tracks)
 
     render :index
   end
@@ -50,7 +46,7 @@ class Api::PlaylistsController < ApplicationController
     if @playlist.nil?
       not_found
     elsif @playlist.destroy
-      render json: { success: ["Playlist deleted"] }
+      render json: @playlist
     else
       render json: { errors: @playlist.errors.full_messages }
     end
