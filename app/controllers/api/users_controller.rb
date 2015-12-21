@@ -18,12 +18,6 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def fetch_playlists
-    @playlists = current_user.playlists
-
-    render "api/playlists/index"
-  end
-
   def update
     username = current_user.username
     password = user_params[:password]
@@ -43,7 +37,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.friendly.find(params[:id])
+    user_identification = params[:id].to_s.downcase
+    @user = User.friendly.find(user_identification)
 
     if @user.nil?
       not_found

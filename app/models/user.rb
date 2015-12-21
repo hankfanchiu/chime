@@ -19,17 +19,18 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  before_save { self.username = username.downcase }
   before_save { self.email = email.downcase }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   INVALID_USERNAMES = %w(discover collect login logout signup settings)
 
+  friendly_id :username, use: :slugged
+
   validates :username,
     presence: true,
     uniqueness: { case_sensitive: false },
     exclusion: { in: INVALID_USERNAMES }
-
-  friendly_id :username, use: :slugged
 
   validates :email,
     presence: true,
@@ -58,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_credentials(username, maybe_password)
-    user = self.find_by(username: username)
+    user = self.find_by(username: username.downcase)
 
     return nil unless user
 

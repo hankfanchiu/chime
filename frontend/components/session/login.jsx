@@ -46,7 +46,7 @@ var Login = React.createClass({
   _loginDemo: function (e) {
     e.preventDefault();
 
-    var demoData = { username: "test", password: "password" };
+    var demoData = { username: "demo_user", password: "password" };
 
     this.setState(demoData);
     SessionActions.login(demoData);
@@ -54,7 +54,7 @@ var Login = React.createClass({
 
   _login: function () {
     var userData = {
-      username: this.state.username,
+      username: this.state.username.toLowerCase(),
       password: this.refs.password.value
     };
 
