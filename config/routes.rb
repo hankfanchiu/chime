@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     post "remove_track_from_playlist", to: "playlistings#delete"
   end
 
-  get "*path" => redirect("/")
+  get "*path", to: "pages#root"
 end
