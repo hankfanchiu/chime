@@ -4,6 +4,8 @@ var PlaylistDropdown = require("../playlist_dropdown/dropdown");
 var History = require("react-router").History;
 
 var SearchIndexItem = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return { isDropdownVisible: false };
   },
