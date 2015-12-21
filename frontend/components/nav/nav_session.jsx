@@ -23,16 +23,8 @@ var NavSession = React.createClass({
     this.setState({ isLoggedIn: SessionStore.isLoggedIn() });
   },
 
-  _signUp: function (e) {
-    this.history.pushState(null, "/signup");
-  },
-
-  _login: function (e) {
-    this.history.pushState(null, "/login");
-  },
-
-  _logout: function (e) {
-    this.history.pushState(null, "/logout");
+  _pushState: function (pathname) {
+    this.history.pushState(null, pathname);
   },
 
   loggedIn: function () {
@@ -41,7 +33,7 @@ var NavSession = React.createClass({
         <NavSessionLinks history={ this.history } />
 
         <button className="btn btn-default navbar-btn"
-          onClick={ this._logout }>Logout</button>
+          onClick={ this._pushState.bind(null, "/logout") }>Logout</button>
       </div>
     );
   },
@@ -50,12 +42,12 @@ var NavSession = React.createClass({
     return (
       <div className="nav navbar-right">
         <button className="btn btn-default navbar-btn"
-          onClick={ this._signUp }>Sign Up</button>
+          onClick={ this._pushState.bind(null, "/signup") }>Sign Up</button>
 
         <span> </span>
 
         <button className="btn btn-default navbar-btn"
-          onClick={ this._login }>Login</button>
+          onClick={ this._pushState.bind(null, "/login") }>Login</button>
       </div>
     );
   },
