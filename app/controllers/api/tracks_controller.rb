@@ -19,7 +19,7 @@ class Api::TracksController < ApplicationController
   end
 
   def update
-    @track = Track.find(params[:id])
+    @track = Track.friendly.find(params[:id])
 
     if @track.nil?
       not_found
@@ -31,7 +31,7 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id])
+    @track = Track.friendly.find(params[:id])
 
     if @track.nil?
       not_found
@@ -41,7 +41,7 @@ class Api::TracksController < ApplicationController
   end
 
   def destroy
-    @track = Track.find(params[:id])
+    @track = Track.friendly.find(params[:id])
 
     if @track.nil?
       not_found

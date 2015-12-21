@@ -11,9 +11,9 @@ var TrackAPIUtils = {
     });
   },
 
-  fetchTrack: function (trackTitle, actionCallback) {
+  fetchTrack: function (slug, actionCallback) {
     $.ajax({
-      url: "/api/tracks/" + trackTitle,
+      url: "/api/tracks/" + slug,
       type: "GET",
       success: function (response) {
         actionCallback(response);
@@ -32,9 +32,9 @@ var TrackAPIUtils = {
     });
   },
 
-  updateTrack: function (trackTitle, trackData, actionCallback) {
+  updateTrack: function (slug, trackData, actionCallback) {
     $.ajax({
-      url: "/api/tracks/" + trackTitle,
+      url: "/api/tracks/" + slug,
       type: "PATCH",
       data: {track: trackData},
       success: function (response) {
@@ -43,9 +43,9 @@ var TrackAPIUtils = {
     });
   },
 
-  deleteTrack: function (trackTitle, actionCallback) {
+  deleteTrack: function (slug, actionCallback) {
     $.ajax({
-      url: "/api/tracks/" + trackTitle,
+      url: "/api/tracks/" + slug,
       type: "DELETE",
       success: function (response) {
         actionCallback(response);

@@ -1,7 +1,7 @@
 json.extract! playlist, :id, :title, :description
 
 json.tracks playlist.tracks do |track|
-  json.extract! track, :id, :title, :track_url, :img_url, :description
+  json.extract! track, :id, :title, :slug, :track_url, :img_url, :description
 
   json.user do
     json.extract! track.user, :id, :username

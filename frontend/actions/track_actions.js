@@ -10,8 +10,8 @@ var TrackActions = {
     TrackAPIUtils.fetchTracks(user, TrackActions.receiveTracks);
   },
 
-  fetchTrack: function (id) {
-    TrackAPIUtils.fetchTrack(id, TrackActions.receiveTrack);
+  fetchTrack: function (slug) {
+    TrackAPIUtils.fetchTrack(slug, TrackActions.receiveTrack);
   },
 
   createTrack: function (data) {

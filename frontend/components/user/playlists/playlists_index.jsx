@@ -1,6 +1,7 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
 var PlaylistsIndexItem = require("./playlists_index_item");
+var UserPageNav = require("../user_page_nav");
 
 var PlaylistsIndex = React.createClass({
   getInitialState: function () {
@@ -35,8 +36,24 @@ var PlaylistsIndex = React.createClass({
 
   render: function () {
     return (
-      <div className="playlists-index clear">
-        { this.renderPlaylistsIndexItems() }
+      <div className="row">
+
+        <div className="col-xs-4">
+          User information goes here
+        </div>
+
+        <div className="col-xs-8">
+          <UserPageNav pathname={ this.props.location.pathname }
+            history={ this.props.history }
+            user={ this.props.params.user } />
+
+          <div className="row">
+            <div className="playlists-index clear">
+              { this.renderPlaylistsIndexItems() }
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }

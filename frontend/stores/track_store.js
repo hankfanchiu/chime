@@ -28,8 +28,8 @@ TrackStore.all = function () {
   return tracksCopy;
 };
 
-TrackStore.find = function (title) {
-  var track = _tracks[title];
+TrackStore.find = function (slug) {
+  var track = _tracks[slug];
 
   return track;
 };
@@ -38,14 +38,14 @@ var resetTracks = function (tracks) {
   _tracks = {};
 
   tracks.forEach(function (track) {
-    _tracks[track.title] = track;
+    _tracks[track.slug] = track;
   });
 
   TrackStore.__emitChange();
 };
 
 var resetTrack = function (track) {
-  _tracks[track.title] = track;
+  _tracks[track.slug] = track;
 
   TrackStore.__emitChange();
 };

@@ -36,6 +36,12 @@ class Track < ActiveRecord::Base
   has_many :playlistings, dependent: :destroy
   has_many :playlists, through: :playlistings
 
+  def self.find_by_user_and_slug(username, slug)
+    user = User.friendly.find(username)
+
+    user.tracks.friendly.find(slug)
+  end
+
   private
 
   def ensure_track_data
@@ -44,7 +50,7 @@ class Track < ActiveRecord::Base
     self.description = "No description" if self.description.nil?
   end
 
-  def ensure_slug
+  def parameterize_slug
     self.slug = self.title.parameterize
   end
 end

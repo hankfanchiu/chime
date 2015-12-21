@@ -38,7 +38,7 @@ class Api::UsersController < ApplicationController
 
   def show
     user_identification = params[:id].to_s.downcase
-    @user = User.friendly.find(user_identification)
+    @user = User.includes(:tracks).friendly.find(user_identification)
 
     if @user.nil?
       not_found

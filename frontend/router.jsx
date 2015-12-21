@@ -14,16 +14,17 @@ var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
 var Settings = require("./components/session/settings");
 
-var User = require("./components/user/user");
+var UserPage = require("./components/user/user_page");
 var UserProfile = require("./components/user/profile/profile_index");
 var UserTracks = require("./components/user/tracks/tracks_index");
 var UserPlaylists = require("./components/user/playlists/playlists_index");
+
+var TrackPage = require("./components/user/track_page");
 
 module.exports = (
   <Router history={ createBrowserHistory() }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ Home } />
-
       <Route name="discover" path="discover" component={ Discover } />
       <Route name="collect" path="collect" component={ Collect } />
 
@@ -33,11 +34,13 @@ module.exports = (
 
       <Route name="settings" path="settings" component={ Settings } />
 
-      <Route name="user" path=":user" component={ User }>
+      <Route name="user" path=":user" component={ UserPage }>
         <IndexRoute component={ UserProfile } />
-        <Route name="user-tracks" path="tracks" component={ UserTracks } />
-        <Route name="user-playlists" path="playlists"
+        <Route name="userTracks" path="tracks" component={ UserTracks } />
+        <Route name="userPlaylists" path="playlists"
           component={ UserPlaylists } />
+
+        <Route name="track" path=":track" component={ TrackPage } />
       </Route>
     </Route>
   </Router>
