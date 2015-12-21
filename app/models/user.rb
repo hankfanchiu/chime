@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  before_save { self.display_name = username }
   before_save { self.username = username.downcase }
   before_save { self.email = email.downcase }
 

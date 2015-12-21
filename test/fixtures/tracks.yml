@@ -7,7 +7,7 @@
 #  title       :string           not null
 #  track_url   :string           not null
 #  img_url     :string
-#  description :text             default("")
+#  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

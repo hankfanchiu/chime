@@ -7,13 +7,15 @@
 #  title       :string           not null
 #  track_url   :string           not null
 #  img_url     :string
-#  description :text             default("")
+#  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
 class Track < ActiveRecord::Base
-  after_initialize :ensure_img_url
+  after_initialize :ensure_track_title
+  after_initialize :ensure_track_img_url
+  after_initialize :ensure_track_description
 
   validates_presence_of :user_id, :title
 
@@ -27,7 +29,15 @@ class Track < ActiveRecord::Base
 
   private
 
-  def ensure_img_url
+  def ensure_track_title
+    self.title = "Untitled" if self.title.nil?
+  end
+
+  def ensure_track_img_url
     self.img_url = "/assets/corgi.jpg" if self.img_url.nil?
+  end
+
+  def ensure_track_description
+    self.description = "No description" if self.description.nil?
   end
 end
