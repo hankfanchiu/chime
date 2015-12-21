@@ -30,13 +30,13 @@ var TrackPage = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ track: this.getStateFromStore() });
+    this.setState(this.getStateFromStore());
   },
 
   render: function () {
     return (
       <div className="row">
-        Track Title:
+        Track Title: { this.state.track.title }
       </div>
     );
   }
