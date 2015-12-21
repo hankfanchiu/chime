@@ -9,12 +9,12 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 
 class User < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :username, use: :slugged
-  
+
   attr_reader :password
 
   after_initialize :ensure_session_token
@@ -22,10 +22,14 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  INVALID_USERNAMES = %w(discover collect login logout signup settings)
 
   validates :username,
     presence: true,
-    uniqueness: { case_sensitive: false }
+    uniqueness: { case_sensitive: false },
+    exclusion: { in: INVALID_USERNAMES }
+
+  friendly_id :username, use: :slugged
 
   validates :email,
     presence: true,
