@@ -1,5 +1,5 @@
 class Api::SessionsController < ApplicationController
-  before_action :prevent_if_logged_in, only: [:create]
+  before_action :prevent_if_logged_in, only: :create
 
   def create
     @user = User.find_by_credentials(

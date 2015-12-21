@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
-  before_action :prevent_if_logged_in, only: [:create]
-  before_action :require_login, only: [:update]
+  before_action :prevent_if_logged_in, only: :create
+  before_action :require_login, only: :update
 
   def create
     if User.friendly.find(params[:user][:username])

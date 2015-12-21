@@ -1,6 +1,6 @@
 class Api::PlaylistingsController < ApplicationController
   before_action :require_login
-  before_action :require_owner, only: [:destroy]
+  before_action :require_owner, only: :destroy
 
   def create
     @playlisting = Playlisting.new(playlisting_params)
@@ -12,7 +12,7 @@ class Api::PlaylistingsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @playlisting = Playlisting.find_by(playlisting_params)
 
     if @playlisting.nil?

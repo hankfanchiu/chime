@@ -35,17 +35,22 @@ TrackStore.find = function (slug) {
 };
 
 var resetTracks = function (tracks) {
+  var trackIdentifier;
+
   _tracks = {};
 
   tracks.forEach(function (track) {
-    _tracks[track.slug] = track;
+    trackIdentifier = track.user.username + "-" + track.slug;
+
+    _tracks[trackIdentifier] = track;
   });
 
   TrackStore.__emitChange();
 };
 
 var resetTrack = function (track) {
-  _tracks[track.slug] = track;
+  var trackIdentifier = track.user.username + "-" + track.slug;
+  _tracks[trackIdentifier] = track;
 
   TrackStore.__emitChange();
 };
