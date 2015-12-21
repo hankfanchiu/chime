@@ -4,9 +4,9 @@ class Api::TracksController < ApplicationController
 
   def index
     if params[:user_id] == current_user.id
-      @tracks = current_user.tracks
+      @tracks = current_user.tracks.includes(:user)
     else
-      @tracks = Track.all
+      @tracks = Track.all.includes(:user)
     end
 
     render :index
