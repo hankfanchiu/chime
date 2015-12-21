@@ -3,13 +3,12 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _user = {};
+var _user = { tracks: [], playlists: [] };
 var UserStore = new Store(AppDispatcher);
 
 UserStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var user = payload.response;
-  debugger;
 
   switch (actionType) {
 
