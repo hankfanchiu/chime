@@ -1,7 +1,9 @@
 var TrackAPIUtils = {
-  fetchTracks: function (actionCallback) {
+  fetchTracks: function (userId, actionCallback) {
+    var url = (userId ? "/api/tracks?user_id=" + userId : "/api/tracks");
+
     $.ajax({
-      url: "/api/tracks",
+      url: url,
       type: "GET",
       success: function (response) {
         actionCallback(response);

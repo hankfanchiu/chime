@@ -1,10 +1,6 @@
 var PlaylistAPIUtils = {
   fetchPlaylists: function (userId, actionCallback) {
-    var url = "/api/playlists";
-
-    if (userId) {
-      url = url + "?user_id=" + userId;
-    }
+    var url = (userId ? "/api/playlists?user_id=" + userId : "/api/playlists");
 
     $.ajax({
       url: url,
