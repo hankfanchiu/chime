@@ -1,9 +1,9 @@
 var React = require("react");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
-var SearchIndex = require("./search_index");
+var CollectIndex = require("./collect_index");
 
-var Search = React.createClass({
+var Collect = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -27,13 +27,13 @@ var Search = React.createClass({
 
   render: function () {
     return (
-      <div className="container search">
-        <h1>Search chimes</h1>
+      <div className="container collect">
+        <h1>Your Collections</h1>
 
-        <SearchIndex tracks={ this.state.tracks } />
+        <CollectIndex tracks={ this.state.tracks } />
       </div>
     );
   }
 });
 
-module.exports = Search;
+module.exports = Collect;

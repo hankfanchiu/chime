@@ -8,7 +8,7 @@ var createBrowserHistory = require("history/lib/createBrowserHistory");
 var App = require("./components/app");
 var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
-var Search = require("./components/search/search");
+var Collect = require("./components/collect/collect");
 var SignUp = require("./components/session/sign_up");
 var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
@@ -25,7 +25,7 @@ module.exports = (
       <IndexRoute component={ Home } />
 
       <Route name="discover" path="discover" component={ Discover } />
-      <Route name="search" path="search" component={ Search } />
+      <Route name="collect" path="collect" component={ Collect } />
 
       <Route name="signup" path="signup" component={ SignUp } />
       <Route name="login" path="login" component={ Login } />

@@ -49,8 +49,8 @@ var Nav = React.createClass({
             </li>
 
             <li>
-              <a onClick={ this._pushState.bind(null, "/search") }>
-                Search
+              <a onClick={ this._pushState.bind(null, "/collect") }>
+                Collect
               </a>
             </li>
           </ul>

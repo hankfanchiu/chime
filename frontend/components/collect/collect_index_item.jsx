@@ -3,7 +3,7 @@ var PlayerActions = require("../../actions/player_actions");
 var PlaylistDropdown = require("../playlist_dropdown/dropdown");
 var History = require("react-router").History;
 
-var SearchIndexItem = React.createClass({
+var CollectIndexItem = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
@@ -63,4 +63,4 @@ var SearchIndexItem = React.createClass({
   }
 });
 
-module.exports = SearchIndexItem;
+module.exports = CollectIndexItem;
