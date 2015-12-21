@@ -24,7 +24,7 @@ var PlaylistingActions = {
 
   receivePlaylisting: function (response) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.PLAYLISTING_RECEIVED,
+      actionType: ActionTypes.PLAYLISTING_RECEIVED,
       response: response
     });
   }

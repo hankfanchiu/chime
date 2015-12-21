@@ -43,12 +43,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.search(query)
-    conditions = ["%#{query}%", "%#{query}", "#{query}%"]
-
-    self.where(
-      "(title LIKE ?) OR (title LIKE ?) OR (title LIKE ?)",
-      *conditions
-    )
+    self.where("title LIKE ?", "%#{query}%")
   end
 
   private

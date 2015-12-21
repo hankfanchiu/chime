@@ -3,6 +3,9 @@ var keyMirror = require("keymirror");
 module.exports = {
 
   ActionTypes: keyMirror({
+    // Search
+    SEARCH_RESULTS_RECEIVED: null,
+
     // Session
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
