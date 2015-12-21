@@ -6,24 +6,24 @@ var ActionTypes = AppConstants.ActionTypes;
 var TrackActions = {
   // Request actions
 
-  fetchTracks: function (user) {
-    TrackAPIUtils.fetchTracks(user, TrackActions.receiveTracks);
+  fetchTracks: function (username) {
+    TrackAPIUtils.fetchTracks(username, TrackActions.receiveTracks);
   },
 
-  fetchTrack: function (slug) {
-    TrackAPIUtils.fetchTrack(slug, TrackActions.receiveTrack);
+  fetchTrack: function (username, trackSlug) {
+    TrackAPIUtils.fetchTrack(username, trackSlug, TrackActions.receiveTrack);
   },
 
-  createTrack: function (data) {
-    TrackAPIUtils.createTrack(data, TrackActions.receiveTrack);
+  createTrack: function (trackData) {
+    TrackAPIUtils.createTrack(trackData, TrackActions.receiveTrack);
   },
 
-  updateTrack: function (id, data) {
-    TrackAPIUtils.updateTrack(id, data, TrackActions.receiveTrack);
+  updateTrack: function (trackId, trackData) {
+    TrackAPIUtils.updateTrack(trackId, trackData, TrackActions.receiveTrack);
   },
 
-  deleteTrack: function (id) {
-    TrackAPIUtils.deleteTrack(id, TrackActions.receiveTrack);
+  deleteTrack: function (trackId) {
+    TrackAPIUtils.deleteTrack(trackId, TrackActions.receiveTrack);
   },
 
   // Response actions

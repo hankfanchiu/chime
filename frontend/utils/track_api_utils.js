@@ -1,6 +1,6 @@
 var TrackAPIUtils = {
-  fetchTracks: function (user, actionCallback) {
-    var url = (user ? "/api/tracks?user_id=" + user : "/api/tracks");
+  fetchTracks: function (username, actionCallback) {
+    var url = (username ? "/api/tracks?username=" + username : "/api/tracks");
 
     $.ajax({
       url: url,
@@ -11,9 +11,11 @@ var TrackAPIUtils = {
     });
   },
 
-  fetchTrack: function (slug, actionCallback) {
+  fetchTrack: function (username, trackSlug, actionCallback) {
+    var url = "/api/tracks/" + trackSlug + "?username=" + username;
+
     $.ajax({
-      url: "/api/tracks/" + slug,
+      url: url,
       type: "GET",
       success: function (response) {
         actionCallback(response);
@@ -32,9 +34,9 @@ var TrackAPIUtils = {
     });
   },
 
-  updateTrack: function (slug, trackData, actionCallback) {
+  updateTrack: function (trackId, trackData, actionCallback) {
     $.ajax({
-      url: "/api/tracks/" + slug,
+      url: "/api/tracks/" + trackId,
       type: "PATCH",
       data: {track: trackData},
       success: function (response) {
@@ -43,9 +45,9 @@ var TrackAPIUtils = {
     });
   },
 
-  deleteTrack: function (slug, actionCallback) {
+  deleteTrack: function (trackId, actionCallback) {
     $.ajax({
-      url: "/api/tracks/" + slug,
+      url: "/api/tracks/" + trackId,
       type: "DELETE",
       success: function (response) {
         actionCallback(response);

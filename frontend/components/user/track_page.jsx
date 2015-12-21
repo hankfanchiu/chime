@@ -8,11 +8,17 @@ var TrackPage = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { track: TrackStore.find(this.props.params.track) };
+    var params = this.props.params;
+    var trackIdentifier = params.user + "-" + params.track;
+
+    return { track: TrackStore.find(trackIdentifier) };
   },
 
   componentWillMount: function () {
-    TrackActions.fetchTrack(this.props.params.track);
+    var user = this.props.params.user;
+    var track = this.props.params.track;
+
+    TrackActions.fetchTrack(user, track);
   },
 
   componentDidMount: function () {
@@ -20,8 +26,12 @@ var TrackPage = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
-    if (this.props.params.track !== nextProps.params.track) {
-      TrackActions.fetchTrack(nextProps.params.track);
+    var nextUser = nextProps.params.user;
+    var nextTrack = nextProps.params.track;
+
+    if ((this.props.params.user !== nextUser) &&
+      (this.props.params.track !== nextTrack)) {
+      TrackActions.fetchTrack(nextUser, nextTrack);
     }
   },
 

@@ -31,7 +31,8 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.friendly.find(params[:id])
+    username, slug = params[:username], params[:id]
+    @track = Track.find_by_username_and_slug(username, slug)
 
     if @track.nil?
       not_found

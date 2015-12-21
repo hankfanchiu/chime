@@ -36,10 +36,10 @@ class Track < ActiveRecord::Base
   has_many :playlistings, dependent: :destroy
   has_many :playlists, through: :playlistings
 
-  def self.find_by_user_and_slug(username, slug)
+  def self.find_by_username_and_slug(username, slug)
     user = User.friendly.find(username)
 
-    user.tracks.friendly.find(slug)
+    user ? user.tracks.friendly.find(slug) : nil
   end
 
   private
