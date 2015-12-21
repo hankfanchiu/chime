@@ -10,18 +10,27 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slug        :string
 #
 
 class Track < ActiveRecord::Base
-  after_initialize :ensure_track_title
-  after_initialize :ensure_track_img_url
-  after_initialize :ensure_track_description
+  extend FriendlyId
 
-  validates_presence_of :user_id, :title
+  after_initialize :ensure_track_data
+
+  before_save :parameterize_slug
+
+  friendly_id :title, use: :slugged
+
+  validates :title, uniqueness: { scope: :user_id }
+
+  validates :slug, uniqueness: { scope: :user_id }
 
   validates :track_url,
     presence: true,
     uniqueness: true
+
+  validates_presence_of :user_id
 
   belongs_to :user
   has_many :playlistings, dependent: :destroy
@@ -29,15 +38,13 @@ class Track < ActiveRecord::Base
 
   private
 
-  def ensure_track_title
+  def ensure_track_data
     self.title = "Untitled" if self.title.nil?
-  end
-
-  def ensure_track_img_url
     self.img_url = "/assets/corgi.jpg" if self.img_url.nil?
+    self.description = "No description" if self.description.nil?
   end
 
-  def ensure_track_description
-    self.description = "No description" if self.description.nil?
+  def ensure_slug
+    self.slug = self.title.parameterize
   end
 end

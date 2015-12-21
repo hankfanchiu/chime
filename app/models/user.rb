@@ -19,9 +19,7 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
-  before_save { self.display_name = username }
-  before_save { self.username = username.downcase }
-  before_save { self.email = email.downcase }
+  before_save :downcase_user_data
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   INVALID_USERNAMES = %w(discover collect login logout signup settings)
@@ -85,6 +83,11 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def downcase_user_data
+    self.username = self.username.downcase
+    self.email = self.email.downcase
+  end
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
