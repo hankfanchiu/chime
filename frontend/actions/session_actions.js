@@ -1,4 +1,5 @@
 var SessionAPIUtils = require("../utils/session_api_utils");
+var UserAPIUtils = require("../utils/user_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
@@ -14,6 +15,10 @@ var SessionActions = {
     SessionAPIUtils.logout(SessionActions.receiveLogout);
   },
 
+  fetchCurrentUser: function (currentUserId) {
+    UserAPIUtils.fetchUser(currentUserId, SessionActions.receiveCurrentUser);
+  },
+
   // Response actions
 
   receiveLogin: function (response) {
@@ -26,6 +31,13 @@ var SessionActions = {
   receiveLogout: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.LOGOUT_RESPONSE,
+      response: response
+    });
+  },
+
+  receiveCurrentUser: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CURRENT_USER_RECEIVED,
       response: response
     });
   }

@@ -1,10 +1,10 @@
 var React = require("react");
-var ProfileStore = require("../../stores/profile_store");
+var SessionStore = require("../../stores/session_store");
 var Playlist = require("./playlist");
 
 var Dropdown = React.createClass({
   getInitialState: function () {
-    return { playlists: ProfileStore.getPlaylists() }
+    return { playlists: SessionStore.getCurrentUserPlaylists() }
   },
 
   renderPlaylists: function () {

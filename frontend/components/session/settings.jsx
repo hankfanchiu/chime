@@ -1,17 +1,16 @@
 var React = require("react");
 var SessionStore = require("../../stores/session_store");
-var ProfileStore = require("../../stores/profile_store");
-var ProfileActions = require("../../actions/profile_actions");
+var SessionActions = require("../../actions/session_actions");
+var UserActions = require("../../actions/user_actions");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 
 var Settings = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
-    var user = ProfileStore.getProfile();
+    var user = SessionStore.getCurrentUser();
 
     return {
-      id: user.id,
       username: user.username,
       email: user.email,
       password: ""
@@ -20,13 +19,13 @@ var Settings = React.createClass({
 
   componentWillMount: function () {
     if (!SessionStore.isLoggedIn()) {
-      this.props.history.pushState(null, "/", {});
+      this.props.history.pushState(null, "/");
     }
   },
 
   componentDidMount: function () {
-    this.listenerToken = ProfileStore.addListener(this._onChange);
-    ProfileActions.fetchUser(SessionStore.getUserId());
+    this.listenerToken = SessionStore.addListener(this._onChange);
+    SessionActions.fetchCurrentUser(SessionStore.getCurrentUserId());
   },
 
   shouldComponentUpdate: function () {
@@ -38,7 +37,7 @@ var Settings = React.createClass({
   },
 
   _onChange: function () {
-    var user = ProfileStore.getProfile();
+    var user = SessionStore.getCurrentUser();
 
     this.setState({
       username: user.username,
@@ -57,13 +56,14 @@ var Settings = React.createClass({
   },
 
   _updateUser: function () {
+    var userId = SessionStore.getCurrentUserId();
     var userData = {
       username: this.state.username,
       email: this.state.email,
       password: this.refs.password.value,
     };
 
-    ProfileActions.updateUser(this.state.id, userData);
+    UserActions.updateUser(userId, userData);
   },
 
   isIncomplete: function () {
@@ -117,7 +117,7 @@ var Settings = React.createClass({
               </div>
 
               <button type="submit"
-                className="btn btn-default">Update Profile</button>
+                className="btn btn-default">Update Account</button>
             </form>
           </div>
         </div>

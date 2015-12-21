@@ -1,7 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 
-var DiscoverListItem = React.createClass({
+var DiscoverIndexItem = React.createClass({
   _addClass: function (e) {
     var $box = $(e.currentTarget);
     $box.addClass("mousedown");
@@ -40,4 +40,4 @@ var DiscoverListItem = React.createClass({
   }
 });
 
-module.exports = DiscoverListItem;
+module.exports = DiscoverIndexItem;

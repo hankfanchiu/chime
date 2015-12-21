@@ -3,18 +3,17 @@ var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 var SessionActions = require("../../actions/session_actions");
 var SessionStore = require("../../stores/session_store");
-var ErrorNotice = require("../error_notice");
 
 var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { username: "", password: "", errors: [] };
+    return { username: "", password: "" };
   },
 
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/", {});
+      this.history.pushState(null, "/");
     }
   },
 
@@ -28,10 +27,12 @@ var Login = React.createClass({
 
   _onChange: function () {
     if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/", {});
-    } else {
-      this.setState({ errors: SessionStore.getErrors() });
+      this.history.pushState(null, "/");
     }
+  },
+
+  _goToSignUp: function () {
+    this.history.pushState(null, "/signup");
   },
 
   _handleSubmit: function (e) {
@@ -39,12 +40,7 @@ var Login = React.createClass({
 
     if (this.isIncomplete()) { return this.handleIncompleteSubmit(); }
 
-    this.setState({ errors: [] });
-    this.login();
-  },
-
-  _goToSignUp: function (e) {
-    this.history.pushState(null, "/signup", {});
+    this._login();
   },
 
   _loginDemo: function (e) {
@@ -56,7 +52,7 @@ var Login = React.createClass({
     SessionActions.login(demoData);
   },
 
-  login: function () {
+  _login: function () {
     var userData = {
       username: this.state.username,
       password: this.refs.password.value
@@ -76,22 +72,11 @@ var Login = React.createClass({
     alert("Please fill out all fields!");
   },
 
-  renderErrorNotice: function () {
-    if (this.state.errors.length > 0) {
-      return <ErrorNotice errors={ this.state.errors } />;
-    } else {
-      return <ul className="error-notice" />
-    }
-  },
-
   render: function () {
     return (
       <div className="container">
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-
-            { this.renderErrorNotice() }
-
             <h1>Login</h1>
 
             <form className="login-form" onSubmit={ this._handleSubmit }>

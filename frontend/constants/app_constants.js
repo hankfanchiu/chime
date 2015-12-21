@@ -6,6 +6,7 @@ module.exports = {
     // Session
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
+    CURRENT_USER_RECEIVED: null,
 
     // User
     USER_RECEIVED: null,

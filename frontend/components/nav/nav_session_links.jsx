@@ -1,46 +1,52 @@
 var React = require("react");
-var ProfileStore = require("../../stores/profile_store");
+var SessionStore = require("../../stores/session_store");
 
 var NavSessionLinks = React.createClass({
-  _goToUserProfile: function () {
-    // this.props.history.pushState(null, "/profile", {});
+  getInitialState: function () {
+    return { username: SessionStore.getCurrentUserUsername() };
   },
 
-  _goToTracks: function () {
-    // this.props.history.pushState(null, "/tracks", {});
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
   },
 
-  _goToPlaylists: function () {
-    // this.props.history.pushState(null, "/playlists", {});
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
   },
 
-  _goToSettings: function () {
-    this.props.history.pushState(null, "/settings", {});
+  _onChange: function () {
+    this.setState({ username: SessionStore.getCurrentUserUsername() });
+  },
+
+  _pushState: function (pathname) {
+    this.props.history.pushState(null, pathname);
   },
 
   render: function () {
+    var path = "/" + this.state.username;
+
     return (
       <ul className="nav navbar-nav nav-links">
         <li>
-          <a onClick={ this._goToUserProfile }>
+          <a onClick={ this._pushState.bind(null, path) }>
             <i className="fa fa-user"></i>
           </a>
         </li>
 
         <li>
-          <a onClick={ this._goToTracks }>
+          <a onClick={ this._pushState.bind(null, path + "/tracks") }>
             <i className="fa fa-music"></i>
           </a>
         </li>
 
         <li>
-          <a onClick={ this._goToPlaylists }>
+          <a onClick={ this._pushState.bind(null, path + "/playlists") }>
             <i className="fa fa-list"></i>
           </a>
         </li>
 
         <li>
-          <a onClick={ this._goToSettings }>
+          <a onClick={ this._pushState.bind(null, "/settings") }>
             <i className="fa fa-cog"></i>
           </a>
         </li>

@@ -1,14 +1,14 @@
 var React = require("react");
 var SessionStore = require("../stores/session_store");
-var ProfileActions = require("../actions/profile_actions");
+var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
 var Player = require("./player/player");
 
 var App = React.createClass({
   componentWillMount: function () {
-    if (!SessionStore.isLoggedIn()) { return; }
-
-    ProfileActions.fetchUser(SessionStore.getUserId());
+    if (SessionStore.isLoggedIn()) {
+      SessionActions.fetchCurrentUser(SessionStore.getCurrentUserId());
+    }
   },
 
   render: function () {

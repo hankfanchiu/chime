@@ -24,16 +24,15 @@ var NavSession = React.createClass({
   },
 
   _signUp: function (e) {
-    this.history.pushState(null, "/signup", {});
+    this.history.pushState(null, "/signup");
   },
 
   _login: function (e) {
-    this.history.pushState(null, "/login", {});
+    this.history.pushState(null, "/login");
   },
 
   _logout: function (e) {
-    SessionActions.logout();
-    this.history.pushState(null, "/", {});
+    this.history.pushState(null, "/logout");
   },
 
   loggedIn: function () {

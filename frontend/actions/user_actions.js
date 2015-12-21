@@ -4,6 +4,8 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var UserActions = {
+  // Request actions
+
   fetchUser: function (username) {
     UserAPIUtils.fetchUser(username, UserActions.receiveUser);
   },
@@ -11,6 +13,12 @@ var UserActions = {
   createUser: function (userData) {
     UserAPIUtils.createUser(userData, UserActions.receiveLogin);
   },
+
+  updateUser: function (userId, userData) {
+    UserAPIUtils.updateUser(userId, userData, UserActions.receiveUser);
+  },
+
+  // Response actions
 
   receiveUser: function (response) {
     AppDispatcher.dispatch({

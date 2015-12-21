@@ -1,10 +1,10 @@
 var React = require("react");
-var DiscoverListItem = require("./discover_list_item");
+var DiscoverIndexItem = require("./discover_index_item");
 
-var DiscoverList = React.createClass({
+var DiscoverIndex = React.createClass({
   discoverListItems: function () {
     return this.props.tracks.map(function (track, idx) {
-      return <DiscoverListItem key={ idx } track={ track } />;
+      return <DiscoverIndexItem key={ idx } track={ track } />;
     });
   },
 
@@ -17,4 +17,4 @@ var DiscoverList = React.createClass({
   }
 });
 
-module.exports = DiscoverList;
+module.exports = DiscoverIndex;

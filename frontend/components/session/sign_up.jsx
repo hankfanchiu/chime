@@ -3,18 +3,17 @@ var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 var UserActions = require("../../actions/user_actions");
 var SessionStore = require("../../stores/session_store");
-var ErrorNotice = require("../error_notice");
 
 var SignUp = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { username: "", email: "", errors: [] };
+    return { username: "", email: "" };
   },
 
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/", {});
+      this.history.pushState(null, "/");
     }
   },
 
@@ -28,20 +27,18 @@ var SignUp = React.createClass({
 
   _onChange: function () {
     if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/", {});
-    } else {
-      this.setState({ errors: SessionStore.getErrors() });
+      this.history.pushState(null, "/");
     }
+  },
+
+  _goToLogin: function () {
+    this.history.pushState(null, "/login");
   },
 
   _signUp: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) {
-      return this.handleIncompleteSubmit();
-    }
-
-    this.setState({ errors: [] });
+    if (this.isIncomplete()) { return this.handleIncompleteSubmit(); }
 
     var userData = {
       username: this.state.username,
@@ -51,10 +48,6 @@ var SignUp = React.createClass({
     };
 
     UserActions.createUser(userData);
-  },
-
-  _goToLogin: function (e) {
-    this.history.pushState(null, "/login", {});
   },
 
   isIncomplete: function () {
@@ -70,22 +63,11 @@ var SignUp = React.createClass({
     alert("Required fields missing");
   },
 
-  renderErrorNotice: function () {
-    if (this.state.errors.length > 0) {
-      return <ErrorNotice errors={ this.state.errors } />;
-    } else {
-      return <ul className="error-notice" />
-    }
-  },
-
   render: function () {
     return (
       <div className="container">
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-
-            { this.renderErrorNotice() }
-
             <h1>Create Account</h1>
 
             <form className="signup-form" onSubmit={ this._signUp }>

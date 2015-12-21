@@ -1,7 +1,7 @@
 var React = require("react");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
-var DiscoverList = require("./discover_list");
+var DiscoverIndex = require("./discover_index");
 
 var Discover = React.createClass({
   getInitialState: function () {
@@ -30,7 +30,7 @@ var Discover = React.createClass({
       <div className="container discover">
         <h1>Discover New Chimes</h1>
 
-        <DiscoverList tracks={ this.state.tracks } />
+        <DiscoverIndex tracks={ this.state.tracks } />
       </div>
     );
   }
