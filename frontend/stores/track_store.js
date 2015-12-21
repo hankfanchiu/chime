@@ -4,7 +4,6 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _tracks = [];
-
 var TrackStore = new Store(AppDispatcher);
 
 TrackStore.__onDispatch = function (payload) {
