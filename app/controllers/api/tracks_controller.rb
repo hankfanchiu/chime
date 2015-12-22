@@ -1,7 +1,6 @@
 class Api::TracksController < ApplicationController
   before_action :require_login, only: [:create, :update, :destroy]
   before_action :require_owner, only: [:update, :destroy]
-  before_action :set_s3_direct_post, only: [:create, :update]
 
   def index
     @tracks = Track.all.includes(:user)
@@ -64,13 +63,5 @@ class Api::TracksController < ApplicationController
     track_owned = current_user.tracks.exists?(id: params[:id])
 
     forbidden unless track_owned
-  end
-
-  def set_s3_direct_post
-    @s3_direct_post = S3_BUCKET.presigned_post(
-      key: "uploads/#{SecureRandom.uuid}/${filename}",
-      success_action_status: '201',
-      acl: 'public-read'
-    )
   end
 end
