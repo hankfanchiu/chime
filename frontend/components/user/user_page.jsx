@@ -6,12 +6,6 @@ var UserPage = React.createClass({
     UserActions.fetchUser(this.props.params.user);
   },
 
-  componentWillReceiveProps: function (nextProps) {
-    if (this.props.params.user !== nextProps.params.user) {
-      UserActions.fetchUser(nextProps.params.user);
-    }
-  },
-
   render: function () {
     return (
       <div className="container">

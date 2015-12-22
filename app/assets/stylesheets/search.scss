@@ -1,0 +1,34 @@
+div.search {
+  position: relative;
+}
+
+div.search-results {
+  position: absolute;
+}
+
+.search {
+  position: relative;
+}
+
+.search-option {
+  box-sizing: border-box;
+  color: rgba(51, 51, 51, 0.8);
+  cursor: pointer;
+  display: block;
+  padding: 8px 10px;
+}
+
+.search-option:last-child {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.search-option:hover {
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.search-option.is-selected {
+  background-color: #f2f9fc;
+  color: #333;
+}

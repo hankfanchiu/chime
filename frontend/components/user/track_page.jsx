@@ -29,8 +29,7 @@ var TrackPage = React.createClass({
     var nextUser = nextProps.params.user;
     var nextTrack = nextProps.params.track;
 
-    if ((this.props.params.user !== nextUser) &&
-      (this.props.params.track !== nextTrack)) {
+    if (this.props.params.track !== nextTrack) {
       TrackActions.fetchTrack(nextUser, nextTrack);
     }
   },

@@ -3,7 +3,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _searchResults = [];
+var _userMatches = [];
+var _trackMatches = [];
 
 var SearchStore = new Store(AppDispatcher);
 
@@ -13,18 +14,25 @@ SearchStore.__onDispatch = function (payload) {
 
   switch (actionType) {
 
-    case ActionTypes.SEARCH_RESULTS_RECEIVED
+    case ActionTypes.SEARCH_RESULTS_RECEIVED:
       resetSearchResults(response)
       break;
   }
 };
 
-SearchStore.success = function () {
-  return _searchResults.slice();
+SearchStore.getUserResults = function () {
+  return _userMatches.slice();
 };
 
-SearchStore.errors = function () {
-  return _errors.slice();
+SearchStore.getTrackResults = function () {
+  return _trackMatches.slice();
+};
+
+var resetSearchResults = function (response) {
+  _userMatches = response.users;
+  _trackMatches = response.tracks;
+
+  SearchStore.__emitChange();
 };
 
 module.exports = SearchStore;

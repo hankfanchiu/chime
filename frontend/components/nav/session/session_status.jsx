@@ -1,11 +1,11 @@
 var React = require("react");
-var NavSessionLinks = require("./nav_session_links");
+var SessionLinks = require("./session_links");
 
-var NavSession = React.createClass({
+var SessionStatus = React.createClass({
   loggedIn: function () {
     return (
       <div className="nav navbar-right">
-        <NavSessionLinks username={ this.props.username }
+        <SessionLinks username={ this.props.username }
           pushState={ this.props.pushState } />
 
         <button className="btn btn-default navbar-btn"
@@ -43,4 +43,4 @@ var NavSession = React.createClass({
   }
 });
 
-module.exports = NavSession;
+module.exports = SessionStatus;

@@ -6,11 +6,10 @@ var ActionTypes = AppConstants.ActionTypes;
 var SearchActions = {
   // Request actions
 
-  fetchResults: function (queryString) {
-    SearchAPIUtils.fetchResults(
-      queryString,
-      SearchActions.receiveResults
-    );
+  fetchResults: function (query) {
+    if (query === "") { return; }
+    
+    SearchAPIUtils.fetchResults(query, SearchActions.receiveResults);
   },
 
   // Response actions
