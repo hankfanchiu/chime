@@ -12,6 +12,7 @@ var Collect = require("./components/collect/collect");
 var SignUp = require("./components/session/sign_up");
 var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
+var Upload = require("./components/upload/upload");
 var Settings = require("./components/session/settings");
 
 var UserPage = require("./components/user/user_page");
@@ -32,6 +33,7 @@ module.exports = (
       <Route name="login" path="login" component={ Login } />
       <Route name="logout" path="logout" component={ Logout } />
 
+      <Route name="upload" path="upload" component={ Upload } />
       <Route name="settings" path="settings" component={ Settings } />
 
       <Route name="user" path=":user" component={ UserPage }>

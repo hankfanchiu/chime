@@ -1,11 +1,17 @@
 var React = require("react");
 
-var NavSessionLinks = React.createClass({
+var SessionLinks = React.createClass({
   render: function () {
     var path = "/" + this.props.username;
 
     return (
       <ul className="nav navbar-nav nav-links">
+        <li>
+          <a onClick={ this.props.pushState.bind(null, "/upload") }>
+            <i className="fa fa-plus"></i>
+          </a>
+        </li>
+
         <li>
           <a onClick={ this.props.pushState.bind(null, path) }>
             <i className="fa fa-user"></i>
@@ -34,4 +40,4 @@ var NavSessionLinks = React.createClass({
   }
 });
 
-module.exports = NavSessionLinks;
+module.exports = SessionLinks;
