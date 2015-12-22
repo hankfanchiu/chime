@@ -21,3 +21,6 @@ bundle.js.map
 
 # Sample tracks
 /public/assets/tracks/**
+
+# Heroku environment config vars
+.env
