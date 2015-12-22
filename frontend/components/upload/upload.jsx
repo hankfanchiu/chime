@@ -1,5 +1,5 @@
 var React = require("react");
-var UploadTrack = require("./upload_track");
+var UploadAudio = require("./upload_audio");
 var UploadImage = require("./upload_image");
 var UploadForm = require("./upload_form");
 
@@ -11,7 +11,7 @@ var Upload = React.createClass({
           <div className="col-xs-6">
             <h1>Chime In</h1>
 
-            <UploadTrack />
+            <UploadAudio />
 
             <UploadImage />
 

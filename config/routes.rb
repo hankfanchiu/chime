@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "static_pages#index"
 
   namespace :api, defaults: { format: :json } do
-    resource :search, only: [:show]
+    resource :search, only: :show
 
     resource :session, only: [:create, :destroy]
 
@@ -12,8 +12,10 @@ Rails.application.routes.draw do
 
     resources :playlists, except: [:new, :edit]
 
-    resources :playlistings, only: [:create]
+    resources :playlistings, only: :create
     post "remove_track_from_playlist", to: "playlistings#destroy"
+
+    resource :aws, only: [:show, :create]
   end
 
   get "*path", to: "static_pages#index"
