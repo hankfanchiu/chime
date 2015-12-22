@@ -31,8 +31,8 @@ var SearchResults = React.createClass({
   render: function () {
     return (
       <div className="search-results">
-        { this.renderUserResults() }
         { this.renderTrackResults() }
+        { this.renderUserResults() }
       </div>
     );
   }

@@ -20,9 +20,13 @@ class Track < ActiveRecord::Base
 
   before_save :parameterize_slug
 
+  INVALID_TRACK_TITLES = %w(tracks playlists)
+
   friendly_id :title, use: :slugged
 
-  validates :title, uniqueness: { scope: :user_id }
+  validates :title,
+    exclusion: { in: INVALID_TRACK_TITLES }
+    uniqueness: { scope: :user_id }
 
   validates :slug, uniqueness: { scope: :user_id }
 

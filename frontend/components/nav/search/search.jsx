@@ -9,7 +9,8 @@ var Search = React.createClass({
     return {
       query: "",
       users: SearchStore.getUserResults(),
-      tracks: SearchStore.getTrackResults()
+      tracks: SearchStore.getTrackResults(),
+      showResults: false
     };
   },
 
@@ -33,15 +34,26 @@ var Search = React.createClass({
 
     if (this.promise) { clearInterval(this.promise); }
 
-    this.setState({ query: query });
+    this.setState({ query: query, showResults: true });
     this.promise = setTimeout(function () {
-      SearchActions.fetchResults(query);
+      SearchActions.fetchResults(query.toLowerCase());
     }.bind(this), 400);
   },
 
   _handleSearchClick: function (pathname) {
     this.props.pushState(pathname);
-    this.setState({ query: "", users: [], tracks: [] });
+    this.setState({ query: "", users: [], tracks: [], showResults: false });
+  },
+
+  renderSearchResults: function () {
+    if (this.state.showResults) {
+      return (
+        <SearchResults
+          users={ this.state.users }
+          tracks={ this.state.tracks }
+          handleSearchClick={ this._handleSearchClick } />
+      );
+    }
   },
 
   render: function () {
@@ -50,10 +62,7 @@ var Search = React.createClass({
         <SearchInput query={ this.state.query }
           handleSearchChange={ this._handleSearchChange } />
 
-        <SearchResults
-          users={ this.state.users }
-          tracks={ this.state.tracks }
-          handleSearchClick={ this._handleSearchClick } />
+        { this.renderSearchResults() }
       </div>
     );
   }
