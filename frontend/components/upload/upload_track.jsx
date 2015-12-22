@@ -9,7 +9,7 @@ var UploadTrack = React.createClass({
     return (
       <form className="upload-track">
         <div className="form-group">
-          <label htmlFor="upload-sound">Track</label>
+          <label htmlFor="upload-sound">Sound</label>
 
           <input id="upload-sound" type="file"
             onChange={ this._handleSoundFile } />

@@ -8,13 +8,9 @@ var Upload = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12">
+          <div className="col-xs-6">
             <h1>Chime In</h1>
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-xs-8">
             <UploadTrack />
 
             <UploadImage />
