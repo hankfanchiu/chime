@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
+# Pry is better than IRB
 gem 'pry-rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -33,6 +34,8 @@ gem 'puma'
 gem "rack-timeout"
 # Amazon Web Services SDK for S3 file storage.
 gem 'aws-sdk'
+# Paperclip to handle pass-through image uploads.
+gem 'paperclip'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
