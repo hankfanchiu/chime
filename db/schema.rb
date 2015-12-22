@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221174428) do
+ActiveRecord::Schema.define(version: 20151222231259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,14 +49,17 @@ ActiveRecord::Schema.define(version: 20151221174428) do
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.string   "title",       null: false
-    t.string   "track_url",   null: false
-    t.string   "img_url"
+    t.integer  "user_id",          null: false
+    t.string   "title",            null: false
+    t.string   "track_url",        null: false
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "slug"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   add_index "tracks", ["track_url"], name: "index_tracks_on_track_url", unique: true, using: :btree

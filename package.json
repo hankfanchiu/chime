@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,9 @@
     "react-router": "^1.0.2",
     "webpack": "^1.12.9"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": "4.1.1",
+    "npm": "2.1.x"
+  }
 }

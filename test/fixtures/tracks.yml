@@ -2,15 +2,18 @@
 #
 # Table name: tracks
 #
-#  id          :integer          not null, primary key
-#  user_id     :integer          not null
-#  title       :string           not null
-#  track_url   :string           not null
-#  img_url     :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  slug        :string
+#  id               :integer          not null, primary key
+#  user_id          :integer          not null
+#  title            :string           not null
+#  track_url        :string           not null
+#  description      :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  slug             :string
+#  img_file_name    :string
+#  img_content_type :string
+#  img_file_size    :integer
+#  img_updated_at   :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
