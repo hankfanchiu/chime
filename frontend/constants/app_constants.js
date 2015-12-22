@@ -17,6 +17,7 @@ module.exports = {
     // Track
     TRACKS_RECEIVED: null,
     TRACK_RECEIVED: null,
+    NEW_TRACK_RECEIVED: null,
 
     // Playlist
     PLAYLISTS_RECEIVED: null,
@@ -30,7 +31,11 @@ module.exports = {
     PLAY_PREVIOUS_TRACK: null,
     AUTO_PLAY_TRACK: null,
     ADD_TRACK_TO_QUEUE: null,
-    LOAD_PLAYLIST: null
+    LOAD_PLAYLIST: null,
+
+    // Upload
+    PUBLIC_URL_RECEIVED: null,
+    DIRECT_UPLOAD_RESPONSE_RECEIVED: null
   })
 
 };

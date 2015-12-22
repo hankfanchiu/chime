@@ -15,7 +15,7 @@ var TrackActions = {
   },
 
   createTrack: function (trackData) {
-    TrackAPIUtils.createTrack(trackData, TrackActions.receiveTrack);
+    TrackAPIUtils.createTrack(trackData, TrackActions.receiveNewTrack);
   },
 
   updateTrack: function (trackId, trackData) {
@@ -38,6 +38,13 @@ var TrackActions = {
   receiveTrack: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.TRACK_RECEIVED,
+      response: response
+    });
+  },
+
+  receiveNewTrack: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.NEW_TRACK_RECEIVED,
       response: response
     });
   }

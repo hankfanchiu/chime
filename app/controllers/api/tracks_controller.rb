@@ -13,7 +13,7 @@ class Api::TracksController < ApplicationController
     @track = current_user.tracks.new(track_params)
 
     if @track.save
-      render json: @track
+      render :show
     else
       render json: { errors: @track.errors.full_messages }
     end
@@ -57,7 +57,7 @@ class Api::TracksController < ApplicationController
   private
 
   def track_params
-    params.require(:track).permit(:title, :description)
+    params.require(:track).permit(:title, :description, :track_url)
   end
 
   def require_owner

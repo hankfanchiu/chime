@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :playlistings, only: :create
     post "remove_track_from_playlist", to: "playlistings#destroy"
 
-    resource :aws, only: [:show, :create]
+    resource :aws, only: :show
   end
 
   get "*path", to: "static_pages#index"

@@ -1,20 +1,20 @@
 var React = require("react");
 
 var UploadImage = React.createClass({
-  _handleImageFile: function (e) {
+  _handleImageFile: function () {
+    var file = this.refs.file.files[0];
 
+    // UploadActions.fetchSignedUrls("image", file.name);
   },
 
   render: function () {
     return (
-      <form className="upload-track">
-        <div className="form-group">
-          <label htmlFor="upload-image">Image</label>
+      <div className="form-group">
+        <label htmlFor="upload-image">Image</label>
 
-          <input id="upload-image" type="file"
-            onChange={ this._handleImageFile } />
-        </div>
-      </form>
+        <input id="upload-image" type="file"
+          onChange={ this._handleImageFile } />
+      </div>
     );
   }
 });

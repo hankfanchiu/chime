@@ -13,5 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require bundle
-//= require jquery.ui.widget
-//= require z.jquery.fileupload
