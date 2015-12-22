@@ -1,7 +1,5 @@
 var React = require("react");
-var UploadStore = require("../../stores/upload_store");
 var UploadActions = require("../../actions/upload_actions");
-var TrackActions = require("../../actions/track_actions");
 
 var UploadAudio = React.createClass({
   _handleFile: function () {
@@ -9,7 +7,7 @@ var UploadAudio = React.createClass({
 
     if (file === null) { return; }
 
-    UploadActions.startDirectUpload("audio", file);
+    UploadActions.startDirectUpload("tracks/audio", file);
   },
 
   render: function () {

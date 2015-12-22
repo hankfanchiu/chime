@@ -14,7 +14,7 @@ var Upload = React.createClass({
       title: "",
       description: "",
       publicUrl: UploadStore.getPublicUrl(),
-      isUploaded: UploadStore.isUploaded(),
+      audioIsUploaded: UploadStore.isUploaded(),
       newTrack: TrackStore.newTrack()
     };
   },
@@ -45,7 +45,7 @@ var Upload = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this._isIncomplete()) { return this._handleIncomplete(); }
+    if (this.state.title === "") { return this._handleIncomplete(); }
 
     var trackData = {
       track_url: this.state.publicUrl,
@@ -54,13 +54,6 @@ var Upload = React.createClass({
     };
 
     TrackActions.createTrack(trackData);
-  },
-
-  _isIncomplete: function () {
-    return (
-      (this.state.title === "") ||
-      (this.state.description === "")
-    );
   },
 
   _handleIncomplete: function () {
@@ -126,7 +119,7 @@ var Upload = React.createClass({
 
               <UploadAudio isUploaded={ this.state.isUploaded } />
 
-              <UploadImage isUploaded={ this.state.isUploaded } />
+
 
               { this.renderFormFields() }
 
