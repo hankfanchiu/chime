@@ -25,7 +25,7 @@ class Track < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   validates :title,
-    exclusion: { in: INVALID_TRACK_TITLES }
+    exclusion: { in: INVALID_TRACK_TITLES },
     uniqueness: { scope: :user_id }
 
   validates :slug, uniqueness: { scope: :user_id }

@@ -38,9 +38,8 @@ var TracksIndex = React.createClass({
         </div>
       );
     } else {
-      return this.state.tracks.map(function (track) {
-        return <TracksIndexItem key={ track.id }
-          track={ track } user={ user }/>;
+      return this.state.tracks.map(function (track, idx) {
+        return <TracksIndexItem key={ idx } track={ track } user={ user } />;
       });
     }
   },

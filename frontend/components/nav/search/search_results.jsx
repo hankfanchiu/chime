@@ -30,7 +30,8 @@ var SearchResults = React.createClass({
 
   render: function () {
     return (
-      <div className="search-results">
+      <div className="search-results" tabIndex="1"
+        onBlur={ this.props.onBlur }>
         { this.renderTrackResults() }
         { this.renderUserResults() }
       </div>

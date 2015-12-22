@@ -45,13 +45,19 @@ var Search = React.createClass({
     this.setState({ query: "", users: [], tracks: [], showResults: false });
   },
 
+  _onBlur: function () {
+    debugger;
+    this.setState({ showResults: false });
+  },
+
   renderSearchResults: function () {
     if (this.state.showResults) {
       return (
         <SearchResults
           users={ this.state.users }
           tracks={ this.state.tracks }
-          handleSearchClick={ this._handleSearchClick } />
+          handleSearchClick={ this._handleSearchClick }
+          onBlur={ this._onBlur } />
       );
     }
   },
