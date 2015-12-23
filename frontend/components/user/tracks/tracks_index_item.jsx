@@ -23,7 +23,7 @@ var TracksIndexItem = React.createClass({
     return (
       <div className="tracks tracks-index-item clear">
         <div className="image" onClick={ this._playTrack }>
-          <img src={ this.props.track.img_url } />
+          <img src={ this.props.track.img_thumb } />
         </div>
 
         <div className="detail">

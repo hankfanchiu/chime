@@ -38,7 +38,7 @@ var CollectIndexItem = React.createClass({
     return (
       <div className="tracks tracks-index-item clear">
         <div className="image" onClick={ this._playTrack }>
-          <img src={ track.img_url } />
+          <img src={ track.img_thumb } />
         </div>
 
         <div className="detail">

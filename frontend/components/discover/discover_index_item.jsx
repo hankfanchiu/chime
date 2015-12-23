@@ -28,7 +28,7 @@ var DiscoverIndexItem = React.createClass({
           onClick={ this._playTrack }>
 
           <div className="image">
-            <img src={ track.img_url } />
+            <img src={ track.img_thumb } />
           </div>
 
           <p className="title">{ track.title }</p>
