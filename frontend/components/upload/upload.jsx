@@ -22,7 +22,6 @@ var Upload = React.createClass({
   },
 
   componentDidMount: function () {
-    UploadActions.resetUploadStore();
     this.uploadListener = UploadStore.addListener(this._onChange);
     this.trackListener = TrackStore.addListener(this._onChange);
   },
@@ -37,7 +36,6 @@ var Upload = React.createClass({
   componentWillUnmount: function () {
     this.uploadListener.remove();
     this.trackListener.remove();
-    UploadActions.resetUploadStore();
   },
 
   _onChange: function () {
@@ -61,6 +59,7 @@ var Upload = React.createClass({
     formData.append("track[img]", this.state.img);
 
     TrackActions.createTrack(formData);
+    UploadActions.resetUploadStore();
   },
 
   _handleIncomplete: function () {
