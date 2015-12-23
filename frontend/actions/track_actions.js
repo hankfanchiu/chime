@@ -7,23 +7,40 @@ var TrackActions = {
   // Request actions
 
   fetchTracks: function (username) {
-    TrackAPIUtils.fetchTracks(username, TrackActions.receiveTracks);
+    TrackAPIUtils.fetchTracks(
+      username,
+      TrackActions.receiveTracks
+    );
   },
 
   fetchTrack: function (username, trackSlug) {
-    TrackAPIUtils.fetchTrack(username, trackSlug, TrackActions.receiveTrack);
+    TrackAPIUtils.fetchTrack(
+      username,
+      trackSlug,
+      TrackActions.receiveTrack
+    );
   },
 
   createTrack: function (trackData) {
-    TrackAPIUtils.createTrack(trackData, TrackActions.receiveNewTrack);
+    TrackAPIUtils.createTrack(
+      trackData,
+      TrackActions.receiveNewTrack
+    );
   },
 
   updateTrack: function (trackId, trackData) {
-    TrackAPIUtils.updateTrack(trackId, trackData, TrackActions.receiveTrack);
+    TrackAPIUtils.updateTrack(
+      trackId,
+      trackData,
+      TrackActions.receiveTrack
+    );
   },
 
   deleteTrack: function (trackId) {
-    TrackAPIUtils.deleteTrack(trackId, TrackActions.receiveTrack);
+    TrackAPIUtils.deleteTrack(
+      trackId,
+      TrackActions.receiveTrack
+    );
   },
 
   // Response actions

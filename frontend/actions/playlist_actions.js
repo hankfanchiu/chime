@@ -3,19 +3,20 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var PlaylistingActions = {
+var PlaylistActions = {
   // Request actions
 
-  fetchPlaylists: function (userId) {
+  fetchPlaylists: function (username) {
     PlaylistAPIUtils.fetchPlaylists(
-      userId,
+      username,
       PlaylistActions.receivePlaylists
     );
   },
 
-  fetchPlaylist: function (playlistId) {
+  fetchPlaylist: function (username, playlistSlug) {
     PlaylistAPIUtils.fetchPlaylist(
-      playlistId,
+      username,
+      playlistSlug,
       PlaylistActions.receivePlaylist
     );
   },
@@ -33,7 +34,7 @@ var PlaylistingActions = {
       playlistData,
       PlaylistActions.receivePlaylist
     );
-  }
+  },
 
   deletePlaylist: function (playlistId) {
     PlaylistAPIUtils.deletePlaylist(

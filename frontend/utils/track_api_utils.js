@@ -1,6 +1,9 @@
 var TrackAPIUtils = {
   fetchTracks: function (username, actionCallback) {
-    var url = (username ? "/api/tracks?username=" + username : "/api/tracks");
+    var url = "/api/tracks";
+    if (username) {
+      url += "?username=" + username;
+    }
 
     $.ajax({
       url: url,
@@ -30,7 +33,6 @@ var TrackAPIUtils = {
       data: formData,
       processData: false,
       contentType: false,
-      dataType: "json",
       success: function (response) {
         actionCallback(response);
       }
@@ -41,7 +43,7 @@ var TrackAPIUtils = {
     $.ajax({
       url: "/api/tracks/" + trackId,
       type: "PATCH",
-      data: {track: trackData},
+      data: { track: trackData },
       success: function (response) {
         actionCallback(response);
       }

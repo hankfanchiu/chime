@@ -1,6 +1,9 @@
 var PlaylistAPIUtils = {
-  fetchPlaylists: function (userId, actionCallback) {
-    var url = (userId ? "/api/playlists?user_id=" + userId : "/api/playlists");
+  fetchPlaylists: function (username, actionCallback) {
+    var url = "/api/playlists"
+    if (username) {
+      url += "?username=" + username;
+    }
 
     $.ajax({
       url: url,
@@ -11,9 +14,11 @@ var PlaylistAPIUtils = {
     });
   },
 
-  fetchPlaylist: function (playlistId, actionCallback) {
+  fetchPlaylist: function (username, playlistSlug, actionCallback) {
+    var url = "/api/tracks/" + playlistSlug + "?username=" + username;
+
     $.ajax({
-      url: "/api/playlists/" + playlistId,
+      url: url,
       type: "GET",
       success: function (response) {
         actionCallback(response);
@@ -25,7 +30,7 @@ var PlaylistAPIUtils = {
     $.ajax({
       url: "/api/playlists",
       type: "POST",
-      data: {playlist: playlistData}
+      data: { playlist: playlistData },
       success: function (response) {
         actionCallback(response);
       }
@@ -36,7 +41,7 @@ var PlaylistAPIUtils = {
     $.ajax({
       url: "/api/playlists/" + playlistId,
       type: "PATCH",
-      data: {playlist: playlistData}
+      data: { playlist: playlistData },
       success: function (response) {
         actionCallback(response);
       }
