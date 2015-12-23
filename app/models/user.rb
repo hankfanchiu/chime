@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   INVALID_USERNAMES = %w(discover collect login logout signup settings upload)
 
   after_initialize :ensure_session_token
-  before_create :downcase_user_data
-  before_create :randomize_avatar_file_name
+  before_save :downcase_user_data
+  before_save :randomize_avatar_file_name
 
   friendly_id :username, use: :slugged
 
@@ -54,16 +54,18 @@ class User < ActiveRecord::Base
   validates_presence_of :password_digest
 
   has_attached_file :avatar,
+    default_url: "/assets/corgi.jpg",
+    default_style: :square,
     url: ":s3_domain_url",
-    path: "/users/images/:filename.:extension",
+    path: "users/images/avatar/:filename",
     styles: {
       hero: '30x30>',
       thumb: '100x100>',
       square: '200x200#',
-      medium: '300x300>'
+      medium: '500x500>'
     }
 
-  validates_attachment_size :avatar, less_than: 5.megabyte
+  validates_attachment_size :avatar, { less_than: 5.megabytes }
   validates_attachment_content_type :avatar,
     content_type: ["image/jpeg", "image/gif", "image/png"]
 

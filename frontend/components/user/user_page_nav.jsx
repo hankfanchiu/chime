@@ -6,7 +6,7 @@ var UserPageNav = React.createClass({
   },
 
   renderProfileLink: function () {
-    var pathname = "/" + this.props.user;
+    var pathname = "/" + this.props.username;
 
     if (this.props.pathname === pathname) {
       return <span>Profile</span>;
@@ -22,7 +22,7 @@ var UserPageNav = React.createClass({
   },
 
   renderTracksLink: function () {
-    var pathname = "/" + this.props.user + "/tracks";
+    var pathname = "/" + this.props.username + "/tracks";
 
     if (this.props.pathname === pathname) {
       return <span>Tracks</span>;
@@ -38,7 +38,7 @@ var UserPageNav = React.createClass({
   },
 
   renderPlaylistsLink: function () {
-    var pathname = "/" + this.props.user + "/playlists";
+    var pathname = "/" + this.props.username + "/playlists";
 
     if (this.props.pathname === pathname) {
       return <span>Playlists</span>;

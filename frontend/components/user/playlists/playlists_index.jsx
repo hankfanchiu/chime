@@ -51,7 +51,7 @@ var PlaylistsIndex = React.createClass({
         <div className="col-xs-8">
           <UserPageNav pathname={ this.props.location.pathname }
             history={ this.props.history }
-            user={ this.props.params.user } />
+            username={ this.state.user.username } />
 
           <div className="row">
             <div className="playlists-index clear">

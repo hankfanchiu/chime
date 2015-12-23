@@ -40,14 +40,19 @@ class Track < ActiveRecord::Base
 
   has_attached_file :img,
     default_url: "/assets/corgi.jpg",
+    default_style: :square,
+    url: ":s3_domain_url",
+    path: "tracks/images/:filename",
     styles: {
-      search: '50x50>',
+      hero: '30x30>',
       thumb: '100x100>',
       square: '200x200#',
-      medium: '300x300>'
+      medium: '500x500>'
     }
 
-  validates_attachment_content_type :img, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_size :img, { less_than: 5.megabytes }
+  validates_attachment_content_type :img,
+    content_type: ["image/jpeg", "image/gif", "image/png"]
 
   belongs_to :user
   has_many :playlistings, dependent: :destroy

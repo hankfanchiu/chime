@@ -43,7 +43,6 @@ var UserAPIUtils = {
       contentType: false,
       dataType: "json",
       success: function (user) {
-        debugger;
         actionCallback(user);
       }
     });
