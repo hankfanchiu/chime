@@ -1,6 +1,8 @@
 var React = require("react");
 var TrackStore = require("../../../stores/track_store");
 var TrackActions = require("../../../actions/track_actions");
+var TrackPlayer = require("./track_player");
+var TrackDetail = require("./track_detail");
 
 var TrackPage = React.createClass({
   getInitialState: function () {
@@ -48,9 +50,9 @@ var TrackPage = React.createClass({
   render: function () {
     return (
       <div className="container">
-        <div className="row">
-          <h1>{ this.state.track.title }</h1>
-        </div>
+        <TrackPlayer track={ this.state.track } />
+
+        <TrackDetail track={ this.state.track } />
       </div>
     );
   }
