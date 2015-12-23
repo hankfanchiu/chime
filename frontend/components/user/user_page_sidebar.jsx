@@ -16,9 +16,14 @@ var UserPageSidebar = React.createClass({
 
     if (isCurrentUser) {
       return (
-        <input ref="file" id="upload-avatar" type="file"
-          className="btn btn-default"
-          onChange={ this._handleFile } />
+        <span>
+          <input ref="file" id="upload-avatar" type="file"
+            onChange={ this._handleFile } />
+
+          <span className="btn btn-default btn-file">
+            Upload new avatar
+          </span>
+        </span>
       );
     }
   },
@@ -28,13 +33,13 @@ var UserPageSidebar = React.createClass({
       <div className="col-xs-4">
         <div className="user-sidebar">
           <div className="avatar">
-            <img src={ this.props.user.avatar_square } />
+            <img className="avatar" src={ this.props.user.avatar_square } />
+
+            { this.renderUpload() }
           </div>
 
-          { this.renderUpload() }
-
           <div className="username">
-            <h2>{ this.props.user.username }</h2>
+            <h3>{ this.props.user.username }</h3>
           </div>
 
           <p>This contains an overview of the user.</p>

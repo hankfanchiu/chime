@@ -70,6 +70,18 @@ class Track < ActiveRecord::Base
     self.where("title ILIKE ?", "%#{query}%")
   end
 
+  def img_hero
+    self.img.url(:hero)
+  end
+
+  def img_thumb
+    self.img.url(:thumb)
+  end
+
+  def img_square
+    self.img.url(:square)
+  end
+
   private
 
   def ensure_track_title
@@ -85,6 +97,8 @@ class Track < ActiveRecord::Base
   end
 
   def randomize_img_file_name
+    return unless self.img_file_name
+
     extension = File.extname(self.img_file_name)
     filename = "#{SecureRandom.uuid}#{extension}"
 

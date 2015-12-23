@@ -30,7 +30,7 @@ var ProfileIndex = React.createClass({
 
         <UserPageSidebar user={ this.state.user } />
 
-        <div className="col-xs-8">
+        <div className="col-sm-8">
           <UserPageNav pathname={ this.props.location.pathname }
             history={ this.props.history }
             username={ this.state.user.username } />
