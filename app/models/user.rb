@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     url: ":s3_domain_url",
     path: "/users/images/:basename_:style.:extension",
     styles: {
-      hero: '30x30>',
+      hero: '20x20>',
       square: '300x300#'
     }
 
