@@ -1,7 +1,5 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var UserNav = require("../user_nav");
-var Sidebar = require("../sidebar/sidebar");
 
 var ProfileIndex = React.createClass({
   getInitialState: function () {
@@ -26,21 +24,8 @@ var ProfileIndex = React.createClass({
 
   render: function () {
     return (
-      <div className="row">
-
-        <Sidebar user={ this.state.user } />
-
-        <div className="col-sm-8">
-          <UserNav pathname={ this.props.location.pathname }
-            username={ this.state.user.username } />
-
-          <div className="row">
-            <div className="profile-index clear">
-              Detailed profile information about { this.state.user.username }.
-            </div>
-          </div>
-
-        </div>
+      <div className="profile-index clear">
+        Detailed profile information about { this.state.user.username }.
       </div>
     );
   }

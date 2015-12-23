@@ -1,11 +1,8 @@
 var React = require("react");
-var History = require("react-router").History;
 
 var UserNav = React.createClass({
-  mixins: [History],
-
   _pushState: function (pathname) {
-    this.history.pushState(null, pathname);
+    this.props.history.pushState(null, pathname);
   },
 
   renderProfileLink: function () {

@@ -9,16 +9,16 @@ var PlaylistPage = React.createClass({
 
   getStateFromStore: function () {
     var params = this.props.params;
-    var identifier = params.user + "-" + params.playlist;
+    var identifier = params.username + "-" + params.playlist;
 
     return { playlist: PlaylistStore.find(identifier) };
   },
 
   componentWillMount: function () {
-    var user = this.props.params.user;
-    var playlist = this.props.params.playlist;
+    var username = this.props.params.username;
+    var slug = this.props.params.playlist;
 
-    PlaylistActions.fetchPlaylist(user, playlist);
+    PlaylistActions.fetchPlaylist(username, slug);
   },
 
   componentDidMount: function () {
@@ -26,10 +26,10 @@ var PlaylistPage = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
-    var nextUser = nextProps.params.user;
+    var nextUser = nextProps.params.username;
     var nextPlaylist = nextProps.params.playlist;
 
-    var sameUser = (this.props.params.user === nextUser);
+    var sameUser = (this.props.params.username === nextUser);
     var samePlaylist = (this.props.params.playlist === nextPlaylist);
 
     if (sameUser && samePlaylist) { return; }

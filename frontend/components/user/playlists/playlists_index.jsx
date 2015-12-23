@@ -1,7 +1,5 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var UserNav = require("../user_nav");
-var Sidebar = require("../sidebar/sidebar");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
@@ -10,10 +8,7 @@ var PlaylistsIndex = React.createClass({
   },
 
   getStatesFromStore: function () {
-    return {
-      user: UserStore.getUser(),
-      playlists: UserStore.getPlaylists()
-    };
+    return { playlists: UserStore.getPlaylists() };
   },
 
   componentDidMount: function () {
@@ -29,19 +24,20 @@ var PlaylistsIndex = React.createClass({
   },
 
   renderPlaylistsIndexItems: function () {
-    var user = this.state.user;
+    var playlists = this.state.playlists;
+    var username = this.props.params.username;
 
-    if (this.state.playlists.length === 0) {
+    if (playlists.length === 0) {
       return (
         <div className="playlists-index-item clear">
           This user has no playlists! :(
         </div>
       );
     } else {
-      return this.state.playlists.map(function (playlist, idx) {
+      return playlists.map(function (playlist, idx) {
         return (
           <PlaylistsIndexItem key={ idx }
-            playlist={ playlist } user={ user } />
+            playlist={ playlist } username={ username } />
         );
       });
     }
@@ -49,21 +45,8 @@ var PlaylistsIndex = React.createClass({
 
   render: function () {
     return (
-      <div className="row">
-
-        <Sidebar user={ this.state.user } />
-
-        <div className="col-xs-8">
-          <UserNav pathname={ this.props.location.pathname }
-            username={ this.state.user.username } />
-
-          <div className="row">
-            <div className="playlists-index clear">
-              { this.renderPlaylistsIndexItems() }
-            </div>
-          </div>
-
-        </div>
+      <div className="playlists-index clear">
+        { this.renderPlaylistsIndexItems() }
       </div>
     );
   }

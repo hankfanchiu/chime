@@ -14,7 +14,7 @@ var TracksIndexItem = React.createClass({
   },
 
   _goToTrack: function () {
-    var url = "/" + this.props.user + "/" + this.props.track.slug;
+    var url = "/" + this.props.username + "/" + this.props.track.slug;
 
     this.history.pushState(null, url);
   },
