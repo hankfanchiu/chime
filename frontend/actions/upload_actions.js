@@ -45,6 +45,14 @@ var UploadActions = {
       actionType: ActionTypes.DIRECT_UPLOAD_RESPONSE_RECEIVED,
       response: response
     });
+  },
+
+  // Non-API actions
+
+  resetUploadStore: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.RESET_UPLOAD_STORE
+    });
   }
 };
 

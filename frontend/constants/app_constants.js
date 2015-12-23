@@ -35,7 +35,8 @@ module.exports = {
 
     // Upload
     PUBLIC_URL_RECEIVED: null,
-    DIRECT_UPLOAD_RESPONSE_RECEIVED: null
+    DIRECT_UPLOAD_RESPONSE_RECEIVED: null,
+    RESET_UPLOAD_STORE: null
   })
 
 };

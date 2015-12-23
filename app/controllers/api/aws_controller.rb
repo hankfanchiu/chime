@@ -6,7 +6,7 @@ class Api::AwsController < ApplicationController
   def show
     prefix = params[:prefix] + "/"
     filename = params[:filename]
-    limit = 10.megabyte
+    limit = 15.megabyte
     presigner = S3Presigner.instance
     presigned_url = presigner.presign(prefix, filename, limit: limit)
 

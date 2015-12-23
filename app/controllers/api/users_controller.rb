@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
   before_action :require_login, only: :update
 
   def create
-    if User.friendly.find(params[:user][:username])
+    if User.friendly.exists?(params[:user][:username])
       render json: { errors: ["Username is not available"] }
       return
     end

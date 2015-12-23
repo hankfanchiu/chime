@@ -57,7 +57,7 @@ class Track < ActiveRecord::Base
 
   def ensure_track_data
     self.title = "Untitled" if self.title.nil?
-    self.img_url = "/assets/corgi.jpg" if self.img_url.nil?
+    self.img.url = "/assets/corgi.jpg" if self.img.url.nil?
     self.description = "No description" if self.description.nil?
   end
 

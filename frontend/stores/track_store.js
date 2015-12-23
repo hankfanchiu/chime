@@ -8,7 +8,6 @@ var _newTrack = null;
 var TrackStore = new Store(AppDispatcher);
 
 TrackStore.__onDispatch = function (payload) {
-  _newTrack = null;
   var actionType = payload.actionType;
   var response = payload.response;
 
@@ -23,6 +22,8 @@ TrackStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.NEW_TRACK_RECEIVED:
+      _newTrack = null;
+
       if (!response.errors) {
         addTrack(response);
       }

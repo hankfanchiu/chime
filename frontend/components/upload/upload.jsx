@@ -1,6 +1,7 @@
 var React = require("react");
 var TrackActions = require("../../actions/track_actions");
 var TrackStore = require("../../stores/track_store");
+var UploadActions = require("../../actions/upload_actions");
 var UploadStore = require("../../stores/upload_store");
 var UploadAudio = require("./upload_audio");
 var UploadImage = require("./upload_image");
@@ -17,6 +18,10 @@ var Upload = React.createClass({
       isUploaded: UploadStore.isUploaded(),
       newTrack: TrackStore.newTrack()
     };
+  },
+
+  componentWillMount: function () {
+    UploadActions.resetUploadStore();
   },
 
   componentDidMount: function () {

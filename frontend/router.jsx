@@ -28,11 +28,9 @@ module.exports = (
       <IndexRoute component={ Home } />
       <Route name="discover" path="discover" component={ Discover } />
       <Route name="collect" path="collect" component={ Collect } />
-
       <Route name="signup" path="signup" component={ SignUp } />
       <Route name="login" path="login" component={ Login } />
       <Route name="logout" path="logout" component={ Logout } />
-
       <Route name="upload" path="upload" component={ Upload } />
       <Route name="settings" path="settings" component={ Settings } />
 
@@ -41,7 +39,6 @@ module.exports = (
         <Route name="userTracks" path="tracks" component={ UserTracks } />
         <Route name="userPlaylists" path="playlists"
           component={ UserPlaylists } />
-
         <Route name="track" path=":track" component={ TrackPage } />
       </Route>
     </Route>

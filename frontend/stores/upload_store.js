@@ -14,11 +14,15 @@ UploadStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.PUBLIC_URL_RECEIVED:
-      resetPublicUrl(response);
+      setPublicUrl(response);
       break;
 
     case ActionTypes.DIRECT_UPLOAD_RESPONSE_RECEIVED:
-      resetResponseStatus(response);
+      setResponseStatus(response);
+      break;
+
+    case ActionTypes.RESET_UPLOAD_STORE:
+      resetUploadStore();
       break;
 
   };
@@ -32,17 +36,22 @@ UploadStore.isUploaded = function () {
   return _responseStatus === 200;
 };
 
-var resetPublicUrl = function (response) {
+var setPublicUrl = function (response) {
   _publicUrl = response.public_url;
   _responseStatus = null;
 
   UploadStore.__emitChange();
 };
 
-var resetResponseStatus = function (response) {
+var setResponseStatus = function (response) {
   _responseStatus = response.status;
 
   UploadStore.__emitChange();
+};
+
+var resetUploadStore = function () {
+  _publicUrl = null;
+  _responseStatus = null;
 };
 
 module.exports = UploadStore;
