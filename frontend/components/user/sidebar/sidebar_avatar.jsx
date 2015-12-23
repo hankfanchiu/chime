@@ -4,11 +4,11 @@ var UserActions = require("../../../actions/user_actions");
 
 var SidebarAvatar = React.createClass({
   _handleFile: function () {
-    var file = this.refs.file.files[0];
+    var img = this.refs.file.files[0];
     var formData = new FormData();
     var currentUserId = SessionStore.getCurrentUserId();
 
-    formData.append("user[avatar]", file);
+    formData.append("user[avatar]", img);
 
     UserActions.uploadImage(currentUserId, formData);
   },

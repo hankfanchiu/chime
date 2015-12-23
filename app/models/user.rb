@@ -56,10 +56,9 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
     default_url: "/assets/corgi.jpg",
     url: ":s3_domain_url",
-    path: "/users/images/avatar/:basename_:style.:extension",
+    path: "/users/images/:basename_:style.:extension",
     styles: {
       hero: '30x30>',
-      thumb: '100x100>',
       square: '300x300#'
     }
 

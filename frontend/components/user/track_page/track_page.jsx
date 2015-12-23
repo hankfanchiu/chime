@@ -1,6 +1,6 @@
 var React = require("react");
-var TrackStore = require("../../stores/track_store");
-var TrackActions = require("../../actions/track_actions");
+var TrackStore = require("../../../stores/track_store");
+var TrackActions = require("../../../actions/track_actions");
 
 var TrackPage = React.createClass({
   getInitialState: function () {
