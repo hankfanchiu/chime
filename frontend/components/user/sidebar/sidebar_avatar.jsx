@@ -5,9 +5,12 @@ var UserActions = require("../../../actions/user_actions");
 var SidebarAvatar = React.createClass({
   _handleFile: function () {
     var file = this.refs.file.files[0];
+    var formData = new FormData();
     var currentUserId = SessionStore.getCurrentUserId();
 
-    UserActions.uploadImage(currentUserId, file);
+    formData.append("user[avatar]", file);
+
+    UserActions.uploadImage(currentUserId, formData);
   },
 
   renderUpload: function () {
@@ -19,7 +22,8 @@ var SidebarAvatar = React.createClass({
         <span className="btn btn-default btn-file">
           <i className="fa fa-camera"></i> Upload new avatar
 
-          <input ref="file" id="upload-avatar" type="file"
+          <input type="file" accept="image/*"
+            ref="file" id="upload-avatar"
             onChange={ this._handleFile } />
         </span>
       );

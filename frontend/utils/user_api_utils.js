@@ -31,10 +31,7 @@ var UserAPIUtils = {
     });
   },
 
-  uploadImage: function (userId, file, actionCallback) {
-    var formData = new FormData();
-    formData.append("user[avatar]", file);
-
+  uploadImage: function (userId, formData, actionCallback) {
     $.ajax({
       url: "/api/users/" + userId,
       type: "PUT",

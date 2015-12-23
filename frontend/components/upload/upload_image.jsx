@@ -29,8 +29,8 @@ var UploadImage = React.createClass({
         <span className="btn btn-default btn-file">
           <i className="fa fa-camera"></i> Upload track image
 
-          <input ref="file" id="upload-img" type="file"
-            accept=".jpg, .gif, .png"
+          <input type="file" accept="image/*"
+            ref="file" id="upload-img"
             onChange={ this._handleFile } />
         </span>
       </div>

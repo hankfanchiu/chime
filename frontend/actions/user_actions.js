@@ -19,8 +19,8 @@ var UserActions = {
     UserAPIUtils.updateUser(userId, userData, UserActions.receiveUser);
   },
 
-  uploadImage: function (userId, file) {
-    UserAPIUtils.uploadImage(userId, file, UserActions.receiveUser);
+  uploadImage: function (userId, formData) {
+    UserAPIUtils.uploadImage(userId, formData, UserActions.receiveUser);
   },
 
   // Response actions
