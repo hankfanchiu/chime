@@ -19,8 +19,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    username = current_user.username
-    password = user_params[:password]
+    username, password = current_user.username, user_params[:password]
 
     @user = User.find_by_credentials(username, password)
 
@@ -37,14 +36,11 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    user_identification = params[:id].to_s.downcase
-    @user = User.includes(:tracks).friendly.find(user_identification)
+    @user = User.includes(:tracks).find_by(user: params[:id])
 
-    if @user.nil?
-      not_found
-    else
-      render :show
-    end
+    return not_found if @user.nil?
+
+    render :show
   end
 
   private

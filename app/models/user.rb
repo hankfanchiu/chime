@@ -17,12 +17,12 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  INVALID_USERNAMES = %w(discover collect login logout signup settings upload)
+
   after_initialize :ensure_session_token
 
   before_save :downcase_user_data
-
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  INVALID_USERNAMES = %w(discover collect login logout signup settings)
 
   friendly_id :username, use: :slugged
 
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   validates :password,
     confirmation: true,
-    length: { minimum: 8, maximum: 20, allow_nil: true }
+    length: { minimum: 6, maximum: 30, allow_nil: true }
 
   validates :password_confirmation,
     presence: true,
@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   has_many :tracks, dependent: :destroy
   has_many :playlists, dependent: :destroy
   has_many :playlistings, through: :playlists
+
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64

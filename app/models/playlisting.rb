@@ -10,7 +10,7 @@
 #
 
 class Playlisting < ActiveRecord::Base
-  validates :track_id, uniqueness: { scope: :playlist_id }
+  validates_uniqueness_of :track, scope: :playlist
 
   belongs_to :playlist
   belongs_to :track

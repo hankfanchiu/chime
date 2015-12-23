@@ -15,9 +15,9 @@ class Api::PlaylistingsController < ApplicationController
   def destroy
     @playlisting = Playlisting.find_by(playlisting_params)
 
-    if @playlisting.nil?
-      not_found
-    elsif @playlisting.destroy
+    return not_found if @playlisting.nil?
+
+    if @playlisting.destroy
       render json: @playlisting
     else
       render json: { errors: @playlisting.errors.full_messages }
@@ -31,10 +31,9 @@ class Api::PlaylistingsController < ApplicationController
   end
 
   def require_owner
-    playlisting_owned = current_user.playlistings.exists?(
-      playlist_id: params[:playlist_id],
-      track_id: params[:track_id]
-    )
+    playlist_id, track_id = params[:playlist_id], params[:track_id]
+    playlisting_owned = current_user.playlistings
+      .exists?(playlist_id: playlist_id, track_id: track_id)
 
     forbidden unless playlisting_owned
   end

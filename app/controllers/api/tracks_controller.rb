@@ -19,12 +19,13 @@ class Api::TracksController < ApplicationController
   end
 
   def update
-    @track = Track.friendly.find(params[:id])
+    username, slug = params[:username], params[:id]
+    @track = Track.find_by_username_and_slug(username, slug)
 
-    if @track.nil?
-      not_found
-    elsif @track.update(track_params)
-      render json: @track
+    return not_found if @track.nil?
+
+    if @track.update(track_params)
+      render :show
     else
       render json: { errors: @track.errors.full_messages }
     end
@@ -34,19 +35,18 @@ class Api::TracksController < ApplicationController
     username, slug = params[:username], params[:id]
     @track = Track.find_by_username_and_slug(username, slug)
 
-    if @track.nil?
-      not_found
-    else
-      render :show
-    end
+    return not_found if @track.nil?
+
+    render :show
   end
 
   def destroy
-    @track = Track.friendly.find(params[:id])
+    username, slug = params[:username], params[:id]
+    @track = Track.find_by_username_and_slug(username, slug)
 
-    if @track.nil?
-      not_found
-    elsif @track.destroy
+    return not_found if @track.nil?
+
+    if @track.destroy
       render json: { success: ["Track deleted"] }
     else
       render json: { errors: @track.errors.full_messages }
@@ -56,7 +56,7 @@ class Api::TracksController < ApplicationController
   private
 
   def track_params
-    params.require(:track).permit(:title, :description, :track_url)
+    params.require(:track).permit(:title, :description, :track_url, :img)
   end
 
   def require_owner

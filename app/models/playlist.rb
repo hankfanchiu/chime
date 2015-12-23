@@ -14,7 +14,8 @@ class Playlist < ActiveRecord::Base
   after_initialize :ensure_playlist_title
   after_initialize :ensure_playlist_description
 
-  validates :user_id, :title, presence: true
+  validates_presence_of :user
+  validates_presence_of :title
 
   belongs_to :user
   has_many :playlistings, dependent: :destroy

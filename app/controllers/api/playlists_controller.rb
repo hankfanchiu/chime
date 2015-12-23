@@ -12,41 +12,39 @@ class Api::PlaylistsController < ApplicationController
     @playlist = current_user.playlists.new(playlist_params)
 
     if @playlist.save
-      render json: @playlist
+      render :show
     else
       render json: { errors: @playlist.errors.full_messages }
     end
   end
 
   def update
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find_by(id: params[:id])
 
-    if @playlist.nil?
-      not_found
-    elsif @playlist.update(playlist_params)
-      render json: @playlist
+    return not_found if @playlist.nil?
+
+    if @playlist.update(playlist_params)
+      render :show
     else
       render json: { errors: @playlist.errors.full_messages }
     end
   end
 
   def show
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find_by(id: params[:id])
 
-    if @playlist.nil?
-      not_found
-    else
-      render :show
-    end
+    return not_found if @playlist.nil?
+
+    render :show
   end
 
   def destroy
     @playlist = Playlist.find(params[:id])
 
-    if @playlist.nil?
-      not_found
-    elsif @playlist.destroy
-      render json: @playlist
+    return not_found if @playlist.nil?
+
+    if @playlist.destroy
+      render json: { success: ["Playlist deleted"] }
     else
       render json: { errors: @playlist.errors.full_messages }
     end

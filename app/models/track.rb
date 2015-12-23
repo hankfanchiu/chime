@@ -19,30 +19,39 @@
 class Track < ActiveRecord::Base
   extend FriendlyId
 
+  INVALID_TRACK_TITLES = %w(tracks playlists)
+
   after_initialize :ensure_track_title
   after_initialize :ensure_track_description
 
   before_save :parameterize_slug
 
-  INVALID_TRACK_TITLES = %w(tracks playlists)
-
   friendly_id :title, use: :slugged
 
   validates :title,
-    exclusion: { in: INVALID_TRACK_TITLES },
-    uniqueness: { scope: :user_id, case_sensitive: false }
+    uniqueness: { scope: :user, case_sensitive: false },
+    exclusion: { in: INVALID_TRACK_TITLES }
 
-  validates :slug, uniqueness: { scope: :user_id }
+  validates_uniqueness_of :slug, scope: :user
 
-  validates :track_url,
-    presence: true,
-    uniqueness: true
+  validates :track_url, presence: true, uniqueness: true
 
-  validates_presence_of :user_id
+  validates_presence_of :user
+
+  has_attached_file :img,
+    default_url: "/assets/corgi.jpg",
+    styles: {
+      thumb: '100x100>',
+      square: '200x200#',
+      medium: '300x300>'
+    }
+
+  validates_attachment_content_type :img, :content_type => /\Aimage\/.*\Z/
 
   belongs_to :user
   has_many :playlistings, dependent: :destroy
   has_many :playlists, through: :playlistings
+
 
   def self.find_by_username_and_slug(username, slug)
     user = User.find_by(username: username)
