@@ -7,7 +7,7 @@ class Api::SessionsController < ApplicationController
 
     if @user
       login!(@user)
-      render :login
+      render "api/users/show"
     else
       render json: { errors: ["Invalid username or password"] }
     end

@@ -16,13 +16,11 @@ var UserPageSidebar = React.createClass({
 
     if (isCurrentUser) {
       return (
-        <span>
+        <span className="btn btn-default btn-file">
+          <i className="fa fa-camera"></i> Upload new avatar
+
           <input ref="file" id="upload-avatar" type="file"
             onChange={ this._handleFile } />
-
-          <span className="btn btn-default btn-file">
-            Upload new avatar
-          </span>
         </span>
       );
     }
