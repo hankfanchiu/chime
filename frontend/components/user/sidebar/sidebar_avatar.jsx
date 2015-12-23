@@ -1,8 +1,8 @@
 var React = require("react");
-var SessionStore = require("../../stores/session_store");
-var UserActions = require("../../actions/user_actions");
+var SessionStore = require("../../../stores/session_store");
+var UserActions = require("../../../actions/user_actions");
 
-var UserPageSidebar = React.createClass({
+var SidebarAvatar = React.createClass({
   _handleFile: function () {
     var file = this.refs.file.files[0];
     var currentUserId = SessionStore.getCurrentUserId();
@@ -28,23 +28,13 @@ var UserPageSidebar = React.createClass({
 
   render: function () {
     return (
-      <div className="col-xs-4">
-        <div className="user-sidebar">
-          <div className="avatar">
-            <img className="avatar" src={ this.props.user.avatar_square } />
+      <div className="avatar">
+        <img className="avatar" src={ this.props.user.avatar_square } />
 
-            { this.renderUpload() }
-          </div>
-
-          <div className="username">
-            <h3>{ this.props.user.username }</h3>
-          </div>
-
-          <p>This contains an overview of the user.</p>
-        </div>
+        { this.renderUpload() }
       </div>
     );
   }
 });
 
-module.exports = UserPageSidebar;
+module.exports = SidebarAvatar;
