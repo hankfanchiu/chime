@@ -27,7 +27,6 @@ module.exports = (
   <Router history={ createBrowserHistory() }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ Home } />
-
       <Route name="discover" path="discover" component={ Discover } />
       <Route name="collect" path="collect" component={ Collect } />
       <Route name="signup" path="signup" component={ SignUp } />
@@ -38,14 +37,13 @@ module.exports = (
 
       <Route name="user" path=":user" component={ User }>
         <IndexRoute component={ ProfileIndex } />
-
         <Route name="tracks" path="tracks" component={ TracksIndex } />
         <Route name="playlists" path="playlists" component={ PlaylistsIndex } />
-        <Route name="playlist" path="playlists/:playlist"
-          component={ PlaylistPage } />
-
-        <Route name="track" path=":track" component={ TrackPage } />
       </Route>
+
+      <Route name="track" path=":user/:track" component={ TrackPage } />
+      <Route name="playlist" path=":user/playlists/:playlist"
+        component={ PlaylistPage } />
     </Route>
   </Router>
 );
