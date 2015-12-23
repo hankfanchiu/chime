@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   before_save :downcase_user_data
-  before_save :randomize_avatar_file_name
+  before_save :randomize_avatar_basename
 
   friendly_id :username, use: :slugged
 
@@ -55,14 +55,12 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar,
     default_url: "/assets/corgi.jpg",
-    default_style: :square,
     url: ":s3_domain_url",
-    path: "users/images/avatar/:filename",
+    path: "/users/images/avatar/:basename_:style.:extension",
     styles: {
       hero: '30x30>',
       thumb: '100x100>',
-      square: '200x200#',
-      medium: '500x500>'
+      square: '300x300#'
     }
 
   validates_attachment_size :avatar, { less_than: 5.megabytes }
@@ -106,6 +104,18 @@ class User < ActiveRecord::Base
     saved_password.is_password?(password)
   end
 
+  def avatar_hero
+    self.avatar.url(:hero)
+  end
+
+  def avatar_thumb
+    self.avatar.url(:thumb)
+  end
+
+  def avatar_square
+    self.avatar.url(:square)
+  end
+
   private
 
   def downcase_user_data
@@ -117,8 +127,8 @@ class User < ActiveRecord::Base
     self.session_token ||= self.class.generate_session_token
   end
 
-  def randomize_avatar_file_name
-    extension = File.extname(avatar_file_name).downcase
+  def randomize_avatar_basename
+    extension = File.extname(self.avatar_file_name)
     filename = "#{SecureRandom.uuid}#{extension}"
 
     self.avatar.instance_write(:file_name, filename)

@@ -25,6 +25,7 @@ class Track < ActiveRecord::Base
   after_initialize :ensure_track_description
 
   before_save :parameterize_slug
+  before_save :randomize_img_file_name
 
   friendly_id :title, use: :slugged
 
@@ -40,14 +41,12 @@ class Track < ActiveRecord::Base
 
   has_attached_file :img,
     default_url: "/assets/corgi.jpg",
-    default_style: :square,
     url: ":s3_domain_url",
-    path: "tracks/images/:filename",
+    path: "/tracks/images/:basename_:style.:extension",
     styles: {
       hero: '30x30>',
       thumb: '100x100>',
-      square: '200x200#',
-      medium: '500x500>'
+      square: '300x300#'
     }
 
   validates_attachment_size :img, { less_than: 5.megabytes }
@@ -83,5 +82,12 @@ class Track < ActiveRecord::Base
 
   def parameterize_slug
     self.slug = self.title.parameterize
+  end
+
+  def randomize_img_file_name
+    extension = File.extname(self.img_file_name)
+    filename = "#{SecureRandom.uuid}#{extension}"
+
+    self.img.instance_write(:file_name, filename)
   end
 end

@@ -1,5 +1,8 @@
 json.extract! @user, :id, :username, :email
-json.avatar_url @user.avatar.url
+
+json.avatar_hero      @user.avatar_hero
+json.avatar_thumb     @user.avatar_thumb
+json.avatar_square    @user.avatar_square
 
 json.playlists @user.playlists do |playlist|
   json.extract! playlist, :id, :title, :description

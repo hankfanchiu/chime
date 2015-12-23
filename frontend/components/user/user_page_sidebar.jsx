@@ -10,12 +10,6 @@ var UserPageSidebar = React.createClass({
     UserActions.uploadImage(currentUserId, file);
   },
 
-  renderAvatar: function () {
-    return (
-      <img src={ this.props.user.avatar_url } />
-    );
-  },
-
   renderUpload: function () {
     var username = this.props.user.username;
     var isCurrentUser = SessionStore.isCurrentUser(username);
@@ -34,7 +28,7 @@ var UserPageSidebar = React.createClass({
       <div className="col-xs-4">
         <div className="user-sidebar">
           <div className="avatar">
-            { this.renderAvatar() }
+            <img src={ this.props.user.avatar_square } />
           </div>
 
           { this.renderUpload() }
