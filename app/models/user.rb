@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def self.search(query)
-    self.where("username LIKE ?", "%#{query}%")
+    self.where("username ILIKE ?", "%#{query}%")
   end
 
   def reset_session_token!

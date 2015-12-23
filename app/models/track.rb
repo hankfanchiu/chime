@@ -19,7 +19,8 @@
 class Track < ActiveRecord::Base
   extend FriendlyId
 
-  after_initialize :ensure_track_data
+  after_initialize :ensure_track_title
+  after_initialize :ensure_track_description
 
   before_save :parameterize_slug
 
@@ -29,7 +30,7 @@ class Track < ActiveRecord::Base
 
   validates :title,
     exclusion: { in: INVALID_TRACK_TITLES },
-    uniqueness: { scope: :user_id }
+    uniqueness: { scope: :user_id, case_sensitive: false }
 
   validates :slug, uniqueness: { scope: :user_id }
 
@@ -44,20 +45,24 @@ class Track < ActiveRecord::Base
   has_many :playlists, through: :playlistings
 
   def self.find_by_username_and_slug(username, slug)
-    user = User.friendly.find(username)
+    user = User.find_by(username: username)
 
-    user ? user.tracks.friendly.find(slug) : nil
+    return nil unless user
+
+    user.tracks.find_by(slug: slug)
   end
 
   def self.search(query)
-    self.where("title LIKE ?", "%#{query}%")
+    self.where("title ILIKE ?", "%#{query}%")
   end
 
   private
 
-  def ensure_track_data
+  def ensure_track_title
     self.title = "Untitled" if self.title.nil?
-    self.img.url = "/assets/corgi.jpg" if self.img.url.nil?
+  end
+
+  def ensure_track_description
     self.description = "No description" if self.description.nil?
   end
 
