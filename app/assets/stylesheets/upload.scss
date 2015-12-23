@@ -1,0 +1,41 @@
+div.upload-img {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+
+  img.img {
+    max-width: 250px;
+  }
+
+  input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    color: transparent;
+    cursor: pointer;
+    display: block;
+  }
+
+  span.btn-file {
+    display: none;
+    position: absolute;
+    left: 45%;
+    transform: translate(-45%, 0);
+    bottom: 10px;
+
+  }
+}
+
+div.upload-img:hover {
+  span.btn-file {
+    display: inline;
+  }
+}

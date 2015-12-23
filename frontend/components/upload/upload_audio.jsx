@@ -25,6 +25,7 @@ var UploadAudio = React.createClass({
           <label htmlFor="upload-sound">Sound</label>
 
           <input ref="file" id="upload-sound" type="file"
+            accept="audio/*"
             onChange={ this._handleFile } />
         </div>
       );

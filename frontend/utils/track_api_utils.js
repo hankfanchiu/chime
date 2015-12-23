@@ -23,11 +23,14 @@ var TrackAPIUtils = {
     });
   },
 
-  createTrack: function (trackData, actionCallback) {
+  createTrack: function (formData, actionCallback) {
     $.ajax({
       url: "/api/tracks",
       type: "POST",
-      data: {track: trackData},
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
       success: function (response) {
         actionCallback(response);
       }

@@ -1,6 +1,4 @@
 var React = require("react");
-var SessionStore = require("../../../stores/session_store");
-var UserActions = require("../../../actions/user_actions");
 var SidebarAvatar = require("./sidebar_avatar");
 
 var Sidebar = React.createClass({

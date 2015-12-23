@@ -14,29 +14,30 @@ var Upload = React.createClass({
     return {
       title: "",
       description: "",
+      img: null,
       publicUrl: UploadStore.getPublicUrl(),
       isUploaded: UploadStore.isUploaded(),
       newTrack: TrackStore.newTrack()
     };
   },
 
-  componentWillMount: function () {
-    UploadActions.resetUploadStore();
-  },
-
   componentDidMount: function () {
+    UploadActions.resetUploadStore();
     this.uploadListener = UploadStore.addListener(this._onChange);
     this.trackListener = TrackStore.addListener(this._onChange);
   },
 
   componentWillUpdate: function (nextProps, nextState) {
     var track = nextState.newTrack;
-    if (track) { return this._redirectToTrack(track); }
+    if (track) {
+      this._redirectToTrack(track);
+    }
   },
 
   componentWillUnmount: function () {
     this.uploadListener.remove();
     this.trackListener.remove();
+    UploadActions.resetUploadStore();
   },
 
   _onChange: function () {
@@ -52,13 +53,14 @@ var Upload = React.createClass({
 
     if (this.state.title === "") { return this._handleIncomplete(); }
 
-    var trackData = {
-      track_url: this.state.publicUrl,
-      title: this.state.title,
-      description: this.state.description
-    };
+    var formData = new FormData();
 
-    TrackActions.createTrack(trackData);
+    formData.append("track[track_url]", this.state.publicUrl);
+    formData.append("track[title]", this.state.title);
+    formData.append("track[description]", this.state.description);
+    formData.append("track[img]", this.state.img);
+
+    TrackActions.createTrack(formData);
   },
 
   _handleIncomplete: function () {
@@ -68,6 +70,10 @@ var Upload = React.createClass({
   _redirectToTrack: function (track) {
     var pathname = "/" + track.user.username + "/" + track.slug;
     this.props.history.pushState(null, pathname);
+  },
+
+  _setImg: function (img) {
+    this.setState({ img: img });
   },
 
   renderFormFields: function () {
@@ -123,7 +129,7 @@ var Upload = React.createClass({
 
               <UploadAudio isUploaded={ this.state.isUploaded } />
 
-
+              <UploadImage setImg={ this._setImg } />
 
               { this.renderFormFields() }
 
