@@ -16,7 +16,7 @@ var UserPage = React.createClass({
     return {
       user: UserStore.getUser(),
       currentUser: SessionStore.getCurrentUser(),
-      isCurrentUser: SessionStore.isCurrentUser()
+      isCurrentUser: SessionStore.isCurrentUser(username)
     };
   },
 
