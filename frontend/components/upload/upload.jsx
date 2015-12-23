@@ -61,7 +61,6 @@ var Upload = React.createClass({
   },
 
   _redirectToTrack: function (track) {
-    debugger;
     var pathname = "/" + track.user.username + "/" + track.slug;
     this.props.history.pushState(null, pathname);
   },
