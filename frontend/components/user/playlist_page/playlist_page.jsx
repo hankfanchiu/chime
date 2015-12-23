@@ -9,9 +9,9 @@ var PlaylistPage = React.createClass({
 
   getStateFromStore: function () {
     var params = this.props.params;
-    var playlistIdentifier = params.user + "-" + params.playlist;
+    var identifier = params.user + "-" + params.playlist;
 
-    return { playlist: PlaylistStore.find(playlistIdentifier) };
+    return { playlist: PlaylistStore.find(identifier) };
   },
 
   componentWillMount: function () {
@@ -29,15 +29,28 @@ var PlaylistPage = React.createClass({
     var nextUser = nextProps.params.user;
     var nextPlaylist = nextProps.params.playlist;
 
-    if (this.props.params.playlist !== nextPlaylist) {
-      PlaylistActions.fetchPlaylist(nextUser, nextPlaylist);
-    }
+    var sameUser = (this.props.params.user === nextUser);
+    var samePlaylist = (this.props.params.playlist === nextPlaylist);
+
+    if (sameUser && samePlaylist) { return; }
+
+    PlaylistActions.fetchPlaylist(nextUser, nextPlaylist);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
   },
 
   render: function () {
     return (
-      <div className="row">
-        Playlist Page
+      <div className="container">
+        <div className="row">
+          <h1>{ this.state.playlist.title }</h1>
+        </div>
       </div>
     );
   }

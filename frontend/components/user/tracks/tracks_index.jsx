@@ -1,6 +1,6 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var UserPageNav = require("../user_page_nav");
+var UserNav = require("../user_nav");
 var Sidebar = require("../sidebar/sidebar");
 var TracksIndexItem = require("./tracks_index_item");
 
@@ -51,8 +51,7 @@ var TracksIndex = React.createClass({
         <Sidebar user={ this.state.user } />
 
         <div className="col-xs-8">
-          <UserPageNav pathname={ this.props.location.pathname }
-            history={ this.props.history }
+          <UserNav pathname={ this.props.location.pathname }
             username={ this.state.user.username } />
 
           <div className="row">

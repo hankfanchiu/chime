@@ -15,10 +15,10 @@ var Logout = require("./components/session/logout");
 var Upload = require("./components/upload/upload");
 var Settings = require("./components/session/settings");
 
-var UserPage = require("./components/user/user_page");
-var Profile = require("./components/user/profile/profile_index");
-var Tracks = require("./components/user/tracks/tracks_index");
-var Playlists = require("./components/user/playlists/playlists_index");
+var User = require("./components/user/user");
+var ProfileIndex = require("./components/user/profile/profile_index");
+var TracksIndex = require("./components/user/tracks/tracks_index");
+var PlaylistsIndex = require("./components/user/playlists/playlists_index");
 
 var PlaylistPage = require("./components/user/playlist_page/playlist_page");
 var TrackPage = require("./components/user/track_page/track_page");
@@ -36,13 +36,13 @@ module.exports = (
       <Route name="upload" path="upload" component={ Upload } />
       <Route name="settings" path="settings" component={ Settings } />
 
-      <Route name="user" path=":user" component={ UserPage }>
-        <IndexRoute component={ Profile } />
+      <Route name="user" path=":user" component={ User }>
+        <IndexRoute component={ ProfileIndex } />
 
-        <Route name="tracks" path="tracks" component={ Tracks } />
-        <Route name="playlists" path="playlists" component={ Playlists }>
-          <Route name="playlist" path=":playlist" component={ PlaylistPage } />
-        </Route>
+        <Route name="tracks" path="tracks" component={ TracksIndex } />
+        <Route name="playlists" path="playlists" component={ PlaylistsIndex } />
+        <Route name="playlist" path="playlists/:playlist"
+          component={ PlaylistPage } />
 
         <Route name="track" path=":track" component={ TrackPage } />
       </Route>

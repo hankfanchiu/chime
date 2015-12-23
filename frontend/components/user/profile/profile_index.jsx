@@ -1,6 +1,6 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var UserPageNav = require("../user_page_nav");
+var UserNav = require("../user_nav");
 var Sidebar = require("../sidebar/sidebar");
 
 var ProfileIndex = React.createClass({
@@ -31,8 +31,7 @@ var ProfileIndex = React.createClass({
         <Sidebar user={ this.state.user } />
 
         <div className="col-sm-8">
-          <UserPageNav pathname={ this.props.location.pathname }
-            history={ this.props.history }
+          <UserNav pathname={ this.props.location.pathname }
             username={ this.state.user.username } />
 
           <div className="row">

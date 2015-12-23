@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
   validates :username,
     presence: true,
     uniqueness: { case_sensitive: false },
-    exclusion: { in: INVALID_USERNAMES }
+    exclusion: { in: INVALID_USERNAMES },
+    length: { maximum: 15 }
 
   validates :email,
     presence: true,

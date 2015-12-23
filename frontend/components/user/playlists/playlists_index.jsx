@@ -1,6 +1,6 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
-var UserPageNav = require("../user_page_nav");
+var UserNav = require("../user_nav");
 var Sidebar = require("../sidebar/sidebar");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
@@ -29,6 +29,8 @@ var PlaylistsIndex = React.createClass({
   },
 
   renderPlaylistsIndexItems: function () {
+    var user = this.state.user;
+
     if (this.state.playlists.length === 0) {
       return (
         <div className="playlists-index-item clear">
@@ -37,7 +39,10 @@ var PlaylistsIndex = React.createClass({
       );
     } else {
       return this.state.playlists.map(function (playlist, idx) {
-        return <PlaylistsIndexItem key={ idx } playlist={ playlist } />;
+        return (
+          <PlaylistsIndexItem key={ idx }
+            playlist={ playlist } user={ user } />
+        );
       });
     }
   },
@@ -49,8 +54,7 @@ var PlaylistsIndex = React.createClass({
         <Sidebar user={ this.state.user } />
 
         <div className="col-xs-8">
-          <UserPageNav pathname={ this.props.location.pathname }
-            history={ this.props.history }
+          <UserNav pathname={ this.props.location.pathname }
             username={ this.state.user.username } />
 
           <div className="row">

@@ -1,8 +1,11 @@
 var React = require("react");
+var History = require("react-router").History;
 
-var UserPageNav = React.createClass({
+var UserNav = React.createClass({
+  mixins: [History],
+
   _pushState: function (pathname) {
-    this.props.history.pushState(null, pathname);
+    this.history.pushState(null, pathname);
   },
 
   renderProfileLink: function () {
@@ -72,4 +75,4 @@ var UserPageNav = React.createClass({
   }
 });
 
-module.exports = UserPageNav;
+module.exports = UserNav;

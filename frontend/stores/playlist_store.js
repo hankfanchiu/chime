@@ -29,29 +29,28 @@ PlaylistStore.all = function () {
   return playlistsCopy;
 };
 
-PlaylistStore.find = function (slug) {
-  var playlist = _playlists[slug] || {};
+PlaylistStore.find = function (identifier) {
+  var playlist = _playlists[identifier] || {};
 
   return playlist;
 };
 
 var resetPlaylists = function (playlists) {
-  var playlistIdentifier;
+  var identifier;
 
   _playlists = {};
 
   playlists.forEach(function (playlist) {
-    playlistIdentifier = playlist.user.username + "-" + playlist.slug;
-
-    _playlists[playlistIdentifier] = playlist;
+    identifier = playlist.user.username + "-" + playlist.slug;
+    _playlists[identifier] = playlist;
   });
 
   PlaylistStore.__emitChange();
 };
 
 var resetPlaylist = function (playlist) {
-  var playlistIdentifier = playlist.user.username + "-" + playlist.slug;
-  _playlists[playlistIdentifier] = playlist;
+  var identifier = playlist.user.username + "-" + playlist.slug;
+  _playlists[identifier] = playlist;
 
   PlaylistStore.__emitChange();
 };

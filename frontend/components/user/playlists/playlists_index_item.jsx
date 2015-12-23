@@ -1,8 +1,11 @@
 var React = require("react");
 var PlaylistTrack = require("./playlist_track");
 var PlayerActions = require("../../../actions/player_actions");
+var History = require("react-router").History;
 
 var PlaylistsIndexItem = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return { isExpanded: false };
   },
@@ -13,6 +16,14 @@ var PlaylistsIndexItem = React.createClass({
 
   _playPlaylist: function () {
     PlayerActions.loadPlaylist(this.props.playlist);
+  },
+
+  _goToPlaylist: function () {
+    var username = this.props.user.username;
+    var slug = this.props.playlist.slug;
+    var url = "/" + username + "/sets/" + slug;
+
+    this.history.pushState(null, url);
   },
 
   renderPlaylistTracks: function () {
@@ -42,7 +53,9 @@ var PlaylistsIndexItem = React.createClass({
 
           <span>&nbsp;</span>
 
-          { playlist.title }
+          <a onClick={ this._goToPlaylist }>
+            { playlist.title }
+          </a>
 
           <span>:&nbsp;</span>
 

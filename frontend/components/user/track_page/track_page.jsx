@@ -29,9 +29,12 @@ var TrackPage = React.createClass({
     var nextUser = nextProps.params.user;
     var nextTrack = nextProps.params.track;
 
-    if (this.props.params.track !== nextTrack) {
-      TrackActions.fetchTrack(nextUser, nextTrack);
-    }
+    var sameUser = (this.props.params.user === nextUser);
+    var sameTrack = (this.props.params.track === nextTrack);
+
+    if (sameUser && sameTrack) { return; }
+
+    TrackActions.fetchTrack(nextUser, nextTrack);
   },
 
   componentWillUnmount: function () {
@@ -44,8 +47,10 @@ var TrackPage = React.createClass({
 
   render: function () {
     return (
-      <div className="row">
-        Track Title: { this.state.track.title }
+      <div className="container">
+        <div className="row">
+          <h1>{ this.state.track.title }</h1>
+        </div>
       </div>
     );
   }

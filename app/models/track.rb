@@ -66,7 +66,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.search(query)
-    self.where("title ILIKE ?", "%#{query}%")
+    self.includes(:user).where("title ILIKE ?", "%#{query}%")
   end
 
   def img_hero

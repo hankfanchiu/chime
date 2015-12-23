@@ -15,7 +15,7 @@ var PlaylistAPIUtils = {
   },
 
   fetchPlaylist: function (username, playlistSlug, actionCallback) {
-    var url = "/api/tracks/" + playlistSlug + "?username=" + username;
+    var url = "/api/playlists/" + playlistSlug + "?username=" + username;
 
     $.ajax({
       url: url,

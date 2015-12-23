@@ -32,7 +32,9 @@ var SearchResults = React.createClass({
     return (
       <div className="search-results" tabIndex="1"
         onBlur={ this.props.onBlur }>
+
         { this.renderTrackResults() }
+        
         { this.renderUserResults() }
       </div>
     );
