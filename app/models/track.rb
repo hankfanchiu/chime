@@ -21,7 +21,6 @@ class Track < ActiveRecord::Base
 
   INVALID_TRACK_TITLES = %w(tracks playlists)
 
-  after_initialize :ensure_track_title
   after_initialize :ensure_track_description
 
   before_save :parameterize_slug
@@ -83,10 +82,6 @@ class Track < ActiveRecord::Base
   end
 
   private
-
-  def ensure_track_title
-    self.title = "Untitled" if self.title.nil?
-  end
 
   def ensure_track_description
     self.description = "No description" if self.description.nil?

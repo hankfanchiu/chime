@@ -31,7 +31,8 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def show
-    @playlist = Playlist.find_by(id: params[:id])
+    username, slug = params[:username], params[:id]
+    @playlist = Playlist.find_by_username_and_slug(username, slug)
 
     return not_found if @playlist.nil?
 
@@ -39,7 +40,7 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def destroy
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find_by(id: params[:id])
 
     return not_found if @playlist.nil?
 

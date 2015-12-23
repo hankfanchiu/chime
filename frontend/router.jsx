@@ -41,7 +41,7 @@ module.exports = (
 
         <Route name="tracks" path="tracks" component={ Tracks } />
         <Route name="playlists" path="playlists" component={ Playlists }>
-          // <Route name="playlist" path=":playlist" component={ PlaylistPage } />
+          <Route name="playlist" path=":playlist" component={ PlaylistPage } />
         </Route>
 
         <Route name="track" path=":track" component={ TrackPage } />
