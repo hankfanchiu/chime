@@ -5,8 +5,8 @@ class S3Presigner
   include Singleton
 
   def presign(prefix, filename, limit: limit)
-    extname = File.extname(filename)
-    filename = "#{SecureRandom.uuid}#{extname}"
+    extension = File.extname(filename).downcase
+    filename = "#{SecureRandom.uuid}#{extension}"
     upload_key = Pathname.new(prefix).join(filename).to_s
 
     creds = Aws::Credentials.new(

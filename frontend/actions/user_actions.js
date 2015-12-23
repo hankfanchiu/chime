@@ -1,4 +1,5 @@
 var UserAPIUtils = require("../utils/user_api_utils");
+var UploadAPIUtils = require("../utils/upload_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
@@ -16,6 +17,10 @@ var UserActions = {
 
   updateUser: function (userId, userData) {
     UserAPIUtils.updateUser(userId, userData, UserActions.receiveUser);
+  },
+
+  uploadImage: function (userId, file) {
+    UserAPIUtils.uploadImage(userId, file, UserActions.receiveUser);
   },
 
   // Response actions

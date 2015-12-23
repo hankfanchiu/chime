@@ -41,6 +41,7 @@ class Track < ActiveRecord::Base
   has_attached_file :img,
     default_url: "/assets/corgi.jpg",
     styles: {
+      search: '50x50>',
       thumb: '100x100>',
       square: '200x200#',
       medium: '300x300>'

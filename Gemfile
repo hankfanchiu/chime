@@ -18,7 +18,6 @@ gem 'font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -27,18 +26,19 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 # Use Puma as the app server
 gem 'puma'
 
 gem 'newrelic_rpm'
-
 # Rack Timeout
 gem "rack-timeout"
 # Amazon Web Services SDK for S3 file storage.
 gem 'aws-sdk'
 # Paperclip to handle pass-through image uploads.
-gem 'paperclip'
+# Paperclip 4 does not work with AWS SDK v2; must use this revision:
+gem 'paperclip',
+  git: 'https://github.com/thoughtbot/paperclip',
+  ref: '523bd46c768226893f23889079a7aa9c73b57d68'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

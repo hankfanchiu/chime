@@ -5,5 +5,5 @@ json.playlists @user.playlists do |playlist|
 end
 
 json.tracks @user.tracks do |track|
-  json.extract! track, :id, :title, :slug, :track_url, :img_url, :description
+  json.extract! track, :id, :title, :slug, :track_url, :description
 end

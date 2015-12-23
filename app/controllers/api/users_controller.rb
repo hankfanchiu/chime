@@ -19,14 +19,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    username, password = current_user.username, user_params[:password]
-
-    @user = User.find_by_credentials(username, password)
-
-    if @user.nil?
-      render json: { errors: ["Incorrect password"] }
-      return
-    end
+    @user = User.find_by(id: params[:id])
 
     if @user.update(user_params.except(:password))
       render :show
@@ -36,7 +29,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:tracks).find_by(user: params[:id])
+    @user = User.includes(:tracks).friendly.find(params[:id])
 
     return not_found if @user.nil?
 
@@ -46,7 +39,14 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:username, :email, :password, :password_confirmation]
+    attributes = [
+      :username,
+      :email,
+      :password,
+      :password_confirmation,
+      :avatar
+    ]
+
     params.require(:user).permit(*attributes)
   end
 end

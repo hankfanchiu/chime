@@ -13,7 +13,7 @@ var UserAPIUtils = {
     $.ajax({
       url: "/api/users",
       type: "POST",
-      data: {user: userData},
+      data: { user: userData },
       success: function (response) {
         actionCallback(response);
       }
@@ -24,8 +24,26 @@ var UserAPIUtils = {
     $.ajax({
       url: "/api/users/" + userId,
       type: "PATCH",
-      data: {user: userData},
+      data: { user: userData },
       success: function (user) {
+        actionCallback(user);
+      }
+    });
+  },
+
+  uploadImage: function (userId, file, actionCallback) {
+    var formData = new FormData();
+    formData.append("user[avatar]", file);
+
+    $.ajax({
+      url: "/api/users/" + userId,
+      type: "PUT",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (user) {
+        debugger;
         actionCallback(user);
       }
     });

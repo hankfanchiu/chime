@@ -1,5 +1,5 @@
 json.array! @tracks do |track|
-  json.extract! track, :id, :title, :slug, :track_url, :img_url, :description
+  json.extract! track, :id, :title, :slug, :track_url, :description
 
   json.user do
     json.extract! track.user, :id, :username

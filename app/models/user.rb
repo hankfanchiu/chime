@@ -2,14 +2,18 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  username        :string           not null
-#  email           :string           not null
-#  session_token   :string           not null
-#  password_digest :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  slug            :string
+#  id                  :integer          not null, primary key
+#  username            :string           not null
+#  email               :string           not null
+#  session_token       :string           not null
+#  password_digest     :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  slug                :string
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -21,8 +25,8 @@ class User < ActiveRecord::Base
   INVALID_USERNAMES = %w(discover collect login logout signup settings upload)
 
   after_initialize :ensure_session_token
-
-  before_save :downcase_user_data
+  before_create :downcase_user_data
+  before_create :randomize_avatar_file_name
 
   friendly_id :username, use: :slugged
 
@@ -49,10 +53,23 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password_digest
 
+  has_attached_file :avatar,
+    url: ":s3_domain_url",
+    path: "/users/images/:filename.:extension",
+    styles: {
+      hero: '30x30>',
+      thumb: '100x100>',
+      square: '200x200#',
+      medium: '300x300>'
+    }
+
+  validates_attachment_size :avatar, less_than: 5.megabyte
+  validates_attachment_content_type :avatar,
+    content_type: ["image/jpeg", "image/gif", "image/png"]
+
   has_many :tracks, dependent: :destroy
   has_many :playlists, dependent: :destroy
   has_many :playlistings, through: :playlists
-
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
@@ -96,5 +113,12 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+
+  def randomize_avatar_file_name
+    extension = File.extname(avatar_file_name).downcase
+    filename = "#{SecureRandom.uuid}#{extension}"
+
+    self.avatar.instance_write(:file_name, filename)
   end
 end

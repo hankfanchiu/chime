@@ -55,6 +55,10 @@ SessionStore.getCurrentUserPlaylists = function () {
   return _currentUser.playlists.slice();
 };
 
+SessionStore.isCurrentUser = function (username) {
+  return _currentUser.username === username;
+};
+
 var setSession = function (user) {
   window.currentUserId = window.currentUserId || user.id;
   _currentUser = user;
