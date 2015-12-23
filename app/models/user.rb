@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false },
     exclusion: { in: INVALID_USERNAMES },
-    length: { maximum: 15 }
+    length: { maximum: 30 }
 
   validates :email,
     presence: true,
