@@ -13,23 +13,38 @@ var TracksIndexItem = React.createClass({
     PlayerActions.addTrackToQueue(this.props.track);
   },
 
-  _goToTrack: function () {
-    var url = "/" + this.props.username + "/" + this.props.track.slug;
+  _pushState: function (pathname) {
+    this.history.pushState(null, pathname);
+  },
 
-    this.history.pushState(null, url);
+  _goToUser: function () {
+    var pathname = "/" + this.props.username;
+
+    this._pushState(pathname);
+  },
+
+  _goToTrack: function () {
+    var pathname = "/" + this.props.username + "/" + this.props.track.slug;
+
+    this._pushState(pathname);
   },
 
   render: function () {
+    var track = this.props.track;
+
     return (
       <div className="tracks tracks-index-item clear">
         <div className="image" onClick={ this._playTrack }>
-          <img src={ this.props.track.img_thumb } />
+          <img src={ track.img_thumb } />
         </div>
 
         <div className="detail">
+          <p className="username">
+            <a onClick={ this._goToUser }>{ track.user.username }</a>
+          </p>
 
           <p className="title">
-            <a onClick={ this._goToTrack }>{ this.props.track.title }</a>
+            <a onClick={ this._goToTrack }>{ track.title }</a>
           </p>
 
           <p>
