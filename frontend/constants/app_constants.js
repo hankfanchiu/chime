@@ -27,6 +27,11 @@ module.exports = {
     PLAYLISTING_RECEIVED: null,
 
     // Player
+    PLAY_AUDIO: null,
+    PAUSE_AUDIO: null,
+    SEEK_TO: null,
+    ADJUST_VOLUME_TO: null,
+
     PLAY_TRACK_NOW: null,
     PLAY_NEXT_TRACK: null,
     PLAY_PREVIOUS_TRACK: null,

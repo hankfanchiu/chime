@@ -3,6 +3,11 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
+var playRequested = false;
+var pauseRequested = false;
+var seekTo = null;
+var adjustVolumeTo = null;
+
 var _queue = [];
 var _queueIndex = 0;
 var _track = {};
@@ -14,8 +19,25 @@ PlayerStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var track = payload.track;
   var playlist = payload.playlist;
+  var response = payload.response
 
   switch (actionType) {
+
+    case ActionTypes.PLAY_AUDIO:
+      setPlayRequest();
+      break;
+
+    case ActionTypes.PAUSE_AUDIO:
+      setPauseRequest();
+      break;
+
+    case ActionTypes.SEEK_TO:
+      setSeekTo(response);
+      break;
+
+    case ActionTypes.ADJUST_VOLUME_TO:
+      setAdjustVolumeTo(response);
+      break;
 
     case ActionTypes.PLAY_TRACK_NOW:
       resetTrackAndQueue(track);
@@ -41,6 +63,23 @@ PlayerStore.__onDispatch = function (payload) {
       loadPlaylistToQueue(playlist);
       break;
   };
+};
+
+
+PlayerStore.playRequested = function () {
+  return playRequested;
+};
+
+PlayerStore.pauseRequested = function () {
+  return pauseRequested;
+};
+
+PlayerStore.getSeekTo = function () {
+  return seekTo;
+};
+
+PlayerStore.getAdjustVolumeTo = function () {
+  return adjustVolumeTo;
 };
 
 PlayerStore.getTrack = function () {
@@ -70,6 +109,45 @@ PlayerStore.queueIsEnded = function () {
 
 PlayerStore.isInQueue = function (track) {
   return (_queue.indexOf(track) !== -1);
+};
+
+PlayerStore.isCurrentTrack = function (track) {
+  return _track === track;
+};
+
+var resetRequests = function () {
+  playRequested = false;
+  pauseRequested = false;
+  seekTo = null;
+  adjustVolumeTo = null;
+};
+
+var setPlayRequest = function () {
+  resetRequests();
+  playRequested = true;
+
+  PlayerStore.__emitChange();
+};
+
+var setPauseRequest = function () {
+  resetRequests();
+  pauseRequested = true;
+
+  PlayerStore.__emitChange();
+};
+
+var setSeekTo = function (response) {
+  resetRequests();
+  seekTo = response;
+
+  PlayerStore.__emitChange();
+};
+
+var setAdjustVolumeTo = function (response) {
+  resetRequests();
+  adjustVolumeTo = response;
+
+  PlayerStore.__emitChange();
 };
 
 var resetTrackAndQueue = function (track) {

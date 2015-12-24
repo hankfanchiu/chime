@@ -3,6 +3,10 @@ var PlayerActions = require("../../actions/player_actions");
 var PlayerStore = require("../../stores/player_store");
 
 var Audio = React.createClass({
+  getInitialState: function () {
+
+  },
+
   componentDidMount: function () {
     this.isPlaying = false;
 
@@ -40,7 +44,7 @@ var Audio = React.createClass({
   _handleEnded: function () {
     this.isPlaying = false;
     this.props.setIsPlaying(this.isPlaying);
-    
+
     setTimeout(PlayerActions.autoPlayNextTrack, 1000);
   },
 

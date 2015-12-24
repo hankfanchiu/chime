@@ -3,6 +3,36 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var PlayerActions = {
+  // Direct actions for the HTML audio element
+
+  playAudio: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAY_AUDIO
+    });
+  },
+
+  pauseAudio: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PAUSE_AUDIO
+    });
+  },
+
+  seekTo: function (time) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SEEK_TO,
+      response: time
+    });
+  },
+
+  adjustVolumeTo: function (volume) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.ADJUST_VOLUME_TO,
+      response: volume
+    });
+  },
+
+  // Actions regarding tracks, queue, and playlist
+
   playTrackNow: function (track) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAY_TRACK_NOW,
