@@ -33,27 +33,13 @@ var Nav = React.createClass({
 
   render: function () {
     return (
-      <nav className="navbar navbar-default navbar-static-top">
-        <div className="container container-fluid">
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container">
 
           <div className="navbar-header">
             <a className="navbar-brand"
               onClick={ this._pushState.bind(null, "/") }>Chime</a>
           </div>
-
-          <ul className="nav navbar-nav nav-links">
-            <li>
-              <a onClick={ this._pushState.bind(null, "/discover") }>
-                Discover
-              </a>
-            </li>
-
-            <li>
-              <a onClick={ this._pushState.bind(null, "/collect") }>
-                Collect
-              </a>
-            </li>
-          </ul>
 
           <Search pushState={ this._pushState } />
 
