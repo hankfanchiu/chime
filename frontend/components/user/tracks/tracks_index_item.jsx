@@ -5,7 +5,7 @@ var History = require("react-router").History;
 var TracksIndexItem = React.createClass({
   mixins: [History],
 
-  _playTrack: function (e) {
+  _playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
 

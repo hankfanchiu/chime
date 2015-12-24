@@ -1,29 +1,27 @@
 var React = require("react");
 var PlayerActions = require("../../../actions/player_actions");
-var PlaylistingActions = require("../../../actions/playlisting_actions");
 
 var PlaylistTrack = React.createClass({
-  _deletePlaylisting: function () {
-    var data = {
-      playlist_id: this.props.playlistId,
-      track_id: this.props.track.id
-    };
-
-    PlaylistingActions.deletePlaylisting(data);
+  _playTrack: function () {
+    PlayerActions.playTrackNow(this.props.track);
   },
 
   render: function () {
     var track = this.props.track;
 
     return (
-      <li className="tracks-index-item clear">
-        { track.title }
+      <li>
+        <div className="playlist-track clear" onClick={ this._playTrack }>
+          <div className="track-image">
+            <img className="track-image" src={ track.img_hero } />
+          </div>
 
-        <span>&nbsp;</span>
-
-        <a onClick={ this._deletePlaylisting }>
-          <i className="fa fa-times"></i>
-        </a>
+          <div className="detail">
+            <div className="title">
+              { track.user.username } -- { track.title }
+            </div>
+          </div>
+        </div>
       </li>
     );
   }

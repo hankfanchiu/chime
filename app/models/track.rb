@@ -43,8 +43,8 @@ class Track < ActiveRecord::Base
     url: ":s3_domain_url",
     path: "/tracks/images/:basename_:style.:extension",
     styles: {
-      hero: '20x20>',
-      thumb: '100x100>',
+      hero: '30x30#',
+      thumb: '100x100#',
       square: '300x300#'
     }
 

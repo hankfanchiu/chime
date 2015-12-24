@@ -34,6 +34,7 @@ var Upload = React.createClass({
   },
 
   componentWillUnmount: function () {
+    UploadActions.resetUploadStore();
     this.uploadListener.remove();
     this.trackListener.remove();
   },

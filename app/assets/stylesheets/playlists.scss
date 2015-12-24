@@ -1,0 +1,28 @@
+div.playlists-index-item {
+  padding: 10px 0 10px 0;
+  display: flex;
+
+  div.playlist-image {
+
+  }
+
+  img.playlist-image {
+    width: 120px;
+  }
+
+  div.playlist-detail {
+    padding: 10px;
+  }
+
+  div.playlist-track {
+    display: block;
+  }
+
+  div.track-image {
+    float: left;
+  }
+
+  img.track-image {
+    width: 30px;
+  }
+}

@@ -38,7 +38,7 @@ var SignUp = React.createClass({
   _signUp: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) { return this.handleIncompleteSubmit(); }
+    if (this.IisIncomplete()) { return this.handleIncompleteSubmit(); }
 
     var userData = {
       username: this.state.username,
@@ -50,7 +50,7 @@ var SignUp = React.createClass({
     UserActions.createUser(userData);
   },
 
-  isIncomplete: function () {
+  IisIncomplete: function () {
     if (this.state.username === "") { return true; }
     if (this.state.email === "") { return true; }
     if (this.state.password === "") { return true; }

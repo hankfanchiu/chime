@@ -49,7 +49,7 @@ var Settings = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) { this._handleIncompleteSubmit(); }
+    if (this._isIncomplete()) { this._handleIncompleteSubmit(); }
 
     this._updateUser();
     this.refs.password.value = "";
@@ -66,7 +66,7 @@ var Settings = React.createClass({
     UserActions.updateUser(userId, userData);
   },
 
-  isIncomplete: function () {
+  _isIncomplete: function () {
     return (
       (this.state.username === "") ||
       (this.state.email === "") ||

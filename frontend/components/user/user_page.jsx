@@ -28,16 +28,16 @@ var UserPage = React.createClass({
     this.listenerToken = UserStore.addListener(this._onChange);
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    UserActions.fetchUser(nextProps.params.username);
+  },
+
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
 
   _onChange: function () {
     this.setState(this.getStatesFromStore());
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    UserActions.fetchUser(nextProps.params.username);
   },
 
   render: function () {
