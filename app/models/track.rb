@@ -39,7 +39,7 @@ class Track < ActiveRecord::Base
   validates_presence_of :user
 
   has_attached_file :img,
-    default_url: "/assets/corgi.jpg",
+    default_url: "/assets/5c7dd1c3f97c7984168c450.jpg",
     url: ":s3_domain_url",
     path: "/tracks/images/:basename_:style.:extension",
     styles: {

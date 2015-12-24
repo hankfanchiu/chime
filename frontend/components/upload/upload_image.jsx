@@ -3,7 +3,7 @@ var UploadActions = require("../../actions/upload_actions");
 
 var UploadImage = React.createClass({
   getInitialState: function () {
-    return { imgUrl: "/assets/corgi.jpg" };
+    return { imgUrl: "/assets/9sc64e325822a1cce626f502.jpg" };
   },
 
   _handleFile: function () {

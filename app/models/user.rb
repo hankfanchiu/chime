@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password_digest
 
   has_attached_file :avatar,
-    default_url: "/assets/corgi.jpg",
+    default_url: "/assets/chimp.jpg",
     url: ":s3_domain_url",
     path: "/users/images/:basename_:style.:extension",
     styles: {
