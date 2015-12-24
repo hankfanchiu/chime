@@ -39,7 +39,7 @@ TrackStore.all = function () {
 };
 
 TrackStore.find = function (slug) {
-  var track = _tracks[slug] || {};
+  var track = _tracks[slug];
 
   return track;
 };
