@@ -99,12 +99,13 @@ var Player = React.createClass({
               currentTime={ this.state.currentTime }
               duration={ this.state.duration } />
 
-            <VolumeBar adjustVolumeTo={ this._adjustVolumeTo }
-              volume={ this.state.volume } />
+
           </div>
         </div>
       </div>
     );
+    // <VolumeBar adjustVolumeTo={ this._adjustVolumeTo }
+    //   volume={ this.state.volume } />
   }
 });
 

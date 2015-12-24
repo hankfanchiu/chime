@@ -2,7 +2,7 @@ var React = require("react");
 var TimeFormatterMixin = require("../../mixins/time_formatter_mixin");
 
 var TimeLabel = React.createClass({
-  mixins: [ TimeFormatterMixin ],
+  mixins: [TimeFormatterMixin],
 
 	render: function() {
 		if (this.props.currentTime == undefined || !this.props.duration) {
