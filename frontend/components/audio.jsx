@@ -22,11 +22,6 @@ var Audio = React.createClass({
     this.listenerToken = PlayerStore.addListener(this._onChange);
   },
 
-  componentWillUnmount: function () {
-    this._removeAudioEventListeners();
-    this.listenerToken.remove();
-  },
-
   componentWillUpdate: function (nextProps, nextState) {
     if (this.refs.audio.playbackId !== nextState.track.playbackId) {
       this._setTrack(nextState.track);
@@ -45,6 +40,11 @@ var Audio = React.createClass({
     if (nextState.adjustVolumeTo) {
       this.refs.audio.volume = nextState.adjustVolumeTo;
     }
+  },
+
+  componentWillUnmount: function () {
+    this._removeAudioEventListeners();
+    this.listenerToken.remove();
   },
 
   _addAudioEventListeners: function () {
