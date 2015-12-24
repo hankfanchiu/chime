@@ -1,7 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../../actions/player_actions");
 
-var TrackPlayer = React.createClass({
+var GiantPlayer = React.createClass({
   _playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
@@ -46,4 +46,4 @@ var TrackPlayer = React.createClass({
   }
 });
 
-module.exports = TrackPlayer;
+module.exports = GiantPlayer;

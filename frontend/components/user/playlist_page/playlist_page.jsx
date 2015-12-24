@@ -1,6 +1,8 @@
 var React = require("react");
 var PlaylistStore = require("../../../stores/playlist_store");
 var PlaylistActions = require("../../../actions/playlist_actions");
+var GiantPlayer = require("../giant_player/giant_player");
+var PlaylistDetail = require("./playlist_detail");
 
 var PlaylistPage = React.createClass({
   getInitialState: function () {
@@ -45,11 +47,18 @@ var PlaylistPage = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  _playTrack: function (track) {
+    this.setState({ track: track });
+  },
+
   render: function () {
     return (
       <div className="container">
         <div className="row">
-          <h1>{ this.state.playlist.title }</h1>
+          <GiantPlayer track={ this.state.track } />
+
+          <PlaylistDetail playlist={ this.state.playlist }
+            playTrack={ this._playTrack } />
         </div>
       </div>
     );

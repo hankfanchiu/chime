@@ -30,7 +30,7 @@ PlaylistStore.all = function () {
 };
 
 PlaylistStore.find = function (identifier) {
-  var playlist = _playlists[identifier] || {};
+  var playlist = _playlists[identifier];
 
   return playlist;
 };

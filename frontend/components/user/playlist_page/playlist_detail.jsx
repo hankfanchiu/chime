@@ -1,4 +1,5 @@
 var React = require("react");
+var PlaylistTrack = require("./playlist_track");
 
 var PlaylistDetail = React.createClass({
   _deletePlaylisting: function () {
@@ -9,11 +10,31 @@ var PlaylistDetail = React.createClass({
 
     PlaylistingActions.deletePlaylisting(data);
   },
-  
+
+  renderTracks: function () {
+    var tracks = this.props.playlist.tracks;
+    var playTrack = this.props.playTrack;
+
+    return tracks.map(function (track, idx) {
+      return (
+        <PlaylistTrack key={ idx } track={ track }
+          playTrack={ playTrack } />
+      );
+    });
+  },
+
   render: function () {
+    var playlist = this.props.playlist;
+
+    if (!playlist) {
+      return <div className="row" />;
+    }
+
     return (
       <div className="row">
-        <h3>Detail</h3>
+        <h1>{ playlist.title }</h1>
+
+        { this.renderTracks() }
       </div>
     );
   }

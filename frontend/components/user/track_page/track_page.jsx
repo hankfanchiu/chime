@@ -1,7 +1,7 @@
 var React = require("react");
 var TrackStore = require("../../../stores/track_store");
 var TrackActions = require("../../../actions/track_actions");
-var TrackPlayer = require("./track_player");
+var GiantPlayer = require("../giant_player/giant_player");
 var TrackDetail = require("./track_detail");
 
 var TrackPage = React.createClass({
@@ -50,7 +50,7 @@ var TrackPage = React.createClass({
   render: function () {
     return (
       <div className="container">
-        <TrackPlayer track={ this.state.track } />
+        <GiantPlayer track={ this.state.track } />
 
         <TrackDetail track={ this.state.track } />
       </div>
