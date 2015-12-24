@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   end
 
   def randomize_avatar_basename
-    return unless self.avatar_file_name
+    return if self.avatar_file_name
 
     extension = File.extname(self.avatar_file_name)
     filename = "#{SecureRandom.uuid}#{extension}"

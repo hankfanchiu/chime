@@ -24,6 +24,7 @@ var Nav = React.createClass({
   },
 
   _onChange: function () {
+    debugger;
     this.setState(this.getStatesFromStore());
   },
 
