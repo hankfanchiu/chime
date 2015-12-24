@@ -39,9 +39,10 @@ TrackStore.all = function () {
 };
 
 TrackStore.find = function (slug) {
-  var track = _tracks[slug];
+  var track = _tracks[slug] || {};
+  var trackCopy = jQuery.extend({}, track);
 
-  return track;
+  return trackCopy;
 };
 
 TrackStore.newTrack = function () {

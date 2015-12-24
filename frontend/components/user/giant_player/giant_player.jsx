@@ -10,12 +10,16 @@ var GiantPlayer = React.createClass({
     PlayerActions.addTrackToQueue(this.props.track);
   },
 
+  renderUsername: function () {
+    var user = this.props.track.user;
+
+    if (user) {
+      return user.username;
+    }
+  },
+
   render: function () {
     var track = this.props.track;
-
-    if (!track) {
-      return <div className="row" />;
-    }
 
     return (
       <div className="row">
@@ -26,7 +30,7 @@ var GiantPlayer = React.createClass({
 
           <div className="detail">
             <p className="username">
-              { track.user.username }
+              { this.renderUsername() }
             </p>
 
             <p className="title">

@@ -92,7 +92,7 @@ class Track < ActiveRecord::Base
   end
 
   def randomize_img_file_name
-    return unless self.img_file_name
+    return if self.img_file_name
 
     extension = File.extname(self.img_file_name)
     filename = "#{SecureRandom.uuid}#{extension}"

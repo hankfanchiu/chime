@@ -23,7 +23,7 @@ UserStore.__onDispatch = function (payload) {
 };
 
 UserStore.getUser = function (username) {
-  var user = _users[username];
+  var user = _users[username] || {};
   var userCopy = jQuery.extend({}, user);
 
   return userCopy;
