@@ -5,7 +5,7 @@ var SessionStatus = React.createClass({
   loggedIn: function () {
     return (
       <div className="nav navbar-right">
-        <SessionLinks username={ this.props.username }
+        <SessionLinks user={ this.props.user }
           pushState={ this.props.pushState } />
 
         <button className="btn btn-default navbar-btn"

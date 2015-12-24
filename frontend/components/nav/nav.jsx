@@ -11,7 +11,7 @@ var Nav = React.createClass({
   getStatesFromStore: function () {
     return {
       isLoggedIn: SessionStore.isLoggedIn(),
-      username: SessionStore.getCurrentUserUsername()
+      user: SessionStore.getCurrentUser()
     };
   },
 
@@ -52,7 +52,7 @@ var Nav = React.createClass({
           <Search pushState={ this._pushState } />
 
           <SessionStatus isLoggedIn={ this.state.isLoggedIn }
-            username={ this.state.username }
+            user={ this.state.user }
             pushState={ this._pushState } />
         </div>
       </nav>

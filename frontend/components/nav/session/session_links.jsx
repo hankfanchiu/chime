@@ -2,19 +2,26 @@ var React = require("react");
 
 var SessionLinks = React.createClass({
   render: function () {
-    var path = "/" + this.props.username;
+    var path = "/" + this.props.user.username;
 
     return (
-      <ul className="nav navbar-nav nav-links">
+      <ul className="nav navbar-nav">
+        <ul className="nav navbar-nav">
         <li>
           <a onClick={ this.props.pushState.bind(null, "/upload") }>
-            <i className="fa fa-plus"></i>
+            Upload
           </a>
         </li>
+      </ul>
 
         <li>
           <a onClick={ this.props.pushState.bind(null, path) }>
-            <i className="fa fa-user"></i>
+            <img className="nav-user-avatar"
+              src={ this.props.user.avatar_hero } />
+
+            <span className="spacer spacer-small"></span>
+
+            { this.props.user.username }
           </a>
         </li>
 
