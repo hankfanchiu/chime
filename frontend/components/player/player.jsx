@@ -8,6 +8,7 @@ var PlayButton = require("./play_button");
 var ForwardButton = require("./forward_button");
 var ProgressBar = require("./progress_bar");
 var VolumeBar = require("./volume_bar");
+var TimeLabel = require("./time_label");
 
 var Player = React.createClass({
   getInitialState: function () {
@@ -76,6 +77,8 @@ var Player = React.createClass({
     return (
       <div className="player">
         <div className="controller">
+          <TimeLabel currentTime={ this.state.currentTime }
+            duration={ this.state.duration } />
           <p>
             <span className="title">
               { this.state.track.title }
