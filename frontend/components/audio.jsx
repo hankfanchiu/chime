@@ -1,6 +1,6 @@
 var React = require("react");
-var PlayerStore = require("../../stores/player_store");
-var AudioActions = require("../../actions/audio_actions");
+var PlayerStore = require("../stores/player_store");
+var AudioActions = require("../actions/audio_actions");
 
 var Audio = React.createClass({
   getInitialState: function () {
@@ -18,6 +18,36 @@ var Audio = React.createClass({
   },
 
   componentDidMount: function () {
+    this._addAudioEventListeners();
+    this.listenerToken = PlayerStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this._removeAudioEventListeners();
+    this.listenerToken.remove();
+  },
+
+  componentWillUpdate: function (nextProps, nextState) {
+    if (this.refs.audio.playbackId !== nextState.track.playbackId) {
+      this._setTrack(nextState.track);
+    }
+
+    if (nextState.playRequested) {
+      this.refs.audio.play();
+    } else if (nextState.pauseRequested) {
+      this.refs.audio.pause();
+    }
+
+    if (nextState.seekTo) {
+      this.refs.audio.currentTime = nextState.seekTo;
+    }
+
+    if (nextState.adjustVolumeTo) {
+      this.refs.audio.volume = nextState.adjustVolumeTo;
+    }
+  },
+
+  _addAudioEventListeners: function () {
     var addListener = this.refs.audio.addEventListener;
 
     addListener("playing", this._handlePlaying);
@@ -28,7 +58,7 @@ var Audio = React.createClass({
     addListener("durationchange", this._handleDurationChange);
   },
 
-  componentWillUnmount: function () {
+  _removeAudioEventListeners: function () {
     var removeListener = this.refs.audio.removeEventListener;
 
     removeListener("playing", this._handlePlaying);
@@ -39,10 +69,8 @@ var Audio = React.createClass({
     removeListener("durationchange", this._handleDurationChange);
   },
 
-  componentWillUpdate: function (nextProps, nextState) {
-    if (this.refs.audio.playbackId !== nextState.track.playbackId) {
-      this._setTrack(nextState.track);
-    }
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
   },
 
   _setTrack: function (track) {
@@ -52,28 +80,31 @@ var Audio = React.createClass({
     this.refs.audio.play();
   },
 
-  _handlePlaying: function (e) {
-
+  _handlePlaying: function () {
+    AudioActions.setToIsPlaying();
   },
 
-  _handlePause: function (e) {
-
+  _handlePause: function () {
+    AudioActions.setToIsPaused();
   },
 
-  _handleEnded: function (e) {
-
+  _handleEnded: function () {
+    AudioActions.setToIsEnded();
   },
 
-  _handleTimeUpdate: function (e) {
-
+  _handleTimeUpdate: function () {
+    var currentTime = this.refs.audio.currentTime;
+    AudioActions.setCurrentTime(currentTime);
   },
 
-  _handleVolumeChange: function (e) {
-
+  _handleVolumeChange: function () {
+    var volume = this.refs.audio.volume;
+    AudioActions.setVolume(volume);
   },
 
-  _handleDurationChange: function (e) {
-
+  _handleDurationChange: function () {
+    var duration = this.refs.audio.duration;
+    AudioActions.setDuration(duration);
   },
 
   render: function () {
