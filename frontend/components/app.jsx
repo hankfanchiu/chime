@@ -3,6 +3,7 @@ var SessionStore = require("../stores/session_store");
 var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
 var Player = require("./player/player");
+var Audio = require("./audio");
 
 var App = React.createClass({
   componentWillMount: function () {
@@ -22,6 +23,8 @@ var App = React.createClass({
           { this.props.children }
         </main>
 
+        <Audio />
+        
         <footer>
           <Player />
         </footer>

@@ -23,14 +23,14 @@ var Audio = React.createClass({
   },
 
   componentWillUpdate: function (nextProps, nextState) {
-    if (this.refs.audio.playbackId !== nextState.track.playbackId) {
+    if (this.refs.audio.trackId !== nextState.track.id) {
       this._setTrack(nextState.track);
     }
 
-    if (nextState.playRequested) {
-      this.refs.audio.play();
-    } else if (nextState.pauseRequested) {
+    if (nextState.pauseRequested) {
       this.refs.audio.pause();
+    } else {
+      this.refs.audio.play();
     }
 
     if (nextState.seekTo) {
@@ -48,25 +48,25 @@ var Audio = React.createClass({
   },
 
   _addAudioEventListeners: function () {
-    var addListener = this.refs.audio.addEventListener;
+    var audio = this.refs.audio;
 
-    addListener("playing", this._handlePlaying);
-    addListener("pause", this._handlePause);
-    addListener("ended", this._handleEnded);
-    addListener("timeupdate", this._handleTimeUpdate);
-    addListener("volumechange", this._handleVolumeChange);
-    addListener("durationchange", this._handleDurationChange);
+    audio.addEventListener("playing", this._handlePlaying);
+    audio.addEventListener("pause", this._handlePause);
+    audio.addEventListener("ended", this._handleEnded);
+    audio.addEventListener("timeupdate", this._handleTimeUpdate, false);
+    audio.addEventListener("volumechange", this._handleVolumeChange, false);
+    audio.addEventListener("durationchange", this._handleDurationChange, false);
   },
 
   _removeAudioEventListeners: function () {
-    var removeListener = this.refs.audio.removeEventListener;
+    var audio = this.refs.audio;
 
-    removeListener("playing", this._handlePlaying);
-    removeListener("pause", this._handlePause);
-    removeListener("ended", this._handleEnded);
-    removeListener("timeupdate", this._handleTimeUpdate);
-    removeListener("volumechange", this._handleVolumeChange);
-    removeListener("durationchange", this._handleDurationChange);
+    audio.removeEventListener("playing", this._handlePlaying);
+    audio.removeEventListener("pause", this._handlePause);
+    audio.removeEventListener("ended", this._handleEnded);
+    audio.removeEventListener("timeupdate", this._handleTimeUpdate);
+    audio.removeEventListener("volumechange", this._handleVolumeChange);
+    audio.removeEventListener("durationchange", this._handleDurationChange);
   },
 
   _onChange: function () {
@@ -74,7 +74,7 @@ var Audio = React.createClass({
   },
 
   _setTrack: function (track) {
-    this.refs.audio.playbackId = track.playbackId;
+    this.refs.audio.trackId = track.id;
     this.refs.audio.src = track.track_url;
     this.refs.audio.load();
     this.refs.audio.play();
@@ -109,7 +109,7 @@ var Audio = React.createClass({
 
   render: function () {
     return (
-      <audio ref="audio">
+      <audio ref="audio" id="audio">
         <p>Your browser does not support the <code>audio</code> element.</p>
       </audio>
     );

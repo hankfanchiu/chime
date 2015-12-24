@@ -21,7 +21,7 @@ var Player = React.createClass({
       isPaused: AudioStore.isPaused(),
       isEnded: AudioStore.isEnded(),
       currentTime: AudioStore.getCurrentTime(),
-      volume  AudioStore.getVolume(),
+      volume: AudioStore.getVolume(),
       duration: AudioStore.getDuration()
     };
   },
@@ -93,6 +93,7 @@ var Player = React.createClass({
             <ForwardButton playNextTrack={ this._playNextTrack }/>
 
             <ProgressBar seekTo={ this._seekTo }
+              currentTime={ this.state.currentTime }
               duration={ this.state.duration } />
 
             <VolumeBar adjustVolumeTo={ this._adjustVolumeTo }
