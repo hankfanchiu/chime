@@ -3,6 +3,7 @@ var ReactRouter = require("react-router");
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
+var IndexRedirect = ReactRouter.IndexRedirect;
 var createBrowserHistory = require("history/lib/createBrowserHistory");
 
 var App = require("./components/app");
@@ -27,7 +28,7 @@ module.exports = (
   <Router history={ createBrowserHistory() }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ Home } />
-      
+
       <Route name="discover" path="discover" component={ Discover } />
       <Route name="signup" path="signup" component={ SignUp } />
       <Route name="login" path="login" component={ Login } />
@@ -36,7 +37,7 @@ module.exports = (
       <Route name="settings" path="settings" component={ Settings } />
 
       <Route name="user" path=":username" component={ UserPage }>
-        <IndexRoute component={ ProfileIndex } />
+        <IndexRedirect to="tracks" />
         <Route name="tracks" path="tracks" component={ TracksIndex } />
         <Route name="playlists" path="playlists" component={ PlaylistsIndex } />
       </Route>

@@ -57,10 +57,6 @@ var UserNav = React.createClass({
     return (
       <div className="row">
         <h4>
-          { this.renderProfileLink() }
-
-          <span className="spacer spacer-large"></span>
-
           { this.renderTracksLink() }
 
           <span className="spacer spacer-large"></span>
