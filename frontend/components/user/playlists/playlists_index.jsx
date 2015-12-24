@@ -8,7 +8,9 @@ var PlaylistsIndex = React.createClass({
   },
 
   getStatesFromStore: function () {
-    return { playlists: UserStore.getPlaylists() };
+    var username = this.props.params.username;
+
+    return { playlists: UserStore.getPlaylists(username) };
   },
 
   componentDidMount: function () {

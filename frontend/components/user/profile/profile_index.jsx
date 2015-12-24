@@ -7,7 +7,9 @@ var ProfileIndex = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { user: UserStore.getUser() };
+    var username = this.props.params.username;
+
+    return { user: UserStore.getUser(username) };
   },
 
   componentDidMount: function () {

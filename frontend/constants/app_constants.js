@@ -18,7 +18,6 @@ module.exports = {
 
     // User
     USER_RECEIVED: null,
-    UPDATED_USER_RECEIVED: null,
 
     // Track
     TRACKS_RECEIVED: null,

@@ -8,7 +8,9 @@ var TracksIndex = React.createClass({
   },
 
   getStatesFromStore: function () {
-    return { tracks: UserStore.getTracks() };
+    var username = this.props.params.username;
+
+    return { tracks: UserStore.getTracks(username) };
   },
 
   componentDidMount: function () {

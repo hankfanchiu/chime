@@ -14,7 +14,7 @@ var UserPage = React.createClass({
     var username = this.props.params.username;
 
     return {
-      user: UserStore.getUser(),
+      user: UserStore.getUser(username),
       currentUser: SessionStore.getCurrentUser(),
       isCurrentUser: SessionStore.isCurrentUser(username)
     };
