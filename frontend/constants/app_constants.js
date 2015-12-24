@@ -11,6 +11,11 @@ module.exports = {
     LOGOUT_RESPONSE: null,
     CURRENT_USER_RECEIVED: null,
 
+    // Upload
+    PUBLIC_URL_RECEIVED: null,
+    DIRECT_UPLOAD_RESPONSE_RECEIVED: null,
+    RESET_UPLOAD_STORE: null,
+
     // User
     USER_RECEIVED: null,
 
@@ -39,10 +44,13 @@ module.exports = {
     ADD_TRACK_TO_QUEUE: null,
     LOAD_PLAYLIST: null,
 
-    // Upload
-    PUBLIC_URL_RECEIVED: null,
-    DIRECT_UPLOAD_RESPONSE_RECEIVED: null,
-    RESET_UPLOAD_STORE: null
+    // Audio
+    AUDIO_SET_TO_PLAYING: null,
+    AUDIO_SET_TO_PAUSED: null,
+    AUDIO_SET_TO_ENDED: null,
+    AUDIO_CURRENT_TIME_RECEIVED: null,
+    AUDIO_VOLUME_RECEIVED: null,
+    AUDIO_DURATION_RECEIVED: null
   })
 
 };

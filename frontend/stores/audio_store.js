@@ -3,12 +3,12 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var isPlaying = false;
-var isPaused = false;
-var isEnded = false;
-var currentTime = null;
-var volume = null;
-var duration = null;
+var _isPlaying = false;
+var _isPaused = false;
+var _isEnded = false;
+var _currentTime = null;
+var _volume = null;
+var _duration = null;
 
 var AudioStore = new Store(AppDispatcher);
 
@@ -18,135 +18,95 @@ AudioStore.__onDispatch = function (payload) {
 
   switch (actionType) {
 
-    case ActionTypes.PLAY_AUDIO:
-      playAudio();
+    case ActionTypes.AUDIO_SET_TO_PLAYING:
+      setIsPlaying();
       break;
 
-    case ActionTypes.PAUSE_AUDIO:
-      pauseAudio();
+    case ActionTypes.AUDIO_SET_TO_PAUSED:
+      setIsPaused();
       break;
 
-    case ActionTypes.SEEK_TO:
-      seekTo()
+    case ActionTypes.AUDIO_SET_TO_ENDED:
+      setIsEnded()
       break;
 
-    case ActionTypes.ADJUST_VOLUME_TO:
-
+    case ActionTypes.AUDIO_CURRENT_TIME_RECEIVED:
+      setCurrentTime(response);
       break;
 
-    case ActionTypes.SET_TO_IS_PLAYING:
-
+    case ActionTypes.AUDIO_VOLUME_RECEIVED:
+      setVolume(response);
       break;
 
-    case ActionTypes.SET_TO_IS_PAUSED:
-
+    case ActionTypes.AUDIO_DURATION_RECEIVED:
+      setDuration(response);
       break;
 
-    case ActionTypes.SET_TO_IS_ENDED:
-
-      break;
-
-    case ActionTypes.SET_CURRENT_TIME:
-
-      break;
-
-    case ActionTypes.SET_VOLUME:
-
-      break;
-
-    case ActionTypes.SET_DURATION:
-
-      break;
   };
 };
 
-AudioStore.getTrack = function () {
-  var trackCopy = jQuery.extend({}, _track);
-
-  return trackCopy;
+AudioStore.isPlaying = function () {
+  return _isPlaying;
 };
 
-AudioStore.getNextTrack = function () {
-  var nextTrack = _queue[_queueIndex + 1];
-  var nextTrackCopy;
-
-  if (nextTrack === undefined) { return null; }
-
-  nextTrackCopy = jQuery.extend({}, nextTrack);
-
-  return nextTrackCopy;
-}
-
-AudioStore.queueIsEmpty = function () {
-  return (_queue.length === 0);
+AudioStore.isPaused = function () {
+  return _isPaused;
 };
 
-AudioStore.queueIsEnded = function () {
-  return (_queueIndex === _queue.length - 1);
+AudioStore.isEnded = function () {
+  return _isEnded;
 };
 
-AudioStore.isInQueue = function (track) {
-  return (_queue.indexOf(track) !== -1);
+AudioStore.getCurrentTime = function () {
+  return _currentTime;
 };
 
-var resetTrackAndQueue = function (track) {
-  _queue = [track];
-  _queueIndex = 0;
-  _track = track;
+AudioStore.getVolume = function () {
+  return _volume;
+};
+
+AudioStore.getDuration = function () {
+  return _duration;
+};
+
+var setIsPlaying = function () {
+  _isPlaying = true;
+  _isPaused = false;
+  _isEnded = false;
 
   AudioStore.__emitChange();
 };
 
-var loadNextTrackInQueue = function () {
-  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
-
-  if (_queueIndex === _queue.length - 1) {
-    _queueIndex = 0;
-  } else {
-    _queueIndex += 1;
-  }
-
-  _track = _queue[_queueIndex];
+var setIsPaused = function () {
+  _isPlaying = false;
+  _isPaused = true;
+  _isEnded = false;
 
   AudioStore.__emitChange();
 };
 
-var loadPreviousTrackInQueue = function () {
-  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
-
-  if (_queueIndex === 0) {
-    _queueIndex = _queue.length - 1;
-  } else {
-    _queueIndex -= 1;
-  }
-
-  _track = _queue[_queueIndex];
+var setIsEnded = function () {
+  _isPlaying = false;
+  _isPaused = false;
+  _isEnded = true;
 
   AudioStore.__emitChange();
 };
 
-var loadNextTrackUntilEnd = function () {
-  if (_queue.length === 0) { return; }
-  if (_queueIndex === _queue.length - 1) { return; }
-
-  _queueIndex += 1;
-
-  _track = _queue[_queueIndex];
+var setCurrentTime = function (time) {
+  _currentTime = time;
 
   AudioStore.__emitChange();
 };
 
-var pushTrackToQueue = function (track) {
-  if (!AudioStore.isInQueue(track)) { _queue.push(track); }
+var setVolume = function (volume) {
+  _volume = volume;
 
   AudioStore.__emitChange();
 };
 
-var loadPlaylistToQueue = function (playlist) {
-  _playlist = playlist;
-  _queue = playlist.tracks;
-  _queueIndex = 0;
-  _track = _queue[_queueIndex];
+var setDuration = function (duration) {
+  _duration = duration;
 
   AudioStore.__emitChange();
 };

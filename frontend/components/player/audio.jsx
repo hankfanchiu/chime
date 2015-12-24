@@ -1,65 +1,79 @@
 var React = require("react");
-var PlayerActions = require("../../actions/player_actions");
 var PlayerStore = require("../../stores/player_store");
+var AudioActions = require("../../actions/audio_actions");
 
 var Audio = React.createClass({
   getInitialState: function () {
+    return this.getStateFromStore();
+  },
 
+  getStateFromStore: function () {
+    return {
+      track: PlayerStore.getTrack(),
+      playRequested: PlayerStore.playRequested(),
+      pauseRequested: PlayerStore.pauseRequested(),
+      seekTo: PlayerStore.getSeekTo(),
+      adjustVolumeTo: PlayerStore.getAdjustVolumeTo()
+    }
   },
 
   componentDidMount: function () {
-    this.isPlaying = false;
+    var addListener = this.refs.audio.addEventListener;
 
-    this.refs.audio.addEventListener("ended", this._handleEnded);
-    this.refs.audio.addEventListener("playing", this._handlePlaying);
-    this.refs.audio.addEventListener("pause", this._handlePause);
+    addListener("playing", this._handlePlaying);
+    addListener("pause", this._handlePause);
+    addListener("ended", this._handleEnded);
+    addListener("timeupdate", this._handleTimeUpdate);
+    addListener("volumechange", this._handleVolumeChange);
+    addListener("durationchange", this._handleDurationChange);
   },
 
   componentWillUnmount: function () {
-    this.refs.audio.removeEventListener("ended", this._handleEnded);
-    this.refs.audio.removeEventListener("playing", this._handlePlaying);
-    this.refs.audio.removeEventListener("pause", this._handlePause);
+    var removeListener = this.refs.audio.removeEventListener;
+
+    removeListener("playing", this._handlePlaying);
+    removeListener("pause", this._handlePause);
+    removeListener("ended", this._handleEnded);
+    removeListener("timeupdate", this._handleTimeUpdate);
+    removeListener("volumechange", this._handleVolumeChange);
+    removeListener("durationchange", this._handleDurationChange);
   },
 
-  componentWillReceiveProps: function (nextProps) {
-    this._setTrack(nextProps.track);
-    this._setPlayback(nextProps.playRequested);
+  componentWillUpdate: function (nextProps, nextState) {
+    if (this.refs.audio.playbackId !== nextState.track.playbackId) {
+      this._setTrack(nextState.track);
+    }
   },
 
   _setTrack: function (track) {
-    if (this.refs.audio.trackId === track.id) { return; }
-
-    this.refs.audio.trackId = track.id;
+    this.refs.audio.playbackId = track.playbackId;
     this.refs.audio.src = track.track_url;
     this.refs.audio.load();
     this.refs.audio.play();
   },
 
-  _setPlayback: function (playRequested) {
-    if (this.props.playRequested === playRequested) { return; }
+  _handlePlaying: function (e) {
 
-    playRequested ? this.refs.audio.play() : this.refs.audio.pause();
   },
 
-  _handleEnded: function () {
-    this.isPlaying = false;
-    this.props.setIsPlaying(this.isPlaying);
+  _handlePause: function (e) {
 
-    setTimeout(PlayerActions.autoPlayNextTrack, 1000);
   },
 
-  _handlePlaying: function () {
-    if (this.isPlaying) { return; }
+  _handleEnded: function (e) {
 
-    this.isPlaying = true;
-    this.props.setIsPlaying(this.isPlaying);
   },
 
-  _handlePause: function () {
-    if (!this.isPlaying) { return; }
+  _handleTimeUpdate: function (e) {
 
-    this.isPlaying = false;
-    this.props.setIsPlaying(this.isPlaying);
+  },
+
+  _handleVolumeChange: function (e) {
+
+  },
+
+  _handleDurationChange: function (e) {
+
   },
 
   render: function () {

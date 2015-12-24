@@ -3,10 +3,10 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var playRequested = false;
-var pauseRequested = false;
-var seekTo = null;
-var adjustVolumeTo = null;
+var _playRequested = false;
+var _pauseRequested = false;
+var _seekTo = null;
+var _adjustVolumeTo = null;
 
 var _queue = [];
 var _queueIndex = 0;
@@ -67,19 +67,19 @@ PlayerStore.__onDispatch = function (payload) {
 
 
 PlayerStore.playRequested = function () {
-  return playRequested;
+  return _playRequested;
 };
 
 PlayerStore.pauseRequested = function () {
-  return pauseRequested;
+  return _pauseRequested;
 };
 
 PlayerStore.getSeekTo = function () {
-  return seekTo;
+  return _seekTo;
 };
 
 PlayerStore.getAdjustVolumeTo = function () {
-  return adjustVolumeTo;
+  return _adjustVolumeTo;
 };
 
 PlayerStore.getTrack = function () {
@@ -99,6 +99,10 @@ PlayerStore.getNextTrack = function () {
   return nextTrackCopy;
 }
 
+PlayerStore.isCurrentTrack = function (track) {
+  return _track === track;
+};
+
 PlayerStore.queueIsEmpty = function () {
   return (_queue.length === 0);
 };
@@ -111,41 +115,37 @@ PlayerStore.isInQueue = function (track) {
   return (_queue.indexOf(track) !== -1);
 };
 
-PlayerStore.isCurrentTrack = function (track) {
-  return _track === track;
-};
-
 var resetRequests = function () {
-  playRequested = false;
-  pauseRequested = false;
-  seekTo = null;
-  adjustVolumeTo = null;
+  _playRequested = false;
+  _pauseRequested = false;
+  _seekTo = null;
+  _adjustVolumeTo = null;
 };
 
 var setPlayRequest = function () {
   resetRequests();
-  playRequested = true;
+  _playRequested = true;
 
   PlayerStore.__emitChange();
 };
 
 var setPauseRequest = function () {
   resetRequests();
-  pauseRequested = true;
+  _pauseRequested = true;
 
   PlayerStore.__emitChange();
 };
 
-var setSeekTo = function (response) {
+var setSeekTo = function (time) {
   resetRequests();
-  seekTo = response;
+  _seekTo = time;
 
   PlayerStore.__emitChange();
 };
 
-var setAdjustVolumeTo = function (response) {
+var setAdjustVolumeTo = function (volume) {
   resetRequests();
-  adjustVolumeTo = response;
+  _adjustVolumeTo = volume;
 
   PlayerStore.__emitChange();
 };
