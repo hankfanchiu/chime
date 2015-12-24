@@ -27,8 +27,8 @@ module.exports = (
   <Router history={ createBrowserHistory() }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ Home } />
+      
       <Route name="discover" path="discover" component={ Discover } />
-      <Route name="collect" path="collect" component={ Collect } />
       <Route name="signup" path="signup" component={ SignUp } />
       <Route name="login" path="login" component={ Login } />
       <Route name="logout" path="logout" component={ Logout } />

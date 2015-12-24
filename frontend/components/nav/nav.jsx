@@ -41,6 +41,14 @@ var Nav = React.createClass({
               onClick={ this._pushState.bind(null, "/") }>Chime</a>
           </div>
 
+          <ul className="nav navbar-nav nav-links">
+            <li>
+              <a onClick={ this._pushState.bind(null, "/discover") }>
+                Discover
+              </a>
+            </li>
+          </ul>
+
           <Search pushState={ this._pushState } />
 
           <SessionStatus isLoggedIn={ this.state.isLoggedIn }

@@ -19,7 +19,29 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+.navbar-default {
+  background-color: #00587D;
+  border-color: #00587D;
+}
+
+nav.navbar .navbar-header a.navbar-brand {
+  color: #ccc
+}
+
+nav.navbar .navbar-header a.navbar-brand:hover {
+  color: #eee
+}
+
+nav.navbar .nav > li > a {
+  color: #ccc
+}
+
+nav.navbar .nav > li > a:hover {
+  color: #eee
+}
+
 main {
+  padding-top: 80px;
   padding-bottom: 120px;
 }
 
