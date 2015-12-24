@@ -18,7 +18,7 @@ var PlaylistTrack = React.createClass({
 
           <div className="detail">
             <div className="title">
-              { track.user.username } -- { track.title }
+              { track.user.username } - { track.title }
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 var React = require("react");
 var UserStore = require("../../../stores/user_store");
+var UserActions = require("../../../actions/user_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
