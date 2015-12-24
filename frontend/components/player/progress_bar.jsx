@@ -5,7 +5,6 @@ var ProgressBar = React.createClass({
 		var container = this.refs.progressBar;
 		var containerStartX = container.offsetLeft;
     var containerWidth = container.offsetWidth;
-
 		var percent = (e.clientX - containerStartX) / containerWidth;
 		percent = (percent >= 1 ? 1 : percent);
 
@@ -15,22 +14,30 @@ var ProgressBar = React.createClass({
   },
 
   render: function () {
-    var width = 0;
+    var position = 0;
     if (this.props.currentTime > 0) {
-       var percent = (this.props.currentTime / this.props.duration) * 100;
-       var width = Math.floor(percent);
+       var percent = this.props.currentTime / this.props.duration;
+       position = percent * 300; // Pixel width of audio progress background
     }
 
     return (
-      <div ref="progressBar"
-        className="progress-bar audio-progress-container pull-left"
-        style={{ marginLeft: '5px' }}
-        onClick={ this._seekTo }>
+      <div className="audio-progress-container">
+        <div className="audio-progress" onClick={ this._seekTo }>
 
-        <span ref="progress" className="progress audio-progress"
-          style={{ width: width + "%" }} />
+          <div ref="progressBar"
+            className="audio-progress-background"
+            style={{ marginLeft: "5px" }}>
 
-			</div>
+            <div ref="progress" className="audio-progress-bar"
+              style={{ width: position + "px" }} />
+
+            <div className="audio-progress-bar-handle"
+              style={{ left: position + "px" }} />
+
+    			</div>
+
+        </div>
+      </div>
     );
   }
 });

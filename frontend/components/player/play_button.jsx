@@ -10,7 +10,15 @@ var PlayButton = React.createClass({
   },
 
   playPauseClassName: function () {
-    return (this.props.isPlaying ? "fa fa-pause" : "fa fa-play");
+    var className = "controller-button fa";
+
+    if (this.props.isPlaying) {
+      className += " fa-pause";
+    } else {
+      className += " fa-play";
+    }
+
+    return className;
   },
 
   render: function () {

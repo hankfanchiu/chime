@@ -9,7 +9,7 @@ var ForwardButton = React.createClass({
     return (
       <div className="controller-button">
         <a onClick={ this._playNextTrack }>
-          <i className="fa fa-forward"></i>
+          <i className="controller-button fa fa-forward"></i>
         </a>
       </div>
     );

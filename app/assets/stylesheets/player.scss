@@ -1,64 +1,169 @@
-footer {
-  background-color: transparent;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-}
-
 div.player {
   display: flex;
-  align-items: center;
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 60px;
   margin: auto;
-  text-align: center;
+  background-color: #eee;
+  border-top: 1px solid #ccc;
+}
 
-  div.controller {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    background-color: #eee;
+div.controller {
+  width: 900px;
+  margin: auto;
+}
+
+div.audio-controller {
+  display: inline-block;
+  min-width: 100px;
+  padding: 10px;
+}
+
+div.controller-button {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+div.controller-button:nth-child(even) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+i.controller-button {
+  font-size: 16px;
+  color: #555;
+  transition: color 100ms;
+}
+
+i.controller-button:hover {
+  color: #222;
+}
+
+i.controller-button:active {
+  color: #008CC7;
+}
+
+div.audio-timeline {
+  display: inline-block;
+  padding: 10px;
+}
+
+div.audio-time-container {
+  display: inline-block;
+  padding: 5px;
+}
+
+div.audio-time {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+
+  .audio-time {
+    color: #0077A9;
   }
 
-  span.title {
+  .audio-duration {
+    color: #555;
+  }
+}
+
+div.audio-progress-container {
+  display: inline-block;
+  padding: 10px;
+}
+
+div.audio-progress {
+  display: inline-block;
+  height: 15px;
+  cursor: pointer;
+}
+
+div.audio-progress:hover {
+  div.audio-progress-bar-handle {
+    opacity: 1;
+  }
+}
+
+div.audio-progress-background {
+  float: left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 2px;
+  background: #bbb;
+}
+
+div.audio-progress-bar {
+  float: left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  background: #0077A9;
+}
+
+div.audio-progress-bar-handle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #0077A9;
+  border-radius: 100%;
+  height: 7px;
+  width: 7px;
+  background-color: #0077A9;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+div.audio-badge {
+  display: inline-block;
+  padding: 10px;
+}
+
+div.audio-badge-container {
+  display: inline-block;
+  min-width: 300px;
+}
+
+div.audio-badge-image {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 10px 0 10px;
+}
+
+img.audio-badge-image {
+  width: 30px;
+  height: 30px;
+}
+
+div.audio-badge-text {
+  display: inline-block;
+
+  a {
+    display: block;
+    text-decoration: none;
+    transition: color 100ms;
+  }
+
+  a:hover {
+    color: #222
+  }
+
+  a:active {
+    color: #0077A9;
+  }
+
+  .username {
+    font-size: 11px;
+    color: #aaa
+  }
+
+  .title {
+    font-size: 13px;
     font-weight: bolder;
+    color: #555;
   }
-
-  div.controller-button {
-    display: inline-block;
-    width: 15px;
-  }
-
-  div.controller-button:nth-child(even) {
-    margin-left: 15px;
-    margin-right: 15px;
-  }
-}
-
-.progress-bar {
-   border:1px solid #aaa;
-   color:#fff;
-   width:295px;
-   height:20px;
-}
-
-.progress {
-   background-color:#ff0000; // red
-   height:20px;
-   display:inline-block;
-}
-
-.audio-progress-container {
-	float: left;
-	height: 34px;
-  border-right: 1px solid #aaaaaa;
-  border-left: 1px solid #aaaaaa;
-	width: 235px;
-}
-
-.audio-progress {
-	background: #666666;
-	width: 100%;
-	height: 100%;
 }

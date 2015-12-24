@@ -9,6 +9,8 @@ var ForwardButton = require("./forward_button");
 var ProgressBar = require("./progress_bar");
 var VolumeBar = require("./volume_bar");
 var TimeLabel = require("./time_label");
+var DurationLabel = require("./duration_label");
+var Badge = require("./badge");
 
 var Player = React.createClass({
   getInitialState: function () {
@@ -77,15 +79,8 @@ var Player = React.createClass({
     return (
       <div className="player">
         <div className="controller">
-          <TimeLabel currentTime={ this.state.currentTime }
-            duration={ this.state.duration } />
-          <p>
-            <span className="title">
-              { this.state.track.title }
-            </span>
-          </p>
 
-          <div className="controller-buttons">
+          <div className="audio-controller">
             <BackwardButton playPreviousTrack={ this._playPreviousTrack }/>
 
             <PlayButton playAudio={ this._playAudio }
@@ -94,18 +89,25 @@ var Player = React.createClass({
               isPaused={ this.state.isPaused } />
 
             <ForwardButton playNextTrack={ this._playNextTrack }/>
+          </div>
+
+          <div className="audio-timeline">
+            <TimeLabel currentTime={ this.state.currentTime } />
 
             <ProgressBar seekTo={ this._seekTo }
               currentTime={ this.state.currentTime }
               duration={ this.state.duration } />
 
-
+            <DurationLabel duration={ this.state.duration } />
           </div>
+
+          <div className="audio-badge">
+            <Badge track={ this.state.track } />
+          </div>
+
         </div>
       </div>
     );
-    // <VolumeBar adjustVolumeTo={ this._adjustVolumeTo }
-    //   volume={ this.state.volume } />
   }
 });
 

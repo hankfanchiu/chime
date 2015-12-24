@@ -4,18 +4,25 @@ var TimeFormatterMixin = require("../../mixins/time_formatter_mixin");
 var TimeLabel = React.createClass({
   mixins: [TimeFormatterMixin],
 
+  renderCurrentTime: function () {
+    if (this.props.currentTime == undefined) {
+      return "00:00";
+    } else {
+      return this.secondsToTime(this.props.currentTime);
+    }
+  },
+
 	render: function() {
-		if (this.props.currentTime == undefined || !this.props.duration) {
-			return <span />;
-		}
-
-		var currentTime = this.secondsToTime(this.props.currentTime);
-		var duration = this.secondsToTime(this.props.duration);
-
 		return (
-			<span className="audio-time pull-right">
-        { currentTime } / { duration }
-      </span>
+      <div className="audio-time-container">
+        <div className="audio-time">
+
+    			<span className="audio-time">
+            { this.renderCurrentTime() }
+          </span>
+
+        </div>
+      </div>
 		);
 	}
 });

@@ -27,6 +27,14 @@ a {
   cursor: pointer;
 }
 
+footer {
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
+
 span.spacer {
   padding: 0 10px 0 10px;
 }

@@ -9,7 +9,7 @@ var BackwardButton = React.createClass({
     return (
       <div className="controller-button">
         <a onClick={ this._playPreviousTrack }>
-          <i className="fa fa-backward"></i>
+          <i className="controller-button fa fa-backward"></i>
         </a>
       </div>
     );

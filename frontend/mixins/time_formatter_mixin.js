@@ -17,7 +17,7 @@ var TimeFormatterMixin = {
 
     time += this.timeUnitFormat(minutes) + ":";
     time += this.timeUnitFormat(seconds);
-    
+
     return time;
 	},
 
