@@ -8,14 +8,17 @@ var UserStore = new Store(AppDispatcher);
 
 UserStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
-  var user = payload.response;
+  var response = payload.response;
 
   switch (actionType) {
 
     case ActionTypes.USER_RECEIVED:
-      resetUser(user);
+      resetUser(response);
       break;
 
+    case ActionTypes.CURRENT_USER_RECEIVED:
+      resetUser(response);
+      break;
   };
 };
 

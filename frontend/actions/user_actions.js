@@ -16,11 +16,11 @@ var UserActions = {
   },
 
   updateUser: function (userId, userData) {
-    UserAPIUtils.updateUser(userId, userData, UserActions.receiveUser);
+    UserAPIUtils.updateUser(userId, userData, UserActions.receiveCurrentUser);
   },
 
   uploadImage: function (userId, formData) {
-    UserAPIUtils.uploadImage(userId, formData, UserActions.receiveUser);
+    UserAPIUtils.uploadImage(userId, formData, UserActions.receiveCurrentUser);
   },
 
   // Response actions
@@ -28,6 +28,13 @@ var UserActions = {
   receiveUser: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.USER_RECEIVED,
+      response: response
+    });
+  },
+
+  receiveCurrentUser: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CURRENT_USER_RECEIVED,
       response: response
     });
   },
