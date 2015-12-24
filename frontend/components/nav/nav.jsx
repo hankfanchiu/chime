@@ -1,6 +1,6 @@
 var React = require("react");
 var SessionStore = require("../../stores/session_store");
-var SessionStatus = require("./session/session_status");
+var LoggedIn = require("./logged_in");
 var Search = require("./search/search");
 
 var Nav = React.createClass({
@@ -31,6 +31,30 @@ var Nav = React.createClass({
     this.props.history.pushState(null, pathname);
   },
 
+  renderSessionStatus: function () {
+    if (this.state.isLoggedIn) {
+      return (
+        <LoggedIn user={ this.state.user } pushState={ this._pushState } />
+      );
+    } else {
+      return (
+        <div className="nav navbar-right">
+          <button className="btn btn-default navbar-btn"
+            onClick={ this._pushState.bind(null, "/signup") }>
+            Sign Up
+          </button>
+
+          <span className="spacer spacer-small"></span>
+
+          <button className="btn btn-default navbar-btn"
+            onClick={ this._pushState.bind(null, "/login") }>
+            Login
+          </button>
+        </div>
+      );
+    }
+  },
+
   render: function () {
     return (
       <nav className="navbar navbar-default navbar-fixed-top">
@@ -51,9 +75,7 @@ var Nav = React.createClass({
 
           <Search pushState={ this._pushState } />
 
-          <SessionStatus isLoggedIn={ this.state.isLoggedIn }
-            user={ this.state.user }
-            pushState={ this._pushState } />
+          { this.renderSessionStatus() }
         </div>
       </nav>
     );
