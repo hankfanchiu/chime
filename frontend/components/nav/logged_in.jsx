@@ -42,7 +42,7 @@ var LoggedIn = React.createClass({
           </li>
 
           <li>
-            <a onClick={ this._goToUser }>
+            <a onClick={ this._goToUser } style={{ paddingBottom: 0 }}>
               <img className="nav-user-avatar"
                 src={ this.props.user.avatar_hero } />
 
