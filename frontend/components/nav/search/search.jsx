@@ -3,7 +3,6 @@ var ReactBootstrap = require("react-bootstrap");
 var Navbar = ReactBootstrap.Navbar;
 var Input = ReactBootstrap.Input;
 var Glyphicon = ReactBootstrap.Glyphicon;
-
 var SearchActions = require("../../../actions/search_actions");
 var SearchStore = require("../../../stores/search_store");
 var SearchResults = require("./search_results");
@@ -48,11 +47,6 @@ var Search = React.createClass({
 
   _handleSearchClick: function (pathname) {
     this.props.pushState(pathname);
-    this.setState({ query: "", users: [], tracks: [], showResults: false });
-  },
-
-  _onBlur: function () {
-    this.setState({ showResults: false });
   },
 
   renderSearchResults: function () {
@@ -61,8 +55,7 @@ var Search = React.createClass({
         <SearchResults
           users={ this.state.users }
           tracks={ this.state.tracks }
-          handleSearchClick={ this._handleSearchClick }
-          onBlur={ this._onBlur } />
+          handleSearchClick={ this._handleSearchClick } />
       );
     }
   },
@@ -76,7 +69,7 @@ var Search = React.createClass({
           ref="input"
           label="Search"
           labelClassName="sr-only"
-          addonBefore={ searchIcon }
+          addonAfter={ searchIcon }
           placeholder="Search for Tracks and Users"
           onChange={ this._handleSearchChange } />
 

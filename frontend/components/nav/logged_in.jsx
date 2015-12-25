@@ -42,7 +42,7 @@ var LoggedIn = React.createClass({
     return (
       <span>
         <Image src={ this.props.user.avatar_hero }
-          style={{ margin: "-1px" }} />
+          style={{ margin: "-5px 0 -5px 0" }} />
         <span className="spacer spacer-small"></span>
         { this.props.user.username }
       </span>

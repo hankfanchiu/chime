@@ -1,7 +1,10 @@
 var React = require("react");
-var TrackStore = require("../../stores/track_store");
-var TrackActions = require("../../actions/track_actions");
-var DiscoverIndex = require("./discover_index");
+var Grid = require("react-bootstrap").Grid;
+var Row = require("react-bootstrap").Row;
+var PageHeader = require("react-bootstrap").PageHeader;
+var DiscoverStore = require("../../stores/discover_store");
+var DiscoverActions = require("../../actions/discover_actions");
+var DiscoverTrack = require("./discover_track");
 
 var Discover = React.createClass({
   getInitialState: function () {
@@ -9,12 +12,15 @@ var Discover = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { tracks: TrackStore.all() };
+    return { tracks: DiscoverStore.all() };
+  },
+
+  componentWillMount: function () {
+    DiscoverActions.fetchTracks();
   },
 
   componentDidMount: function () {
-    this.listenerToken = TrackStore.addListener(this._onChange);
-    TrackActions.fetchTracks(null);
+    this.listenerToken = DiscoverStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -25,13 +31,34 @@ var Discover = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  renderDiscoverRows: function () {
+    var tracks = this.state.tracks;
+    var rows = [];
+    var row;
+
+    for (var i = 0; i < tracks.length; i += 4) {
+      row = (
+        <Row key={ i }>
+          <DiscoverTrack key={ i } track={ tracks[i] } />
+          <DiscoverTrack key={ i + 1 } track={ tracks[i + 1] } />
+          <DiscoverTrack key={ i + 2 } track={ tracks[i + 2] } />
+          <DiscoverTrack key={ i + 3 } track={ tracks[i + 3] } />
+        </Row>
+      );
+
+      rows.push(row);
+    };
+
+    return rows;
+  },
+
   render: function () {
     return (
-      <div className="container discover">
-        <h1>Discover New Chimes</h1>
+      <Grid>
+        <PageHeader>Discover New Chimes</PageHeader>
 
-        <DiscoverIndex tracks={ this.state.tracks } />
-      </div>
+        { this.renderDiscoverRows() }
+      </Grid>
     );
   }
 });
