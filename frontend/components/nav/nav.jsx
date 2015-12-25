@@ -1,12 +1,12 @@
 var React = require("react");
-var ReactBootstrap = require("react-bootstrap");
-var Navbar = ReactBootstrap.Navbar;
-var Nav = ReactBootstrap.Nav;
-var NavItem = ReactBootstrap.NavItem;
-var Button = ReactBootstrap.Button;
+var Navbar = require("react-bootstrap").Navbar;
+var Nav = require("react-bootstrap").Nav;
+var NavItem = require("react-bootstrap").NavItem;
+var Button = require("react-bootstrap").Button;
 
 var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
+var LoggedOut = require("./logged_out");
 var Search = require("./search/search");
 
 var Navigation = React.createClass({
@@ -44,19 +44,7 @@ var Navigation = React.createClass({
       );
     } else {
       return (
-        <Nav pullRight>
-          <Button navItem
-            onClick={ this._pushState.bind(null, "/signup") }>
-            Sign Up
-          </Button>
-
-          <span className="spacer spacer-small"></span>
-
-          <Button navItem
-            onClick={ this._pushState.bind(null, "/login") }>
-            Login
-          </Button>
-        </Nav>
+        <LoggedOut pushState={ this._pushState } />
       );
     }
   },

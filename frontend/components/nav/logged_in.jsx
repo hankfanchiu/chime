@@ -1,15 +1,18 @@
 var React = require("react");
-var ReactBootstrap = require("react-bootstrap");
-var Nav = ReactBootstrap.Nav;
-var NavItem = ReactBootstrap.NavItem;
-var Button = ReactBootstrap.Button;
+var Nav = require("react-bootstrap").Nav;
+var NavItem = require("react-bootstrap").NavItem;
+var NavDropdown = require("react-bootstrap").NavDropdown;
+var MenuItem = require("react-bootstrap").MenuItem;
+var Button = require("react-bootstrap").Button;
+var Image = require("react-bootstrap").Image;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 
 var LoggedIn = React.createClass({
   _goToUpload: function () {
     this.props.pushState("/upload");
   },
 
-  _goToUser: function () {
+  _goToUserProfile: function () {
     var pathname = "/" + this.props.user.username;
 
     this.props.pushState(pathname);
@@ -35,35 +38,63 @@ var LoggedIn = React.createClass({
     this.props.pushState("/logout");
   },
 
+  renderDropdownTitle: function () {
+    return (
+      <span>
+        <Image src={ this.props.user.avatar_hero }
+          style={{ margin: "-1px" }} />
+        <span className="spacer spacer-small"></span>
+        { this.props.user.username }
+      </span>
+    );
+  },
+
   render: function () {
+    if (!this.props.user.username) { return <Nav />; }
+
     return (
       <Nav pullRight>
         <NavItem eventKey={ 1 } onSelect={ this._goToUpload }>
           Upload
         </NavItem>
 
-        <NavItem eventKey={ 2 } onClick={ this._goToUser }>
-          <img className="nav-user-avatar"
-            src={ this.props.user.avatar_hero } />
+        <NavDropdown eventKey={ 2 }
+          title={ this.renderDropdownTitle() }
+          id="basic-nav-dropdown">
 
-          <span className="spacer spacer-small"></span>
+          <MenuItem eventKey={ 2.1 } onClick={ this._goToUserProfile }>
+            <Glyphicon glyph="user" />
+            <span className="spacer spacer-small" />
+            User Profile
+          </MenuItem>
 
-          { this.props.user.username }
-        </NavItem>
+          <MenuItem eventKey={ 2.2 } onClick={ this._goToTracks }>
+            <Glyphicon glyph="music" />
+            <span className="spacer spacer-small" />
+            Tracks
+          </MenuItem>
 
-        <NavItem eventKey={ 3 } onClick={ this._goToTracks }>
-          <i className="fa fa-music"></i>
-        </NavItem>
+          <MenuItem eventKey={ 2.3 } onClick={ this._goToPlaylists }>
+            <Glyphicon glyph="th-list" />
+            <span className="spacer spacer-small" />
+            Playlists
+          </MenuItem>
 
-        <NavItem eventKey={ 4 } onClick={ this._goToPlaylists }>
-          <i className="fa fa-list"></i>
-        </NavItem>
+          <MenuItem eventKey={ 2.4 } onClick={ this._goToSettings }>
+            <Glyphicon glyph="cog" />
+            <span className="spacer spacer-small" />
+            Settings
+          </MenuItem>
 
-        <NavItem eventKey={ 5 } onClick={ this._goToSettings }>
-          <i className="fa fa-cog"></i>
-        </NavItem>
+          <MenuItem divider />
 
-        <Button onClick={ this._logout }>Logout</Button>
+          <MenuItem eventKey={ 3 } onSelect={ this._logout }>
+            <Glyphicon glyph="log-out" />
+            <span className="spacer spacer-small" />
+            Logout
+          </MenuItem>
+
+        </NavDropdown>
       </Nav>
     );
   }
