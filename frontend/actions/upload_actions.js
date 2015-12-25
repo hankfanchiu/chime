@@ -41,10 +41,10 @@ var UploadActions = {
     UploadActions.directUploadToS3(presignedUrl, file);
   },
 
-  receiveUploadProgress: function (response) {
+  receiveUploadProgress: function (percent) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.DIRECT_UPLOAD_PROGRESS_RECEIVED,
-      response: response
+      response: percent
     });
   },
 

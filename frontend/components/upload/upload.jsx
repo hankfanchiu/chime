@@ -36,7 +36,6 @@ var Upload = React.createClass({
   },
 
   componentWillUnmount: function () {
-    UploadActions.resetUploadStore();
     this.uploadListener.remove();
     this.trackListener.remove();
   },
@@ -117,11 +116,15 @@ var Upload = React.createClass({
   renderSubmitButton: function () {
     if (this.state.isUploaded) {
       return (
-        <button className="btn btn-default" type="submit">Save</button>
+        <button className="btn btn-default" type="submit">
+          Save
+        </button>
       );
     } else {
       return (
-        <button className="btn btn-default" disabled>Save</button>
+        <button className="btn btn-default" type="submit" disabled>
+          Save
+        </button>
       )
     }
   },
