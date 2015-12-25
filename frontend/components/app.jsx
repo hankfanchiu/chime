@@ -24,7 +24,7 @@ var App = React.createClass({
         </main>
 
         <Audio />
-        
+
         <footer>
           <Player />
         </footer>

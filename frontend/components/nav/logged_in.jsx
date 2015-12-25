@@ -1,4 +1,8 @@
 var React = require("react");
+var ReactBootstrap = require("react-bootstrap");
+var Nav = ReactBootstrap.Nav;
+var NavItem = ReactBootstrap.NavItem;
+var Button = ReactBootstrap.Button;
 
 var LoggedIn = React.createClass({
   _goToUpload: function () {
@@ -33,47 +37,34 @@ var LoggedIn = React.createClass({
 
   render: function () {
     return (
-      <div className="nav navbar-right">
-        <ul className="nav navbar-nav">
-          <li>
-            <a onClick={ this._goToUpload }>
-              Upload
-            </a>
-          </li>
+      <Nav pullRight>
+        <NavItem eventKey={ 1 } onSelect={ this._goToUpload }>
+          Upload
+        </NavItem>
 
-          <li>
-            <a onClick={ this._goToUser } style={{ paddingBottom: 0 }}>
-              <img className="nav-user-avatar"
-                src={ this.props.user.avatar_hero } />
+        <NavItem eventKey={ 2 } onClick={ this._goToUser }>
+          <img className="nav-user-avatar"
+            src={ this.props.user.avatar_hero } />
 
-              <span className="spacer spacer-small"></span>
+          <span className="spacer spacer-small"></span>
 
-              { this.props.user.username }
-            </a>
-          </li>
+          { this.props.user.username }
+        </NavItem>
 
-          <li>
-            <a onClick={ this._goToTracks }>
-              <i className="fa fa-music"></i>
-            </a>
-          </li>
+        <NavItem eventKey={ 3 } onClick={ this._goToTracks }>
+          <i className="fa fa-music"></i>
+        </NavItem>
 
-          <li>
-            <a onClick={ this._goToPlaylists }>
-              <i className="fa fa-list"></i>
-            </a>
-          </li>
+        <NavItem eventKey={ 4 } onClick={ this._goToPlaylists }>
+          <i className="fa fa-list"></i>
+        </NavItem>
 
-          <li>
-            <a onClick={ this._goToSettings }>
-              <i className="fa fa-cog"></i>
-            </a>
-          </li>
-        </ul>
+        <NavItem eventKey={ 5 } onClick={ this._goToSettings }>
+          <i className="fa fa-cog"></i>
+        </NavItem>
 
-        <button className="btn btn-default navbar-btn"
-          onClick={ this._logout }>Logout</button>
-      </div>
+        <Button onClick={ this._logout }>Logout</Button>
+      </Nav>
     );
   }
 });

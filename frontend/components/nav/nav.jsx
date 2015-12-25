@@ -1,9 +1,15 @@
 var React = require("react");
+var ReactBootstrap = require("react-bootstrap");
+var Navbar = ReactBootstrap.Navbar;
+var Nav = ReactBootstrap.Nav;
+var NavItem = ReactBootstrap.NavItem;
+var Button = ReactBootstrap.Button;
+
 var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
 var Search = require("./search/search");
 
-var Nav = React.createClass({
+var Navigation = React.createClass({
   getInitialState: function () {
     return this.getStatesFromStore();
   },
@@ -38,48 +44,45 @@ var Nav = React.createClass({
       );
     } else {
       return (
-        <div className="nav navbar-right">
-          <button className="btn btn-default navbar-btn"
+        <Nav pullRight>
+          <Button navItem
             onClick={ this._pushState.bind(null, "/signup") }>
             Sign Up
-          </button>
+          </Button>
 
           <span className="spacer spacer-small"></span>
 
-          <button className="btn btn-default navbar-btn"
+          <Button navItem
             onClick={ this._pushState.bind(null, "/login") }>
             Login
-          </button>
-        </div>
+          </Button>
+        </Nav>
       );
     }
   },
 
   render: function () {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="container">
+      <Navbar fixedTop>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a onClick={ this._pushState.bind(null, "/") }>Chime</a>
+          </Navbar.Brand>
+        </Navbar.Header>
 
-          <div className="navbar-header">
-            <a className="navbar-brand"
-              onClick={ this._pushState.bind(null, "/") }>Chime</a>
-          </div>
-
-          <ul className="nav navbar-nav nav-links">
-            <li>
-              <a onClick={ this._pushState.bind(null, "/discover") }>
-                Discover
-              </a>
-            </li>
-          </ul>
+        <Nav>
+          <NavItem eventKey={ 1 }
+            onSelect={ this._pushState.bind(null, "/discover") }>
+            Discover
+          </NavItem>
 
           <Search pushState={ this._pushState } />
+        </Nav>
 
-          { this.renderSessionStatus() }
-        </div>
-      </nav>
+        { this.renderSessionStatus() }
+      </Navbar>
     );
   }
 });
 
-module.exports = Nav;
+module.exports = Navigation;

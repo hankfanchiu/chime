@@ -1,4 +1,8 @@
 var React = require("react");
+var ReactBootstrap = require("react-bootstrap");
+var Navbar = ReactBootstrap.Navbar;
+var Input = ReactBootstrap.Input;
+
 var SearchActions = require("../../../actions/search_actions");
 var SearchStore = require("../../../stores/search_store");
 var SearchInput = require("./search_input");
@@ -29,8 +33,10 @@ var Search = React.createClass({
     });
   },
 
-  _handleSearchChange: function (e) {
-    var query = e.target.value;
+  _handleSearchChange: function () {
+    var query = this.refs.input.getValue();
+
+    if (query === "") { return; }
 
     if (this.promise) { clearInterval(this.promise); }
 
@@ -46,7 +52,6 @@ var Search = React.createClass({
   },
 
   _onBlur: function () {
-    debugger;
     this.setState({ showResults: false });
   },
 
@@ -64,12 +69,16 @@ var Search = React.createClass({
 
   render: function () {
     return (
-      <div className="search">
-        <SearchInput query={ this.state.query }
-          handleSearchChange={ this._handleSearchChange } />
+      <Navbar.Form pullLeft>
+        <Input type="text"
+          ref="input"
+          label="Search"
+          labelClassName="sr-only"
+          placeholder="Search for Tracks and Users"
+          onChange={ this._handleSearchChange } />
 
         { this.renderSearchResults() }
-      </div>
+      </Navbar.Form>
     );
   }
 });
