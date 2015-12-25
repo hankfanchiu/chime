@@ -13,15 +13,20 @@ var UploadAPIUtils = {
     });
   },
 
-  directUploadToS3: function (presignedUrl, file, actionCallback) {
+  directUploadToS3: function (presignedUrl, file, progressCB, successCB) {
     var xhr = new XMLHttpRequest();
 
     xhr.open('PUT', presignedUrl, true);
     xhr.setRequestHeader("Content-Type", file.type);
 
+    xhr.upload.onprogress = function (e) {
+      var percent = e.loaded / e.total;
+      progressCB(percent);
+    }
+
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
-        actionCallback(xhr);
+        successCB(xhr);
       }
     };
 

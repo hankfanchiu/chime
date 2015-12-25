@@ -11,25 +11,16 @@ var UploadAudio = React.createClass({
   },
 
   render: function () {
-    if (this.props.isUploaded) {
-      return (
-        <div className="form-group">
-          <label htmlFor="upload-sound">Sound</label>
+    return (
+      <div className="form-group upload-audio">
+        <span className="btn btn-default btn-file">
+          <i className="fa fa-file-audio-o"></i> Upload track audio
 
-          <p>Sound file uploaded.</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="form-group">
-          <label htmlFor="upload-sound">Sound</label>
-
-          <input type="file" accept="audio/*"
-            ref="file" id="upload-sound" 
+          <input type="file" accept="audio/*" ref="file"
             onChange={ this._handleFile } />
-        </div>
-      );
-    }
+        </span>
+      </div>
+    );
   }
 });
 

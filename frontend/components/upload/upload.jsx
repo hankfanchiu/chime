@@ -4,6 +4,7 @@ var TrackStore = require("../../stores/track_store");
 var UploadActions = require("../../actions/upload_actions");
 var UploadStore = require("../../stores/upload_store");
 var UploadAudio = require("./upload_audio");
+var UploadAudioProgress = require("./upload_audio_progress");
 var UploadImage = require("./upload_image");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 
@@ -16,6 +17,7 @@ var Upload = React.createClass({
       description: "",
       img: null,
       publicUrl: UploadStore.getPublicUrl(),
+      progress: UploadStore.getProgress(),
       isUploaded: UploadStore.isUploaded(),
       newTrack: TrackStore.newTrack()
     };
@@ -34,6 +36,7 @@ var Upload = React.createClass({
   },
 
   componentWillUnmount: function () {
+    UploadActions.resetUploadStore();
     this.uploadListener.remove();
     this.trackListener.remove();
   },
@@ -41,6 +44,7 @@ var Upload = React.createClass({
   _onChange: function () {
     this.setState({
       publicUrl: UploadStore.getPublicUrl(),
+      progress: UploadStore.getProgress(),
       isUploaded: UploadStore.isUploaded(),
       newTrack: TrackStore.newTrack()
     });
@@ -73,6 +77,14 @@ var Upload = React.createClass({
 
   _setImg: function (img) {
     this.setState({ img: img });
+  },
+
+  renderAudioUpload: function () {
+    if (this.state.progress) {
+      return <UploadAudioProgress progress={ this.state.progress } />;
+    } else {
+      return <UploadAudio />;
+    }
   },
 
   renderFormFields: function () {
@@ -109,8 +121,7 @@ var Upload = React.createClass({
       );
     } else {
       return (
-        <button className="btn btn-default"
-          type="submit" disabled>Save</button>
+        <button className="btn btn-default" disabled>Save</button>
       )
     }
   },
@@ -126,7 +137,7 @@ var Upload = React.createClass({
               encType="multipart/form-data"
               onSubmit={ this._handleSubmit }>
 
-              <UploadAudio isUploaded={ this.state.isUploaded } />
+              { this.renderAudioUpload() }
 
               <UploadImage setImg={ this._setImg } />
 

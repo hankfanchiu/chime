@@ -3,21 +3,20 @@ var UploadActions = require("../../actions/upload_actions");
 
 var UploadImage = React.createClass({
   getInitialState: function () {
-    return { imgUrl: "/assets/9sc64e325822a1cce626f502.jpg" };
+    return { imgUrl: "/assets/5c7dd1c3f97c7984168c450.jpg" };
   },
 
   _handleFile: function () {
     var reader = new FileReader();
     var img = this.refs.file.files[0];
 
+    if (img === null) { return; }
+
     reader.onloadend = function () {
       this.setState({ imgUrl: reader.result });
     }.bind(this);
 
-    if (img) {
-      reader.readAsDataURL(img);
-    }
-
+    reader.readAsDataURL(img);
     this.props.setImg(img);
   },
 
@@ -27,10 +26,9 @@ var UploadImage = React.createClass({
         <img className="img" src={ this.state.imgUrl } />
 
         <span className="btn btn-default btn-file">
-          <i className="fa fa-camera"></i> Upload track image
+          <i className="fa fa-file-image-o"></i> Upload track image
 
-          <input type="file" accept="image/*"
-            ref="file" id="upload-img"
+          <input type="file" accept="image/*" ref="file"
             onChange={ this._handleFile } />
         </span>
       </div>

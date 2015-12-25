@@ -22,7 +22,8 @@ var UploadActions = {
     UploadAPIUtils.directUploadToS3(
       presignedUrl,
       file,
-      UploadActions.receiveDirectUploadResponse
+      UploadActions.receiveUploadProgress,
+      UploadActions.receiveUploadSuccess
     );
   },
 
@@ -40,9 +41,16 @@ var UploadActions = {
     UploadActions.directUploadToS3(presignedUrl, file);
   },
 
-  receiveDirectUploadResponse: function (response) {
+  receiveUploadProgress: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.DIRECT_UPLOAD_RESPONSE_RECEIVED,
+      actionType: ActionTypes.DIRECT_UPLOAD_PROGRESS_RECEIVED,
+      response: response
+    });
+  },
+
+  receiveUploadSuccess: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.DIRECT_UPLOAD_SUCCESS_RECEIVED,
       response: response
     });
   },

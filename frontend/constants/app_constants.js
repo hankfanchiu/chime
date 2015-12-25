@@ -13,7 +13,8 @@ module.exports = {
 
     // Upload
     PUBLIC_URL_RECEIVED: null,
-    DIRECT_UPLOAD_RESPONSE_RECEIVED: null,
+    DIRECT_UPLOAD_PROGRESS_RECEIVED: null,
+    DIRECT_UPLOAD_SUCCESS_RECEIVED: null,
     RESET_UPLOAD_STORE: null,
 
     // User

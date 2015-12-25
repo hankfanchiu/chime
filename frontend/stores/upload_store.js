@@ -4,6 +4,7 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _publicUrl = null;
+var _progress = 0;
 var _responseStatus = null;
 var UploadStore = new Store(AppDispatcher);
 
@@ -17,7 +18,11 @@ UploadStore.__onDispatch = function (payload) {
       setPublicUrl(response);
       break;
 
-    case ActionTypes.DIRECT_UPLOAD_RESPONSE_RECEIVED:
+    case ActionTypes.DIRECT_UPLOAD_PROGRESS_RECEIVED:
+      updateProgress(response);
+      break;
+
+    case ActionTypes.DIRECT_UPLOAD_SUCCESS_RECEIVED:
       setResponseStatus(response);
       break;
 
@@ -32,6 +37,10 @@ UploadStore.getPublicUrl = function () {
   return _publicUrl;
 };
 
+UploadStore.getProgress = function () {
+  return _progress;
+};
+
 UploadStore.isUploaded = function () {
   return _responseStatus === 200;
 };
@@ -39,6 +48,12 @@ UploadStore.isUploaded = function () {
 var setPublicUrl = function (response) {
   _publicUrl = response.public_url;
   _responseStatus = null;
+
+  UploadStore.__emitChange();
+};
+
+var updateProgress = function (percent) {
+  _progress = parseFloat(percent);
 
   UploadStore.__emitChange();
 };
@@ -51,6 +66,7 @@ var setResponseStatus = function (response) {
 
 var resetUploadStore = function () {
   _publicUrl = null;
+  _progress = 0;
   _responseStatus = null;
 };
 

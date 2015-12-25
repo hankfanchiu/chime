@@ -1,3 +1,62 @@
+// Upload audio button
+
+div.upload-audio {
+  position: relative;
+  width: 350px;
+  height: 50px;
+  overflow: hidden;
+
+  input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    color: transparent;
+    cursor: pointer;
+    display: block;
+  }
+
+  span.btn-file {
+    position: absolute;
+    bottom: 10px;
+  }
+}
+
+// Upload audio progress bar
+
+div.upload-audio-progress {
+  display: inline-block;
+  height: 15px;
+  cursor: pointer;
+}
+
+div.upload-audio-progress-background {
+  float: left;
+  width: 300px;
+  height: 5px;
+  background: #bbb;
+}
+
+div.upload-audio-progress-bar {
+  float: left;
+  height: 5px;
+  background: #0077A9;
+}
+
+div.upload-audio-progress-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// Upload image
+
 div.upload-img {
   position: relative;
   width: 250px;
@@ -30,7 +89,6 @@ div.upload-img {
     left: 45%;
     transform: translate(-45%, 0);
     bottom: 10px;
-
   }
 }
 
