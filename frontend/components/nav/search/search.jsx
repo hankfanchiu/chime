@@ -2,10 +2,10 @@ var React = require("react");
 var ReactBootstrap = require("react-bootstrap");
 var Navbar = ReactBootstrap.Navbar;
 var Input = ReactBootstrap.Input;
+var Glyphicon = ReactBootstrap.Glyphicon;
 
 var SearchActions = require("../../../actions/search_actions");
 var SearchStore = require("../../../stores/search_store");
-var SearchInput = require("./search_input");
 var SearchResults = require("./search_results");
 
 var Search = React.createClass({
@@ -68,12 +68,15 @@ var Search = React.createClass({
   },
 
   render: function () {
+    var searchIcon = <Glyphicon glyph="search" />;
+
     return (
       <Navbar.Form pullLeft>
         <Input type="text"
           ref="input"
           label="Search"
           labelClassName="sr-only"
+          addonBefore={ searchIcon }
           placeholder="Search for Tracks and Users"
           onChange={ this._handleSearchChange } />
 
