@@ -101,6 +101,7 @@ var SignUp = React.createClass({
             <Input type="password"
               label="Password"
               placeholder="Enter password"
+              help="Use at least 6 characters."
               valueLink={ this.linkState("password") } />
 
             <Input type="email"
@@ -114,8 +115,6 @@ var SignUp = React.createClass({
           </Modal.Body>
 
           <Modal.Footer>
-            <Button onClick={ this.reset }>Cancel</Button>
-
             { this.renderSubmitButton() }
           </Modal.Footer>
         </form>
