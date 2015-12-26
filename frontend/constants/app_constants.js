@@ -12,6 +12,7 @@ module.exports = {
     CURRENT_USER_RECEIVED: null,
 
     // Upload
+    SHOW_UPLOAD_MODAL: null,
     PUBLIC_URL_RECEIVED: null,
     DIRECT_UPLOAD_PROGRESS_RECEIVED: null,
     DIRECT_UPLOAD_SUCCESS_RECEIVED: null,

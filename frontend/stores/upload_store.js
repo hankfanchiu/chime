@@ -3,6 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
+var _showModal = false;
 var _publicUrl = null;
 var _progress = 0;
 var _responseStatus = null;
@@ -14,6 +15,10 @@ UploadStore.__onDispatch = function (payload) {
   var response = payload.response;
 
   switch (actionType) {
+
+    case ActionTypes.SHOW_UPLOAD_MODAL:
+      setShowModal();
+      break;
 
     case ActionTypes.PUBLIC_URL_RECEIVED:
       setPublicUrl(response);
@@ -38,6 +43,10 @@ UploadStore.__onDispatch = function (payload) {
   };
 };
 
+UploadStore.showModal = function () {
+  return _showModal;
+};
+
 UploadStore.getPublicUrl = function () {
   return _publicUrl;
 };
@@ -52,6 +61,12 @@ UploadStore.isUploaded = function () {
 
 UploadStore.getTrackPathname = function () {
   return _trackPathname;
+};
+
+var setShowModal = function () {
+  _showModal = true;
+
+  UploadStore.__emitChange();
 };
 
 var setPublicUrl = function (response) {
@@ -74,6 +89,7 @@ var setResponseStatus = function (response) {
 };
 
 var setTrackPathname = function (track) {
+  _showModal = false;
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
@@ -83,6 +99,7 @@ var setTrackPathname = function (track) {
 };
 
 var resetUploadStore = function () {
+  _showModal = false;
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;

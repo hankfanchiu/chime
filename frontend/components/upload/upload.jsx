@@ -17,12 +17,15 @@ var Upload = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { title: "", description: "" };
+    return {
+      showModal: UploadStore.showModal(),
+      title: "",
+      description: ""
+    };
   },
 
   componentDidMount: function () {
     this.listenerToken = UploadStore.addListener(this._onChange);
-    UploadActions.resetUploadStore();
   },
 
   componentWillUnmount: function () {
@@ -30,24 +33,29 @@ var Upload = React.createClass({
   },
 
   _onChange: function () {
-    var pathname = UploadStore.getTrackPathname();
-
-    if (pathname) {
-      this.replaceState(this.getInitialState());
-      this.props.close();
-      this.history.pushState(null, pathname);
-    }
-
     this.setState({
+      showModal: UploadStore.showModal(),
       publicUrl: UploadStore.getPublicUrl(),
       progress: UploadStore.getProgress(),
       isUploaded: UploadStore.isUploaded()
     });
+
+    this._redirectIfSaved();
   },
 
-  _cancel: function () {
-    this._reset();
-    this.props.close();
+  _redirectIfSaved: function () {
+    var pathname = UploadStore.getTrackPathname();
+    var pushState = this.history.pushState.bind(this, null, pathname);
+
+    if (!pathname) { return; }
+
+    this.setState({ title: "", description: "" });
+    setTimeout(pushState, 300);
+  },
+
+  _reset: function () {
+    this.setState({ title: "", description: "" });
+    UploadActions.resetUploadStore();
   },
 
   _save: function () {
@@ -66,11 +74,6 @@ var Upload = React.createClass({
 
   _setImg: function (img) {
     this.setState({ img: img });
-  },
-
-  _reset: function () {
-    this.replaceState(this.getInitialState());
-    UploadActions.resetUploadStore();
   },
 
   progressState: function () {
@@ -100,8 +103,8 @@ var Upload = React.createClass({
     return (
       <Modal backdrop="static"
         dialogClassName="upload-modal"
-        onHide={ this._cancel }
-        show={ this.props.showModal }>
+        onHide={ this._reset }
+        show={ this.state.showModal }>
 
         <Modal.Header closeButton>
           <Modal.Title>Chime In</Modal.Title>
@@ -130,7 +133,7 @@ var Upload = React.createClass({
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={ this._cancel }>Cancel</Button>
+          <Button onClick={ this._reset }>Cancel</Button>
 
           { this.renderSubmitButton() }
         </Modal.Footer>

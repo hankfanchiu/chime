@@ -4,6 +4,20 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var UploadActions = {
+  // UI actions
+
+  showModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_UPLOAD_MODAL
+    });
+  },
+
+  resetUploadStore: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.RESET_UPLOAD_STORE
+    });
+  },
+
   // Request actions
 
   startDirectUpload: function (prefix, file) {
@@ -52,14 +66,6 @@ var UploadActions = {
     AppDispatcher.dispatch({
       actionType: ActionTypes.DIRECT_UPLOAD_SUCCESS_RECEIVED,
       response: response
-    });
-  },
-
-  // Non-API actions
-
-  resetUploadStore: function () {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.RESET_UPLOAD_STORE
     });
   }
 };
