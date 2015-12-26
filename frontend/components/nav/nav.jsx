@@ -31,9 +31,17 @@ var Navigation = React.createClass({
   _onChange: function () {
     this.setState(this.getStatesFromStore());
   },
-
+  
   _pushState: function (pathname) {
     this.props.history.pushState(null, pathname);
+  },
+
+  _goToHome: function () {
+    this._pushState("/");
+  },
+
+  _goToDiscover: function () {
+    this._pushState("/discover");
   },
 
   renderSessionStatus: function () {
@@ -52,14 +60,13 @@ var Navigation = React.createClass({
     return (
       <Navbar fixedTop>
         <Navbar.Header>
-          <Navbar.Brand>
-            <a onClick={ this._pushState.bind(null, "/") }>Chime</a>
+          <Navbar.Brand onClick={ this._goToHome }>
+            Chime
           </Navbar.Brand>
         </Navbar.Header>
 
         <Nav>
-          <NavItem eventKey={ 1 }
-            onSelect={ this._pushState.bind(null, "/discover") }>
+          <NavItem onClick={ this._goToDiscover }>
             Discover
           </NavItem>
 

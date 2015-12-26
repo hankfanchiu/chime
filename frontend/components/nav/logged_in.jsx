@@ -12,22 +12,16 @@ var LoggedIn = React.createClass({
     this.props.pushState("/upload");
   },
 
-  _goToProfile: function () {
-    var pathname = "/" + this.props.user.username;
-
-    this.props.pushState(pathname);
-  },
-
   _goToTracks: function () {
-    var pathname = "/" + this.props.user.username + "/tracks";
+    var tracks = "/" + this.props.user.username + "/tracks";
 
-    this.props.pushState(pathname);
+    this.props.pushState(tracks);
   },
 
   _goToPlaylists: function () {
-    var pathname = "/" + this.props.user.username + "/playlists";
+    var playlists = "/" + this.props.user.username + "/playlists";
 
-    this.props.pushState(pathname);
+    this.props.pushState(playlists);
   },
 
   _goToSettings: function () {
@@ -54,33 +48,26 @@ var LoggedIn = React.createClass({
 
     return (
       <Nav pullRight>
-        <NavItem eventKey={ 1 } onSelect={ this._goToUpload }>
+        <NavItem onClick={ this._goToUpload }>
           Upload
         </NavItem>
 
-        <NavDropdown eventKey={ 2 }
-          title={ this.renderDropdownTitle() }
-          id="basic-nav-dropdown">
+        <NavDropdown id="user-dropdown"
+          title={ this.renderDropdownTitle() }>
 
-          <MenuItem eventKey={ 2.1 } onClick={ this._goToProfile }>
-            <Glyphicon glyph="user" />
-            <span className="spacer spacer-small" />
-            Profile
-          </MenuItem>
-
-          <MenuItem eventKey={ 2.2 } onClick={ this._goToTracks }>
+          <MenuItem onClick={ this._goToTracks }>
             <Glyphicon glyph="music" />
             <span className="spacer spacer-small" />
             Tracks
           </MenuItem>
 
-          <MenuItem eventKey={ 2.3 } onClick={ this._goToPlaylists }>
+          <MenuItem onClick={ this._goToPlaylists }>
             <Glyphicon glyph="th-list" />
             <span className="spacer spacer-small" />
             Playlists
           </MenuItem>
 
-          <MenuItem eventKey={ 2.4 } onClick={ this._goToSettings }>
+          <MenuItem onClick={ this._goToSettings }>
             <Glyphicon glyph="cog" />
             <span className="spacer spacer-small" />
             Settings
@@ -88,7 +75,7 @@ var LoggedIn = React.createClass({
 
           <MenuItem divider />
 
-          <MenuItem eventKey={ 3 } onSelect={ this._logout }>
+          <MenuItem onClick={ this._logout }>
             <Glyphicon glyph="log-out" />
             <span className="spacer spacer-small" />
             Logout

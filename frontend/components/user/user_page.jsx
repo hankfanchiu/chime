@@ -51,7 +51,6 @@ var UserPage = React.createClass({
 
   render: function () {
     var username = this.props.params.username;
-    var profile = "/" + username;
     var tracks = "/" + username + "/tracks";
     var playlists = "/" + username + "/playlists";
 
@@ -67,14 +66,7 @@ var UserPage = React.createClass({
               activeKey={ this.props.location.pathname }
               onSelect={ this._handleSelect }>
 
-              <NavItem eventKey={ profile } disabled>Profile</NavItem>
-
-              <span className="spacer spacer-large" />
-
               <NavItem eventKey={ tracks }>Tracks</NavItem>
-
-              <span className="spacer spacer-large" />
-
               <NavItem eventKey={ playlists }>Playlists</NavItem>
             </Nav>
 
