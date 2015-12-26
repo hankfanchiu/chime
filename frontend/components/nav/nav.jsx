@@ -7,8 +7,11 @@ var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
 var LoggedOut = require("./logged_out");
 var Search = require("./search/search");
+var History = require("react-router").History;
 
 var Navigation = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return this.getStatesFromStore();
   },
@@ -31,9 +34,9 @@ var Navigation = React.createClass({
   _onChange: function () {
     this.setState(this.getStatesFromStore());
   },
-  
+
   _pushState: function (pathname) {
-    this.props.history.pushState(null, pathname);
+    this.history.pushState(null, pathname);
   },
 
   _goToHome: function () {
@@ -47,7 +50,9 @@ var Navigation = React.createClass({
   renderSessionStatus: function () {
     if (this.state.isLoggedIn) {
       return (
-        <LoggedIn user={ this.state.user } pushState={ this._pushState } />
+        <LoggedIn user={ this.state.user }
+          pushState={ this._pushState }
+          openUpload={ this.props.openUpload } />
       );
     } else {
       return (

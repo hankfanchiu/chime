@@ -2,10 +2,23 @@ var React = require("react");
 var SessionStore = require("../stores/session_store");
 var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
+var UploadModal = require("./upload/upload_modal");
 var Player = require("./player/player");
 var Audio = require("./audio");
 
 var App = React.createClass({
+  getInitialState: function () {
+    return { showUploadModal: false };
+  },
+
+  _openUpload: function () {
+    this.setState({ showUploadModal: true });
+  },
+
+  _closeUpload: function () {
+    this.setState({ showUploadModal: false });
+  },
+
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
       var currentUserId = SessionStore.getCurrentUserId();
@@ -17,7 +30,10 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="app">
-        <Nav history={ this.props.history } />
+        <Nav openUpload={ this._openUpload } />
+
+        <UploadModal showModal={ this.state.showUploadModal }
+          close={ this._closeUpload } />
 
         <main>
           { this.props.children }

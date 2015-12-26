@@ -9,7 +9,7 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 
 var LoggedIn = React.createClass({
   _goToUpload: function () {
-    this.props.pushState("/upload");
+    this.props.openUpload();
   },
 
   _goToTracks: function () {
