@@ -53,7 +53,7 @@ var setPublicUrl = function (response) {
 };
 
 var updateProgress = function (percent) {
-  _progress = parseFloat(percent);
+  _progress = parseFloat(percent) * 100;
 
   UploadStore.__emitChange();
 };

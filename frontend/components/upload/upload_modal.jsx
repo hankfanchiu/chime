@@ -3,6 +3,7 @@ var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
+var ProgressBar = require("react-bootstrap").ProgressBar;
 var Button = require("react-bootstrap").Button;
 var TrackActions = require("../../actions/track_actions");
 var TrackStore = require("../../stores/track_store");
@@ -59,12 +60,12 @@ var UploadModal = React.createClass({
     this.props.close();
   },
 
-  _handleSubmit: function (e) {
-    e.preventDefault();
-  },
-
   _handleIncomplete: function () {
     alert("Required fields missing!");
+  },
+
+  _handleSubmit: function (e) {
+    e.preventDefault();
   },
 
   _redirectToTrack: function (track) {
@@ -94,12 +95,18 @@ var UploadModal = React.createClass({
     this.setState({ img: img });
   },
 
+  progressState: function () {
+    if (this.state.progress === 100) { return "success"; }
+  },
+
   renderAudioUpload: function () {
-    if (this.state.progress) {
-      return <UploadAudioProgress progress={ this.state.progress } />;
-    } else {
-      return <UploadAudio />;
-    }
+    if (!this.state.progress) { return <UploadAudio />; }
+
+    return (
+      <ProgressBar now={ this.state.progress } active
+        label="%(percent)s%" srOnly
+        bsStyle={ this.progressState() } />
+    );
   },
 
   renderSubmitButton: function () {
@@ -133,7 +140,7 @@ var UploadModal = React.createClass({
 
             <Col xs={ 8 } sm={ 8 } md={ 8 }>
               <Input type="text"
-                label="Track Title"
+                label="Title"
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
 
