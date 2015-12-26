@@ -85,7 +85,8 @@ var SignUp = React.createClass({
 
   render: function () {
     return (
-      <Modal bsSize="small"
+      <Modal backdrop="static"
+        bsSize="small"
         onHide={ this.reset }
         show={ this.state.showModal }>
 
