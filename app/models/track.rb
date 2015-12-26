@@ -44,7 +44,7 @@ class Track < ActiveRecord::Base
     path: "/tracks/images/:basename_:style.:extension",
     styles: {
       hero: '30x30#',
-      thumb: '100x100#',
+      thumb: '200x200#',
       square: '300x300#'
     }
 

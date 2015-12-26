@@ -1,9 +1,13 @@
 var React = require("react");
+var ListGroup = require("react-bootstrap").ListGroup;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var UserStore = require("../../../stores/user_store");
 var TracksIndexItem = require("./tracks_index_item");
 
 var TracksIndex = React.createClass({
   getInitialState: function () {
+    this.username = this.props.params.username;
+
     return this.getStatesFromStore();
   },
 
@@ -25,31 +29,31 @@ var TracksIndex = React.createClass({
     this.setState(this.getStatesFromStore());
   },
 
+  renderNoTracks: function () {
+    return (
+      <ListGroup>
+        <ListGroupItem>This user has no tracks! :(</ListGroupItem>
+      </ListGroup>
+    );
+  },
+
   renderTrackIndexItems: function () {
-    var tracks = this.state.tracks;
     var username = this.props.params.username;
 
-    if (tracks.length === 0) {
+    return this.state.tracks.map(function (track, idx) {
       return (
-        <div className="tracks-index-item clear">
-          This user has no tracks! :(
-        </div>
+        <TracksIndexItem key={ idx } track={ track } username={ username } />
       );
-    } else {
-      return tracks.map(function (track, idx) {
-        return (
-          <TracksIndexItem key={ idx }
-            track={ track } username={ username } />
-        );
-      });
-    }
+    });
   },
 
   render: function () {
+    if (this.state.tracks.length === 0) { return this.renderNoTracks(); }
+
     return (
-      <div className="tracks-index clear">
+      <ListGroup>
         { this.renderTrackIndexItems() }
-      </div>
+      </ListGroup>
     );
   }
 });

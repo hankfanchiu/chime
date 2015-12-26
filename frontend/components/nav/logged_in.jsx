@@ -12,7 +12,7 @@ var LoggedIn = React.createClass({
     this.props.pushState("/upload");
   },
 
-  _goToUserProfile: function () {
+  _goToProfile: function () {
     var pathname = "/" + this.props.user.username;
 
     this.props.pushState(pathname);
@@ -62,10 +62,10 @@ var LoggedIn = React.createClass({
           title={ this.renderDropdownTitle() }
           id="basic-nav-dropdown">
 
-          <MenuItem eventKey={ 2.1 } onClick={ this._goToUserProfile }>
+          <MenuItem eventKey={ 2.1 } onClick={ this._goToProfile }>
             <Glyphicon glyph="user" />
             <span className="spacer spacer-small" />
-            User Profile
+            Profile
           </MenuItem>
 
           <MenuItem eventKey={ 2.2 } onClick={ this._goToTracks }>

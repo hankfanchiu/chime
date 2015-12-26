@@ -1,4 +1,6 @@
 var React = require("react");
+var ListGroup = require("react-bootstrap").ListGroup;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var UserStore = require("../../../stores/user_store");
 var UserActions = require("../../../actions/user_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
@@ -26,31 +28,32 @@ var PlaylistsIndex = React.createClass({
     this.setState(this.getStatesFromStore());
   },
 
+  renderNoPlaylists: function () {
+    return (
+      <ListGroup>
+        <ListGroupItem>This user has no playlists! :(</ListGroupItem>
+      </ListGroup>
+    );
+  },
+
   renderPlaylistsIndexItems: function () {
-    var playlists = this.state.playlists;
     var username = this.props.params.username;
 
-    if (playlists.length === 0) {
+    return this.state.playlists.map(function (playlist, idx) {
       return (
-        <div className="playlists-index-item clear">
-          This user has no playlists! :(
-        </div>
+        <PlaylistsIndexItem key={ idx }
+          playlist={ playlist } username={ username } />
       );
-    } else {
-      return playlists.map(function (playlist, idx) {
-        return (
-          <PlaylistsIndexItem key={ idx }
-            playlist={ playlist } username={ username } />
-        );
-      });
-    }
+    });
   },
 
   render: function () {
+    if (this.state.playlists.length === 0) { return this.renderNoPlaylists(); }
+
     return (
-      <div className="playlists-index clear">
+      <ListGroup>
         { this.renderPlaylistsIndexItems() }
-      </div>
+      </ListGroup>
     );
   }
 });

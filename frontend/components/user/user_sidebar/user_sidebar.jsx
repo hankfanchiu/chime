@@ -1,23 +1,21 @@
 var React = require("react");
-var SessionStore = require("../../../stores/session_store");
+var Col = require("react-bootstrap").Col;
 var UserSidebarAvatar = require("./user_sidebar_avatar");
 
 var UserSidebar = React.createClass({
   render: function () {
     return (
-      <div className="col-xs-4">
-        <div className="user-sidebar">
-          <UserSidebarAvatar user={ this.props.user }
-            currentUser={ this.props.currentUser }
-            isCurrentUser={ this.props.isCurrentUser } />
+      <Col sm={ 4 } md={ 4 }>
+        <UserSidebarAvatar user={ this.props.user }
+          currentUser={ this.props.currentUser }
+          isCurrentUser={ this.props.isCurrentUser } />
 
-          <div className="username">
-            <h3>{ this.props.user.username }</h3>
-          </div>
-
-          <p>This contains an overview of the user.</p>
+        <div className="username">
+          <h3>{ this.props.user.username }</h3>
         </div>
-      </div>
+
+        <p>This contains an overview of the user.</p>
+      </Col>
     );
   }
 });

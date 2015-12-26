@@ -1,4 +1,6 @@
 var React = require("react");
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var Image = require("react-bootstrap").Image;
 var PlayerActions = require("../../../actions/player_actions");
 var History = require("react-router").History;
 
@@ -33,10 +35,8 @@ var TracksIndexItem = React.createClass({
     var track = this.props.track;
 
     return (
-      <div className="tracks tracks-index-item clear">
-        <div className="image" onClick={ this._playTrack }>
-          <img src={ track.img_thumb } />
-        </div>
+      <ListGroupItem>
+        <Image src={ track.img_thumb } onClick={ this._playTrack } />
 
         <div className="detail">
           <p className="username">
@@ -54,7 +54,7 @@ var TracksIndexItem = React.createClass({
           </p>
 
         </div>
-      </div>
+      </ListGroupItem>
     );
   }
 });

@@ -23,11 +23,11 @@ var App = React.createClass({
           { this.props.children }
         </main>
 
-        <Audio />
-
         <footer>
           <Player />
         </footer>
+
+        <Audio />
       </div>
     );
   }

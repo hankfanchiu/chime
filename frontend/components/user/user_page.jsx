@@ -1,27 +1,32 @@
 var React = require("react");
+var Grid = require("react-bootstrap").Grid;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Nav = require("react-bootstrap").Nav;
+var NavItem = require("react-bootstrap").NavItem;
+
 var SessionStore = require("../../stores/session_store");
 var UserStore = require("../../stores/user_store");
 var UserActions = require("../../actions/user_actions");
 var UserSidebar = require("./user_sidebar/user_sidebar");
-var UserNav = require("./user_nav");
 
 var UserPage = React.createClass({
   getInitialState: function () {
+    this.username = this.props.params.username;
+
     return this.getStatesFromStore();
   },
 
   getStatesFromStore: function () {
-    var username = this.props.params.username;
-
     return {
-      user: UserStore.getUser(username),
+      user: UserStore.getUser(this.username),
       currentUser: SessionStore.getCurrentUser(),
-      isCurrentUser: SessionStore.isCurrentUser(username)
+      isCurrentUser: SessionStore.isCurrentUser(this.username)
     };
   },
 
   componentWillMount: function () {
-    UserActions.fetchUser(this.props.params.username);
+    UserActions.fetchUser(this.username);
   },
 
   componentDidMount: function () {
@@ -40,26 +45,36 @@ var UserPage = React.createClass({
     this.setState(this.getStatesFromStore());
   },
 
+  _handleSelect: function (selectKey) {
+    this.props.history.pushState(null, selectKey);
+  },
+
   render: function () {
+    var profile = "/" + this.username;
+    var tracks = "/" + this.username + "/tracks";
+    var playlists = "/" + this.username + "/playlists";
+
     return (
-      <div className="container">
-        <div className="row">
+      <Grid>
+        <Row>
           <UserSidebar user={ this.state.user }
             currentUser={ this.state.currentUser }
             isCurrentUser={ this.state.isCurrentUser } />
 
-          <div className="col-xs-8">
-            <UserNav pathname={ this.props.location.pathname }
-              history={ this.props.history }
-              username={ this.props.params.username } />
+          <Col sm={ 8 } md={ 8 }>
+            <Nav bsStyle="tabs"
+              activeKey={ this.props.location.pathname }
+              onSelect={ this._handleSelect }>
 
-            <div className="row">
-              { this.props.children }
-            </div>
+              <NavItem eventKey={ profile } disabled>Profile</NavItem>
+              <NavItem eventKey={ tracks }>Tracks</NavItem>
+              <NavItem eventKey={ playlists }>Playlists</NavItem>
+            </Nav>
 
-          </div>
-        </div>
-      </div>
+            { this.props.children }
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 });
