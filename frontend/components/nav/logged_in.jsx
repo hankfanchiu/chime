@@ -34,10 +34,11 @@ var LoggedIn = React.createClass({
   },
 
   renderDropdownTitle: function () {
+    var style = { margin: "-5px 0 -5px 0", width: "20px", height: "20px" };
+
     return (
       <span>
-        <Image src={ this.props.user.avatar_hero }
-          style={{ margin: "-5px 0 -5px 0" }} />
+        <Image src={ this.props.user.avatar_hero } style={ style } />
         <span className="spacer spacer-small"></span>
         { this.props.user.username }
       </span>

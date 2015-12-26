@@ -18,7 +18,7 @@ var Upload = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: UploadStore.showModal(),
+      showModal: false,
       title: "",
       description: ""
     };
@@ -54,8 +54,8 @@ var Upload = React.createClass({
   },
 
   _reset: function () {
-    this.setState({ title: "", description: "" });
     UploadActions.resetUploadStore();
+    this.setState(this.getInitialState());
   },
 
   _save: function () {

@@ -1,24 +1,31 @@
 var React = require("react");
+var Modal = require("react-bootstrap").Modal;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Input = require("react-bootstrap").Input;
+var Button = require("react-bootstrap").Button;
+var UserActions = require("../../actions/user_actions");
+
+var SignUpActions = require("../../actions/sign_up_actions");
+var SignUpStore = require("../../stores/sign_up_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
-var UserActions = require("../../actions/user_actions");
-var SessionStore = require("../../stores/session_store");
 
 var SignUp = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { username: "", email: "" };
-  },
-
-  componentWillMount: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/");
-    }
+    return {
+      showModal: false,
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirmation: ""
+    };
   },
 
   componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
+    this.listenerToken = SignUpStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -26,107 +33,93 @@ var SignUp = React.createClass({
   },
 
   _onChange: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/");
-    }
+    this.setState({ showModal: SignUpStore.showModal() });
   },
 
-  _goToLogin: function () {
-    this.history.pushState(null, "/login");
+  _reset: function () {
+    SignUpActions.closeModal();
+    this.setState(this.getInitialState());
   },
 
-  _signUp: function (e) {
-    e.preventDefault();
-
-    if (this.IisIncomplete()) { return this.handleIncompleteSubmit(); }
-
+  _signUp: function () {
     var userData = {
       username: this.state.username,
       email: this.state.email,
-      password: this.refs.password.value,
-      password_confirmation: this.refs.passwordConfirmation.value
+      password: this.state.password,
+      password_confirmation: this.state.passwordConfirmation
     };
 
     UserActions.createUser(userData);
   },
 
-  IisIncomplete: function () {
-    if (this.state.username === "") { return true; }
-    if (this.state.email === "") { return true; }
-    if (this.state.password === "") { return true; }
-    if (this.state.passwordConfirmation === "") { return true; }
-
-    return false;
+  _showLoginModal: function () {
+    this._reset();
+    // show login modal
   },
 
-  handleIncompleteSubmit: function () {
-    alert("Required fields missing");
+  _validateComplete: function () {
+    if (this.state.username === "") { return false; }
+    if (this.state.email === "") { return false; }
+    if (this.state.password === "") { return false; }
+    if (this.state.passwordConfirmation === "") { return false; }
+
+    return true;
+  },
+
+  renderSubmitButton: function () {
+    var isComplete = this._validateComplete();
+
+    if (!isComplete) {
+      return <Button bsStyle="primary" disabled>Sign Up</Button>;
+    }
+
+    return (
+      <Button bsStyle="primary" onClick={ this._signUp }>Sign Up</Button>
+    );
   },
 
   render: function () {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-xs-4 col-xs-offset-4">
-            <h1>Create Account</h1>
+      <Modal bsSize="small"
+        onHide={ this._reset }
+        show={ this.state.showModal }>
 
-            <form className="signup-form" onSubmit={ this._signUp }>
+        <Modal.Header closeButton>
+          <Modal.Title>Create Account</Modal.Title>
+        </Modal.Header>
 
-              <div className="form-group">
-                <label htmlFor="signup-username">Username</label>
+        <Modal.Body>
+          <Input type="text"
+            label="Username"
+            placeholder="Identify your unique self"
+            valueLink={ this.linkState("username") } />
 
-                <input type="text"
-                  name="username"
-                  className="form-control"
-                  id="signup-username"
-                  valueLink={ this.linkState("username") } />
-              </div>
+          <Input type="email"
+            label="Email Address"
+            placeholder="Enter email address"
+            valueLink={ this.linkState("email") } />
 
-              <div className="form-group">
-                <label htmlFor="signup-email">Email</label>
+          <Input type="password"
+            label="Password"
+            placeholder="Enter password"
+            valueLink={ this.linkState("password") } />
 
-                <input type="text"
-                  name="email"
-                  className="form-control"
-                  id="signup-email"
-                  valueLink={ this.linkState("email") } />
-              </div>
+          <Input type="password"
+            label="Password Confirmation"
+            placeholder="Confirm your password"
+            valueLink={ this.linkState("passwordConfirmation") } />
 
-              <div className="form-group">
-                <label htmlFor="signup-password">Password</label>
+          <a onClick={ this._showLoginModal }>
+            Already have an account?
+          </a>
+        </Modal.Body>
 
-                <input type="password"
-                  name="password"
-                  className="form-control"
-                  ref="password"
-                  id="signup-password" />
-              </div>
+        <Modal.Footer>
+          <Button onClick={ this._reset }>Cancel</Button>
 
-              <div className="form-group">
-                <label htmlFor="signup-password-confirmation">
-                  Password Confirmation
-                </label>
-
-                <input type="password"
-                  name="passwordConfirmation"
-                  className="form-control"
-                  ref="passwordConfirmation"
-                  id="signup-password-confirmation" />
-              </div>
-
-              <p>
-                <a onClick={ this._goToLogin }>
-                  Already have an account?
-                </a>
-              </p>
-
-              <button className="btn btn-default"
-                type="submit">Sign Up</button>
-            </form>
-
-          </div>
-        </div>
-      </div>
+          { this.renderSubmitButton() }
+        </Modal.Footer>
+      </Modal>
     );
   }
 });

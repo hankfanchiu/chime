@@ -6,10 +6,11 @@ var MenuItem = require("react-bootstrap").MenuItem;
 var Button = require("react-bootstrap").Button;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
+var SignUpActions = require("../../actions/sign_up_actions");
 
 var LoggedOut = React.createClass({
-  _goToSignUp: function () {
-    this.props.pushState("/signup");
+  _showSignUpModal: function () {
+    SignUpActions.showModal();
   },
 
   _goToLogin: function () {
@@ -19,7 +20,7 @@ var LoggedOut = React.createClass({
   render: function () {
     return (
       <Nav pullRight>
-        <NavItem eventKey={ 1 } onSelect={ this._goToSignUp }>
+        <NavItem eventKey={ 1 } onSelect={ this._showSignUpModal }>
           Sign Up
         </NavItem>
 

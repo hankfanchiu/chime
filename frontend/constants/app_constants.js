@@ -11,6 +11,10 @@ module.exports = {
     LOGOUT_RESPONSE: null,
     CURRENT_USER_RECEIVED: null,
 
+    // Sign Up
+    SHOW_SIGN_UP_MODAL: null,
+    CLOSE_SIGN_UP_MODAL: null,
+
     // Upload
     SHOW_UPLOAD_MODAL: null,
     PUBLIC_URL_RECEIVED: null,

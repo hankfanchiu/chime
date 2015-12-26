@@ -1,17 +1,14 @@
 var React = require("react");
-var ReactRouter = require("react-router");
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var IndexRedirect = ReactRouter.IndexRedirect;
+var Router = require("react-router").Router;
+var Route = require("react-router").Route;
+var IndexRoute = require("react-router").IndexRoute;
+var IndexRedirect = require("react-router").IndexRedirect;
 var createBrowserHistory = require("history/lib/createBrowserHistory");
 
 var App = require("./components/app");
 var Home = require("./components/home");
-var Upload = require("./components/upload/upload");
 var Discover = require("./components/discover/discover");
 var Collect = require("./components/collect/collect");
-var SignUp = require("./components/session/sign_up");
 var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
 var Settings = require("./components/session/settings");
@@ -30,7 +27,6 @@ module.exports = (
       <IndexRoute component={ Home } />
 
       <Route name="discover" path="discover" component={ Discover } />
-      <Route name="signup" path="signup" component={ SignUp } />
       <Route name="login" path="login" component={ Login } />
       <Route name="logout" path="logout" component={ Logout } />
       <Route name="settings" path="settings" component={ Settings } />
