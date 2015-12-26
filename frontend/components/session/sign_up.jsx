@@ -16,8 +16,7 @@ var SignUp = React.createClass({
       showModal: false,
       username: "",
       email: "",
-      password: "",
-      passwordConfirmation: ""
+      password: ""
     };
   },
 
@@ -43,7 +42,6 @@ var SignUp = React.createClass({
     if (this.state.username === "") { return false; }
     if (this.state.email === "") { return false; }
     if (this.state.password === "") { return false; }
-    if (this.state.passwordConfirmation === "") { return false; }
 
     return true;
   },
@@ -62,8 +60,7 @@ var SignUp = React.createClass({
     var userData = {
       username: this.state.username,
       email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.passwordConfirmation
+      password: this.state.password
     };
 
     UserActions.createUser(userData);
@@ -110,11 +107,6 @@ var SignUp = React.createClass({
               label="Email Address"
               placeholder="Enter email address"
               valueLink={ this.linkState("email") } />
-
-            <Input type="password"
-              label="Password Confirmation"
-              placeholder="Confirm your password"
-              valueLink={ this.linkState("passwordConfirmation") } />
 
             <a onClick={ this.showLoginModal }>
               Already have an account?

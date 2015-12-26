@@ -45,12 +45,7 @@ class User < ActiveRecord::Base
     format: { with: VALID_EMAIL_REGEX }
 
   validates :password,
-    confirmation: true,
     length: { minimum: 6, maximum: 30, allow_nil: true }
-
-  validates :password_confirmation,
-    presence: true,
-    allow_nil: true
 
   validates :session_token,
     presence: true,
