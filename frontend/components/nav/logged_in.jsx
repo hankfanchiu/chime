@@ -8,10 +8,6 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 
 var LoggedIn = React.createClass({
-  _goToUpload: function () {
-    this.props.openUpload();
-  },
-
   _goToTracks: function () {
     var tracks = "/" + this.props.user.username + "/tracks";
 
@@ -48,7 +44,7 @@ var LoggedIn = React.createClass({
 
     return (
       <Nav pullRight>
-        <NavItem onClick={ this._goToUpload }>
+        <NavItem onClick={ this.props.openUpload }>
           Upload
         </NavItem>
 

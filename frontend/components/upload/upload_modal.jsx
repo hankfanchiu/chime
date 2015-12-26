@@ -2,6 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var TrackActions = require("../../actions/track_actions");
 var TrackStore = require("../../stores/track_store");
@@ -114,6 +115,7 @@ var UploadModal = React.createClass({
   render: function () {
     return (
       <Modal bsSize="large"
+        bsStyle="static"
         onHide={ this._clearUpload }
         show={ this.props.showModal }>
 
@@ -124,35 +126,25 @@ var UploadModal = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          <form className="upload-form"
-            encType="multipart/form-data"
-            onSubmit={ this._handleSubmit }>
+          <Row>
+            <Col xs={ 4 } sm={ 4 } md={ 4 }>
+              <UploadImage setImg={ this._setImg } />
+            </Col>
 
-            { this.renderAudioUpload() }
-
-            <UploadImage setImg={ this._setImg } />
-
-            <div className="form-group">
-              <label htmlFor="upload-track-title">Title</label>
-
-              <input type="text"
-                name="title"
-                className="form-control"
-                id="upload-track-title"
+            <Col xs={ 8 } sm={ 8 } md={ 8 }>
+              <Input type="text"
+                label="Track Title"
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="upload-track-description">Description</label>
-
-              <textarea name="description"
-                className="form-control"
-                id="upload-track-description"
+              <Input type="textarea"
+                label="Description"
                 placeholder="Describe your track"
                 valueLink={ this.linkState("description") } />
-            </div>
-          </form>
+
+              { this.renderAudioUpload() }
+            </Col>
+          </Row>
         </Modal.Body>
 
         <Modal.Footer>

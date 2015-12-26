@@ -32,10 +32,10 @@ var App = React.createClass({
       <div className="app">
         <Nav openUpload={ this._openUpload } />
 
-        <UploadModal showModal={ this.state.showUploadModal }
-          close={ this._closeUpload } />
-
         <main>
+          <UploadModal showModal={ this.state.showUploadModal }
+            close={ this._closeUpload } />
+          
           { this.props.children }
         </main>
 
