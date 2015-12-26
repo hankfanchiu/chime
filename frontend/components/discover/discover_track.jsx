@@ -30,7 +30,7 @@ var DiscoverTrack = React.createClass({
     if (!track) { return <Col />; }
 
     return (
-      <Col md={ 3 }>
+      <Col xs={ 3 } sm={ 3 } md={ 3 }>
         <Thumbnail src={ track.img_square }
           alt={ track.title }
           onClick={ this._playTrack }>

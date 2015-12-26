@@ -1,4 +1,6 @@
 var React = require("react");
+var Glyphicon = require("react-bootstrap").Glyphicon;
+var Thumbnail = require("react-bootstrap").Thumbnail;
 var UserActions = require("../../../actions/user_actions");
 
 var UserSidebarAvatar = React.createClass({
@@ -12,28 +14,28 @@ var UserSidebarAvatar = React.createClass({
     UserActions.uploadImage(currentUserId, formData);
   },
 
-  renderUpload: function () {
-    var username = this.props.user.username;
+  renderNoUpload: function () {
+    return (
+      <div className="avatar">
+        <Thumbnail src={ this.props.user.avatar_square } />
+      </div>
+    );
+  },
 
-    if (this.props.isCurrentUser) {
-      return (
+  render: function () {
+    if (!this.props.isCurrentUser) { return this.renderNoUpload(); }
+
+    return (
+      <div className="avatar">
         <span className="btn btn-default btn-file">
-          <i className="fa fa-camera"></i> Upload new avatar
+          <Glyphicon glyph="camera"/> Update avatar
 
           <input type="file" accept="image/*"
             ref="file" id="upload-avatar"
             onChange={ this._handleFile } />
         </span>
-      );
-    }
-  },
 
-  render: function () {
-    return (
-      <div className="avatar">
-        <img className="avatar" src={ this.props.user.avatar_square } />
-
-        { this.renderUpload() }
+        <Thumbnail src={ this.props.user.avatar_square } />
       </div>
     );
   }

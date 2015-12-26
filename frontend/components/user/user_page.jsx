@@ -61,7 +61,7 @@ var UserPage = React.createClass({
             currentUser={ this.state.currentUser }
             isCurrentUser={ this.state.isCurrentUser } />
 
-          <Col xs={ 8 } sm={ 8 } md={ 8 }>
+          <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <Nav bsStyle="tabs"
               activeKey={ this.props.location.pathname }
               onSelect={ this._handleSelect }>

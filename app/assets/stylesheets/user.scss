@@ -4,36 +4,33 @@ div.user-sidebar {
 
 div.avatar {
   position: relative;
-  width: 250px;
-  height: 250px;
-
-  img.avatar {
-    width: 250px;
-  }
 
   input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
+    width: 100%;
     min-width: 100%;
     min-height: 100%;
     font-size: 100px;
-    text-align: right;
+    text-align: center;
     filter: alpha(opacity=0);
     opacity: 0;
     outline: none;
     color: transparent;
     cursor: pointer;
     display: block;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0);
   }
 
   span.btn-file {
     display: none;
     position: absolute;
-    left: 45%;
-    transform: translate(-45%, 0);
-    bottom: 10px;
-
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0);
   }
 }
 
