@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   INVALID_USERNAMES = %w(discover collect login logout signup settings upload)
 
+  has_many :tracks, dependent: :destroy
+  has_many :playlists, dependent: :destroy
+  has_many :playlistings, through: :playlists
+
   after_initialize :ensure_session_token
   before_save :downcase_user_data
   before_save :randomize_avatar_basename
@@ -66,10 +70,6 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, { less_than: 5.megabytes }
   validates_attachment_content_type :avatar,
     content_type: ["image/jpeg", "image/gif", "image/png"]
-
-  has_many :tracks, dependent: :destroy
-  has_many :playlists, dependent: :destroy
-  has_many :playlistings, through: :playlists
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64

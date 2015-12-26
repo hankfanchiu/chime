@@ -1,6 +1,14 @@
 var React = require("react");
-var PlaylistTrack = require("./playlist_track");
+var ListGroup = require("react-bootstrap").ListGroup;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Thumbnail = require("react-bootstrap").Thumbnail;
+var Glyphicon = require("react-bootstrap").Glyphicon;
+var Collapse = require("react-bootstrap").Collapse;
+var Well = require("react-bootstrap").Well;
 var PlayerActions = require("../../../actions/player_actions");
+var PlaylistTrack = require("./playlist_track");
 var History = require("react-router").History;
 
 var PlaylistsIndexItem = React.createClass({
@@ -21,14 +29,12 @@ var PlaylistsIndexItem = React.createClass({
   renderPlaylistTrackList: function () {
     var playlist = this.props.playlist;
 
-    var tracks = playlist.tracks.map(function (track, idx) {
+    return playlist.tracks.map(function (track, idx) {
       return (
-        <PlaylistTrack key={ idx }
+        <PlaylistTrack key={ idx } index={ idx + 1 }
           track={ track } playlistId={ playlist.id }/>
       );
     });
-
-    return tracks;
   },
 
   render: function () {
@@ -36,25 +42,32 @@ var PlaylistsIndexItem = React.createClass({
     var firstTrackImgUrl = playlist.tracks[0].img_thumb;
 
     return (
-      <div className="playlists-index-item clear">
-        <div className="playlist-image" onClick={ this._playPlaylist }>
-          <img className="playlist-image" src={ firstTrackImgUrl } />
-        </div>
+      <ListGroupItem>
+        <Row>
+          <Col xs={ 3 } sm={ 3 } md={ 3 }>
+            <Thumbnail src={ firstTrackImgUrl }
+              onClick={ this._playPlaylist } />
+          </Col>
 
-        <div className="playlist-detail">
-          <p className="username">
-            <a onClick={ this._goToUser }>{ playlist.user.username }</a>
-          </p>
+          <Col xs={ 9 } sm={ 9 } md={ 9 }>
+            <Row>
+              <p className="username">
+                <a onClick={ this._goToUser }>{ playlist.user.username }</a>
+              </p>
 
-          <p className="playlist-title">
-            <a onClick={ this._goToPlaylist }>{ playlist.title }</a>
-          </p>
+              <p className="playlist-title">
+                <a onClick={ this._goToPlaylist }>{ playlist.title }</a>
+              </p>
+            </Row>
 
-          <ul className="playlist-track-list">
-            { this.renderPlaylistTrackList() }
-          </ul>
-        </div>
-      </div>
+            <Row>
+              <ListGroup>
+                { this.renderPlaylistTrackList() }
+              </ListGroup>
+            </Row>
+          </Col>
+        </Row>
+      </ListGroupItem>
     );
   }
 });

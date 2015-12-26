@@ -1,6 +1,8 @@
 var React = require("react");
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
-var Image = require("react-bootstrap").Image;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlayerActions = require("../../../actions/player_actions");
 var History = require("react-router").History;
 
@@ -36,24 +38,31 @@ var TracksIndexItem = React.createClass({
 
     return (
       <ListGroupItem>
-        <Image src={ track.img_thumb } onClick={ this._playTrack } />
+        <Row>
+          <Col xs={ 3 } sm={ 3 } md={ 3 }>
+            <Thumbnail src={ track.img_thumb }
+              onClick={ this._playTrack } />
+          </Col>
 
-        <div className="detail">
-          <p className="username">
-            <a onClick={ this._goToUser }>{ track.user.username }</a>
-          </p>
+          <Col xs={ 9 } sm={ 9 } md={ 9 }>
+            <div className="detail">
+              <p className="username">
+                <a onClick={ this._goToUser }>{ track.user.username }</a>
+              </p>
 
-          <p className="title">
-            <a onClick={ this._goToTrack }>{ track.title }</a>
-          </p>
+              <p className="title">
+                <a onClick={ this._goToTrack }>{ track.title }</a>
+              </p>
 
-          <p>
-            <a onClick={ this._addTrackToQueue }>
-              <i className="fa fa-plus"></i> Add to queue
-            </a>
-          </p>
+              <p>
+                <a onClick={ this._addTrackToQueue }>
+                  <i className="fa fa-plus"></i> Add to queue
+                </a>
+              </p>
 
-        </div>
+            </div>
+          </Col>
+        </Row>
       </ListGroupItem>
     );
   }

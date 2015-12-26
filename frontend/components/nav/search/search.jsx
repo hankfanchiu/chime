@@ -42,7 +42,7 @@ var Search = React.createClass({
     this.setState({ query: query, showResults: true });
     this.promise = setTimeout(function () {
       SearchActions.fetchResults(query.toLowerCase());
-    }.bind(this), 400);
+    }.bind(this), 200);
   },
 
   _handleSearchClick: function (pathname) {

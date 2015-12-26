@@ -5,7 +5,7 @@ var UserSidebarAvatar = require("./user_sidebar_avatar");
 var UserSidebar = React.createClass({
   render: function () {
     return (
-      <Col sm={ 4 } md={ 4 }>
+      <Col xs={ 4 } sm={ 4 } md={ 4 }>
         <UserSidebarAvatar user={ this.props.user }
           currentUser={ this.props.currentUser }
           isCurrentUser={ this.props.isCurrentUser } />

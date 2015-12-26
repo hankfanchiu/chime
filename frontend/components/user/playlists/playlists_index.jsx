@@ -2,7 +2,6 @@ var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var UserStore = require("../../../stores/user_store");
-var UserActions = require("../../../actions/user_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
@@ -31,7 +30,9 @@ var PlaylistsIndex = React.createClass({
   renderNoPlaylists: function () {
     return (
       <ListGroup>
-        <ListGroupItem>This user has no playlists! :(</ListGroupItem>
+        <ListGroupItem>
+          This user has no playlists! :(
+        </ListGroupItem>
       </ListGroup>
     );
   },

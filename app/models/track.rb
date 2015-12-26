@@ -21,6 +21,10 @@ class Track < ActiveRecord::Base
 
   INVALID_TRACK_TITLES = %w(tracks playlists)
 
+  belongs_to :user
+  has_many :playlistings, dependent: :destroy
+  has_many :playlists, through: :playlistings
+
   after_initialize :ensure_track_description
 
   before_save :parameterize_slug
@@ -51,11 +55,6 @@ class Track < ActiveRecord::Base
   validates_attachment_size :img, { less_than: 5.megabytes }
   validates_attachment_content_type :img,
     content_type: ["image/jpeg", "image/gif", "image/png"]
-
-  belongs_to :user
-  has_many :playlistings, dependent: :destroy
-  has_many :playlists, through: :playlistings
-
 
   def self.find_by_username_and_slug(username, slug)
     user = User.find_by(username: username)

@@ -1,4 +1,8 @@
 var React = require("react");
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlayerActions = require("../../../actions/player_actions");
 
 var PlaylistTrack = React.createClass({
@@ -10,19 +14,28 @@ var PlaylistTrack = React.createClass({
     var track = this.props.track;
 
     return (
-      <li>
-        <div className="playlist-track clear" onClick={ this._playTrack }>
-          <div className="track-image">
-            <img className="track-image" src={ track.img_hero } />
-          </div>
+      <ListGroupItem>
+        <Row>
+          <Col xs={ 2 } sm={ 2 } md={ 2 }>
+            <Thumbnail src={ track.img_hero }
+              onClick={ this._playTrack } />
+          </Col>
 
-          <div className="detail">
-            <div className="title">
-              { track.user.username } - { track.title }
-            </div>
-          </div>
-        </div>
-      </li>
+          <Col xs={ 10 } sm={ 10 } md={ 10 }>
+            <Row>
+              <Col xs={ 1 } sm={ 1 } md={ 1 }>
+                { this.props.index }
+              </Col>
+
+              <Col xs={ 11 } sm={ 11 } md={ 11 }>
+                { track.user.username }<br/>
+                { track.title }
+              </Col>
+            </Row>
+
+          </Col>
+        </Row>
+      </ListGroupItem>
     );
   }
 });

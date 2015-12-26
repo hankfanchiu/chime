@@ -12,21 +12,21 @@ var UserSidebar = require("./user_sidebar/user_sidebar");
 
 var UserPage = React.createClass({
   getInitialState: function () {
-    this.username = this.props.params.username;
-
     return this.getStatesFromStore();
   },
 
   getStatesFromStore: function () {
+    var username = this.props.params.username;
+
     return {
-      user: UserStore.getUser(this.username),
+      user: UserStore.getUser(username),
       currentUser: SessionStore.getCurrentUser(),
-      isCurrentUser: SessionStore.isCurrentUser(this.username)
+      isCurrentUser: SessionStore.isCurrentUser(username)
     };
   },
 
   componentWillMount: function () {
-    UserActions.fetchUser(this.username);
+    UserActions.fetchUser(this.props.params.username);
   },
 
   componentDidMount: function () {
@@ -50,9 +50,10 @@ var UserPage = React.createClass({
   },
 
   render: function () {
-    var profile = "/" + this.username;
-    var tracks = "/" + this.username + "/tracks";
-    var playlists = "/" + this.username + "/playlists";
+    var username = this.props.params.username;
+    var profile = "/" + username;
+    var tracks = "/" + username + "/tracks";
+    var playlists = "/" + username + "/playlists";
 
     return (
       <Grid>
@@ -61,13 +62,19 @@ var UserPage = React.createClass({
             currentUser={ this.state.currentUser }
             isCurrentUser={ this.state.isCurrentUser } />
 
-          <Col sm={ 8 } md={ 8 }>
+          <Col xs={ 8 } sm={ 8 } md={ 8 }>
             <Nav bsStyle="tabs"
               activeKey={ this.props.location.pathname }
               onSelect={ this._handleSelect }>
 
               <NavItem eventKey={ profile } disabled>Profile</NavItem>
+
+              <span className="spacer spacer-large" />
+
               <NavItem eventKey={ tracks }>Tracks</NavItem>
+
+              <span className="spacer spacer-large" />
+
               <NavItem eventKey={ playlists }>Playlists</NavItem>
             </Nav>
 

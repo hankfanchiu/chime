@@ -14,18 +14,22 @@
 class Playlist < ActiveRecord::Base
   extend FriendlyId
 
+  belongs_to :user
+  has_many :playlistings, dependent: :destroy
+  has_many :tracks, through: :playlistings
+
   after_initialize :ensure_playlist_description
 
   before_save :parameterize_slug
 
   friendly_id :title, use: :slugged
 
-  validates_uniqueness_of :title, scope: :user, case_sensitive: false
-  validates_presence_of :user
+  validates :title,
+    presence: true,
+    uniqueness: { scope: :user, case_sensitive: false }
 
-  belongs_to :user
-  has_many :playlistings, dependent: :destroy
-  has_many :tracks, through: :playlistings
+  validates_presence_of :user
+  validates_presence_of :tracks
 
   def self.find_by_username_and_slug(username, slug)
     user = User.find_by(username: username)
