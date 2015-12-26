@@ -4,6 +4,7 @@ var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
 var Upload = require("./upload/upload");
 var SignUp = require("./session/sign_up");
+var Login = require("./session/login");
 var Player = require("./player/player");
 var Audio = require("./audio");
 
@@ -21,6 +22,7 @@ var App = React.createClass({
         <Nav />
 
         <SignUp />
+        <Login />
         <Upload />
 
         <main>

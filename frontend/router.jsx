@@ -9,7 +9,6 @@ var App = require("./components/app");
 var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
 var Collect = require("./components/collect/collect");
-var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
 var Settings = require("./components/session/settings");
 
@@ -27,7 +26,6 @@ module.exports = (
       <IndexRoute component={ Home } />
 
       <Route name="discover" path="discover" component={ Discover } />
-      <Route name="login" path="login" component={ Login } />
       <Route name="logout" path="logout" component={ Logout } />
       <Route name="settings" path="settings" component={ Settings } />
 

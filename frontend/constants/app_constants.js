@@ -15,6 +15,10 @@ module.exports = {
     SHOW_SIGN_UP_MODAL: null,
     CLOSE_SIGN_UP_MODAL: null,
 
+    // Login
+    SHOW_LOGIN_MODAL: null,
+    CLOSE_LOGIN_MODAL: null,
+
     // Upload
     SHOW_UPLOAD_MODAL: null,
     PUBLIC_URL_RECEIVED: null,

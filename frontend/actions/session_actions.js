@@ -5,6 +5,34 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var SessionActions = {
+  // Sign up modal actions
+
+  showSignUpModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_SIGN_UP_MODAL
+    });
+  },
+
+  closeSignUpModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_SIGN_UP_MODAL
+    });
+  },
+
+  // Login modal actions
+
+  showLoginModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_LOGIN_MODAL
+    });
+  },
+
+  closeLoginModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_LOGIN_MODAL
+    });
+  },
+
   // Request actions
 
   login: function (userData) {

@@ -1,24 +1,26 @@
 var React = require("react");
+var Modal = require("react-bootstrap").Modal;
+var Input = require("react-bootstrap").Input;
+var Button = require("react-bootstrap").Button;
+var UserActions = require("../../actions/user_actions");
+var SessionActions = require("../../actions/session_actions");
+var LoginStore = require("../../stores/login_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
-var SessionActions = require("../../actions/session_actions");
-var SessionStore = require("../../stores/session_store");
 
 var Login = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { username: "", password: "" };
-  },
-
-  componentWillMount: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/");
-    }
+    return {
+      showModal: false,
+      username: "",
+      password: ""
+    };
   },
 
   componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
+    this.listenerToken = LoginStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -26,100 +28,96 @@ var Login = React.createClass({
   },
 
   _onChange: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.history.pushState(null, "/");
-    }
-  },
-
-  _goToSignUp: function () {
-    this.history.pushState(null, "/signup");
+    this.setState({ showModal: LoginStore.showModal() });
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this.isIncomplete()) { return this.handleIncompleteSubmit(); }
-
-    this._login();
+    if (this._validateComplete()) { return this.login(); }
   },
 
-  _loginDemo: function (e) {
-    e.preventDefault();
+  _validateComplete: function () {
+    if (this.state.username === "") { return false; }
+    if (this.state.password === "") { return false; }
 
+    return true;
+  },
+
+  loginDemo: function (e) {
     var demoData = { username: "demo_user", password: "password" };
 
     this.setState(demoData);
     SessionActions.login(demoData);
   },
 
-  _login: function () {
+  login: function () {
     var userData = {
       username: this.state.username.toLowerCase(),
-      password: this.refs.password.value
+      password: this.state.password
     };
 
     SessionActions.login(userData);
   },
 
-  isIncomplete: function () {
-    if (this.state.username === "") { return true; }
-    if (this.state.password === "") { return true; }
-
-    return false;
+  reset: function () {
+    this.setState(this.getInitialState());
+    SessionActions.closeLoginModal();
   },
 
-  handleIncompleteSubmit: function () {
-    alert("Please fill out all fields!");
+  showSignUpModal: function () {
+    this.reset();
+    SessionActions.showSignUpModal();
+  },
+
+  renderLoginButton: function () {
+    var isComplete = this._validateComplete();
+
+    if (!isComplete) {
+      return <Button bsStyle="primary" disabled>Login</Button>;
+    }
+
+    return (
+      <Button type="submit"
+        bsStyle="primary"
+        onClick={ this.login }>Login</Button>
+    );
   },
 
   render: function () {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-xs-4 col-xs-offset-4">
-            <h1>Login</h1>
+      <Modal bsSize="small"
+        onHide={ this.reset }
+        show={ this.state.showModal }>
 
-            <form className="login-form" onSubmit={ this._handleSubmit }>
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
 
-              <div className="form-group">
-                <label htmlFor="login-username">Username</label>
+        <form onSubmit={ this._handleSubmit }>
+          <Modal.Body>
+            <Input type="text"
+              label="Username"
+              placeholder="Enter username"
+              valueLink={ this.linkState("username") } />
 
-                <input type="text"
-                  name="username"
-                  className="form-control"
-                  id="login-username"
-                  valueLink={ this.linkState("username") } />
-              </div>
+            <Input type="password"
+              label="Password"
+              placeholder="Enter password"
+              valueLink={ this.linkState("password") } />
 
-              <div className="form-group">
-                <label htmlFor="login-password">Password</label>
+            <a onClick={ this.showSignUpModal }>
+              Don't have an account?
+            </a>
+          </Modal.Body>
 
-                <input type="password"
-                  name="password"
-                  className="form-control"
-                  ref="password"
-                  id="login-password"
-                  valueLink={ this.linkState("password") } />
-              </div>
+          <Modal.Footer>
+            <Button onClick={ this.loginDemo }>Demo</Button>
 
-              <p>
-                <a onClick={ this._goToSignUp }>
-                  Don't have an account?
-                </a>
-              </p>
-
-              <button className="btn btn-default btn-primary"
-                type="submit">Login</button>
-
-              <span style={{ paddingRight: "10px" }}></span>
-
-              <button className="btn btn-default"
-                onClick={ this._loginDemo }>Demo</button>
-            </form>
-
-          </div>
-        </div>
-      </div>
+            { this.renderLoginButton() }
+          </Modal.Footer>
+        </form>
+      </Modal>
     );
   }
 });
