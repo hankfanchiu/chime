@@ -2,7 +2,7 @@ var React = require("react");
 var SessionStore = require("../stores/session_store");
 var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
-var UploadModal = require("./upload/upload_modal");
+var Upload = require("./upload/upload");
 var Player = require("./player/player");
 var Audio = require("./audio");
 
@@ -33,9 +33,9 @@ var App = React.createClass({
         <Nav openUpload={ this._openUpload } />
 
         <main>
-          <UploadModal showModal={ this.state.showUploadModal }
+          <Upload showModal={ this.state.showUploadModal }
             close={ this._closeUpload } />
-          
+
           { this.props.children }
         </main>
 

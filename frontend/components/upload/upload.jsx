@@ -6,76 +6,51 @@ var Input = require("react-bootstrap").Input;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Button = require("react-bootstrap").Button;
 var TrackActions = require("../../actions/track_actions");
-var TrackStore = require("../../stores/track_store");
 var UploadActions = require("../../actions/upload_actions");
 var UploadStore = require("../../stores/upload_store");
 var UploadAudio = require("./upload_audio");
-var UploadAudioProgress = require("./upload_audio_progress");
 var UploadImage = require("./upload_image");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
+var History = require("react-router").History;
 
-var UploadModal = React.createClass({
-  mixins: [LinkedStateMixin],
+var Upload = React.createClass({
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return {
-      title: "",
-      description: "",
-      img: null,
-      publicUrl: UploadStore.getPublicUrl(),
-      progress: UploadStore.getProgress(),
-      isUploaded: UploadStore.isUploaded(),
-      newTrack: TrackStore.newTrack()
-    };
+    return { title: "", description: "" };
   },
 
   componentDidMount: function () {
-    this.uploadListener = UploadStore.addListener(this._onChange);
-    this.trackListener = TrackStore.addListener(this._onChange);
-  },
-
-  componentWillUpdate: function (nextProps, nextState) {
-    var track = nextState.newTrack;
-    if (track) {
-      this._redirectToTrack(track);
-    }
+    this.listenerToken = UploadStore.addListener(this._onChange);
+    UploadActions.resetUploadStore();
   },
 
   componentWillUnmount: function () {
-    this.uploadListener.remove();
-    this.trackListener.remove();
+    this.listenerToken.remove();
   },
 
   _onChange: function () {
+    var pathname = UploadStore.getTrackPathname();
+
+    if (pathname) {
+      this.replaceState(this.getInitialState());
+      this.props.close();
+      this.history.pushState(null, pathname);
+    }
+
     this.setState({
       publicUrl: UploadStore.getPublicUrl(),
       progress: UploadStore.getProgress(),
-      isUploaded: UploadStore.isUploaded(),
-      newTrack: TrackStore.newTrack()
+      isUploaded: UploadStore.isUploaded()
     });
   },
 
   _cancel: function () {
-    UploadActions.resetUploadStore();
+    this._reset();
     this.props.close();
   },
 
-  _handleIncomplete: function () {
-    alert("Required fields missing!");
-  },
-
-  _handleSubmit: function (e) {
-    e.preventDefault();
-  },
-
-  _redirectToTrack: function (track) {
-    var pathname = "/" + track.user.username + "/" + track.slug;
-    this.props.history.pushState(null, pathname);
-  },
-
   _save: function () {
-    if (this.state.title === "") { return this._handleIncomplete(); }
-
     var formData = new FormData();
 
     formData.append("track[track_url]", this.state.publicUrl);
@@ -87,12 +62,15 @@ var UploadModal = React.createClass({
     }
 
     TrackActions.createTrack(formData);
-    UploadActions.resetUploadStore();
-    this.props.close();
   },
 
   _setImg: function (img) {
     this.setState({ img: img });
+  },
+
+  _reset: function () {
+    this.replaceState(this.getInitialState());
+    UploadActions.resetUploadStore();
   },
 
   progressState: function () {
@@ -104,13 +82,12 @@ var UploadModal = React.createClass({
 
     return (
       <ProgressBar now={ this.state.progress } active
-        label="%(percent)s%" srOnly
         bsStyle={ this.progressState() } />
     );
   },
 
   renderSubmitButton: function () {
-    if (!this.state.isUploaded) {
+    if (!this.state.isUploaded || (this.state.title === "")) {
       return <Button bsStyle="primary" disabled>Save</Button>;
     }
 
@@ -121,15 +98,13 @@ var UploadModal = React.createClass({
 
   render: function () {
     return (
-      <Modal bsSize="large"
-        bsStyle="static"
-        onHide={ this._clearUpload }
+      <Modal backdrop="static"
+        dialogClassName="upload-modal"
+        onHide={ this._cancel }
         show={ this.props.showModal }>
 
         <Modal.Header closeButton>
-          <Modal.Title>
-            Chime In
-          </Modal.Title>
+          <Modal.Title>Chime In</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -140,7 +115,7 @@ var UploadModal = React.createClass({
 
             <Col xs={ 8 } sm={ 8 } md={ 8 }>
               <Input type="text"
-                label="Title"
+                label="Title *"
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
 
@@ -164,4 +139,4 @@ var UploadModal = React.createClass({
   }
 });
 
-module.exports = UploadModal;
+module.exports = Upload;

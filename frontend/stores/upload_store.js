@@ -6,6 +6,7 @@ var ActionTypes = AppConstants.ActionTypes;
 var _publicUrl = null;
 var _progress = 0;
 var _responseStatus = null;
+var _trackPathname = null;
 var UploadStore = new Store(AppDispatcher);
 
 UploadStore.__onDispatch = function (payload) {
@@ -24,6 +25,10 @@ UploadStore.__onDispatch = function (payload) {
 
     case ActionTypes.DIRECT_UPLOAD_SUCCESS_RECEIVED:
       setResponseStatus(response);
+      break;
+
+    case ActionTypes.NEW_TRACK_RECEIVED:
+      if (!response.errors) { setTrackPathname(response); }
       break;
 
     case ActionTypes.RESET_UPLOAD_STORE:
@@ -45,6 +50,10 @@ UploadStore.isUploaded = function () {
   return _responseStatus === 200;
 };
 
+UploadStore.getTrackPathname = function () {
+  return _trackPathname;
+};
+
 var setPublicUrl = function (response) {
   _publicUrl = response.public_url;
   _responseStatus = null;
@@ -64,10 +73,22 @@ var setResponseStatus = function (response) {
   UploadStore.__emitChange();
 };
 
+var setTrackPathname = function (track) {
+  _publicUrl = null;
+  _progress = 0;
+  _responseStatus = null;
+  _trackPathname = "/" + track.user.username + "/" + track.slug;
+
+  UploadStore.__emitChange();
+};
+
 var resetUploadStore = function () {
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
+  _trackPathname = null;
+
+  UploadStore.__emitChange();
 };
 
 module.exports = UploadStore;

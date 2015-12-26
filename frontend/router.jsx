@@ -8,12 +8,12 @@ var createBrowserHistory = require("history/lib/createBrowserHistory");
 
 var App = require("./components/app");
 var Home = require("./components/home");
+var Upload = require("./components/upload/upload");
 var Discover = require("./components/discover/discover");
 var Collect = require("./components/collect/collect");
 var SignUp = require("./components/session/sign_up");
 var Login = require("./components/session/login");
 var Logout = require("./components/session/logout");
-var Upload = require("./components/upload/upload_modal");
 var Settings = require("./components/session/settings");
 
 var UserPage = require("./components/user/user_page");

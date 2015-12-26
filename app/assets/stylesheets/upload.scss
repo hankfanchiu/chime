@@ -1,3 +1,7 @@
+div.upload-modal {
+  width: 60%;
+}
+
 // Upload audio button
 
 div.upload-audio {
@@ -28,72 +32,35 @@ div.upload-audio {
   }
 }
 
-// Upload audio progress bar
-
-div.upload-audio-progress {
-  display: inline-block;
-  height: 15px;
-  cursor: pointer;
-}
-
-div.upload-audio-progress-background {
-  float: left;
-  width: 300px;
-  height: 5px;
-  background: #bbb;
-}
-
-div.upload-audio-progress-bar {
-  float: left;
-  height: 5px;
-  background: #0077A9;
-}
-
-div.upload-audio-progress-text {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 // Upload image
 
 div.upload-img {
   position: relative;
-  width: 250px;
-  height: 250px;
-  overflow: hidden;
-
-  img.img {
-    max-width: 250px;
-  }
 
   input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
+    width: 100%;
     min-width: 100%;
     min-height: 100%;
     font-size: 100px;
-    text-align: right;
+    text-align: center;
     filter: alpha(opacity=0);
     opacity: 0;
     outline: none;
     color: transparent;
     cursor: pointer;
     display: block;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0);
   }
 
   span.btn-file {
-    display: none;
     position: absolute;
-    left: 45%;
-    transform: translate(-45%, 0);
-    bottom: 10px;
-  }
-}
-
-div.upload-img:hover {
-  span.btn-file {
-    display: inline;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0);
   }
 }

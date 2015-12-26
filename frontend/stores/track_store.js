@@ -4,7 +4,6 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _tracks = {};
-var _newTrack = null;
 var TrackStore = new Store(AppDispatcher);
 
 TrackStore.__onDispatch = function (payload) {
@@ -18,17 +17,13 @@ TrackStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_RECEIVED:
-      resetTrack(response);
+      if (!response.errors) { resetTrack(response); }
       break;
 
     case ActionTypes.NEW_TRACK_RECEIVED:
-      _newTrack = null;
-
-      if (!response.errors) {
-        addTrack(response);
-      }
-
+      if (!response.errors) { resetTrack(response); }
       break;
+
   };
 };
 
@@ -45,39 +40,26 @@ TrackStore.find = function (slug) {
   return trackCopy;
 };
 
-TrackStore.newTrack = function () {
-  var newTrackCopy = (_newTrack ? jQuery.extend({}, _newTrack) : null);
-
-  return newTrackCopy;
-};
-
 var resetTracks = function (tracks) {
-  var trackIdentifier;
+  var identifier;
 
   _tracks = {};
 
   tracks.forEach(function (track) {
-    trackIdentifier = track.user.username + "-" + track.slug;
+    identifier = track.user.username + "-" + track.slug;
 
-    _tracks[trackIdentifier] = track;
+    _tracks[identifier] = track;
   });
 
   TrackStore.__emitChange();
 };
 
 var resetTrack = function (track) {
-  var trackIdentifier = track.user.username + "-" + track.slug;
-  _tracks[trackIdentifier] = track;
+  var identifier = track.user.username + "-" + track.slug;
+  _tracks[identifier] = track;
 
   TrackStore.__emitChange();
 };
 
-var addTrack = function (track) {
-  var trackIdentifier = track.user.username + "-" + track.slug;
-  _tracks[trackIdentifier] = track;
-  _newTrack = track;
-
-  TrackStore.__emitChange();
-};
 
 module.exports = TrackStore;
