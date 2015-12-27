@@ -49,8 +49,6 @@ var Settings = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this._isIncomplete()) { this._handleIncompleteSubmit(); }
-
     this._updateUser();
   },
 
@@ -94,6 +92,8 @@ var Settings = React.createClass({
                 valueLink={ this.linkState("email") } />
 
               { this.renderSubmitButton() }
+
+              <Button
             </form>
           </Col>
         </Row>
