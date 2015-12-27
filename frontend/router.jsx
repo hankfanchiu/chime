@@ -10,7 +10,6 @@ var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
 var Collect = require("./components/collect/collect");
 var Logout = require("./components/session/logout");
-var Settings = require("./components/session/settings");
 
 var UserPage = require("./components/user/user_page");
 var ProfileIndex = require("./components/user/profile/profile_index");
@@ -27,7 +26,6 @@ module.exports = (
 
       <Route name="discover" path="discover" component={ Discover } />
       <Route name="logout" path="logout" component={ Logout } />
-      <Route name="settings" path="settings" component={ Settings } />
 
       <Route name="user" path=":username" component={ UserPage }>
         <IndexRedirect to="tracks" />

@@ -1,5 +1,5 @@
 var React = require("react");
-var Grid = require("react-bootstrap").Grid;
+var Modal = require("react-bootstrap").Modal;
 var PageHeader = require("react-bootstrap").PageHeader;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
@@ -7,8 +7,8 @@ var Thumbnail = require("react-bootstrap").Thumbnail;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
+var SettingsStore = require("../../stores/settings_store");
 var SessionStore = require("../../stores/session_store");
-var SessionActions = require("../../actions/session_actions");
 var UserActions = require("../../actions/user_actions");
 
 var Settings = React.createClass({
@@ -16,6 +16,7 @@ var Settings = React.createClass({
     var user = SessionStore.getClient();
 
     return {
+      showModal: SettingsStore.showModal(),
       disabled: true,
       user: user,
       username: user.username,
@@ -24,21 +25,8 @@ var Settings = React.createClass({
      };
   },
 
-  componentWillMount: function () {
-    if (SessionStore.isLoggedIn()) {
-      var username = SessionStore.getClientUsername();
-      SessionActions.fetchClient(username);
-    } else {
-      this.props.history.pushState(null, "/");
-    }
-  },
-
   componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
-  },
-
-  shouldComponentUpdate: function () {
-    return SessionStore.isLoggedIn();
+    this.listenerToken = SettingsStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -46,11 +34,7 @@ var Settings = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getInitialState);
-  },
-
-  _disabled: function () {
-    return (!this._validateComplete()) || (this.state.disabled);
+    this.setState(this.getInitialState());
   },
 
   _handleFile: function () {
@@ -92,53 +76,70 @@ var Settings = React.createClass({
     UserActions.updateUser(this.state.user.id, formData);
   },
 
-  _validateComplete: function () {
-    return (this.state.username !== "") && (this.state.email !== "");
+  close: function () {
+    UserActions.closeSettings();
+  },
+
+  disabled: function () {
+    return (
+      (this.state.username === "") ||
+      (this.state.email === "") ||
+      (this.state.disabled)
+    );
   },
 
   render: function () {
     return (
-      <Grid>
-        <PageHeader>Account Settings</PageHeader>
+      <Modal onHide={ this.close }
+        show={ this.state.showModal }>
 
-        <Row>
-          <Col xs={ 4 } sm={ 4 } md={ 4 }>
-            <div className="avatar">
-              <span className="btn btn-default btn-file">
-                <Glyphicon glyph="camera"/> Update avatar
+        <Modal.Header closeButton>
+          <Modal.Title>Account Settings</Modal.Title>
+        </Modal.Header>
 
-                <input type="file" accept="image/*"
-                  ref="file" id="upload-avatar"
-                  onChange={ this._handleFile } />
-              </span>
+        <Modal.Body>
+          <Row>
+            <Col xs={ 4 } sm={ 4 } md={ 4 }>
+              <div className="avatar">
+                <span className="btn btn-default btn-file">
+                  <Glyphicon glyph="camera"/> Update avatar
 
-              <Thumbnail src={ this.state.avatarUrl } />
-            </div>
-          </Col>
+                  <input type="file" accept="image/*" ref="img"
+                    onChange={ this._handleFile } />
+                </span>
 
-          <Col xs={ 4 } sm={ 4 } md={ 4 }>
-            <Input type="text"
-              label="Username"
-              ref="username"
-              value={ this.state.username }
-              placeholder="Update your username"
-              onChange={ this._handleUsernameChange } />
+                <Thumbnail src={ this.state.avatarUrl } />
+              </div>
+            </Col>
 
-            <Input type="email"
-              label="Email Address"
-              ref="email"
-              value={ this.state.email }
-              placeholder="Update your email address"
-              onChange={ this._handleEmailChange } />
+            <Col xs={ 8 } sm={ 8 } md={ 8 }>
+              <Input type="text"
+                label="Username"
+                ref="username"
+                value={ this.state.username }
+                placeholder="Update your username"
+                onChange={ this._handleUsernameChange } />
 
-            <Button bsStyle="primary"
-              disabled={ this._disabled() }
-              onClick={ this._updateUser }>
-              Update Account
-            </Button>
-          </Col>
-        </Row>
-      </Grid>
+              <Input type="email"
+                label="Email Address"
+                ref="email"
+                value={ this.state.email }
+                placeholder="Update your email address"
+                onChange={ this._handleEmailChange } />
+            </Col>
+          </Row>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={ this.close }>Cancel</Button>
+
+          <Button bsStyle="primary"
+            disabled={ this.disabled() }
+            onClick={ this._updateUser }>
+            Update Account
+          </Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 });

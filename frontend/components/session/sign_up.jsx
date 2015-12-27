@@ -13,7 +13,7 @@ var SignUp = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: false,
+      showModal: SignUpStore.showModal(),
       username: "",
       email: "",
       password: ""
@@ -29,21 +29,20 @@ var SignUp = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ showModal: SignUpStore.showModal() });
+    this.setState(this.getInitialState());
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
-
-    if (this._validateComplete()) { this.signUp(); }
+    this.signUp();
   },
 
-  _validateComplete: function () {
-    if (this.state.username === "") { return false; }
-    if (this.state.email === "") { return false; }
-    if (this.state.password === "") { return false; }
-
-    return true;
+  disabled: function () {
+    return (
+      (this.state.username === "") ||
+      (this.state.email === "") ||
+      (this.state.password === "")
+    );
   },
 
   reset: function () {
@@ -64,27 +63,12 @@ var SignUp = React.createClass({
     };
 
     UserActions.createUser(userData);
-    this.setState({ username: "", password: "", email: "" });
-  },
-
-  renderSubmitButton: function () {
-    var isComplete = this._validateComplete();
-
-    if (!isComplete) {
-      return <Button bsStyle="primary" disabled>Sign Up</Button>;
-    }
-
-    return (
-      <Button type="submit"
-        bsStyle="primary"
-        onClick={ this.signUp }>Sign Up</Button>
-    );
+    this.setState(this.getInitialState());
   },
 
   render: function () {
     return (
-      <Modal backdrop="static"
-        bsSize="small"
+      <Modal bsSize="small"
         onHide={ this.reset }
         show={ this.state.showModal }>
 
@@ -116,7 +100,12 @@ var SignUp = React.createClass({
           </Modal.Body>
 
           <Modal.Footer>
-            { this.renderSubmitButton() }
+            <Button type="submit"
+              bsStyle="primary"
+              disabled={ this.disabled() }
+              onClick={ this.signUp }>
+              Sign Up
+            </Button>
           </Modal.Footer>
         </form>
       </Modal>

@@ -6,6 +6,7 @@ var MenuItem = require("react-bootstrap").MenuItem;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var UploadActions = require("../../actions/upload_actions");
+var UserActions = require("../../actions/user_actions");
 
 var LoggedIn = React.createClass({
   _goToTracks: function () {
@@ -18,10 +19,6 @@ var LoggedIn = React.createClass({
     var playlists = "/" + this.props.user.username + "/playlists";
 
     this.props.pushState(playlists);
-  },
-
-  _goToSettings: function () {
-    this.props.pushState("/settings");
   },
 
   _logout: function () {
@@ -62,13 +59,13 @@ var LoggedIn = React.createClass({
             Playlists
           </MenuItem>
 
-          <MenuItem onClick={ this._goToSettings }>
+          <MenuItem divider />
+
+          <MenuItem onClick={ UserActions.showSettings }>
             <Glyphicon glyph="cog" />
             <span className="spacer spacer-small" />
             Settings
           </MenuItem>
-
-          <MenuItem divider />
 
           <MenuItem onClick={ this._logout }>
             <Glyphicon glyph="log-out" />

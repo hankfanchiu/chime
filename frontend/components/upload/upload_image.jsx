@@ -1,6 +1,5 @@
 var React = require("react");
 var Thumbnail = require("react-bootstrap").Thumbnail;
-var UploadActions = require("../../actions/upload_actions");
 
 var UploadImage = React.createClass({
   getInitialState: function () {

@@ -13,7 +13,7 @@ var Login = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: false,
+      showModal: LoginStore.showModal(),
       username: "",
       password: ""
     };
@@ -28,24 +28,16 @@ var Login = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({
-      showModal: LoginStore.showModal(),
-      username: "",
-      password: ""
-    });
+    this.setState(this.getInitialState());
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
-
-    if (this._validateComplete()) { this.login(); }
+    this.login();
   },
 
-  _validateComplete: function () {
-    if (this.state.username === "") { return false; }
-    if (this.state.password === "") { return false; }
-
-    return true;
+  disabled: function () {
+    return (this.state.username === "") || (this.state.password === "");
   },
 
   loginDemo: function () {
@@ -56,12 +48,10 @@ var Login = React.createClass({
   },
 
   login: function () {
-    var userData = {
-      username: this.state.username.toLowerCase(),
-      password: this.state.password
-    };
+    var username = this.state.username.toLowerCase();
+    var password = this.state.password;
 
-    SessionActions.login(userData);
+    SessionActions.login({ username: username, password: password });
   },
 
   reset: function () {
@@ -74,24 +64,9 @@ var Login = React.createClass({
     SessionActions.showSignUpModal();
   },
 
-  renderLoginButton: function () {
-    var isComplete = this._validateComplete();
-
-    if (!isComplete) {
-      return <Button bsStyle="primary" disabled>Login</Button>;
-    }
-
-    return (
-      <Button type="submit"
-        bsStyle="primary"
-        onClick={ this.login }>Login</Button>
-    );
-  },
-
   render: function () {
     return (
-      <Modal backdrop="static"
-        bsSize="small"
+      <Modal bsSize="small"
         onHide={ this.reset }
         show={ this.state.showModal }>
 
@@ -119,7 +94,10 @@ var Login = React.createClass({
           <Modal.Footer>
             <Button onClick={ this.loginDemo }>Demo</Button>
 
-            { this.renderLoginButton() }
+            <Button type="submit"
+              bsStyle="primary"
+              disabled={ this.disabled() }
+              onClick={ this.login }>Login</Button>
           </Modal.Footer>
         </form>
       </Modal>

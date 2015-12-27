@@ -5,6 +5,20 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var UserActions = {
+  // UI actions
+
+  showSettings: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_SETTINGS_MODAL
+    });
+  },
+
+  closeSettings: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_SETTINGS_MODAL
+    });
+  },
+
   // Request actions
 
   fetchUser: function (username) {
@@ -15,8 +29,8 @@ var UserActions = {
     UserAPIUtils.createUser(userData, UserActions.receiveLogin);
   },
 
-  updateUser: function (userId, userData) {
-    UserAPIUtils.updateUser(userId, userData, UserActions.receiveClient);
+  updateUser: function (userId, formData) {
+    UserAPIUtils.updateUser(userId, formData, UserActions.receiveClient);
   },
 
   uploadImage: function (userId, formData) {
@@ -32,16 +46,16 @@ var UserActions = {
     });
   },
 
-  receiveClient: function (response) {
+  receiveLogin: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.CLIENT_RECEIVED,
+      actionType: ActionTypes.LOGIN_RESPONSE,
       response: response
     });
   },
 
-  receiveLogin: function (response) {
+  receiveClient: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.LOGIN_RESPONSE,
+      actionType: ActionTypes.CLIENT_RECEIVED,
       response: response
     });
   }
