@@ -58,7 +58,20 @@ main {
 }
 
 a {
+  display: block;
+  text-decoration: none;
   cursor: pointer;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #222
+}
+
+a:active {
+  text-decoration: none;
+  color: #0077A9;
 }
 
 footer {
@@ -79,6 +92,17 @@ span.spacer-small {
 
 span.spacer-large {
   padding: 0 20px 0 20px;
+}
+
+span.username {
+  font-size: 11px;
+  color: #aaa
+}
+
+span.title {
+  font-size: 13px;
+  font-weight: bolder;
+  color: #555;
 }
 
 .clear:after {

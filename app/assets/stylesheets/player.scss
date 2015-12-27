@@ -141,29 +141,4 @@ img.audio-badge-image {
 
 div.audio-badge-text {
   display: inline-block;
-
-  a {
-    display: block;
-    text-decoration: none;
-    transition: color 100ms;
-  }
-
-  a:hover {
-    color: #222
-  }
-
-  a:active {
-    color: #0077A9;
-  }
-
-  .username {
-    font-size: 11px;
-    color: #aaa
-  }
-
-  .title {
-    font-size: 13px;
-    font-weight: bolder;
-    color: #555;
-  }
 }

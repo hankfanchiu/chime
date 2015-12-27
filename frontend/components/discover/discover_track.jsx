@@ -40,11 +40,17 @@ var DiscoverTrack = React.createClass({
           <Thumbnail src={ track.img_square }
             alt={ track.title }>
 
-            <a onClick={ this._goToUserProfile }>{ track.user.username }</a>
+            <span className="username">
+              <a onClick={ this._goToUserProfile }>
+                { track.user.username }
+              </a>
+            </span>
 
-            <h6>
-              <a onClick={ this._goToTrack }>{ track.title }</a>
-            </h6>
+            <span className="title">
+              <a onClick={ this._goToTrack }>
+                { track.title }
+              </a>
+            </span>
 
           </Thumbnail>
         </div>

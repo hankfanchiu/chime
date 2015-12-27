@@ -29,13 +29,17 @@ var Badge = React.createClass({
         </div>
 
         <div className="audio-badge-text">
-          <a className="username" onClick={ this._goToUser }>
-            { track.user.username }
-          </a>
+          <span className="username">
+            <a onClick={ this._goToUser }>
+              { track.user.username }
+            </a>
+          </span>
 
-          <a className="title" onClick={ this._goToTrack }>
-            { track.title }
-          </a>
+          <span className="title">
+            <a onClick={ this._goToTrack }>
+              { track.title }
+            </a>
+          </span>
         </div>
 
       </div>
