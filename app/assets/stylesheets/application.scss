@@ -22,20 +22,42 @@
   border-color: #00587D;
 }
 
-nav.navbar .navbar-header a.navbar-brand {
+.navbar-collapse.collapse {
+  display: block !important;
+}
+
+.navbar-nav > li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
+}
+
+.navbar .navbar-header a.navbar-brand {
   color: #ccc
 }
 
-nav.navbar .navbar-header a.navbar-brand:hover {
+.navbar .navbar-header a.navbar-brand:hover {
   color: #eee
 }
 
-nav.navbar .nav > li > a {
+.navbar .nav > li > a {
   color: #ccc
 }
 
-nav.navbar .nav > li > a:hover {
+.navbar .nav > li > a:hover {
   color: #eee
+}
+
+body {
+  min-width: 800px;
+  width: auto !important;
+  width: 800px;
 }
 
 main {
