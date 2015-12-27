@@ -28,7 +28,11 @@ var Login = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ showModal: LoginStore.showModal() });
+    this.setState({
+      showModal: LoginStore.showModal(),
+      username: "",
+      password: ""
+    });
   },
 
   _handleSubmit: function (e) {
@@ -44,7 +48,7 @@ var Login = React.createClass({
     return true;
   },
 
-  loginDemo: function (e) {
+  loginDemo: function () {
     var demoData = { username: "demo_user", password: "password" };
 
     this.setState(demoData);
@@ -58,7 +62,6 @@ var Login = React.createClass({
     };
 
     SessionActions.login(userData);
-    this.setState({ username: "", password: "" });
   },
 
   reset: function () {

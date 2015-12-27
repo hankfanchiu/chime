@@ -1,10 +1,9 @@
 class Api::UsersController < ApplicationController
   before_action :prevent_if_logged_in, only: :create
+  before_action :prevent_if_username_exists, only: :create
   before_action :require_login, only: :update
 
   def create
-    return render_username_unavailable if user_exists?
-
     @user = User.new(user_params)
 
     if @user.save
@@ -26,7 +25,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:tracks).find_by(username: params[:id])
+    @user = User.includes(:tracks).friendly.find(params[:id])
 
     return not_found if @user.nil?
 
@@ -39,11 +38,18 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, :avatar)
   end
 
-  def user_exists?
-    User.friendly.exists?(params[:user][:username])
+  def prevent_if_username_exists
+    if user_exists?
+      username_not_available
+      false
+    end
   end
 
-  def render_username_unavailable
+  def user_exists?
+    User.exists?(username: params[:user][:username])
+  end
+
+  def username_not_available
     render json: { errors: ["Username is not available"] }
   end
 end
