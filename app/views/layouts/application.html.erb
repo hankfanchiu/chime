@@ -9,7 +9,8 @@
 
   <script>
     <% if logged_in? %>
-      localStorage.setItem("client", <%= current_user.username %>);
+      var client = "<%= current_user.username %>";
+      localStorage.setItem("client", client);
     <% else %>
       localStorage.removeItem("client");
     <% end %>

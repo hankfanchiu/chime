@@ -1,4 +1,10 @@
 var React = require("react");
+var Grid = require("react-bootstrap").Grid;
+var PageHeader = require("react-bootstrap").PageHeader;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Input = require("react-bootstrap").Input;
+var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");
 var SessionActions = require("../../actions/session_actions");
 var UserActions = require("../../actions/user_actions");
@@ -10,11 +16,7 @@ var Settings = React.createClass({
   getInitialState: function () {
     var user = SessionStore.getClient();
 
-    return {
-      username: user.username,
-      email: user.email,
-      password: ""
-    }
+    return { username: user.username, email: user.email };
   },
 
   componentWillMount: function () {
@@ -41,11 +43,7 @@ var Settings = React.createClass({
   _onChange: function () {
     var user = SessionStore.getClient();
 
-    this.setState({
-      username: user.username,
-      email: user.email,
-      password: ""
-    });
+    this.setState({ username: user.username, email: user.email });
   },
 
   _handleSubmit: function (e) {
@@ -54,76 +52,52 @@ var Settings = React.createClass({
     if (this._isIncomplete()) { this._handleIncompleteSubmit(); }
 
     this._updateUser();
-    this.refs.password.value = "";
   },
 
   _updateUser: function () {
     var userId = SessionStore.getClientId();
-    var userData = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.refs.password.value,
-    };
+    var userData = { username: this.state.username, email: this.state.email };
 
     UserActions.updateUser(userId, userData);
   },
 
-  _isIncomplete: function () {
-    return (
-      (this.state.username === "") ||
-      (this.state.email === "") ||
-      (this.refs.password.value === "")
-    );
+  _validateComplete: function () {
+    return (this.state.username !== "") && (this.state.email !== "");
   },
 
-  _handleIncompleteSubmit: function () {
-    alert("Required fields missing");
+  renderSubmitButton: function () {
+    var isComplete = this._validateComplete();
+
+    if (!isComplete) {
+      return <Button disabled>Update Account</Button>;
+    } else {
+      return <Button type="submit">Update Account</Button>;
+    }
   },
 
   render: function () {
     return (
-      <div className="container">
-        <div className="row">
-          <h1>Account Settings</h1>
+      <Grid>
+        <PageHeader>Account Settings</PageHeader>
 
-          <div className="col-xs-4">
-            <form className="profile-form" onSubmit={ this._handleSubmit }>
+        <Row>
+          <Col xs={ 4 } sm={ 4 } md={ 4 }>
+            <form onSubmit={ this._handleSubmit }>
+              <Input type="text"
+                label="Username"
+                placeholder="Update your username"
+                valueLink={ this.linkState("username") } />
 
-              <div className="form-group">
-                <label htmlFor="profile-username">Username</label>
+              <Input type="email"
+                label="Email Address"
+                placeholder="Update your email address"
+                valueLink={ this.linkState("email") } />
 
-                <input type="text"
-                  className="form-control"
-                  id="profile-username"
-                  valueLink={ this.linkState("username") } />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="profile-email">Email</label>
-
-                <input type="text"
-                  className="form-control"
-                  id="profile-email"
-                  valueLink={ this.linkState("email") } />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="profile-password">
-                  Password Confirmation
-                </label>
-
-                <input type="password"
-                  className="form-control"
-                  ref="password"
-                  id="profile-password" />
-              </div>
-
-              <button type="submit"
-                className="btn btn-default">Update Account</button>
+              { this.renderSubmitButton() }
             </form>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 });

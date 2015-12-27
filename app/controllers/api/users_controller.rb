@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find_by(id: params[:id])
 
-    if @user.update(user_params.except(:password))
+    if @user.update(user_params)
       render :show
     else
       render json: { errors: @user.errors.full_messages }
