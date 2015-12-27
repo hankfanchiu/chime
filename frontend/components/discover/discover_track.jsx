@@ -35,13 +35,11 @@ var DiscoverTrack = React.createClass({
           alt={ track.title }
           onClick={ this._playTrack }>
 
+          <a onClick={ this._goToUserProfile }>{ track.user.username }</a>
+
           <h6>
             <a onClick={ this._goToTrack }>{ track.title }</a>
           </h6>
-
-          <span>
-            <a onClick={ this._goToUserProfile }>{ track.user.username }</a>
-          </span>
 
         </Thumbnail>
       </Col>
