@@ -85,14 +85,12 @@ var Upload = React.createClass({
   },
 
   renderAudioUpload: function () {
-    if (this.state.progress) {
-      return (
-        <ProgressBar now={ this.state.progress } active
-          bsStyle={ this.progressState() } />
-      );
-    } else {
-      return <UploadAudio />;
-    }
+    if (!this.state.progress) { return <UploadAudio />; }
+
+    return (
+      <ProgressBar now={ this.state.progress } active
+        bsStyle={ this.progressState() } />
+    );
   },
 
   render: function () {

@@ -7,7 +7,9 @@ var UploadAPIUtils = {
       type: "GET",
       dataType: "json",
       cache: false,
-      success: callback
+      success: function (response) {
+        callback(response, file);
+      }
     });
   },
 

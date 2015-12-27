@@ -1,5 +1,5 @@
-require 'aws-sdk'
-require 'singleton'
+require "aws-sdk"
+require "singleton"
 
 class S3Presigner
   include Singleton
@@ -10,14 +10,15 @@ class S3Presigner
     upload_key = Pathname.new(prefix).join(filename).to_s
 
     creds = Aws::Credentials.new(
-      ENV['AWS_ACCESS_KEY_ID'],
-      ENV['AWS_SECRET_ACCESS_KEY']
+      ENV["AWS_ACCESS_KEY_ID"],
+      ENV["AWS_SECRET_ACCESS_KEY"]
     )
 
-    s3 = Aws::S3::Resource.new(region: 'us-west-1', credentials: creds)
-    object = s3.bucket("chime-audio-assets-dev").object(upload_key)
+    s3 = Aws::S3::Resource.new(region: "us-west-1", credentials: creds)
+    bucket = s3.bucket("chime-audio-assets-dev")
+    object = bucket.object(upload_key)
 
-    params = { acl: 'public-read' }
+    params = { acl: "public-read" }
     params[:content_length] = limit if limit
 
     {
