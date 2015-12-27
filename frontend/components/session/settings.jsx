@@ -97,7 +97,7 @@ var Settings = React.createClass({
 
         <Modal.Body>
           <Row>
-            <Col xs={ 4 } sm={ 4 } md={ 4 }>
+            <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <div className="avatar">
                 <span className="btn btn-default btn-file">
                   <Glyphicon glyph="camera"/> Update avatar
@@ -110,7 +110,7 @@ var Settings = React.createClass({
               </div>
             </Col>
 
-            <Col xs={ 8 } sm={ 8 } md={ 8 }>
+            <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="text"
                 label="Username"
                 ref="username"

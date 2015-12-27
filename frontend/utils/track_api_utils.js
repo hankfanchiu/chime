@@ -1,5 +1,5 @@
 var TrackAPIUtils = {
-  fetchTracks: function (username, actionCallback) {
+  fetchTracks: function (username, callback) {
     var url = "/api/tracks";
     if (username) {
       url += "?username=" + username;
@@ -8,55 +8,45 @@ var TrackAPIUtils = {
     $.ajax({
       url: url,
       type: "GET",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  fetchTrack: function (username, trackSlug, actionCallback) {
+  fetchTrack: function (username, trackSlug, callback) {
     var url = "/api/tracks/" + trackSlug + "?username=" + username;
 
     $.ajax({
       url: url,
       type: "GET",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  createTrack: function (formData, actionCallback) {
+  createTrack: function (formData, callback) {
     $.ajax({
       url: "/api/tracks",
       type: "POST",
       data: formData,
       processData: false,
       contentType: false,
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  updateTrack: function (trackId, trackData, actionCallback) {
+  updateTrack: function (trackId, trackData, callback) {
     $.ajax({
       url: "/api/tracks/" + trackId,
       type: "PATCH",
       data: { track: trackData },
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  deleteTrack: function (trackId, actionCallback) {
+  deleteTrack: function (trackId, callback) {
     $.ajax({
       url: "/api/tracks/" + trackId,
       type: "DELETE",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   }
 };

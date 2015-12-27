@@ -63,6 +63,7 @@ var SignUp = React.createClass({
     };
 
     UserActions.createUser(userData);
+    // this.setState(this.getInitialState());
   },
 
   render: function () {

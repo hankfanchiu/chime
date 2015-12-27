@@ -1,22 +1,18 @@
 var SessionAPIUtils = {
-  login: function (userData, actionCallback) {
+  login: function (userData, callback) {
     $.ajax({
       url: "/api/session",
       type: "POST",
       data: {user: userData},
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  logout: function (actionCallback) {
+  logout: function (callback) {
     $.ajax({
       url: "/api/session",
       type: "DELETE",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 };

@@ -1,23 +1,19 @@
 var PlaylistingAPIUtils = {
-  createPlaylisting: function (playlistingData, actionCallback) {
+  createPlaylisting: function (playlistingData, callback) {
     $.ajax({
       url: "/api/playlistings",
       type: "POST",
       data: {playlisting: playlistingData},
-      success: function (playlisting) {
-        actionCallback(playlisting);
-      }
+      success: callback
     });
   },
 
-  deletePlaylisting: function (ids, actionCallback) {
+  deletePlaylisting: function (ids, callback) {
     $.ajax({
       url: "/api/remove_track_from_playlist",
       type: "POST",
       data: {playlisting: ids},
-      success: function (playlisting) {
-        actionCallback(playlisting);
-      }
+      success: callback
     });
   }
 };

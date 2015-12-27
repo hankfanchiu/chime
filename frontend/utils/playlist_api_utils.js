@@ -1,5 +1,5 @@
 var PlaylistAPIUtils = {
-  fetchPlaylists: function (username, actionCallback) {
+  fetchPlaylists: function (username, callback) {
     var url = "/api/playlists"
     if (username) {
       url += "?username=" + username;
@@ -8,53 +8,43 @@ var PlaylistAPIUtils = {
     $.ajax({
       url: url,
       type: "GET",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  fetchPlaylist: function (username, playlistSlug, actionCallback) {
+  fetchPlaylist: function (username, playlistSlug, callback) {
     var url = "/api/playlists/" + playlistSlug + "?username=" + username;
 
     $.ajax({
       url: url,
       type: "GET",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  createPlaylist: function (playlistData, actionCallback) {
+  createPlaylist: function (playlistData, callback) {
     $.ajax({
       url: "/api/playlists",
       type: "POST",
       data: { playlist: playlistData },
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  updatePlaylist: function (playlistId, playlistData, actionCallback) {
+  updatePlaylist: function (playlistId, playlistData, callback) {
     $.ajax({
       url: "/api/playlists/" + playlistId,
       type: "PATCH",
       data: { playlist: playlistData },
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  deletePlaylist: function (playlistId, actionCallback) {
+  deletePlaylist: function (playlistId, callback) {
     $.ajax({
       url: "/api/playlists/" + playlistId,
       type: "DELETE",
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   }
 };

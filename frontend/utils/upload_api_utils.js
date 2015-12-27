@@ -1,5 +1,5 @@
 var UploadAPIUtils = {
-  fetchSignedUrls: function (prefix, file, actionCallback) {
+  fetchSignedUrls: function (prefix, file, callback) {
     var url = "/api/aws?prefix=" + prefix + "&filename=" + file.name;
 
     $.ajax({
@@ -7,13 +7,11 @@ var UploadAPIUtils = {
       type: "GET",
       dataType: "json",
       cache: false,
-      success: function (response) {
-        actionCallback(response, file);
-      }
+      success: callback
     });
   },
 
-  directUploadToS3: function (presignedUrl, file, progressCB, successCB) {
+  directUploadToS3: function (presignedUrl, file, progressCb, successCb) {
     var xhr = new XMLHttpRequest();
 
     xhr.open('PUT', presignedUrl, true);
@@ -21,12 +19,12 @@ var UploadAPIUtils = {
 
     xhr.upload.onprogress = function (e) {
       var percent = e.loaded / e.total;
-      progressCB(percent);
+      progressCb(percent);
     }
 
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
-        successCB(xhr);
+        successCb(xhr);
       }
     };
 

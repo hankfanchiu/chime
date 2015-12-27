@@ -76,27 +76,23 @@ var Upload = React.createClass({
     this.setState({ img: img });
   },
 
+  disabled: function () {
+    return (!this.state.isUploaded) || (this.state.title === "");
+  },
+
   progressState: function () {
     if (this.state.progress === 100) { return "success"; }
   },
 
   renderAudioUpload: function () {
-    if (!this.state.progress) { return <UploadAudio />; }
-
-    return (
-      <ProgressBar now={ this.state.progress } active
-        bsStyle={ this.progressState() } />
-    );
-  },
-
-  renderSubmitButton: function () {
-    if (!this.state.isUploaded || (this.state.title === "")) {
-      return <Button bsStyle="primary" disabled>Save</Button>;
+    if (this.state.progress) {
+      return (
+        <ProgressBar now={ this.state.progress } active
+          bsStyle={ this.progressState() } />
+      );
+    } else {
+      return <UploadAudio />;
     }
-
-    return (
-      <Button bsStyle="primary" onClick={ this._save }>Save</Button>
-    );
   },
 
   render: function () {
@@ -135,7 +131,11 @@ var Upload = React.createClass({
         <Modal.Footer>
           <Button onClick={ this._reset }>Cancel</Button>
 
-          { this.renderSubmitButton() }
+          <Button bsStyle="primary"
+            disabled={ this.disabled() }
+            onClick={ this._save }>
+            Save
+          </Button>
         </Modal.Footer>
       </Modal>
     );

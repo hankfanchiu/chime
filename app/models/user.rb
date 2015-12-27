@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     uniqueness: true
 
   has_attached_file :avatar,
-    default_url: "/assets/chimp.jpg",
+    default_url: "https://s3-us-west-1.amazonaws.com/chime-audio-assets/chimp.jpg",
     url: ":s3_domain_url",
     path: "/users/images/:hash_:style.:extension",
     hash_secret: "chime-audio-hash",

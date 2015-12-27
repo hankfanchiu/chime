@@ -1,39 +1,33 @@
 var UserAPIUtils = {
-  fetchUser: function (username, actionCallback) {
+  fetchUser: function (username, callback) {
     $.ajax({
       url: "/api/users/" + username,
       type: "GET",
-      success: function (user) {
-        actionCallback(user);
-      }
+      success: callback
     });
   },
 
-  createUser: function (userData, actionCallback) {
+  createUser: function (userData, callback) {
     $.ajax({
       url: "/api/users",
       type: "POST",
-      data: { user: userData },
-      success: function (response) {
-        actionCallback(response);
-      }
+      data: {user: userData},
+      success: callback
     });
   },
 
-  updateUser: function (userId, formData, actionCallback) {
+  updateUser: function (userId, formData, callback) {
     $.ajax({
       url: "/api/users/" + userId,
       type: "PATCH",
       data: formData,
       processData: false,
       contentType: false,
-      success: function (response) {
-        actionCallback(response);
-      }
+      success: callback
     });
   },
 
-  uploadImage: function (userId, formData, actionCallback) {
+  uploadImage: function (userId, formData, callback) {
     $.ajax({
       url: "/api/users/" + userId,
       type: "PUT",
@@ -41,19 +35,15 @@ var UserAPIUtils = {
       processData: false,
       contentType: false,
       dataType: "json",
-      success: function (user) {
-        actionCallback(user);
-      }
+      success: callback
     });
   },
 
-  deleteUser: function (userId, actionCallback) {
+  deleteUser: function (userId, callback) {
     $.ajax({
       url: "/api/users/" + userId,
       type: "DELETE",
-      success: function (user) {
-        actionCallback(user);
-      }
+      success: callback
     });
   }
 };
