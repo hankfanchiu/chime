@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
     default_url: "https://s3-us-west-1.amazonaws.com/chime-audio-assets/chimp.jpg",
     url: ":s3_domain_url",
-    path: "/users/images/:hash_:style.:extension",
+    path: "/users/images/:hash.:extension",
     hash_secret: "chime-audio-hash",
     styles: {
       hero: '30x30#',

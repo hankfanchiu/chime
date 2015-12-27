@@ -44,7 +44,7 @@ class Track < ActiveRecord::Base
   has_attached_file :img,
     default_url: "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg",
     url: ":s3_domain_url",
-    path: "/tracks/images/:hash_:style.:extension",
+    path: "/tracks/images/:hash.:extension",
     hash_secret: "chime-audio-hash",
     styles: {
       hero: '30x30#',
