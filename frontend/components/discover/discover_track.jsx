@@ -31,27 +31,26 @@ var DiscoverTrack = React.createClass({
     if (!track) { return <Col />; }
 
     return (
-      <Col xs={ 4 } sm={ 4 } md={ 3 }>
+      <Col xs={ 4 } sm={ 3 } md={ 3 }>
         <div className="discover-track">
           <span className="play-button" onClick={ this._playTrack }>
             <Glyphicon glyph="play" className="play-icon"/>
           </span>
 
-          <Thumbnail src={ track.img_square }
-            alt={ track.title }>
-
+          <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">
               <a onClick={ this._goToUserProfile }>
                 { track.user.username }
               </a>
             </span>
 
-            <span className="title">
-              <a onClick={ this._goToTrack }>
-                { track.title }
-              </a>
-            </span>
-
+            <div className="title-table">
+              <span className="title">
+                <a onClick={ this._goToTrack }>
+                  { track.title }
+                </a>
+              </span>
+            </div>
           </Thumbnail>
         </div>
       </Col>

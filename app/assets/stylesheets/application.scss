@@ -30,11 +30,12 @@
   min-width: 970px;
 }
 
-.navbar .navbar-header a.navbar-brand {
+.navbar .navbar-header span.navbar-brand {
+  cursor: pointer;
   color: #ccc
 }
 
-.navbar .navbar-header a.navbar-brand:hover {
+.navbar .navbar-header span.navbar-brand:hover {
   color: #eee
 }
 
@@ -48,7 +49,6 @@
 
 .container {
   min-width: 970px;
-  width: 970px;
   max-width: none !important;
 }
 

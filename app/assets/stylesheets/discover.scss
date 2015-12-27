@@ -25,6 +25,16 @@ div.discover-track {
   }
 }
 
+div.title-table {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+div.title-table:hover {
+
+}
+
 div.discover-track:hover {
   span.play-button {
     cursor: pointer;

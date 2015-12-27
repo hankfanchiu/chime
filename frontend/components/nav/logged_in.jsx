@@ -59,13 +59,13 @@ var LoggedIn = React.createClass({
             Playlists
           </MenuItem>
 
-          <MenuItem divider />
-
           <MenuItem onClick={ UserActions.showSettings }>
             <Glyphicon glyph="cog" />
             <span className="spacer spacer-small" />
             Settings
           </MenuItem>
+
+          <MenuItem divider />
 
           <MenuItem onClick={ this._logout }>
             <Glyphicon glyph="log-out" />
