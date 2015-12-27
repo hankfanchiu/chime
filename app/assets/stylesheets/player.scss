@@ -10,7 +10,7 @@ div.player {
 }
 
 div.controller {
-  width: 900px;
+  min-width: 970px;
   margin: auto;
 }
 
@@ -141,4 +141,7 @@ img.audio-badge-image {
 
 div.audio-badge-text {
   display: inline-block;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }

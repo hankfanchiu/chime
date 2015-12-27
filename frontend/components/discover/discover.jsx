@@ -55,7 +55,13 @@ var Discover = React.createClass({
   render: function () {
     return (
       <Grid>
-        <PageHeader>Discover New Chimes</PageHeader>
+        <PageHeader>
+          Discover new chimes
+          
+          <p>
+            <small>See what's popular. Play it now or add to your own playlist.</small>
+          </p>
+        </PageHeader>
 
         { this.renderDiscoverRows() }
       </Grid>

@@ -2,15 +2,14 @@ var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var Glyphicon = require("react-bootstrap").Glyphicon;
+var Button = require("react-bootstrap").Button;
 var PlayerActions = require("../../actions/player_actions");
+var AddToQueue = require("../utility/add_to_queue");
+var AddToPlaylist = require("../utility/add_to_playlist");
 var History = require("react-router").History;
 
 var DiscoverTrack = React.createClass({
   mixins: [History],
-
-  _playTrack: function () {
-    PlayerActions.playTrackNow(this.props.track);
-  },
 
   _goToTrack: function () {
     var track = this.props.track;
@@ -25,6 +24,14 @@ var DiscoverTrack = React.createClass({
     this.history.pushState(null, pathname);
   },
 
+  addToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
+  },
+
+  playTrack: function () {
+    PlayerActions.playTrackNow(this.props.track);
+  },
+
   render: function () {
     var track = this.props.track;
 
@@ -33,9 +40,14 @@ var DiscoverTrack = React.createClass({
     return (
       <Col xs={ 4 } sm={ 3 } md={ 3 }>
         <div className="discover-track">
-          <span className="play-button" onClick={ this._playTrack }>
+          <span className="btn play-button" onClick={ this.playTrack }>
             <Glyphicon glyph="play" className="play-icon"/>
           </span>
+
+          <div className="discover-track-buttons">
+            <AddToQueue addToQueue={ this.addToQueue } />
+            <AddToPlaylist />
+          </div>
 
           <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">

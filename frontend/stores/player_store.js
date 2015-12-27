@@ -198,7 +198,11 @@ var loadNextTrackUntilEnd = function () {
 };
 
 var pushTrackToQueue = function (track) {
-  if (!PlayerStore.isInQueue(track)) { _queue.push(track); }
+  if (PlayerStore.isInQueue(track)) { return; }
+
+  _queue.push(track);
+  
+  if (!_track.id) { _track = track; }
 
   PlayerStore.__emitChange();
 };
