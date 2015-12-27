@@ -88,7 +88,8 @@ var Settings = React.createClass({
 
   render: function () {
     return (
-      <Modal onHide={ this.close }
+      <Modal dialogClassName="settings-modal"
+        onHide={ this.close }
         show={ this.state.show }>
 
         <Modal.Header closeButton>

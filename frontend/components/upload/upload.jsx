@@ -112,7 +112,7 @@ var Upload = React.createClass({
 
             <Col xs={ 8 } sm={ 8 } md={ 8 }>
               <Input type="text"
-                label="Title *"
+                label="Title"
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
 

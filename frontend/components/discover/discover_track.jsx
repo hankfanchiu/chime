@@ -31,7 +31,7 @@ var DiscoverTrack = React.createClass({
     if (!track) { return <Col />; }
 
     return (
-      <Col xs={ 3 } sm={ 3 } md={ 3 }>
+      <Col xs={ 4 } sm={ 4 } md={ 3 }>
         <div className="discover-track">
           <span className="play-button" onClick={ this._playTrack }>
             <Glyphicon glyph="play" className="play-icon"/>

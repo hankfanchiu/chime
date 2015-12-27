@@ -68,15 +68,17 @@ var Navigation = React.createClass({
           </Navbar.Brand>
         </Navbar.Header>
 
-        <Nav>
-          <NavItem onClick={ this._goToDiscover }>
-            Discover
-          </NavItem>
+        <div id="navbar">
+          <Nav>
+            <NavItem onClick={ this._goToDiscover }>
+              Discover
+            </NavItem>
 
-          <Search pushState={ this._pushState } />
-        </Nav>
+            <Search pushState={ this._pushState } />
+          </Nav>
 
-        { this.renderSessionStatus() }
+          { this.renderSessionStatus() }
+        </div>
       </Navbar>
     );
   }
