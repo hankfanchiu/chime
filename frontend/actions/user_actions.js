@@ -26,7 +26,7 @@ var UserActions = {
   },
 
   createUser: function (userData) {
-    UserAPIUtils.createUser(userData, UserActions.receiveLogin);
+    UserAPIUtils.createUser(userData, UserActions.receiveSignUpResponse);
   },
 
   updateUser: function (userId, formData) {
@@ -46,9 +46,9 @@ var UserActions = {
     });
   },
 
-  receiveLogin: function (response) {
+  receiveSignUpResponse: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.LOGIN_RESPONSE,
+      actionType: ActionTypes.SIGN_UP_RESPONSE,
       response: response
     });
   },

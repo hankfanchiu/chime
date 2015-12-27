@@ -21,7 +21,7 @@ LoginStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
-      if (!response.errors) { setShowModal(false); }
+      setShowModal(!!response.errors);
       break;
 
   };

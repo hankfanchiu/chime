@@ -13,7 +13,7 @@ SessionStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.LOGIN_RESPONSE:
-      setSession(response);
+      if (!response.errors) { setSession(response); }
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:

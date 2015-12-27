@@ -13,7 +13,7 @@ var Login = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: LoginStore.showModal(),
+      show: LoginStore.showModal(),
       username: "",
       password: ""
     };
@@ -55,20 +55,20 @@ var Login = React.createClass({
   },
 
   reset: function () {
+    SessionActions.closeLogin();
     this.setState(this.getInitialState());
-    SessionActions.closeLoginModal();
   },
 
-  showSignUpModal: function () {
+  showSignUp: function () {
     this.reset();
-    SessionActions.showSignUpModal();
+    SessionActions.showSignUp();
   },
 
   render: function () {
     return (
       <Modal bsSize="small"
         onHide={ this.reset }
-        show={ this.state.showModal }>
+        show={ this.state.show }>
 
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
@@ -86,7 +86,7 @@ var Login = React.createClass({
               placeholder="Enter password"
               valueLink={ this.linkState("password") } />
 
-            <a onClick={ this.showSignUpModal }>
+            <a onClick={ this.showSignUp }>
               Don't have an account?
             </a>
           </Modal.Body>

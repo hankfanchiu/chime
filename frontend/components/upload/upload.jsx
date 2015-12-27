@@ -18,7 +18,7 @@ var Upload = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: false,
+      show: UploadStore.showModal(),
       title: "",
       description: ""
     };
@@ -34,7 +34,7 @@ var Upload = React.createClass({
 
   _onChange: function () {
     this.setState({
-      showModal: UploadStore.showModal(),
+      show: UploadStore.showModal(),
       publicUrl: UploadStore.getPublicUrl(),
       progress: UploadStore.getProgress(),
       isUploaded: UploadStore.isUploaded()
@@ -104,7 +104,7 @@ var Upload = React.createClass({
       <Modal backdrop="static"
         dialogClassName="upload-modal"
         onHide={ this._reset }
-        show={ this.state.showModal }>
+        show={ this.state.show }>
 
         <Modal.Header closeButton>
           <Modal.Title>Chime In</Modal.Title>

@@ -6,7 +6,7 @@ var ActionTypes = AppConstants.ActionTypes;
 var UploadActions = {
   // UI actions
 
-  showModal: function () {
+  showUpload: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_UPLOAD_MODAL
     });

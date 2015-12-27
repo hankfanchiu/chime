@@ -40,7 +40,7 @@ var LoggedIn = React.createClass({
   render: function () {
     return (
       <Nav pullRight>
-        <NavItem onClick={ UploadActions.showModal }>
+        <NavItem onClick={ UploadActions.showUpload }>
           Upload
         </NavItem>
 

@@ -16,7 +16,7 @@ var Settings = React.createClass({
     var user = SessionStore.getClient();
 
     return {
-      showModal: SettingsStore.showModal(),
+      show: SettingsStore.showModal(),
       disabled: true,
       user: user,
       username: user.username,
@@ -53,13 +53,11 @@ var Settings = React.createClass({
 
   _handleEmailChange: function () {
     var email = this.refs.email.getValue();
-
     this.setState({ disabled: false, email: email });
   },
 
   _handleUsernameChange: function () {
     var username = this.refs.username.getValue();
-
     this.setState({ disabled: false, username: username });
   },
 
@@ -91,7 +89,7 @@ var Settings = React.createClass({
   render: function () {
     return (
       <Modal onHide={ this.close }
-        show={ this.state.showModal }>
+        show={ this.state.show }>
 
         <Modal.Header closeButton>
           <Modal.Title>Account Settings</Modal.Title>
@@ -104,7 +102,7 @@ var Settings = React.createClass({
                 <span className="btn btn-default btn-file">
                   <Glyphicon glyph="camera"/> Update avatar
 
-                  <input type="file" accept="image/*" ref="img"
+                  <input type="file" accept="image/*" ref="file"
                     onChange={ this._handleFile } />
                 </span>
 

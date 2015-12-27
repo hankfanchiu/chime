@@ -13,7 +13,7 @@ var SignUp = React.createClass({
 
   getInitialState: function () {
     return {
-      showModal: SignUpStore.showModal(),
+      show: SignUpStore.showModal(),
       username: "",
       email: "",
       password: ""
@@ -47,12 +47,12 @@ var SignUp = React.createClass({
 
   reset: function () {
     this.setState(this.getInitialState());
-    SessionActions.closeSignUpModal();
+    SessionActions.closeSignUp();
   },
 
-  showLoginModal: function () {
+  showLogin: function () {
     this.reset();
-    SessionActions.showLoginModal();
+    SessionActions.showLogin();
   },
 
   signUp: function () {
@@ -63,14 +63,13 @@ var SignUp = React.createClass({
     };
 
     UserActions.createUser(userData);
-    this.setState(this.getInitialState());
   },
 
   render: function () {
     return (
       <Modal bsSize="small"
         onHide={ this.reset }
-        show={ this.state.showModal }>
+        show={ this.state.show }>
 
         <Modal.Header closeButton>
           <Modal.Title>Create Account</Modal.Title>
@@ -94,7 +93,7 @@ var SignUp = React.createClass({
               placeholder="Enter email address"
               valueLink={ this.linkState("email") } />
 
-            <a onClick={ this.showLoginModal }>
+            <a onClick={ this.showLogin }>
               Already have an account?
             </a>
           </Modal.Body>

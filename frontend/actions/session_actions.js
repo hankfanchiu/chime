@@ -7,13 +7,13 @@ var ActionTypes = AppConstants.ActionTypes;
 var SessionActions = {
   // Sign up modal actions
 
-  showSignUpModal: function () {
+  showSignUp: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_SIGN_UP_MODAL
     });
   },
 
-  closeSignUpModal: function () {
+  closeSignUp: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLOSE_SIGN_UP_MODAL
     });
@@ -21,13 +21,13 @@ var SessionActions = {
 
   // Login modal actions
 
-  showLoginModal: function () {
+  showLogin: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_LOGIN_MODAL
     });
   },
 
-  closeLoginModal: function () {
+  closeLogin: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLOSE_LOGIN_MODAL
     });
