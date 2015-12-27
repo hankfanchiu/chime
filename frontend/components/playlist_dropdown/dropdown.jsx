@@ -4,7 +4,7 @@ var Playlist = require("./playlist");
 
 var Dropdown = React.createClass({
   getInitialState: function () {
-    return { playlists: SessionStore.getCurrentUserPlaylists() }
+    return { playlists: SessionStore.getClientPlaylists() }
   },
 
   renderPlaylists: function () {

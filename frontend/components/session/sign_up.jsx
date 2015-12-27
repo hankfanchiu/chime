@@ -35,7 +35,7 @@ var SignUp = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this._validateComplete()) { return this.signUp(); }
+    if (this._validateComplete()) { this.signUp(); }
   },
 
   _validateComplete: function () {
@@ -64,6 +64,7 @@ var SignUp = React.createClass({
     };
 
     UserActions.createUser(userData);
+    this.setState({ username: "", password: "", email: "" });
   },
 
   renderSubmitButton: function () {

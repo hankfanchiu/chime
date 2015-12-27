@@ -3,10 +3,7 @@ class Api::UsersController < ApplicationController
   before_action :require_login, only: :update
 
   def create
-    if User.friendly.exists?(params[:user][:username])
-      render json: { errors: ["Username is not available"] }
-      return
-    end
+    return render_username_unavailable if user_exists?
 
     @user = User.new(user_params)
 
@@ -29,7 +26,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:tracks).friendly.find(params[:id])
+    @user = User.includes(:tracks).find_by(username: params[:id])
 
     return not_found if @user.nil?
 
@@ -40,5 +37,13 @@ class Api::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :avatar)
+  end
+
+  def user_exists?
+    User.friendly.exists?(params[:user][:username])
+  end
+
+  def render_username_unavailable
+    render json: { errors: ["Username is not available"] }
   end
 end

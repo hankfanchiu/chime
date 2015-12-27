@@ -9,9 +9,9 @@
 
   <script>
     <% if logged_in? %>
-      window.currentUserId = <%= current_user.id %>;
+      localStorage.setItem("client", <%= current_user.username %>);
     <% else %>
-      window.currentUserId = null;
+      localStorage.removeItem("client");
     <% end %>
   </script>
 

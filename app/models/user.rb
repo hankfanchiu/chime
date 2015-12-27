@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   before_save :downcase_user_data
-  before_save :randomize_avatar_basename
 
   friendly_id :username, use: :slugged
 
@@ -40,23 +39,24 @@ class User < ActiveRecord::Base
     exclusion: { in: INVALID_USERNAMES },
     length: { maximum: 30 }
 
+  validates :password,
+    length: { minimum: 6, allow_nil: true }
+
+  validates_presence_of :password_digest
+
   validates :email,
     presence: true,
     format: { with: VALID_EMAIL_REGEX }
-
-  validates :password,
-    length: { minimum: 6, maximum: 30, allow_nil: true }
 
   validates :session_token,
     presence: true,
     uniqueness: true
 
-  validates_presence_of :password_digest
-
   has_attached_file :avatar,
     default_url: "/assets/chimp.jpg",
     url: ":s3_domain_url",
-    path: "/users/images/:basename_:style.:extension",
+    path: "/users/images/:hash_:style.:extension",
+    hash_secret: "chime-audio-hash",
     styles: {
       hero: '30x30#',
       square: '300x300#'
@@ -120,14 +120,5 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
-  end
-
-  def randomize_avatar_basename
-    return if self.avatar_file_name.nil?
-
-    extension = File.extname(self.avatar_file_name)
-    filename = "#{SecureRandom.uuid}#{extension}"
-
-    self.avatar.instance_write(:file_name, filename)
   end
 end

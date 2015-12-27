@@ -34,7 +34,7 @@ var Login = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this._validateComplete()) { return this.login(); }
+    if (this._validateComplete()) { this.login(); }
   },
 
   _validateComplete: function () {
@@ -58,6 +58,7 @@ var Login = React.createClass({
     };
 
     SessionActions.login(userData);
+    this.setState({ username: "", password: "" });
   },
 
   reset: function () {

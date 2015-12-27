@@ -8,7 +8,7 @@ var Settings = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
-    var user = SessionStore.getCurrentUser();
+    var user = SessionStore.getClient();
 
     return {
       username: user.username,
@@ -18,14 +18,16 @@ var Settings = React.createClass({
   },
 
   componentWillMount: function () {
-    if (!SessionStore.isLoggedIn()) {
+    if (SessionStore.isLoggedIn()) {
+      var username = SessionStore.getClientUsername();
+      SessionActions.fetchClient(username);
+    } else {
       this.props.history.pushState(null, "/");
     }
   },
 
   componentDidMount: function () {
     this.listenerToken = SessionStore.addListener(this._onChange);
-    SessionActions.fetchCurrentUser(SessionStore.getCurrentUserId());
   },
 
   shouldComponentUpdate: function () {
@@ -37,7 +39,7 @@ var Settings = React.createClass({
   },
 
   _onChange: function () {
-    var user = SessionStore.getCurrentUser();
+    var user = SessionStore.getClient();
 
     this.setState({
       username: user.username,
@@ -56,7 +58,7 @@ var Settings = React.createClass({
   },
 
   _updateUser: function () {
-    var userId = SessionStore.getCurrentUserId();
+    var userId = SessionStore.getClientId();
     var userData = {
       username: this.state.username,
       email: this.state.email,

@@ -7,11 +7,11 @@ var UserSidebarAvatar = React.createClass({
   _handleFile: function () {
     var formData = new FormData();
     var img = this.refs.file.files[0];
-    var currentUserId = this.props.currentUser.id;
+    var clientId = this.props.client.id;
 
     formData.append("user[avatar]", img);
 
-    UserActions.uploadImage(currentUserId, formData);
+    UserActions.uploadImage(clientId, formData);
   },
 
   renderNoUpload: function () {
@@ -23,7 +23,7 @@ var UserSidebarAvatar = React.createClass({
   },
 
   render: function () {
-    if (!this.props.isCurrentUser) { return this.renderNoUpload(); }
+    if (!this.props.isClient) { return this.renderNoUpload(); }
 
     return (
       <div className="avatar">

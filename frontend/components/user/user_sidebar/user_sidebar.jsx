@@ -7,8 +7,8 @@ var UserSidebar = React.createClass({
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 }>
         <UserSidebarAvatar user={ this.props.user }
-          currentUser={ this.props.currentUser }
-          isCurrentUser={ this.props.isCurrentUser } />
+          client={ this.props.client }
+          isClient={ this.props.isClient } />
 
         <div className="username">
           <h3>{ this.props.user.username }</h3>

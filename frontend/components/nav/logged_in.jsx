@@ -3,16 +3,11 @@ var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
 var NavDropdown = require("react-bootstrap").NavDropdown;
 var MenuItem = require("react-bootstrap").MenuItem;
-var Button = require("react-bootstrap").Button;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var UploadActions = require("../../actions/upload_actions");
 
 var LoggedIn = React.createClass({
-  _showUploadModal: function () {
-    UploadActions.showModal();
-  },
-
   _goToTracks: function () {
     var tracks = "/" + this.props.user.username + "/tracks";
 
@@ -46,11 +41,9 @@ var LoggedIn = React.createClass({
   },
 
   render: function () {
-    if (!this.props.user.username) { return <Nav />; }
-
     return (
       <Nav pullRight>
-        <NavItem onClick={ this._showUploadModal }>
+        <NavItem onClick={ UploadActions.showModal }>
           Upload
         </NavItem>
 

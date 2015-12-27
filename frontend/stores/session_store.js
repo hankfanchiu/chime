@@ -3,7 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _currentUser = { tracks: [], playlists: [] };
+var _client = { tracks: [], playlists: [] };
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
@@ -20,61 +20,60 @@ SessionStore.__onDispatch = function (payload) {
       removeSession();
       break;
 
-    case ActionTypes.CURRENT_USER_RECEIVED:
-      setCurrentUser(response);
+    case ActionTypes.CLIENT_RECEIVED:
+      setClient(response);
       break;
 
   };
 };
 
 SessionStore.isLoggedIn = function () {
-  _currentUser.id = _currentUser.id || window.currentUserId;
-
-  return !!_currentUser.id;
+  return !!localStorage.getItem("client");
 };
 
-SessionStore.getCurrentUser = function () {
-  var currentUserCopy = jQuery.extend({}, _currentUser);
+SessionStore.getClient = function () {
+  var clientCopy = jQuery.extend({}, _client);
 
-  return currentUserCopy;
+  return clientCopy;
 };
 
-SessionStore.getCurrentUserId = function () {
-  return _currentUser.id;
+SessionStore.getClientId = function () {
+  return _client.id;
 };
 
-SessionStore.getCurrentUserUsername = function () {
-  return _currentUser.username;
+SessionStore.getClientUsername = function () {
+  return _client.username || localStorage.getItem("client");
 };
 
-SessionStore.getCurrentUserTracks = function () {
-  return _currentUser.tracks.slice();
+SessionStore.getClientTracks = function () {
+  return _client.tracks.slice();
 };
 
-SessionStore.getCurrentUserPlaylists = function () {
-  return _currentUser.playlists.slice();
+SessionStore.getClientPlaylists = function () {
+  return _client.playlists.slice();
 };
 
-SessionStore.isCurrentUser = function (username) {
-  return _currentUser.username === username;
+SessionStore.isClient = function (username) {
+  return _client.username === username;
 };
 
 var setSession = function (user) {
-  window.currentUserId = window.currentUserId || user.id;
-  _currentUser = user;
+  localStorage.setItem("client", user.username);
+  _client = user;
 
   SessionStore.__emitChange();
 };
 
 var removeSession = function () {
-  window.currentUserId = null;
-  _currentUser = {};
+  sessionStorage.clear();
+  localStorage.removeItem("client");
+  _client = {};
 
   SessionStore.__emitChange();
 };
 
-var setCurrentUser = function (user) {
-  _currentUser = user;
+var setClient = function (user) {
+  _client = user;
 
   SessionStore.__emitChange();
 };

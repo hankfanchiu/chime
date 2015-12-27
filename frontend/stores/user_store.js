@@ -16,7 +16,7 @@ UserStore.__onDispatch = function (payload) {
       resetUser(response);
       break;
 
-    case ActionTypes.CURRENT_USER_RECEIVED:
+    case ActionTypes.CLIENT_RECEIVED:
       resetUser(response);
       break;
   };

@@ -20,8 +20,8 @@ var UserPage = React.createClass({
 
     return {
       user: UserStore.getUser(username),
-      currentUser: SessionStore.getCurrentUser(),
-      isCurrentUser: SessionStore.isCurrentUser(username)
+      client: SessionStore.getClient(),
+      isClient: SessionStore.isClient(username)
     };
   },
 
@@ -58,8 +58,8 @@ var UserPage = React.createClass({
       <Grid>
         <Row>
           <UserSidebar user={ this.state.user }
-            currentUser={ this.state.currentUser }
-            isCurrentUser={ this.state.isCurrentUser } />
+            client={ this.state.client }
+            isClient={ this.state.isClient } />
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <Nav bsStyle="tabs"

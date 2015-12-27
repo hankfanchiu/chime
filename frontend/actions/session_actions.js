@@ -43,8 +43,8 @@ var SessionActions = {
     SessionAPIUtils.logout(SessionActions.receiveLogout);
   },
 
-  fetchCurrentUser: function (currentUserId) {
-    UserAPIUtils.fetchUser(currentUserId, SessionActions.receiveCurrentUser);
+  fetchClient: function (username) {
+    UserAPIUtils.fetchUser(username, SessionActions.receiveClient);
   },
 
   // Response actions
@@ -63,9 +63,9 @@ var SessionActions = {
     });
   },
 
-  receiveCurrentUser: function (response) {
+  receiveClient: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.CURRENT_USER_RECEIVED,
+      actionType: ActionTypes.CLIENT_RECEIVED,
       response: response
     });
   }

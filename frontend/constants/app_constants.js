@@ -9,7 +9,7 @@ module.exports = {
     // Session
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
-    CURRENT_USER_RECEIVED: null,
+    CLIENT_RECEIVED: null,
 
     // Sign Up
     SHOW_SIGN_UP_MODAL: null,

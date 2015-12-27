@@ -19,7 +19,7 @@ var Navigation = React.createClass({
   getStatesFromStore: function () {
     return {
       isLoggedIn: SessionStore.isLoggedIn(),
-      user: SessionStore.getCurrentUser()
+      user: SessionStore.getClient()
     };
   },
 
@@ -50,9 +50,7 @@ var Navigation = React.createClass({
   renderSessionStatus: function () {
     if (this.state.isLoggedIn) {
       return (
-        <LoggedIn user={ this.state.user }
-          pushState={ this._pushState }
-          openUpload={ this.props.openUpload } />
+        <LoggedIn user={ this.state.user } pushState={ this._pushState } />
       );
     } else {
       return (
