@@ -20,13 +20,15 @@ var UserAPIUtils = {
     });
   },
 
-  updateUser: function (userId, userData, actionCallback) {
+  updateUser: function (userId, formData, actionCallback) {
     $.ajax({
       url: "/api/users/" + userId,
       type: "PATCH",
-      data: { user: userData },
-      success: function (user) {
-        actionCallback(user);
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        actionCallback(response);
       }
     });
   },

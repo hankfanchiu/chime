@@ -1,12 +1,17 @@
 var React = require("react");
+var Grid = require("react-bootstrap").Grid;
+var PageHeader = require("react-bootstrap").PageHeader;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
 
 var Home = React.createClass({
   render: function () {
     return (
-      <div className="container home">
-        <h1>See what's trending</h1>
-
-      </div>
+      <Grid>
+        <PageHeader>
+          See what's trending
+        </PageHeader>
+      </Grid>
     );
   }
 });
