@@ -1,55 +1,33 @@
-div.discover {
-  text-align: center;
-}
+div.discover-track {
+  position: relative;
 
-div.discover-list:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-div.discover-list-item {
-  float: left;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 220px;
-  width: 220px;
-
-  div.box {
-    background: white;
-    width: 200px;
-    top: 50%;
+  span.play-button {
+    position: absolute;
+    display: table;
     left: 50%;
+    top: 30%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 0 0 2px 3px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background: #000;
+    opacity: 0;
+    transition: opacity 300ms;
   }
 
-  div.mousedown {
-    -moz-box-shadow: 0 2px 3px 0 #b3b3b3;
-    -webkit-box-shadow: 0 2px 3px 0 #b3b3b3;
-  }
-
-  img {
-    height: 150px;
-    width: 150px;
-  }
-
-  p.title {
-    font-size: 12px;
-    padding: 0;
-    margin: 0;
-  }
-
-  p.user {
-    font-size: 11px;
-    font-weight: lighter;
-    padding: 0;
-    margin: 0;
+  .glyphicon.play-icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 35px;
+    color: #bbb;
   }
 }
 
-div.discover-list-item:hover {
-  div.box{
-    border: 2px solid #eee;
-    border-radius: 10px;
+div.discover-track:hover {
+  span.play-button {
+    cursor: pointer;
+    opacity: 1;
   }
 }

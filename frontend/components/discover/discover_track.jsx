@@ -1,6 +1,7 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 var History = require("react-router").History;
 
@@ -31,17 +32,22 @@ var DiscoverTrack = React.createClass({
 
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 }>
-        <Thumbnail src={ track.img_square }
-          alt={ track.title }
-          onClick={ this._playTrack }>
+        <div className="discover-track">
+          <span className="play-button" onClick={ this._playTrack }>
+            <Glyphicon glyph="play" className="play-icon"/>
+          </span>
 
-          <a onClick={ this._goToUserProfile }>{ track.user.username }</a>
+          <Thumbnail src={ track.img_square }
+            alt={ track.title }>
 
-          <h6>
-            <a onClick={ this._goToTrack }>{ track.title }</a>
-          </h6>
+            <a onClick={ this._goToUserProfile }>{ track.user.username }</a>
 
-        </Thumbnail>
+            <h6>
+              <a onClick={ this._goToTrack }>{ track.title }</a>
+            </h6>
+
+          </Thumbnail>
+        </div>
       </Col>
     );
   }

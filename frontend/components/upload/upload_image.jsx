@@ -3,7 +3,9 @@ var Thumbnail = require("react-bootstrap").Thumbnail;
 
 var UploadImage = React.createClass({
   getInitialState: function () {
-    return { imgUrl: "/assets/4e325cce6262de6c03bff502.jpg" };
+    return {
+      imgUrl: "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg"
+    };
   },
 
   _handleFile: function () {
