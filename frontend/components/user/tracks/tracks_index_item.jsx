@@ -12,25 +12,30 @@ var History = require("react-router").History;
 var TracksIndexItem = React.createClass({
   mixins: [History],
 
-  _playTrack: function () {
-    PlayerActions.playTrackNow(this.props.track);
-  },
-
-  _addTrackToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
   _pushState: function (pathname) {
     this.history.pushState(null, pathname);
   },
 
-  _goToUser: function () {
+  playTrack: function () {
+    PlayerActions.playTrackNow(this.props.track);
+  },
+
+  addToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
+  },
+
+  addToPlaylist: function () {
+    this.props.setTrackToAdd(this.props.track);
+    PlaylistActions.showPlaylistModal();
+  },
+
+  goToUser: function () {
     var pathname = "/" + this.props.username;
 
     this._pushState(pathname);
   },
 
-  _goToTrack: function () {
+  goToTrack: function () {
     var pathname = "/" + this.props.username + "/" + this.props.track.slug;
 
     this._pushState(pathname);
@@ -44,17 +49,17 @@ var TracksIndexItem = React.createClass({
         <Row>
           <Col xs={ 3 } sm={ 3 } md={ 3 }>
             <Thumbnail src={ track.img_thumb }
-              onClick={ this._playTrack } />
+              onClick={ this.playTrack } />
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <div className="detail">
               <p className="username">
-                <a onClick={ this._goToUser }>{ track.user.username }</a>
+                <a onClick={ this.goToUser }>{ track.user.username }</a>
               </p>
 
               <p className="title">
-                <a onClick={ this._goToTrack }>{ track.title }</a>
+                <a onClick={ this.goToTrack }>{ track.title }</a>
               </p>
 
               <AddToQueue addToQueue={ this.addToQueue } />

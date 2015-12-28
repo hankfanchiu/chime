@@ -13,10 +13,7 @@ var Discover = React.createClass({
   },
 
   getStateFromStore: function () {
-    return {
-      tracks: DiscoverStore.all(),
-      trackToAdd: null
-    };
+    return { tracks: DiscoverStore.all() };
   },
 
   componentWillMount: function () {

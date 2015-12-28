@@ -2,12 +2,11 @@ var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var UserStore = require("../../../stores/user_store");
+var PlaylistModal = require("../../playlist_modal/playlist_modal");
 var TracksIndexItem = require("./tracks_index_item");
 
 var TracksIndex = React.createClass({
   getInitialState: function () {
-    this.username = this.props.params.username;
-
     return this.getStatesFromStore();
   },
 
@@ -29,6 +28,10 @@ var TracksIndex = React.createClass({
     this.setState(this.getStatesFromStore());
   },
 
+  _setTrackToAdd: function (track) {
+    this.setState({ trackToAdd: track });
+  },
+
   renderNoTracks: function () {
     return (
       <ListGroup>
@@ -39,10 +42,14 @@ var TracksIndex = React.createClass({
 
   renderTrackIndexItems: function () {
     var username = this.props.params.username;
+    var setTrackToAdd = this._setTrackToAdd;
 
     return this.state.tracks.map(function (track, idx) {
       return (
-        <TracksIndexItem key={ idx } track={ track } username={ username } />
+        <TracksIndexItem key={ idx }
+          track={ track }
+          username={ username }
+          setTrackToAdd={ setTrackToAdd } />
       );
     });
   },
@@ -53,6 +60,8 @@ var TracksIndex = React.createClass({
     return (
       <ListGroup>
         { this.renderTrackIndexItems() }
+
+        <PlaylistModal track={ this.state.trackToAdd } />
       </ListGroup>
     );
   }
