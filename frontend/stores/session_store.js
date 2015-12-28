@@ -26,11 +26,7 @@ SessionStore.__onDispatch = function (payload) {
       setClient(response);
       break;
 
-    case ActionTypes.PLAYLISTING_CREATED:
-      if (!response.errors) { updateClientPlaylist(response); }
-      break;
-
-    case ActionTypes.PLAYLISTING_DELETED:
+    case ActionTypes.PLAYLISTING_UPDATED:
       if (!response.errors) { updateClientPlaylist(response); }
       break;
 
