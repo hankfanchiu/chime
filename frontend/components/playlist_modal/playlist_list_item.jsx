@@ -86,9 +86,13 @@ var PlaylistListItem = React.createClass({
           </Col>
 
           <Col xs={ 7 } sm={ 7 } md={ 7 }>
-            <p className="playlist-title">
+            <span className="playlist-title">
               <a onClick={ this.goToPlaylist }>{ playlist.title }</a>
-            </p>
+            </span>
+
+            <span className="playlist-track-count">
+              Tracks: { playlist.track_count }
+            </span>
           </Col>
 
           <Col xs={ 3 } sm={ 3 } md={ 3 } style={{ textAlign: "right" }}>
