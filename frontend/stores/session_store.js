@@ -84,10 +84,10 @@ SessionStore.playlistContainsTrack = function (playlistId, trackId) {
 
   if (!clientPlaylist) { return; }
 
-  var tracks = clientPlaylist.track;
+  var tracks = clientPlaylist.tracks;
   var foundIndex = -1;
 
-  playlist.tracks.findIndex(function (possibleTrack, index) {
+  tracks.findIndex(function (possibleTrack, index) {
     if (possibleTrack.id === trackId) { foundIndex = index; }
   });
 
