@@ -30,14 +30,14 @@ var Login = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
+  
+  _disabled: function () {
+    return (this.state.username === "") || (this.state.password === "");
+  },
 
   _handleSubmit: function (e) {
     e.preventDefault();
     this.login();
-  },
-
-  disabled: function () {
-    return (this.state.username === "") || (this.state.password === "");
   },
 
   loginDemo: function () {
@@ -96,7 +96,7 @@ var Login = React.createClass({
 
             <Button type="submit"
               bsStyle="primary"
-              disabled={ this.disabled() }
+              disabled={ this._disabled() }
               onClick={ this.login }>Login</Button>
           </Modal.Footer>
         </form>

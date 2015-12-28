@@ -31,18 +31,18 @@ var SignUp = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
-
-  _handleSubmit: function (e) {
-    e.preventDefault();
-    this.signUp();
-  },
-
-  disabled: function () {
+  
+  _disabled: function () {
     return (
       (this.state.username === "") ||
       (this.state.email === "") ||
       (this.state.password === "")
     );
+  },
+
+  _handleSubmit: function (e) {
+    e.preventDefault();
+    this.signUp();
   },
 
   reset: function () {
@@ -101,7 +101,7 @@ var SignUp = React.createClass({
           <Modal.Footer>
             <Button type="submit"
               bsStyle="primary"
-              disabled={ this.disabled() }
+              disabled={ this._disabled() }
               onClick={ this.signUp }>
               Sign Up
             </Button>

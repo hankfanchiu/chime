@@ -34,6 +34,10 @@ var PlaylistForm = React.createClass({
     this.history.pushState(null, pathname);
   },
 
+  _disabled: function () {
+    return this.state.title === "";
+  },
+
   _handleSubmit: function (e) {
     e.preventDefault();
     this.createPlaylist();
@@ -88,7 +92,11 @@ var PlaylistForm = React.createClass({
         <Modal.Footer>
           <Button onClick={ this.reset }>Cancel</Button>
 
-          <Button bsStyle="primary" type="submit">Create Playlist</Button>
+          <Button bsStyle="primary"
+            disabled={ this._disabled() }
+            type="submit">
+            Create Playlist
+          </Button>
         </Modal.Footer>
       </form>
     );

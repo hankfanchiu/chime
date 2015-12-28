@@ -36,6 +36,14 @@ var Settings = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
+  
+  _disabled: function () {
+    return (
+      (this.state.username === "") ||
+      (this.state.email === "") ||
+      (this.state.disabled)
+    );
+  },
 
   _handleFile: function () {
     var reader = new FileReader();
@@ -76,14 +84,6 @@ var Settings = React.createClass({
 
   close: function () {
     UserActions.closeSettings();
-  },
-
-  disabled: function () {
-    return (
-      (this.state.username === "") ||
-      (this.state.email === "") ||
-      (this.state.disabled)
-    );
   },
 
   render: function () {
@@ -133,7 +133,7 @@ var Settings = React.createClass({
           <Button onClick={ this.close }>Cancel</Button>
 
           <Button bsStyle="primary"
-            disabled={ this.disabled() }
+            disabled={ this._disabled() }
             onClick={ this._updateUser }>
             Update Account
           </Button>

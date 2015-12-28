@@ -43,6 +43,10 @@ var Upload = React.createClass({
     this._redirectIfSaved();
   },
 
+  _disabled: function () {
+    return (!this.state.isUploaded) || (this.state.title === "");
+  },
+
   _redirectIfSaved: function () {
     var pathname = UploadStore.getTrackPathname();
     var pushState = this.history.pushState.bind(this, null, pathname);
@@ -74,10 +78,6 @@ var Upload = React.createClass({
 
   _setImg: function (img) {
     this.setState({ img: img });
-  },
-
-  disabled: function () {
-    return (!this.state.isUploaded) || (this.state.title === "");
   },
 
   progressState: function () {
@@ -130,7 +130,7 @@ var Upload = React.createClass({
           <Button onClick={ this._reset }>Cancel</Button>
 
           <Button bsStyle="primary"
-            disabled={ this.disabled() }
+            disabled={ this._disabled() }
             onClick={ this._save }>
             Save
           </Button>
