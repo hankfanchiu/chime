@@ -44,7 +44,7 @@ module.exports = {
     CLOSE_PLAYLIST_MODAL: null,
     PLAYLISTS_RECEIVED: null,
     PLAYLIST_RECEIVED: null,
-    NEW_PLAYLIST_RECEIVED: null,
+    PLAYLIST_CREATED: null,
 
     // Playlisting
     PLAYLISTING_CREATED: null,

@@ -61,16 +61,12 @@ var PlaylistListItem = React.createClass({
     this.props.removeFromPlaylist(ids);
   },
 
-  renderAdd: function () {
-    return (
-      <Button bsStyle="primary" onClick={ this.add }>Add</Button>
-    );
+  addButton: function () {
+    return <Button bsStyle="primary" onClick={ this.add }>Add</Button>;
   },
 
-  renderRemove: function () {
-    return (
-      <Button bsStyle="warning" onClick={ this.remove }>Remove</Button>
-    );
+  removeButton: function () {
+    return <Button onClick={ this.remove }>Remove</Button>;
   },
 
   render: function () {
@@ -96,7 +92,7 @@ var PlaylistListItem = React.createClass({
           </Col>
 
           <Col xs={ 3 } sm={ 3 } md={ 3 } style={{ textAlign: "right" }}>
-            { this.state.isAdded ? this.renderRemove() : this.renderAdd() }
+            { this.state.isAdded ? this.removeButton() : this.addButton() }
           </Col>
         </Row>
       </ListGroupItem>

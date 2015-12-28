@@ -39,6 +39,7 @@ var PlaylistModal = React.createClass({
   },
 
   close: function () {
+    this.setState({ showForm: false });
     PlaylistActions.closePlaylistModal();
   },
 

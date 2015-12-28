@@ -5,19 +5,16 @@ var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var Button = require("react-bootstrap").Button;
-var PlaylistingActions = require("../../actions/playlisting_actions");
+var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistStore = require("../../stores/playlist_store");
-var SessionStore = require("../../stores/session_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
+var History = require("react-router").History;
 
 var PlaylistForm = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return {
-      title: "",
-      description: ""
-    };
+    return { title: "", description: "" };
   },
 
   componentDidMount: function () {
@@ -29,7 +26,12 @@ var PlaylistForm = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ playlist: PlaylistStore.getNewPlaylistPathname() });
+    var pathname = PlaylistStore.getNewPlaylistPathname();
+
+    if (!pathname) { return; }
+
+    this.setState(this.getInitialState);
+    this.history.pushState(null, pathname);
   },
 
   _handleSubmit: function (e) {
@@ -38,19 +40,16 @@ var PlaylistForm = React.createClass({
   },
 
   createPlaylist: function () {
+    var playlistData = {
+      title: this.state.title,
+      description: this.state.description,
+      track_ids: [this.props.track.id]
+    }
 
+    PlaylistActions.createPlaylist(playlistData);
   },
 
-  createPlaylisting: function () {
-    var data = {
-      playlist_id: this.props.playlist.id,
-      track_id: this.props.trackId
-    };
-
-    PlaylistingActions.createPlaylisting(data);
-  },
-
-  cancel: function () {
+  reset: function () {
     this.setState(this.getInitialState);
     this.props.close();
   },
@@ -87,7 +86,7 @@ var PlaylistForm = React.createClass({
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={ this.cancel }>Cancel</Button>
+          <Button onClick={ this.reset }>Cancel</Button>
 
           <Button bsStyle="primary" type="submit">Create Playlist</Button>
         </Modal.Footer>

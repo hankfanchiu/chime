@@ -54,7 +54,8 @@ class Api::PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(:playlist).permit(:title, :description, :tracks)
+    permitted = [:title, :description, { track_ids: [] }]
+    params.require(:playlist).permit(permitted)
   end
 
   def require_owner

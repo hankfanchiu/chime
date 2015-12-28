@@ -38,7 +38,7 @@ var PlaylistActions = {
   createPlaylist: function (playlistData) {
     PlaylistAPIUtils.createPlaylist(
       playlistData,
-      PlaylistActions.receivePlaylist
+      PlaylistActions.receiveCreatedPlaylist
     );
   },
 
@@ -69,6 +69,13 @@ var PlaylistActions = {
   receivePlaylist: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAYLIST_RECEIVED,
+      response: response
+    });
+  },
+
+  receiveCreatedPlaylist: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAYLIST_CREATED,
       response: response
     });
   }

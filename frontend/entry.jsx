@@ -10,7 +10,6 @@ var history = createBrowserHistory();
 var App = require("./components/app");
 var Home = require("./components/home");
 var Discover = require("./components/discover/discover");
-var Collect = require("./components/collect/collect");
 var Logout = require("./components/session/logout");
 var UserPage = require("./components/user/user_page");
 var ProfileIndex = require("./components/user/profile/profile_index");

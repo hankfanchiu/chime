@@ -30,7 +30,7 @@ PlaylistStore.__onDispatch = function (payload) {
       resetPlaylist(response);
       break;
 
-    case ActionTypes.NEW_PLAYLIST_RECEIVED:
+    case ActionTypes.PLAYLIST_CREATED:
       if (!response.errors) { setPlaylistPathname(response); }
       break;
 
@@ -84,8 +84,11 @@ var resetPlaylist = function (playlist) {
 };
 
 var setPlaylistPathname = function (playlist) {
+  var username = playlist.user.username;
+  var pathname = "/" + username + "/playlists/" + playlist.slug;
+
   _showModal = false;
-  _newTrackPathname = "/" + playlist.user.username + "/" + playlist.slug;
+  _newPlaylistPathname = pathname;
 
   PlaylistStore.__emitChange();
 };
