@@ -6,9 +6,9 @@ var ActionTypes = AppConstants.ActionTypes;
 var PlaylistingActions = {
   // Request actions
 
-  createPlaylisting: function (playlistingData) {
+  createPlaylisting: function (ids) {
     PlaylistingAPIUtils.createPlaylisting(
-      playlistingData,
+      ids,
       PlaylistingActions.receivePlaylisting
     );
   },

@@ -7,7 +7,7 @@ var _showModal = false;
 var _publicUrl = null;
 var _progress = 0;
 var _responseStatus = null;
-var _trackPathname = null;
+var _newTrackPathname = null;
 var UploadStore = new Store(AppDispatcher);
 
 UploadStore.__onDispatch = function (payload) {
@@ -60,7 +60,7 @@ UploadStore.isUploaded = function () {
 };
 
 UploadStore.getTrackPathname = function () {
-  return _trackPathname;
+  return _newTrackPathname;
 };
 
 var setShowModal = function () {
@@ -93,7 +93,7 @@ var setTrackPathname = function (track) {
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
-  _trackPathname = "/" + track.user.username + "/" + track.slug;
+  _newTrackPathname = "/" + track.user.username + "/" + track.slug;
 
   UploadStore.__emitChange();
 };
@@ -103,7 +103,7 @@ var resetUploadStore = function () {
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
-  _trackPathname = null;
+  _newTrackPathname = null;
 
   UploadStore.__emitChange();
 };

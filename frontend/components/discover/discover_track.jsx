@@ -24,10 +24,6 @@ var DiscoverTrack = React.createClass({
     this.history.pushState(null, pathname);
   },
 
-  addToPlaylist: function () {
-
-  },
-
   addToQueue: function () {
     PlayerActions.addTrackToQueue(this.props.track);
   },
@@ -50,7 +46,7 @@ var DiscoverTrack = React.createClass({
 
           <div className="discover-track-buttons">
             <AddToQueue addToQueue={ this.addToQueue } />
-            <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
+            <AddToPlaylist track={ this.props.track } />
           </div>
 
           <Thumbnail src={ track.img_square } alt={ track.title }>

@@ -2,23 +2,21 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
-var Input = require("react-bootstrap").Input;
-var Button = require("react-bootstrap").Button;
-var Glyphicon = require("react-bootstrap").Modal;
-var PlaylistingActions = require("../../actions/playlisting_actions");
 var PlaylistStore = require("../../stores/playlist_store");
-var SessionStore = require("../../stores/session_store");
+var PlaylistActions = require("../../actions/playlist_actions");
+var PlaylistForm = require("./playlist_form");
+var PlaylistList = require("./playlist_list");
 
 var PlaylistModal = React.createClass({
   getInitialState: function () {
     return {
-      show: PlaylistModalStore.showModal(),
-      playlists: SessionStore.getClientPlaylists(),
+      show: PlaylistStore.showModal(),
+      showForm: false
     };
   },
 
   componentDidMount: function () {
-    this.listenerToken = PlaylistModalStore.addListener(this._onChange);
+    this.playlistListener = PlaylistStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -26,24 +24,27 @@ var PlaylistModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getInitialState());
+    this.setState({ show: PlaylistStore.showModal() });
   },
 
-  createPlaylist: function () {
-
-  },
-
-  createPlaylisting: function () {
-    var data = {
-      playlist_id: this.props.playlist.id,
-      track_id: this.props.trackId
-    };
-
-    PlaylistingActions.createPlaylisting(data);
+  _handleSelect: function (selectKey) {
+    this.setState({ showForm: selectKey });
   },
 
   close: function () {
-    this.props.close();
+    PlaylistActions.closePlaylistModal();
+  },
+
+  renderForm: function () {
+    return <PlaylistForm close={ this.close } track={ this.props.track } />;
+  },
+
+  renderList: function () {
+    return (
+      <PlaylistList close={ this.close }
+        playlists={ this.props.playlists }
+        track={ this.props.track } />
+    );
   },
 
   render: function () {
@@ -51,23 +52,17 @@ var PlaylistModal = React.createClass({
       <Modal onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
           <Modal.Title>
-            <Nav bsStyle="tabs"
-              activeKey={ 1 }
+            <Nav bsStyle="pills"
+              activeKey={ this.state.showForm }
               onSelect={ this._handleSelect }>
 
-              <NavItem eventKey={ 1 }>Add to playlist</NavItem>
-              <NavItem eventKey={ 2 }>Create new playlist</NavItem>
+              <NavItem eventKey={ false }>Add to playlist</NavItem>
+              <NavItem eventKey={ true }>Create new playlist</NavItem>
             </Nav>
           </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          { this.props.children }
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button onClick={ this.close }>Close</Button>
-        </Modal.Footer>
+        { this.state.showForm ? this.renderForm() : this.renderList() }
       </Modal>
     );
   }

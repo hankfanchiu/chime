@@ -4,6 +4,20 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var PlaylistActions = {
+  // UI actions
+
+  showPlaylistModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_PLAYLIST_MODAL
+    });
+  },
+
+  closePlaylistModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_PLAYLIST_MODAL
+    });
+  },
+
   // Request actions
 
   fetchPlaylists: function (username) {

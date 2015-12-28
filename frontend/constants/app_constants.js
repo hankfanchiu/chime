@@ -40,8 +40,11 @@ module.exports = {
     NEW_TRACK_RECEIVED: null,
 
     // Playlist
+    SHOW_PLAYLIST_MODAL: null,
+    CLOSE_PLAYLIST_MODAL: null,
     PLAYLISTS_RECEIVED: null,
     PLAYLIST_RECEIVED: null,
+    NEW_PLAYLIST_RECEIVED: null,
 
     // Playlisting
     PLAYLISTING_RECEIVED: null,
