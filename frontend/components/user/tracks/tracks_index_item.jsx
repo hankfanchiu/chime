@@ -4,6 +4,9 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlayerActions = require("../../../actions/player_actions");
+var PlaylistActions = require("../../../actions/playlist_actions");
+var AddToQueue = require("../../utility/add_to_queue");
+var AddToPlaylist = require("../../utility/add_to_playlist");
 var History = require("react-router").History;
 
 var TracksIndexItem = React.createClass({
@@ -54,11 +57,8 @@ var TracksIndexItem = React.createClass({
                 <a onClick={ this._goToTrack }>{ track.title }</a>
               </p>
 
-              <p>
-                <a onClick={ this._addTrackToQueue }>
-                  <i className="fa fa-plus"></i> Add to queue
-                </a>
-              </p>
+              <AddToQueue addToQueue={ this.addToQueue } />
+              <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
             </div>
           </Col>
