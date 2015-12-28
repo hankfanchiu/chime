@@ -23,36 +23,44 @@ div.discover-track {
     font-size: 35px;
     color: #bbb;
   }
-}
 
-div.discover-track-buttons {
-  position: relative;
-  width: 100%;
+  span.play-button:hover {
+    background: #111;
 
-  span.add-to-queue {
-    position: absolute;
-    margin: auto;
-    top: 60%;
-    font-size: 10px;
-    opacity: 0;
-    transition: opacity 300ms;
-
-    .glyphicon.plus-icon {
-      font-size: 10px;
+    .glyphicon.play-icon {
+      color: #ddd;
     }
   }
 
-  span.add-to-playlist {
-    position: absolute;
-    margin: auto;
-    top: 60%;
+  span.play-button:active {
+    background: #000;
+
+    .glyphicon.play-icon {
+      color: #bbb;
+    }
+  }
+}
+
+div.discover-track-buttons {
+  width: 100%;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+
+  span.add-to-queue {
+    margin: 0 1%;
     font-size: 10px;
     opacity: 0;
     transition: opacity 300ms;
+  }
 
-    .glyphicon.playlist-icon {
-      font-size: 10px;
-    }
+  span.add-to-playlist {
+    margin: 0 1%;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 300ms;
   }
 }
 

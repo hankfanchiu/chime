@@ -18,8 +18,8 @@
 @import 'bootstrap';
 
 .navbar-default {
-  background-color: #00587D;
-  border-color: #00587D;
+  background-color: #005284;
+  border-color: #333;
 }
 
 .navbar-fixed-top {
@@ -54,7 +54,7 @@
 
 main {
   padding-top: 70px;
-  padding-bottom: 120px;
+  padding-bottom: 100px;
 }
 
 a {
@@ -100,7 +100,7 @@ span.username {
 }
 
 span.title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bolder;
   color: #555;
 }
