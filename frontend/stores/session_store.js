@@ -3,8 +3,9 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _client = { tracks: [] };
+var _client = {};
 var _clientPlaylists = {};
+var _clientTracks = {};
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
@@ -23,6 +24,14 @@ SessionStore.__onDispatch = function (payload) {
 
     case ActionTypes.CLIENT_RECEIVED:
       setClient(response);
+      break;
+
+    case ActionTypes.PLAYLISTING_CREATED:
+      if (!response.errors) { addPlaylisting(response); }
+      break;
+
+    case ActionTypes.PLAYLISTING_DELETED:
+      if (!response.errors) { removePlaylisting(response); }
       break;
 
   };
@@ -47,7 +56,13 @@ SessionStore.getClientUsername = function () {
 };
 
 SessionStore.getClientTracks = function () {
-  return _client.tracks.slice();
+  var tracks = [];
+
+  Object.keys(_clientTracks).forEach(function (id) {
+    tracks.push(_clientTracks[id]);
+  });
+
+  return tracks;
 };
 
 SessionStore.getClientPlaylists = function () {
@@ -68,8 +83,8 @@ SessionStore.playlistContainsTrack = function (playlistId, trackId) {
   var playlist = _clientPlaylists[playlistId];
   var foundIndex = -1;
 
-  playlist.tracks.findIndex(function (track, index) {
-    if (track.id === trackId) { foundIndex = index; }
+  playlist.tracks.findIndex(function (possibleTrack, index) {
+    if (possibleTrack.id === trackId) { foundIndex = index; }
   });
 
   return foundIndex !== -1;
@@ -77,25 +92,69 @@ SessionStore.playlistContainsTrack = function (playlistId, trackId) {
 
 var setSession = function (user) {
   localStorage.setItem("client", user.username);
-  _client = user;
-
-  SessionStore.__emitChange();
+  setClient(user);
 };
 
 var removeSession = function () {
   sessionStorage.clear();
   localStorage.removeItem("client");
-  _client = {};
-
-  SessionStore.__emitChange();
+  removeClient();
 };
 
 var setClient = function (user) {
   _client = user;
+  _setClientPlaylists(user.playlists);
+  _setClientTracks(user.tracks);
 
-  user.playlists.forEach(function (playlist) {
+  SessionStore.__emitChange();
+};
+
+var removeClient = function () {
+  _client = {};
+  _clientPlaylists = {};
+  _clientTracks = {};
+
+  SessionStore.__emitChange();
+};
+
+var _setClientPlaylists = function (playlists) {
+  playlists.forEach(function (playlist) {
     _clientPlaylists[playlist.id] = playlist;
   });
+};
+
+var _setClientTracks = function (tracks) {
+  tracks.forEach(function (track) {
+    _clientTracks[track.id] = track;
+  });
+};
+
+var addPlaylisting = function (playlisting) {
+  var playlistId = playlisting.playlist.id;
+  var clientPlaylist = _clientPlaylists[playlistId];
+  var addedTrack = playlisting.track;
+
+  if (!clientPlaylist) { return; }
+
+  var tracks = clientPlaylist.tracks;
+  tracks.push(addedTrack);
+
+  SessionStore.__emitChange();
+};
+
+var removePlaylisting = function (playlisting) {
+  var playlistId = playlisting.playlist.id;
+  var clientPlaylist = _clientPlaylists[playlistId];
+  var removedTrack = playlisting.track;
+
+  if (!clientPlaylist) { return; }
+
+  var tracks = clientPlaylist.tracks;
+  for (var i = 0; i < tracks.length; i++) {
+    if (tracks[i].id === removedTrack.id) {
+      tracks.splice(i, 1);
+    }
+  }
 
   SessionStore.__emitChange();
 };

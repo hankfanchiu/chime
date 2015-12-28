@@ -81,16 +81,17 @@ var PlaylistListItem = React.createClass({
       <ListGroupItem>
         <Row>
           <Col xs={ 2 } sm={ 2 } md={ 2 }>
-            <Thumbnail src={ firstTrackImgUrl } />
+            <Thumbnail src={ firstTrackImgUrl }
+              onClick={ this.goToPlaylist } />
           </Col>
 
-          <Col xs={ 8 } sm={ 8 } md={ 8 }>
+          <Col xs={ 7 } sm={ 7 } md={ 7 }>
             <p className="playlist-title">
               <a onClick={ this.goToPlaylist }>{ playlist.title }</a>
             </p>
           </Col>
 
-          <Col xs={ 2 } sm={ 2 } md={ 2 }>
+          <Col xs={ 3 } sm={ 3 } md={ 3 } style={{ textAlign: "right" }}>
             { this.state.isAdded ? this.renderRemove() : this.renderAdd() }
           </Col>
         </Row>

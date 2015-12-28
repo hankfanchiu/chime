@@ -6,7 +6,7 @@ class Api::PlaylistingsController < ApplicationController
     @playlisting = Playlisting.new(playlisting_params)
 
     if @playlisting.save
-      render json: @playlisting
+      render :playlisting_created
     else
       render json: { errors: @playlisting.errors.full_messages }
     end
@@ -18,7 +18,7 @@ class Api::PlaylistingsController < ApplicationController
     return not_found if @playlisting.nil?
 
     if @playlisting.destroy
-      render json: @playlisting
+      render :playlisting_destroyed
     else
       render json: { errors: @playlisting.errors.full_messages }
     end
@@ -33,7 +33,7 @@ class Api::PlaylistingsController < ApplicationController
   def require_owner
     playlist_id = playlisting_params[:playlist_id]
     track_id = playlisting_params[:track_id]
-    
+
     playlisting_owned = current_user.playlistings
       .exists?(playlist_id: playlist_id, track_id: track_id)
 
