@@ -9,22 +9,29 @@ var PlaylistingActions = {
   createPlaylisting: function (ids) {
     PlaylistingAPIUtils.createPlaylisting(
       ids,
-      PlaylistingActions.receivePlaylistUpdate
+      PlaylistingActions.receivePlaylistingCreated
     );
   },
 
   deletePlaylisting: function (ids) {
     PlaylistingAPIUtils.deletePlaylisting(
       ids,
-      PlaylistingActions.receivePlaylistUpdate
+      PlaylistingActions.receivePlaylistingDeleted
     );
   },
 
   // Response actions
 
-  receivePlaylistUpdate: function (response) {
+  receivePlaylistingCreated: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.PLAYLIST_UPDATED,
+      actionType: ActionTypes.PLAYLISTING_CREATED,
+      response: response
+    });
+  },
+
+  receivePlaylistingDeleted: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAYLISTING_DELETED,
       response: response
     });
   }

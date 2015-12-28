@@ -75,7 +75,7 @@ var PlaylistListItem = React.createClass({
             </span>
 
             <span className="playlist-track-count">
-              Tracks: { playlist.track_count }
+              Tracks: { playlist.tracks.length }
             </span>
           </Col>
 

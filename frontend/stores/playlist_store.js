@@ -34,8 +34,12 @@ PlaylistStore.__onDispatch = function (payload) {
       if (!response.errors) { setPlaylistPathname(response); }
       break;
 
-    case ActionTypes.PLAYLIST_UPDATED:
-      if (!response.errors) { updatePlaylist(response); }
+    case ActionTypes.PLAYLISTING_CREATED:
+      if (!response.errors) { addTrackToPlaylist(response); }
+      break;
+
+    case ActionTypes.PLAYLISTING_DELETED:
+      if (!response.errors) { removeTrackFromPlaylist(response); }
       break;
 
     case ActionTypes.USER_RECEIVED:
@@ -139,10 +143,32 @@ var resetPlaylist = function (playlist) {
   PlaylistStore.__emitChange();
 };
 
-var updatePlaylist = function (playlist) {
-  var username = playlist.user.username;
+var addTrackToPlaylist = function (response) {
+  var username = response.username;
+  var playlistSlug = response.playlist_slug;
+  var addedTrack = response.track;
 
-  _playlists[username][playlist.slug] = playlist;
+  var playlist = _playlists[username][playlistSlug];
+  var tracks = playlist.tracks;
+
+  tracks.push(addedTrack);
+
+  PlaylistStore.__emitChange();
+};
+
+var removeTrackFromPlaylist = function (response) {
+  var username = response.username;
+  var playlistSlug = response.playlist_slug;
+  var removedTrackId = response.track_id;
+
+  var playlist = _playlists[username][playlistSlug];
+  var tracks = playlist.tracks;
+
+  for (var i = 0; i < tracks.length; i++) {
+    if (tracks[i].id === removedTrackId) {
+      tracks.splice(i, 1);
+    }
+  }
 
   PlaylistStore.__emitChange();
 };

@@ -45,7 +45,10 @@ module.exports = {
     PLAYLISTS_RECEIVED: null,
     PLAYLIST_RECEIVED: null,
     PLAYLIST_CREATED: null,
-    PLAYLIST_UPDATED: null,
+
+    // Playlisting
+    PLAYLISTING_CREATED: null,
+    PLAYLISTING_DELETED: null,
 
     // Player
     PLAY_AUDIO: null,

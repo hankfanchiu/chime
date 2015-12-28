@@ -39,10 +39,6 @@ class Playlist < ActiveRecord::Base
     user.playlists.find_by(slug: slug)
   end
 
-  def track_count
-    self.tracks.count
-  end
-
   private
 
   def ensure_playlist_description
