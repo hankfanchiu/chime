@@ -37,8 +37,9 @@ var PlaylistListItem = React.createClass({
   goToPlaylist: function () {
     var username = SessionStore.getClientUsername();
     var slug = this.props.playlist.slug;
-    var pathname = "/" + username + "/sets/" + slug;
+    var pathname = "/" + username + "/playlists/" + slug;
 
+    this.props.close();
     this.history.pushState(null, pathname);
   },
 

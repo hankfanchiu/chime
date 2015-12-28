@@ -15,19 +15,16 @@ var PlaylistList = React.createClass({
   },
 
   renderPlaylists: function () {
-    var addToPlaylist = this.createPlaylisting;
-    var removeFromPlaylist = this.deletePlaylisting;
-    var track = this.props.track;
-
     return this.props.playlists.map(function (playlist, idx) {
       return (
         <PlaylistListItem key={ idx }
-          addToPlaylist={ addToPlaylist }
-          removeFromPlaylist={ removeFromPlaylist }
+          close={ this.props.close }
+          addToPlaylist={ this.createPlaylisting }
+          removeFromPlaylist={ this.deletePlaylisting }
           playlist={ playlist }
-          track={ track } />
+          track={ this.props.track } />
       );
-    });
+    }.bind(this));
   },
 
   render: function () {
