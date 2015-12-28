@@ -10,16 +10,21 @@ var History = require("react-router").History;
 var PlaylistListItem = React.createClass({
   mixins: [History],
 
+  _disabled: function () {
+    var tracks = this.props.playlist.tracks;
+
+    return (tracks.length === 1);
+  },
+
   _isAdded: function () {
-    var playlist = this.props.playlist;
+    var tracks = this.props.playlist.tracks;
     var trackId = this.props.track.id;
-    var foundIndex = -1;
 
-    playlist.tracks.forEach(function (possibleTrack, idx) {
-      if (possibleTrack.id === trackId) { foundIndex = idx; }
-    });
+    for (var i = 0; i < tracks.length; i++) {
+      if (tracks[i].id === trackId) { return true; }
+    }
 
-    return (foundIndex !== -1);
+    return false;
   },
 
   goToPlaylist: function () {
@@ -54,18 +59,21 @@ var PlaylistListItem = React.createClass({
   },
 
   removeButton: function () {
-    return <Button onClick={ this.remove }>Remove</Button>;
+    return <Button disabled={ this._disabled() }
+      onClick={ this.remove }>
+      Remove
+    </Button>;
   },
 
   render: function () {
     var playlist = this.props.playlist;
-    var firstTrackImgUrl = playlist.tracks[0].img_thumb;
+    var firstTrack = playlist.tracks[0];
 
     return (
       <ListGroupItem>
         <Row>
           <Col xs={ 2 } sm={ 2 } md={ 2 }>
-            <Thumbnail src={ firstTrackImgUrl }
+            <Thumbnail src={ firstTrack.img_thumb }
               onClick={ this.goToPlaylist } />
           </Col>
 
