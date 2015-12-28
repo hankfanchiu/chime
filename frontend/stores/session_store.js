@@ -80,7 +80,11 @@ SessionStore.isClient = function (username) {
 };
 
 SessionStore.playlistContainsTrack = function (playlistId, trackId) {
-  var playlist = _clientPlaylists[playlistId];
+  var clientPlaylist = _clientPlaylists[playlistId];
+
+  if (!clientPlaylist) { return; }
+
+  var tracks = clientPlaylist.track;
   var foundIndex = -1;
 
   playlist.tracks.findIndex(function (possibleTrack, index) {
