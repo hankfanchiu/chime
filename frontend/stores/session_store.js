@@ -27,11 +27,11 @@ SessionStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.PLAYLISTING_CREATED:
-      if (!response.errors) { addPlaylisting(response); }
+      if (!response.errors) { updateClientPlaylist(response); }
       break;
 
     case ActionTypes.PLAYLISTING_DELETED:
-      if (!response.errors) { removePlaylisting(response); }
+      if (!response.errors) { updateClientPlaylist(response); }
       break;
 
   };
@@ -107,8 +107,8 @@ var removeSession = function () {
 
 var setClient = function (user) {
   _client = user;
-  _setClientPlaylists(user.playlists);
-  _setClientTracks(user.tracks);
+  setClientPlaylists(user.playlists);
+  setClientTracks(user.tracks);
 
   SessionStore.__emitChange();
 };
@@ -121,44 +121,21 @@ var removeClient = function () {
   SessionStore.__emitChange();
 };
 
-var _setClientPlaylists = function (playlists) {
+var setClientPlaylists = function (playlists) {
   playlists.forEach(function (playlist) {
     _clientPlaylists[playlist.id] = playlist;
   });
 };
 
-var _setClientTracks = function (tracks) {
+var setClientTracks = function (tracks) {
   tracks.forEach(function (track) {
     _clientTracks[track.id] = track;
   });
 };
 
-var addPlaylisting = function (playlisting) {
-  var playlistId = playlisting.playlist.id;
-  var clientPlaylist = _clientPlaylists[playlistId];
-  var addedTrack = playlisting.track;
-
-  if (!clientPlaylist) { return; }
-
-  var tracks = clientPlaylist.tracks;
-  tracks.push(addedTrack);
-
-  SessionStore.__emitChange();
-};
-
-var removePlaylisting = function (playlisting) {
-  var playlistId = playlisting.playlist.id;
-  var clientPlaylist = _clientPlaylists[playlistId];
-  var removedTrack = playlisting.track;
-
-  if (!clientPlaylist) { return; }
-
-  var tracks = clientPlaylist.tracks;
-  for (var i = 0; i < tracks.length; i++) {
-    if (tracks[i].id === removedTrack.id) {
-      tracks.splice(i, 1);
-    }
-  }
+var updateClientPlaylist = function (playlisting) {
+  var receivedPlaylist = playlisting.playlist;
+  _clientPlaylists[receivedPlaylist.id] = receivedPlaylist;
 
   SessionStore.__emitChange();
 };
