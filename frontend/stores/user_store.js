@@ -29,13 +29,6 @@ UserStore.getUser = function (username) {
   return userCopy;
 };
 
-UserStore.getPlaylists = function (username) {
-  var user = _users[username] || {};
-  var playlists = user.playlists || [];
-
-  return playlists.slice();
-};
-
 var resetUser = function (user) {
   _users[user.username] = user;
 

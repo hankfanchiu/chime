@@ -57,7 +57,9 @@ var PlaylistsIndex = React.createClass({
   },
 
   render: function () {
-    if (this.state.playlists.length === 0) { return this.renderNoPlaylists(); }
+    var playlistCount = Object.keys(this.state.playlists).length;
+    
+    if (playlistCount === 0) { return this.renderNoPlaylists(); }
 
     return (
       <ListGroup>
