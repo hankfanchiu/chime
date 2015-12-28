@@ -32,7 +32,7 @@ UploadStore.__onDispatch = function (payload) {
       setResponseStatus(response);
       break;
 
-    case ActionTypes.NEW_TRACK_RECEIVED:
+    case ActionTypes.TRACK_CREATED:
       if (!response.errors) { setTrackPathname(response); }
       break;
 

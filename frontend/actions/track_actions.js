@@ -24,7 +24,7 @@ var TrackActions = {
   createTrack: function (trackData) {
     TrackAPIUtils.createTrack(
       trackData,
-      TrackActions.receiveNewTrack
+      TrackActions.receiveTrackCreated
     );
   },
 
@@ -59,9 +59,9 @@ var TrackActions = {
     });
   },
 
-  receiveNewTrack: function (response) {
+  receiveTrackCreated: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.NEW_TRACK_RECEIVED,
+      actionType: ActionTypes.TRACK_CREATED,
       response: response
     });
   }

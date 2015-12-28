@@ -37,7 +37,7 @@ module.exports = {
     // Track
     TRACKS_RECEIVED: null,
     TRACK_RECEIVED: null,
-    NEW_TRACK_RECEIVED: null,
+    TRACK_CREATED: null,
 
     // Playlist
     SHOW_PLAYLIST_MODAL: null,

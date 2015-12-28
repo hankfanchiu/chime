@@ -20,7 +20,7 @@ TrackStore.__onDispatch = function (payload) {
       if (!response.errors) { resetTrack(response); }
       break;
 
-    case ActionTypes.NEW_TRACK_RECEIVED:
+    case ActionTypes.TRACK_CREATED:
       if (!response.errors) { resetTrack(response); }
       break;
 
@@ -67,15 +67,6 @@ var resetTracks = function (tracks) {
   TrackStore.__emitChange();
 };
 
-var resetTrack = function (track) {
-  var username = track.user.username;
-
-  _tracks[username] = _tracks[username] || {};
-  _tracks[username][track.slug] = track;
-
-  TrackStore.__emitChange();
-};
-
 var updateTracks = function (response) {
   var username = response.username;
   var tracks = response.tracks;
@@ -85,6 +76,15 @@ var updateTracks = function (response) {
   tracks.forEach(function (track) {
     _tracks[username][track.slug] = track;
   });
+
+  TrackStore.__emitChange();
+};
+
+var resetTrack = function (track) {
+  var username = track.user.username;
+
+  _tracks[username] = _tracks[username] || {};
+  _tracks[username][track.slug] = track;
 
   TrackStore.__emitChange();
 };

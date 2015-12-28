@@ -10,10 +10,10 @@ var PlaylistPage = React.createClass({
   },
 
   getStateFromStore: function () {
-    var params = this.props.params;
-    var identifier = params.username + "-" + params.playlist;
+    var username = this.props.params.username;
+    var slug = this.props.params.playlist;
 
-    return { playlist: PlaylistStore.find(identifier) };
+    return { playlist: PlaylistStore.find(username, slug) };
   },
 
   componentWillMount: function () {

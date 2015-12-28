@@ -23,15 +23,27 @@ PlaylistStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.PLAYLISTS_RECEIVED:
-      resetPlaylists(response);
+      if (!response.errors) { resetPlaylists(response); }
       break;
 
     case ActionTypes.PLAYLIST_RECEIVED:
-      resetPlaylist(response);
+      if (!response.errors) { resetPlaylist(response); }
       break;
 
     case ActionTypes.PLAYLIST_CREATED:
       if (!response.errors) { setPlaylistPathname(response); }
+      break;
+
+    case ActionTypes.USER_RECEIVED:
+      if (!response.errors && response.playlists) {
+        updatePlaylists(response);
+      }
+      break;
+
+    case ActionTypes.CLIENT_RECEIVED:
+      if (!response.errors && response.playlists) {
+        updatePlaylists(response);
+      }
       break;
 
   };
@@ -47,10 +59,12 @@ PlaylistStore.all = function () {
   return playlistsCopy;
 };
 
-PlaylistStore.find = function (identifier) {
-  var playlist = _playlists[identifier];
+PlaylistStore.find = function (username, slug) {
+  var playlist = (_playlists[username] ? _playlists[username][slug] : {});
 
-  return playlist;
+  var playlistCopy = jQuery.extend({}, playlist);
+
+  return playlistCopy;
 };
 
 PlaylistStore.getNewPlaylistPathname = function () {
@@ -64,21 +78,37 @@ var setShowModal = function (boolean) {
 };
 
 var resetPlaylists = function (playlists) {
-  var identifier;
-
+  var username;
   _playlists = {};
 
   playlists.forEach(function (playlist) {
-    identifier = playlist.user.username + "-" + playlist.slug;
-    _playlists[identifier] = playlist;
+    username = playlist.user.username;
+
+    _playlists[username] = _playlists[username] || {};
+    _playlists[username][playlist.slug] = playlist;
+  });
+
+  PlaylistStore.__emitChange();
+};
+
+var updatePlaylists = function (response) {
+  var username = response.username;
+  var playlists = response.playlists;
+
+  _playlists[username] = _playlists[username] || {};
+
+  playlists.forEach(function (playlist) {
+    _playlists[username][playlist.slug] = playlist;
   });
 
   PlaylistStore.__emitChange();
 };
 
 var resetPlaylist = function (playlist) {
-  var identifier = playlist.user.username + "-" + playlist.slug;
-  _playlists[identifier] = playlist;
+  var username = playlist.user.username;
+
+  _playlists[username] = _playlists[username] || {};
+  _playlists[username][playlist.slug] = playlist;
 
   PlaylistStore.__emitChange();
 };
