@@ -10,7 +10,10 @@ var PlaylistList = require("./playlist_list");
 
 var PlaylistModal = React.createClass({
   getInitialState: function () {
-    return this.getStateFromStore();
+    var state = this.getStateFromStore();
+    state.showForm = false;
+
+    return state;
   },
 
   getStateFromStore: function () {
