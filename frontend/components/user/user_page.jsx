@@ -19,7 +19,7 @@ var UserPage = React.createClass({
     var username = this.props.params.username;
 
     return {
-      user: UserStore.getUser(username),
+      user: UserStore.find(username),
       client: SessionStore.getClient(),
       isClient: SessionStore.isClient(username)
     };
