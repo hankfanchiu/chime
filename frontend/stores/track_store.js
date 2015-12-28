@@ -45,6 +45,13 @@ TrackStore.all = function () {
   return tracksCopy;
 };
 
+TrackStore.getTracksByUsername = function (username) {
+  var tracks = _tracks[username] || {};
+  var tracksCopy = jQuery.extend({}, tracks);
+
+  return tracksCopy;
+};
+
 TrackStore.find = function (username, slug) {
   var track = (_tracks[username] ? _tracks[username][slug] : {});
 
