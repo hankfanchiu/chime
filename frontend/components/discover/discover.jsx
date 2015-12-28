@@ -2,6 +2,7 @@ var React = require("react");
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var PageHeader = require("react-bootstrap").PageHeader;
+var SessionStore = require("../../stores/session_store");
 var DiscoverStore = require("../../stores/discover_store");
 var DiscoverActions = require("../../actions/discover_actions");
 var DiscoverTrack = require("./discover_track");
@@ -13,7 +14,10 @@ var Discover = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { tracks: DiscoverStore.all() };
+    return {
+      tracks: DiscoverStore.all(),
+      username: SessionStore.getClientUsername()
+    };
   },
 
   componentWillMount: function () {
@@ -21,11 +25,13 @@ var Discover = React.createClass({
   },
 
   componentDidMount: function () {
-    this.listenerToken = DiscoverStore.addListener(this._onChange);
+    this.discoverListener = DiscoverStore.addListener(this._onChange);
+    this.sessionListener = SessionStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.discoverListener.remove();
+    this.sessionListener.remove();
   },
 
   _onChange: function () {
@@ -81,7 +87,8 @@ var Discover = React.createClass({
 
         { this.renderDiscoverRows() }
 
-        <PlaylistModal track={ this.state.trackToAdd } />
+        <PlaylistModal track={ this.state.trackToAdd }
+          username={ this.state.username } />
       </Grid>
     );
   }

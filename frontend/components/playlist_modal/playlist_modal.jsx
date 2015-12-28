@@ -10,28 +10,30 @@ var PlaylistList = require("./playlist_list");
 
 var PlaylistModal = React.createClass({
   getInitialState: function () {
-    return {
-      show: PlaylistStore.showModal(),
-      showForm: false,
-      playlists: SessionStore.getClientPlaylists()
-    };
+    var state = this.getStateFromStore();
+    state.showForm = false;
+
+    return state;
+  },
+
+  getStateFromStore: function () {
+    var username = this.props.username;
+    var show = PlaylistStore.showModal();
+    var playlists = PlaylistStore.getPlaylistsByUsername(username);
+
+    return { show: show, playlists: playlists };
   },
 
   componentDidMount: function () {
-    this.playlistListener = PlaylistStore.addListener(this._onChange);
-    this.sessionListener = SessionStore.addListener(this._onChange);
+    this.listenerToken = PlaylistStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    this.playlistListener.remove();
-    this.sessionListener.remove();
+    this.listenerToken.remove();
   },
 
   _onChange: function () {
-    this.setState({
-      show: PlaylistStore.showModal(),
-      playlists: SessionStore.getClientPlaylists()
-    });
+    this.setState(this.getStateFromStore());
   },
 
   _handleSelect: function (selectKey) {

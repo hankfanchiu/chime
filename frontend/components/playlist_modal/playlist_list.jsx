@@ -15,16 +15,24 @@ var PlaylistList = React.createClass({
   },
 
   renderPlaylists: function () {
-    return this.props.playlists.map(function (playlist, idx) {
-      return (
-        <PlaylistListItem key={ idx }
+    var playlistList = [];
+    var listItem, playlist;
+
+    Object.keys(this.props.playlists).forEach(function (slug) {
+      playlist = this.props.playlists[slug];
+      listItem = (
+        <PlaylistListItem key={ playlist.id }
           close={ this.props.close }
           addToPlaylist={ this.createPlaylisting }
           removeFromPlaylist={ this.deletePlaylisting }
           playlist={ playlist }
           track={ this.props.track } />
       );
+
+      playlistList.push(listItem);
     }.bind(this));
+
+    return playlistList
   },
 
   render: function () {

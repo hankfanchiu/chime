@@ -23,7 +23,7 @@ SessionStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.CLIENT_RECEIVED:
-      setClient(response);
+      if (!response.errors) { setClient(response); }
       break;
 
     case ActionTypes.PLAYLISTING_UPDATED:
