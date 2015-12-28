@@ -41,17 +41,14 @@ var TracksIndex = React.createClass({
   },
 
   renderTrackIndexItems: function () {
-    var username = this.props.params.username;
-    var setTrackToAdd = this._setTrackToAdd;
-
     return this.state.tracks.map(function (track, idx) {
       return (
         <TracksIndexItem key={ idx }
           track={ track }
-          username={ username }
-          setTrackToAdd={ setTrackToAdd } />
+          username={ this.props.params.username }
+          setTrackToAdd={ this._setTrackToAdd } />
       );
-    });
+    }.bind(this));
   },
 
   render: function () {

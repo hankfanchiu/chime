@@ -50,14 +50,13 @@ var Search = React.createClass({
   },
 
   renderSearchResults: function () {
-    if (this.state.showResults) {
-      return (
-        <SearchResults
-          users={ this.state.users }
-          tracks={ this.state.tracks }
-          handleSearchClick={ this._handleSearchClick } />
-      );
-    }
+    if (!this.state.showResults) { return; }
+
+    return (
+      <SearchResults handleSearchClick={ this._handleSearchClick }
+        users={ this.state.users }
+        tracks={ this.state.tracks } />
+    );
   },
 
   render: function () {

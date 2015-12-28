@@ -43,7 +43,8 @@ var PlaylistsIndex = React.createClass({
     return this.state.playlists.map(function (playlist, idx) {
       return (
         <PlaylistsIndexItem key={ idx }
-          playlist={ playlist } username={ username } />
+          playlist={ playlist }
+          username={ username } />
       );
     });
   },
