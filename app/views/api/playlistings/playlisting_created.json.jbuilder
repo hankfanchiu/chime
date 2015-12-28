@@ -1,3 +1,3 @@
-json.partial! "api/playlistings/playlisting", playlisting: @playlisting
+json.partial! "api/playlists/playlist", playlist: @playlisting.playlist
 
 json.success [ "Track added" ]

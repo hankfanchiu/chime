@@ -10,28 +10,16 @@ var History = require("react-router").History;
 var PlaylistListItem = React.createClass({
   mixins: [History],
 
-  getInitialState: function () {
-    return this.getStateFromStore();
-  },
-
-  getStateFromStore: function () {
-    var playlistId = this.props.playlist.id;
+  _isAdded: function () {
+    var playlist = this.props.playlist;
     var trackId = this.props.track.id;
-    var isAdded = SessionStore.playlistContainsTrack(playlistId, trackId);
+    var foundIndex = -1;
 
-    return { isAdded: isAdded };
-  },
+    playlist.tracks.forEach(function (possibleTrack, idx) {
+      if (possibleTrack.id === trackId) { foundIndex = idx; }
+    });
 
-  componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
-  },
-
-  componentWillUnmount: function () {
-    this.listenerToken.remove();
-  },
-
-  _onChange: function () {
-    this.setState(this.getStateFromStore());
+    return (foundIndex !== -1);
   },
 
   goToPlaylist: function () {
@@ -92,7 +80,7 @@ var PlaylistListItem = React.createClass({
           </Col>
 
           <Col xs={ 3 } sm={ 3 } md={ 3 } style={{ textAlign: "right" }}>
-            { this.state.isAdded ? this.removeButton() : this.addButton() }
+            { this._isAdded() ? this.removeButton() : this.addButton() }
           </Col>
         </Row>
       </ListGroupItem>

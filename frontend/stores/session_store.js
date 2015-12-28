@@ -26,15 +26,15 @@ SessionStore.__onDispatch = function (payload) {
       if (!response.errors) { setClient(response); }
       break;
 
-    case ActionTypes.PLAYLISTING_UPDATED:
-      if (!response.errors) { updateClientPlaylist(response); }
-      break;
-
   };
 };
 
 SessionStore.isLoggedIn = function () {
   return !!localStorage.getItem("client");
+};
+
+SessionStore.isClient = function (username) {
+  return _client.username === username;
 };
 
 SessionStore.getClient = function () {
@@ -49,35 +49,6 @@ SessionStore.getClientId = function () {
 
 SessionStore.getClientUsername = function () {
   return _client.username || localStorage.getItem("client");
-};
-
-SessionStore.getClientPlaylists = function () {
-  var playlists = [];
-
-  Object.keys(_clientPlaylists).forEach(function (id) {
-    playlists.push(_clientPlaylists[id]);
-  });
-
-  return playlists;
-};
-
-SessionStore.isClient = function (username) {
-  return _client.username === username;
-};
-
-SessionStore.playlistContainsTrack = function (playlistId, trackId) {
-  var clientPlaylist = _clientPlaylists[playlistId];
-
-  if (!clientPlaylist) { return; }
-
-  var tracks = clientPlaylist.tracks;
-  var foundIndex = -1;
-
-  tracks.findIndex(function (possibleTrack, index) {
-    if (possibleTrack.id === trackId) { foundIndex = index; }
-  });
-
-  return foundIndex !== -1;
 };
 
 var setSession = function (user) {
@@ -117,13 +88,6 @@ var setClientTracks = function (tracks) {
   tracks.forEach(function (track) {
     _clientTracks[track.id] = track;
   });
-};
-
-var updateClientPlaylist = function (playlisting) {
-  var receivedPlaylist = playlisting.playlist;
-  _clientPlaylists[receivedPlaylist.id] = receivedPlaylist;
-
-  SessionStore.__emitChange();
 };
 
 module.exports = SessionStore;

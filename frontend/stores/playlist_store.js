@@ -34,6 +34,10 @@ PlaylistStore.__onDispatch = function (payload) {
       if (!response.errors) { setPlaylistPathname(response); }
       break;
 
+    case ActionTypes.PLAYLIST_UPDATED:
+      if (!response.errors) { updatePlaylist(response); }
+      break;
+
     case ActionTypes.USER_RECEIVED:
       if (!response.errors && response.playlists) {
         updatePlaylists(response);
@@ -72,6 +76,21 @@ PlaylistStore.find = function (username, slug) {
   var playlistCopy = jQuery.extend({}, playlist);
 
   return playlistCopy;
+};
+
+PlaylistStore.playlistContainsTrack = function (playlistSlug, trackId) {
+  var clientPlaylist = _clientPlaylists[playlistId];
+
+  if (!clientPlaylist) { return; }
+
+  var tracks = clientPlaylist.tracks;
+  var foundIndex = -1;
+
+  tracks.findIndex(function (possibleTrack, index) {
+    if (possibleTrack.id === trackId) { foundIndex = index; }
+  });
+
+  return foundIndex !== -1;
 };
 
 PlaylistStore.getNewPlaylistPathname = function () {
@@ -115,6 +134,14 @@ var resetPlaylist = function (playlist) {
   var username = playlist.user.username;
 
   _playlists[username] = _playlists[username] || {};
+  _playlists[username][playlist.slug] = playlist;
+
+  PlaylistStore.__emitChange();
+};
+
+var updatePlaylist = function (playlist) {
+  var username = playlist.user.username;
+
   _playlists[username][playlist.slug] = playlist;
 
   PlaylistStore.__emitChange();
