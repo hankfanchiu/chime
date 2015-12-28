@@ -10,10 +10,10 @@ var TrackPage = React.createClass({
   },
 
   getStateFromStore: function () {
-    var params = this.props.params;
-    var identifier = params.username + "-" + params.track;
+    var username = this.props.params.username;
+    var slug = this.props.params.track;
 
-    return { track: TrackStore.find(identifier) };
+    return { track: TrackStore.find(username, slug) };
   },
 
   componentWillMount: function () {

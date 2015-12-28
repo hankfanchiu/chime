@@ -13,7 +13,7 @@ TrackStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.TRACKS_RECEIVED:
-      resetTracks(response);
+      if (!response.errors) { resetTracks(response); }
       break;
 
     case ActionTypes.TRACK_RECEIVED:
@@ -22,6 +22,18 @@ TrackStore.__onDispatch = function (payload) {
 
     case ActionTypes.NEW_TRACK_RECEIVED:
       if (!response.errors) { resetTrack(response); }
+      break;
+
+    case ActionTypes.USER_RECEIVED:
+      if (!response.errors && response.tracks) {
+        updateTracks(response);
+      }
+      break;
+
+    case ActionTypes.CLIENT_RECEIVED:
+      if (!response.errors && response.tracks) {
+        updateTracks(response);
+      }
       break;
 
   };
@@ -33,30 +45,46 @@ TrackStore.all = function () {
   return tracksCopy;
 };
 
-TrackStore.find = function (slug) {
-  var track = _tracks[slug] || {};
+TrackStore.find = function (username, slug) {
+  var track = (_tracks[username] ? _tracks[username][slug] : {});
+
   var trackCopy = jQuery.extend({}, track);
 
   return trackCopy;
 };
 
 var resetTracks = function (tracks) {
-  var identifier;
-
+  var username;
   _tracks = {};
 
   tracks.forEach(function (track) {
-    identifier = track.user.username + "-" + track.slug;
+    username = track.user.username;
 
-    _tracks[identifier] = track;
+    _tracks[username] = _tracks[username] || {};
+    _tracks[username][track.slug] = track;
   });
 
   TrackStore.__emitChange();
 };
 
 var resetTrack = function (track) {
-  var identifier = track.user.username + "-" + track.slug;
-  _tracks[identifier] = track;
+  var username = track.user.username;
+
+  _tracks[username] = _tracks[username] || {};
+  _tracks[username][track.slug] = track;
+
+  TrackStore.__emitChange();
+};
+
+var updateTracks = function (response) {
+  var username = response.username;
+  var tracks = response.tracks;
+
+  _tracks[username] = _tracks[username] || {};
+
+  tracks.forEach(function (track) {
+    _tracks[username][track.slug] = track;
+  });
 
   TrackStore.__emitChange();
 };
