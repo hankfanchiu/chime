@@ -2,6 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
+var SessionStore = require("../../stores/session_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistForm = require("./playlist_form");
@@ -11,20 +12,26 @@ var PlaylistModal = React.createClass({
   getInitialState: function () {
     return {
       show: PlaylistStore.showModal(),
-      showForm: false
+      showForm: false,
+      playlists: SessionStore.getClientPlaylists()
     };
   },
 
   componentDidMount: function () {
     this.playlistListener = PlaylistStore.addListener(this._onChange);
+    this.sessionListener = SessionStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.playlistListener.remove();
+    this.sessionListener.remove();
   },
 
   _onChange: function () {
-    this.setState({ show: PlaylistStore.showModal() });
+    this.setState({
+      show: PlaylistStore.showModal(),
+      playlists: SessionStore.getClientPlaylists()
+    });
   },
 
   _handleSelect: function (selectKey) {
@@ -42,7 +49,7 @@ var PlaylistModal = React.createClass({
   renderList: function () {
     return (
       <PlaylistList close={ this.close }
-        playlists={ this.props.playlists }
+        playlists={ this.state.playlists }
         track={ this.props.track } />
     );
   },

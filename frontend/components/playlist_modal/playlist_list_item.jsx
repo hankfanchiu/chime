@@ -1,36 +1,75 @@
 var React = require("react");
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
+var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");
 var History = require("react-router").History;
 
 var PlaylistListItem = React.createClass({
   mixins: [History],
 
-  _goToPlaylist: function () {
+  getInitialState: function () {
+    return this.getStateFromStore();
+  },
+
+  getStateFromStore: function () {
+    var playlistId = this.props.playlist.id;
+    var trackId = this.props.track.id;
+    var isAdded = SessionStore.playlistContainsTrack(playlistId, trackId);
+
+    return { isAdded: isAdded };
+  },
+
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
+  },
+
+  goToPlaylist: function () {
     var username = SessionStore.getClientUsername();
-    var pathname = "/" + username + "/" + this.props.playlist.slug;
-
-    this.history.pushState(null, pathname);
-  },
-
-  _goToPlaylist: function () {
-    var username = this.props.username;
     var slug = this.props.playlist.slug;
-    var pathname = "/" + username + "/playlists/" + slug;
+    var pathname = "/" + username + "/sets/" + slug;
 
     this.history.pushState(null, pathname);
   },
 
-  renderPlaylistTrackList: function () {
-    var playlist = this.props.playlist;
+  add: function () {
+    var ids = {
+      playlist_id: this.props.playlist.id,
+      track_id: this.props.track.id
+    };
 
-    return playlist.tracks.map(function (track, idx) {
-      return (
-        <PlaylistTrack key={ idx } index={ idx + 1 }
-          track={ track } playlistId={ playlist.id }/>
-      );
-    });
+    this.props.addToPlaylist(ids);
+  },
+
+  remove: function () {
+    var ids = {
+      playlist_id: this.props.playlist.id,
+      track_id: this.props.track.id
+    };
+
+    this.props.removeFromPlaylist(ids);
+  },
+
+  renderAdd: function () {
+    return (
+      <Button bsStyle="primary" onClick={ this.add }>Add</Button>
+    );
+  },
+
+  renderRemove: function () {
+    return (
+      <Button bsStyle="warning" onClick={ this.remove }>Remove</Button>
+    );
   },
 
   render: function () {
@@ -40,27 +79,18 @@ var PlaylistListItem = React.createClass({
     return (
       <ListGroupItem>
         <Row>
-          <Col xs={ 3 } sm={ 3 } md={ 3 }>
-            <Thumbnail src={ firstTrackImgUrl }
-              onClick={ this._playPlaylist } />
+          <Col xs={ 2 } sm={ 2 } md={ 2 }>
+            <Thumbnail src={ firstTrackImgUrl } />
           </Col>
 
-          <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <Row>
-              <p className="username">
-                <a onClick={ this._goToUser }>{ playlist.user.username }</a>
-              </p>
+          <Col xs={ 8 } sm={ 8 } md={ 8 }>
+            <p className="playlist-title">
+              <a onClick={ this.goToPlaylist }>{ playlist.title }</a>
+            </p>
+          </Col>
 
-              <p className="playlist-title">
-                <a onClick={ this._goToPlaylist }>{ playlist.title }</a>
-              </p>
-            </Row>
-
-            <Row>
-              <ListGroup>
-                { this.renderPlaylistTrackList() }
-              </ListGroup>
-            </Row>
+          <Col xs={ 2 } sm={ 2 } md={ 2 }>
+            { this.state.isAdded ? this.renderRemove() : this.renderAdd() }
           </Col>
         </Row>
       </ListGroupItem>

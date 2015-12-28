@@ -4,6 +4,7 @@ var Thumbnail = require("react-bootstrap").Thumbnail;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Button = require("react-bootstrap").Button;
 var PlayerActions = require("../../actions/player_actions");
+var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
 var History = require("react-router").History;
@@ -11,14 +12,14 @@ var History = require("react-router").History;
 var DiscoverTrack = React.createClass({
   mixins: [History],
 
-  _goToTrack: function () {
+  goToTrack: function () {
     var track = this.props.track;
     var pathname = "/" + track.user.username + "/" + track.slug;
 
     this.history.pushState(null, pathname);
   },
 
-  _goToUserProfile: function () {
+  goToUserProfile: function () {
     var pathname = "/" + this.props.track.user.username;
 
     this.history.pushState(null, pathname);
@@ -26,6 +27,11 @@ var DiscoverTrack = React.createClass({
 
   addToQueue: function () {
     PlayerActions.addTrackToQueue(this.props.track);
+  },
+
+  addToPlaylist: function () {
+    this.props.setTrackToAdd(this.props.track);
+    PlaylistActions.showPlaylistModal();
   },
 
   playTrack: function () {
@@ -46,19 +52,19 @@ var DiscoverTrack = React.createClass({
 
           <div className="discover-track-buttons">
             <AddToQueue addToQueue={ this.addToQueue } />
-            <AddToPlaylist track={ this.props.track } />
+            <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
           </div>
 
           <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">
-              <a onClick={ this._goToUserProfile }>
+              <a onClick={ this.goToUserProfile }>
                 { track.user.username }
               </a>
             </span>
 
             <div className="title-container">
               <span className="title">
-                <a onClick={ this._goToTrack }>
+                <a onClick={ this.goToTrack }>
                   { track.title }
                 </a>
               </span>

@@ -31,7 +31,9 @@ class Api::PlaylistingsController < ApplicationController
   end
 
   def require_owner
-    playlist_id, track_id = params[:playlist_id], params[:track_id]
+    playlist_id = playlisting_params[:playlist_id]
+    track_id = playlisting_params[:track_id]
+    
     playlisting_owned = current_user.playlistings
       .exists?(playlist_id: playlist_id, track_id: track_id)
 

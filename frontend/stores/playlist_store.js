@@ -3,7 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var showModal = false;
+var _showModal = false;
 var _playlists = {};
 var _newPlaylistPathname = null;
 var PlaylistStore = new Store(AppDispatcher);
@@ -53,7 +53,7 @@ PlaylistStore.find = function (identifier) {
   return playlist;
 };
 
-PlaylistStore.getPlaylistPathname = function () {
+PlaylistStore.getNewPlaylistPathname = function () {
   return _newPlaylistPathname;
 };
 

@@ -3,7 +3,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
-var _client = { tracks: [], playlists: [] };
+var _client = { tracks: [] };
+var _clientPlaylists = {};
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
@@ -50,11 +51,28 @@ SessionStore.getClientTracks = function () {
 };
 
 SessionStore.getClientPlaylists = function () {
-  return _client.playlists.slice();
+  var playlists = [];
+
+  Object.keys(_clientPlaylists).forEach(function (id) {
+    playlists.push(_clientPlaylists[id]);
+  });
+
+  return playlists;
 };
 
 SessionStore.isClient = function (username) {
   return _client.username === username;
+};
+
+SessionStore.playlistContainsTrack = function (playlistId, trackId) {
+  var playlist = _clientPlaylists[playlistId];
+  var foundIndex = -1;
+
+  playlist.tracks.findIndex(function (track, index) {
+    if (track.id === trackId) { foundIndex = index; }
+  });
+
+  return foundIndex !== -1;
 };
 
 var setSession = function (user) {
@@ -74,6 +92,10 @@ var removeSession = function () {
 
 var setClient = function (user) {
   _client = user;
+
+  user.playlists.forEach(function (playlist) {
+    _clientPlaylists[playlist.id] = playlist;
+  });
 
   SessionStore.__emitChange();
 };

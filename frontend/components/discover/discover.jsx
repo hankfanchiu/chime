@@ -5,6 +5,7 @@ var PageHeader = require("react-bootstrap").PageHeader;
 var DiscoverStore = require("../../stores/discover_store");
 var DiscoverActions = require("../../actions/discover_actions");
 var DiscoverTrack = require("./discover_track");
+var PlaylistModal = require("../playlist_modal/playlist_modal");
 
 var Discover = React.createClass({
   getInitialState: function () {
@@ -12,7 +13,10 @@ var Discover = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { tracks: DiscoverStore.all() };
+    return {
+      tracks: DiscoverStore.all(),
+      trackToAdd: null
+    };
   },
 
   componentWillMount: function () {
@@ -31,6 +35,10 @@ var Discover = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  _setTrackToAdd: function (track) {
+    this.setState({ trackToAdd: track });
+  },
+
   renderDiscoverRows: function () {
     var tracks = this.state.tracks;
     var rows = [];
@@ -39,10 +47,21 @@ var Discover = React.createClass({
     for (var i = 0; i < tracks.length; i += 4) {
       row = (
         <Row key={ i }>
-          <DiscoverTrack key={ i } track={ tracks[i] } />
-          <DiscoverTrack key={ i + 1 } track={ tracks[i + 1] } />
-          <DiscoverTrack key={ i + 2 } track={ tracks[i + 2] } />
-          <DiscoverTrack key={ i + 3 } track={ tracks[i + 3] } />
+          <DiscoverTrack key={ i }
+            track={ tracks[i] }
+            setTrackToAdd={ this._setTrackToAdd } />
+
+          <DiscoverTrack key={ i + 1 }
+            track={ tracks[i + 1] }
+            setTrackToAdd={ this._setTrackToAdd } />
+
+          <DiscoverTrack key={ i + 2 }
+            track={ tracks[i + 2] }
+            setTrackToAdd={ this._setTrackToAdd } />
+
+          <DiscoverTrack key={ i + 3 }
+            track={ tracks[i + 3] }
+            setTrackToAdd={ this._setTrackToAdd } />
         </Row>
       );
 
@@ -64,6 +83,8 @@ var Discover = React.createClass({
         </p>
 
         { this.renderDiscoverRows() }
+
+        <PlaylistModal track={ this.state.trackToAdd } />
       </Grid>
     );
   }
