@@ -4,8 +4,6 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _client = {};
-var _clientPlaylists = {};
-var _clientTracks = {};
 var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
@@ -53,41 +51,23 @@ SessionStore.getClientUsername = function () {
 
 var setSession = function (user) {
   localStorage.setItem("client", user.username);
-  setClient(user);
+  _client = user;
+
+  SessionStore.__emitChange();
 };
 
 var removeSession = function () {
   sessionStorage.clear();
   localStorage.removeItem("client");
-  removeClient();
+  _client = {};
+
+  SessionStore.__emitChange();
 };
 
 var setClient = function (user) {
   _client = user;
-  setClientPlaylists(user.playlists);
-  setClientTracks(user.tracks);
 
   SessionStore.__emitChange();
-};
-
-var removeClient = function () {
-  _client = {};
-  _clientPlaylists = {};
-  _clientTracks = {};
-
-  SessionStore.__emitChange();
-};
-
-var setClientPlaylists = function (playlists) {
-  playlists.forEach(function (playlist) {
-    _clientPlaylists[playlist.id] = playlist;
-  });
-};
-
-var setClientTracks = function (tracks) {
-  tracks.forEach(function (track) {
-    _clientTracks[track.id] = track;
-  });
 };
 
 module.exports = SessionStore;
