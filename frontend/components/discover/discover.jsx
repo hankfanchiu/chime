@@ -16,7 +16,7 @@ var Discover = React.createClass({
   getStateFromStore: function () {
     return {
       tracks: DiscoverStore.all(),
-      username: SessionStore.getClientUsername()
+      clientUsername: SessionStore.getClientUsername()
     };
   },
 
@@ -88,7 +88,7 @@ var Discover = React.createClass({
         { this.renderDiscoverRows() }
 
         <PlaylistModal track={ this.state.trackToAdd }
-          username={ this.state.username } />
+          clientUsername={ this.state.clientUsername } />
       </Grid>
     );
   }

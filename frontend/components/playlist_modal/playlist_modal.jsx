@@ -10,16 +10,13 @@ var PlaylistList = require("./playlist_list");
 
 var PlaylistModal = React.createClass({
   getInitialState: function () {
-    var state = this.getStateFromStore();
-    state.showForm = false;
-
-    return state;
+    return this.getStateFromStore();
   },
 
   getStateFromStore: function () {
-    var username = this.props.username;
+    var clientUsername = this.props.clientUsername;
     var show = PlaylistStore.showModal();
-    var playlists = PlaylistStore.getPlaylistsByUsername(username);
+    var playlists = PlaylistStore.getPlaylistsByUsername(clientUsername);
 
     return { show: show, playlists: playlists };
   },
