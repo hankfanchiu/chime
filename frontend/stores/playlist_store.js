@@ -59,6 +59,13 @@ PlaylistStore.all = function () {
   return playlistsCopy;
 };
 
+PlaylistStore.getPlaylistsByUsername = function (username) {
+  var playlists = _playlists[username] || {};
+  var playlistsCopy = jQuery.extend({}, playlists);
+
+  return playlistsCopy;
+};
+
 PlaylistStore.find = function (username, slug) {
   var playlist = (_playlists[username] ? _playlists[username][slug] : {});
 

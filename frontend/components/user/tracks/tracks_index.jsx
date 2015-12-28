@@ -42,8 +42,7 @@ var TracksIndex = React.createClass({
 
   renderTrackIndexItems: function () {
     var trackIndexItems = [];
-    var indexItem;
-    var track;
+    var indexItem, track;
 
     Object.keys(this.state.tracks).forEach(function (slug) {
       track = this.state.tracks[slug];
@@ -61,7 +60,9 @@ var TracksIndex = React.createClass({
   },
 
   render: function () {
-    if (this.state.tracks.length === 0) { return this.renderNoTracks(); }
+    var trackCount = Object.keys(this.state.tracks).length;
+
+    if (trackCount === 0) { return this.renderNoTracks(); }
 
     return (
       <ListGroup>

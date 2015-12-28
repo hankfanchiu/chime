@@ -1,7 +1,7 @@
 var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
-var UserStore = require("../../../stores/user_store");
+var PlaylistStore = require("../../../stores/playlist_store");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
@@ -11,12 +11,13 @@ var PlaylistsIndex = React.createClass({
 
   getStatesFromStore: function () {
     var username = this.props.params.username;
+    var playlists = PlaylistStore.getPlaylistsByUsername(username);
 
-    return { playlists: UserStore.getPlaylists(username) };
+    return { playlists: playlists };
   },
 
   componentDidMount: function () {
-    this.listenerToken = UserStore.addListener(this._onChange);
+    this.listenerToken = PlaylistStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -38,15 +39,21 @@ var PlaylistsIndex = React.createClass({
   },
 
   renderPlaylistsIndexItems: function () {
-    var username = this.props.params.username;
+    var playlistsIndexItems = [];
+    var indexItem, playlist;
 
-    return this.state.playlists.map(function (playlist, idx) {
-      return (
-        <PlaylistsIndexItem key={ idx }
+    Object.keys(this.state.playlists).forEach(function (slug) {
+      playlist = this.state.playlists[slug];
+      indexItem = (
+        <PlaylistsIndexItem key={ playlist.id }
           playlist={ playlist }
-          username={ username } />
+          username={ this.props.params.username } />
       );
-    });
+
+      playlistsIndexItems.push(indexItem);
+    }.bind(this));
+
+    return playlistsIndexItems;
   },
 
   render: function () {

@@ -51,16 +51,6 @@ SessionStore.getClientUsername = function () {
   return _client.username || localStorage.getItem("client");
 };
 
-SessionStore.getClientTracks = function () {
-  var tracks = [];
-
-  Object.keys(_clientTracks).forEach(function (id) {
-    tracks.push(_clientTracks[id]);
-  });
-
-  return tracks;
-};
-
 SessionStore.getClientPlaylists = function () {
   var playlists = [];
 
