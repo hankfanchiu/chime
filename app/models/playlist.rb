@@ -39,6 +39,10 @@ class Playlist < ActiveRecord::Base
     user.playlists.find_by(slug: slug)
   end
 
+  def tracks_ordered
+    self.tracks.order("playlistings.created_at")
+  end
+
   private
 
   def ensure_playlist_description
