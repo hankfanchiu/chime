@@ -16,7 +16,8 @@ var Discover = React.createClass({
   getStateFromStore: function () {
     return {
       tracks: DiscoverStore.all(),
-      clientUsername: SessionStore.getClientUsername()
+      clientUsername: SessionStore.getClientUsername(),
+      isLoggedIn: SessionStore.isLoggedIn()
     };
   },
 
@@ -52,18 +53,22 @@ var Discover = React.createClass({
         <Row key={ i }>
           <DiscoverTrack key={ i }
             track={ tracks[i] }
+            isLoggedIn={ this.state.isLoggedIn }
             setTrackToAdd={ this._setTrackToAdd } />
 
           <DiscoverTrack key={ i + 1 }
             track={ tracks[i + 1] }
+            isLoggedIn={ this.state.isLoggedIn }
             setTrackToAdd={ this._setTrackToAdd } />
 
           <DiscoverTrack key={ i + 2 }
             track={ tracks[i + 2] }
+            isLoggedIn={ this.state.isLoggedIn }
             setTrackToAdd={ this._setTrackToAdd } />
 
           <DiscoverTrack key={ i + 3 }
             track={ tracks[i + 3] }
+            isLoggedIn={ this.state.isLoggedIn }
             setTrackToAdd={ this._setTrackToAdd } />
         </Row>
       );
