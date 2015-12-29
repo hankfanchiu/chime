@@ -11,25 +11,12 @@ div.playlist-form-track {
     width: 60px;
   }
 
-  div.index {
-    display: inline-block;
-    text-align: center;
-    width: 20px;
-    padding: 0 10px;
-  }
-
   div.track-info {
     display: inline-block;
     vertical-align: middle;
     overflow-x: hidden;
     white-space: nowrap;
-    width: 200px;
     padding: 0 10px;
-  }
-
-  div.button {
-    display: inline-block;
-    align-items: right;
   }
 }
 

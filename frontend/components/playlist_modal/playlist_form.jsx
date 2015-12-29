@@ -72,14 +72,10 @@ var PlaylistForm = React.createClass({
             placeholder="Describe your new playlist"
             valueLink={ this.linkState("description") } />
 
-          <Input label="Tracks">
+          <Input label="Added Track">
             <div className="playlist-form-track">
               <div className="track-thumbnail">
                 <Image src={ this.props.track.img_thumb } thumbnail />
-              </div>
-
-              <div className="index">
-                1
               </div>
 
               <div className="track-info">
@@ -94,10 +90,6 @@ var PlaylistForm = React.createClass({
                     { this.props.track.title }
                   </span>
                 </div>
-              </div>
-
-              <div className="button">
-                <Button disabled>Added</Button>
               </div>
             </div>
           </Input>
