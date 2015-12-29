@@ -56,14 +56,23 @@ var PlaylistListItem = React.createClass({
   },
 
   addButton: function () {
-    return <Button bsStyle="primary" onClick={ this.add }>Add</Button>;
+    return (
+      <Button bsSize="small"
+        bsStyle="primary"
+        onClick={ this.add }>
+        Add
+      </Button>
+    );
   },
 
   removeButton: function () {
-    return <Button disabled={ this._disabled() }
-      onClick={ this.remove }>
-      Remove
-    </Button>;
+    return (
+      <Button bsSize="small"
+        disabled={ this._disabled() }
+        onClick={ this.remove }>
+        Remove
+      </Button>
+    );
   },
 
   render: function () {

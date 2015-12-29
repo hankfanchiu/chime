@@ -21,7 +21,6 @@ div.playlist-form-track {
 }
 
 div.playlist-list-item {
-  text-align: justify;
 
   div.playlist-thumbnail {
     display: inline-block;
@@ -34,18 +33,14 @@ div.playlist-list-item {
     text-align: left;
     overflow-x: hidden;
     white-space: nowrap;
-    width: 190px;
-    padding: 0 10px;
+    width: 185px;
+    margin: 0 10px;
   }
 
   div.button {
     display: inline-block;
-    vertical-align: baseline;
+    width: 70px;
     text-align: right;
+    vertical-align: baseline;
   }
-}
-div.playlist-list-item::after {
-    content: '';
-    display: inline-block;
-    width: 100%;
 }

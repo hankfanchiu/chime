@@ -2,6 +2,8 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var ListGroup = require("react-bootstrap").ListGroup;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Input = require("react-bootstrap").Input;
 var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
@@ -73,25 +75,29 @@ var PlaylistForm = React.createClass({
             valueLink={ this.linkState("description") } />
 
           <Input label="Added Track">
-            <div className="playlist-form-track">
-              <div className="track-thumbnail">
-                <Image src={ this.props.track.img_thumb } thumbnail />
-              </div>
+            <ListGroup>
+              <ListGroupItem>
+                <div className="playlist-form-track">
+                  <div className="track-thumbnail">
+                    <Image src={ this.props.track.img_thumb } thumbnail />
+                  </div>
 
-              <div className="track-info">
-                <div>
-                  <span className="username">
-                    { this.props.track.user.username }
-                  </span>
-                </div>
+                  <div className="track-info">
+                    <div>
+                      <span className="username">
+                        { this.props.track.user.username }
+                      </span>
+                    </div>
 
-                <div>
-                  <span className="title">
-                    { this.props.track.title }
-                  </span>
+                    <div>
+                      <span className="title">
+                        { this.props.track.title }
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </ListGroupItem>
+            </ListGroup>
           </Input>
         </Modal.Body>
 
