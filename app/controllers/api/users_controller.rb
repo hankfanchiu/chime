@@ -35,7 +35,9 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :avatar)
+    permitted = [:username, :email, :description, :password, :avatar]
+    
+    params.require(:user).permit(permitted)
   end
 
   def prevent_if_username_exists

@@ -1,3 +1,7 @@
+textarea#user-profile-description {
+  resize: none;
+}
+
 div.user-sidebar {
   section.user-asset-count {
     width: 100%;
@@ -11,6 +15,12 @@ div.user-sidebar {
   h4.grey-heading {
     color: #aaa;
     font-weight: lighter;
+  }
+
+  section.user-profile {
+    margin-top: 15px;
+    color: #555;
+    line-height: 2em;
   }
 }
 

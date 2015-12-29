@@ -14,6 +14,7 @@
 #  avatar_content_type :string
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
+#  description         :text
 #
 
 class User < ActiveRecord::Base
@@ -29,6 +30,7 @@ class User < ActiveRecord::Base
   has_many :playlistings, through: :playlists
 
   after_initialize :ensure_session_token
+
   before_save :downcase_user_data
 
   friendly_id :username, use: :slugged

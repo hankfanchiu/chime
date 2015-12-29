@@ -37,6 +37,10 @@ var UserSidebar = React.createClass({
             </h4>
           </div>
         </section>
+
+        <section className="user-profile">
+          { this.props.user.description }
+        </section>
       </Col>
     );
   }

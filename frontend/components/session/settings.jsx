@@ -62,7 +62,7 @@ var Settings = React.createClass({
 
   _handleDescriptionChange: function () {
     var description = this.refs.description.getValue();
-    this.setState({ description: description });
+    this.setState({ disabled: false, description: description });
   },
 
   _updateUser: function () {
@@ -116,6 +116,8 @@ var Settings = React.createClass({
                 onChange={ this._handleEmailChange } />
 
               <Input type="textarea"
+                rows="5"
+                id="user-profile-description"
                 label="Profile Description"
                 ref="description"
                 value={ this.state.description }
