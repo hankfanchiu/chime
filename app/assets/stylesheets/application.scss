@@ -99,8 +99,6 @@ span.spacer-large {
   padding: 0 20px 0 20px;
 }
 
-h6.username,
-h6.grey-helper-text,
 span.username,
 span.grey-helper-text {
   font-size: 11px;
@@ -108,24 +106,24 @@ span.grey-helper-text {
   color: #aaa
 }
 
-h6.username-large,
-h6.grey-helper-text-large,
-span.username-large,
-span.grey-helper-text-large {
+
+h5.username,
+span.username-large {
   font-size: 16px;
+  font-weight: normal;
+  color: #aaa
 }
 
-h5.title,
 span.title {
   font-size: 12px;
   font-weight: bolder;
   color: #555;
 }
 
-h5.title-large,
+h4.title,
 span.title-large {
   font-size: 20px;
-  font-weight: normal
+  color: #555;
 }
 
 header.title-thin,

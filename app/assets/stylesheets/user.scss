@@ -1,5 +1,17 @@
 div.user-sidebar {
-  padding-top: 15px;
+  section.user-asset-count {
+    width: 100%;
+  }
+
+  div.user-asset {
+    width: 50%;
+    display: inline-block;
+  }
+
+  h4.grey-heading {
+    color: #aaa;
+    font-weight: lighter;
+  }
 }
 
 div.avatar {

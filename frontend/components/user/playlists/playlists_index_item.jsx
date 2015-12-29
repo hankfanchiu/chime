@@ -12,16 +12,22 @@ var History = require("react-router").History;
 var PlaylistsIndexItem = React.createClass({
   mixins: [History],
 
-  _playPlaylist: function () {
-    PlayerActions.loadPlaylist(this.props.playlist);
-  },
-
-  _goToPlaylist: function () {
+  goToPlaylist: function () {
     var username = this.props.username;
     var slug = this.props.playlist.slug;
     var pathname = "/" + username + "/playlists/" + slug;
 
     this.history.pushState(null, pathname);
+  },
+
+  goToUser: function () {
+    var pathname = "/" + this.props.username;
+
+    this.history.pushState(null, pathname);
+  },
+
+  playPlaylist: function () {
+    PlayerActions.loadPlaylist(this.props.playlist);
   },
 
   renderPlaylistTrackList: function () {
@@ -45,7 +51,7 @@ var PlaylistsIndexItem = React.createClass({
       <ListGroupItem className="playlist-index-item">
         <Row>
           <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
-            <span className="btn play-button" onClick={ this._playPlaylist }>
+            <span className="btn play-button" onClick={ this.playPlaylist }>
               <Glyphicon glyph="play" className="play-icon"/>
             </span>
 
@@ -54,17 +60,17 @@ var PlaylistsIndexItem = React.createClass({
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <section className="playlist-info">
-              <h6 className="username username-large">
-                <a className="username" onClick={ this._goToUser }>
+              <h5 className="username">
+                <a className="username" onClick={ this.goToUser }>
                   { playlist.user.username }
                 </a>
-              </h6>
+              </h5>
 
-              <h5 className="title title-large">
-                <a className="title" onClick={ this._goToPlaylist }>
+              <h4 className="title">
+                <a className="title" onClick={ this.goToPlaylist }>
                   { playlist.title }
                 </a>
-              </h5>
+              </h4>
             </section>
 
             <ListGroup>
