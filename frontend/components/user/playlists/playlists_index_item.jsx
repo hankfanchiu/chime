@@ -4,6 +4,7 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../../actions/player_actions");
 var PlaylistTrack = require("./playlist_track");
 var History = require("react-router").History;
@@ -43,9 +44,12 @@ var PlaylistsIndexItem = React.createClass({
     return (
       <ListGroupItem className="playlist-index-item">
         <Row>
-          <Col xs={ 3 } sm={ 3 } md={ 3 }>
-            <Image src={ firstTrack.img_square } thumbnail
-              onClick={ this._playPlaylist } />
+          <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
+            <span className="btn play-button" onClick={ this._playPlaylist }>
+              <Glyphicon glyph="play" className="play-icon"/>
+            </span>
+
+            <Image src={ firstTrack.img_square } thumbnail />
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>

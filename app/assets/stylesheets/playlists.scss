@@ -7,6 +7,56 @@ div.playlist-index {
     margin-top: 10px;
   }
 
+  div.playlist-image {
+    position: relative;
+  }
+
+  span.play-button {
+    position: absolute;
+    display: table;
+    left: 50%;
+    top: 37%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 0 0 2px 3px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #000;
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .glyphicon.play-icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 25px;
+    color: #bbb;
+  }
+
+  span.play-button:hover {
+    background: #111;
+
+    .glyphicon.play-icon {
+      color: #ddd;
+    }
+  }
+
+  span.play-button:active {
+    background: #000;
+
+    .glyphicon.play-icon {
+      color: #bbb;
+    }
+  }
+
+  div.playlist-image:hover {
+    span.btn {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+
   section.playlist-info {
     margin-bottom: 1em;
   }

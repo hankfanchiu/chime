@@ -31,7 +31,7 @@ var PlaylistTrack = React.createClass({
             { track.user.username } &mdash;&nbsp;
           </span>
 
-          <span className="title">
+          <span className="title title-thin">
             { track.title }
           </span>
         </section>
