@@ -10,11 +10,11 @@ var UserSidebar = React.createClass({
           client={ this.props.client }
           isClient={ this.props.isClient } />
 
-        <div className="username">
-          <h3>{ this.props.user.username }</h3>
-        </div>
+        <h3>{ this.props.user.username }</h3>
 
-        <p>This contains an overview of the user.</p>
+        <section className="user-info">
+
+        </section>
       </Col>
     );
   }

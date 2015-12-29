@@ -54,17 +54,17 @@ var PlaylistsIndexItem = React.createClass({
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <section className="playlist-info">
-              <header className="username username-large">
+              <h6 className="username username-large">
                 <a className="username" onClick={ this._goToUser }>
                   { playlist.user.username }
                 </a>
-              </header>
+              </h6>
 
-              <header className="title title-large">
+              <h5 className="title title-large">
                 <a className="title" onClick={ this._goToPlaylist }>
                   { playlist.title }
                 </a>
-              </header>
+              </h5>
             </section>
 
             <ListGroup>
