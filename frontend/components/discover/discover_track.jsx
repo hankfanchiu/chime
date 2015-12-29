@@ -34,6 +34,7 @@ var DiscoverTrack = React.createClass({
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
       PlaylistActions.showPlaylistModal();
+      
     } else {
       SessionActions.showLogin();
     }

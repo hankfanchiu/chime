@@ -42,6 +42,12 @@ PlaylistStore.__onDispatch = function (payload) {
       if (!response.errors) { removeTrackFromPlaylist(response); }
       break;
 
+    case ActionTypes.LOGIN_RESPONSE:
+      if (!response.errors && response.playlists) {
+        updatePlaylists(response);
+      }
+      break;
+
     case ActionTypes.USER_RECEIVED:
       if (!response.errors && response.playlists) {
         updatePlaylists(response);

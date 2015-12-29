@@ -28,9 +28,10 @@ var PlaylistForm = React.createClass({
   _onChange: function () {
     var pathname = PlaylistStore.getNewPlaylistPathname();
 
-    if (!pathname) { return; }
-
-    this._redirectToPlaylist();
+    if (pathname) {
+      this.setState(this.getInitialState);
+      this.history.pushState(null, pathname);
+    }
   },
 
   _disabled: function () {
@@ -40,11 +41,6 @@ var PlaylistForm = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
     this.createPlaylist();
-  },
-
-  _redirectToPlaylist: function () {
-    this.setState(this.getInitialState);
-    this.history.pushState(null, pathname);
   },
 
   createPlaylist: function () {
