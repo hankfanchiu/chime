@@ -63,7 +63,7 @@ var DiscoverTrack = React.createClass({
 
           <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">
-              <a className="track-username track-username-small"
+              <a className="username username-small"
                 onClick={ this.goToUserProfile }>
                 { track.user.username }
               </a>
@@ -71,7 +71,7 @@ var DiscoverTrack = React.createClass({
 
             <div className="title-container">
               <span className="title">
-                <a className="track-title track-title-small"
+                <a className="title title-small"
                   onClick={ this.goToTrack }>
                   { track.title }
                 </a>

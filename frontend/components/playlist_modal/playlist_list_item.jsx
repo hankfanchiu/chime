@@ -86,19 +86,19 @@ var PlaylistListItem = React.createClass({
             <Image src={ firstTrack.img_thumb } thumbnail />
           </div>
 
-          <div className="playlist-info">
-            <div className="playlist-title">
+          <section className="playlist-info">
+            <header>
               <span className="title">
                 { playlist.title }
               </span>
-            </div>
+            </header>
 
-            <div className="playlist-track-count">
+            <header>
               <span className="grey-helper-text">
                 Tracks: { playlist.tracks.length }
               </span>
-            </div>
-          </div>
+            </header>
+          </section>
 
           <div className="button">
             { this._isAdded() ? this.removeButton() : this.addButton() }

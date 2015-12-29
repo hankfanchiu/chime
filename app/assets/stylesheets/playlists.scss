@@ -1,28 +1,30 @@
-div.playlists-index-item {
-  padding: 10px 0 10px 0;
-  display: flex;
+div.playlist-index {
 
-  div.playlist-image {
-
+  span.playlist-index-item {
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0px;
+    margin-top: 10px;
   }
 
-  img.playlist-image {
-    width: 120px;
+  section.playlist-info {
+    margin-bottom: 1em;
   }
 
-  div.playlist-detail {
-    padding: 10px;
+  button.track-list-item {
+    padding: 8px;
   }
 
-  div.playlist-track {
-    display: block;
+  figure.track-image {
+    display: inline-block;
   }
 
-  div.track-image {
-    float: left;
+  section.track-index {
+    display: inline-block;
+    margin: 0 10px;
   }
 
-  img.track-image {
-    width: 30px;
+  section.track-info {
+    display: inline-block;
   }
 }

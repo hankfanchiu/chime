@@ -66,8 +66,13 @@ var UserPage = React.createClass({
               activeKey={ this.props.location.pathname }
               onSelect={ this._handleSelect }>
 
-              <NavItem eventKey={ tracks }>Tracks</NavItem>
-              <NavItem eventKey={ playlists }>Playlists</NavItem>
+              <NavItem eventKey={ tracks }>
+                <h4>Tracks</h4>
+              </NavItem>
+
+              <NavItem eventKey={ playlists }>
+                <h4>Playlists</h4>
+              </NavItem>
             </Nav>
 
             { this.props.children }

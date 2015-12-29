@@ -28,21 +28,25 @@ var Badge = React.createClass({
           <img className="audio-badge-image" src={ track.img_hero } />
         </div>
 
-        <div className="audio-badge-text">
-          <span className="username">
-            <a className="track-username track-username-small"
-              onClick={ this._goToUser }>
-              { track.user.username }
-            </a>
-          </span>
+        <section className="audio-badge-text">
+          <header>
+            <span className="username">
+              <a className="username username-small"
+                onClick={ this._goToUser }>
+                { track.user.username }
+              </a>
+            </span>
+          </header>
 
-          <span className="title">
-            <a className="track-title track-title-small"
-              onClick={ this._goToTrack }>
-              { track.title }
-            </a>
-          </span>
-        </div>
+          <header>
+            <span className="title">
+              <a className="title title-small"
+                onClick={ this._goToTrack }>
+                { track.title }
+              </a>
+            </span>
+          </header>
+        </section>
 
       </div>
 		);

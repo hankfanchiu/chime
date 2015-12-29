@@ -82,19 +82,19 @@ var PlaylistForm = React.createClass({
                     <Image src={ this.props.track.img_thumb } thumbnail />
                   </div>
 
-                  <div className="track-info">
-                    <div>
+                  <section className="track-info">
+                    <header>
                       <span className="username">
                         { this.props.track.user.username }
                       </span>
-                    </div>
+                    </header>
 
-                    <div>
+                    <header>
                       <span className="title">
                         { this.props.track.title }
                       </span>
-                    </div>
-                  </div>
+                    </header>
+                  </section>
                 </div>
               </ListGroupItem>
             </ListGroup>

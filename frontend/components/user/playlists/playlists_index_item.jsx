@@ -3,10 +3,7 @@ var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Thumbnail = require("react-bootstrap").Thumbnail;
-var Glyphicon = require("react-bootstrap").Glyphicon;
-var Collapse = require("react-bootstrap").Collapse;
-var Well = require("react-bootstrap").Well;
+var Image = require("react-bootstrap").Image;
 var PlayerActions = require("../../../actions/player_actions");
 var PlaylistTrack = require("./playlist_track");
 var History = require("react-router").History;
@@ -31,40 +28,44 @@ var PlaylistsIndexItem = React.createClass({
 
     return playlist.tracks.map(function (track, idx) {
       return (
-        <PlaylistTrack key={ idx } index={ idx + 1 }
-          track={ track } playlistId={ playlist.id }/>
+        <PlaylistTrack key={ idx }
+          index={ idx + 1 }
+          track={ track }
+          playlistId={ playlist.id } />
       );
     });
   },
 
   render: function () {
     var playlist = this.props.playlist;
-    var firstTrackImgUrl = playlist.tracks[0].img_thumb;
+    var firstTrack = playlist.tracks[0];
 
     return (
-      <ListGroupItem>
+      <ListGroupItem className="playlist-index-item">
         <Row>
           <Col xs={ 3 } sm={ 3 } md={ 3 }>
-            <Thumbnail src={ firstTrackImgUrl }
+            <Image src={ firstTrack.img_square } thumbnail
               onClick={ this._playPlaylist } />
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <Row>
-              <p className="username">
-                <a onClick={ this._goToUser }>{ playlist.user.username }</a>
-              </p>
+            <section className="playlist-info">
+              <header className="username username-large">
+                <a className="username" onClick={ this._goToUser }>
+                  { playlist.user.username }
+                </a>
+              </header>
 
-              <p className="playlist-title">
-                <a onClick={ this._goToPlaylist }>{ playlist.title }</a>
-              </p>
-            </Row>
+              <header className="title title-large">
+                <a className="title" onClick={ this._goToPlaylist }>
+                  { playlist.title }
+                </a>
+              </header>
+            </section>
 
-            <Row>
-              <ListGroup>
-                { this.renderPlaylistTrackList() }
-              </ListGroup>
-            </Row>
+            <ListGroup>
+              { this.renderPlaylistTrackList() }
+            </ListGroup>
           </Col>
         </Row>
       </ListGroupItem>

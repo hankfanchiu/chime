@@ -15,33 +15,26 @@ var PlaylistTrack = React.createClass({
     var track = this.props.track;
 
     return (
-      <ListGroupItem onClick={ this._playTrack }>
-        <Row>
-          <Col xs={ 1 } sm={ 1 } md={ 1 }>
-            <Image src={ track.img_hero } style={{ width: "30px" }} />
-          </Col>
+      <ListGroupItem className="track-list-item" onClick={ this._playTrack }>
+        <figure className="track-image">
+          <Image src={ track.img_hero } />
+        </figure>
 
-          <Col xs={ 1 } sm={ 1 } md={ 1 }>
+        <section className="track-index">
+          <span className="track-index">
             { this.props.index }
-          </Col>
+          </span>
+        </section>
 
-          <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <div>
-              <span className="username">
-                { track.user.username }
-              </span>
-            </div>
-            <div>
-              <span className="title">
-                { track.title }
-              </span>
-            </div>
-          </Col>
+        <section className="track-info">
+          <span className="username">
+            { track.user.username } &mdash;&nbsp;
+          </span>
 
-          <Col xs={ 1 } sm={ 1 } md={ 1 }>
-            <Glyphicon glyph="play" />
-          </Col>
-        </Row>
+          <span className="title">
+            { track.title }
+          </span>
+        </section>
       </ListGroupItem>
     );
   }

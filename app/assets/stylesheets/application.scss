@@ -95,29 +95,48 @@ span.spacer-large {
   padding: 0 20px 0 20px;
 }
 
-span.username, span.grey-helper-text {
+header.username,
+header.grey-helper-text,
+span.username,
+span.grey-helper-text {
   font-size: 11px;
   color: #aaa
 }
 
+header.username-large,
+header.grey-helper-text-large,
+span.username-large,
+span.grey-helper-text-large {
+  font-size: 16px;
+}
+
+header.title,
 span.title {
   font-size: 12px;
   font-weight: bolder;
   color: #555;
 }
 
-a.track-username, a.track-title {
-  display: block;
+header.title-large,
+span.title-large {
+  font-size: 20px;
+  font-weight: normal
+}
+
+a.username,
+a.title {
   text-decoration: none;
   cursor: pointer;
   color: inherit;
 }
 
-a.track-username:hover, a.track-title:hover {
+a.username:hover,
+a.title:hover {
   color: #222;
 }
 
-a.track-username:active, a.track-title:active {
+a.username:active,
+a.title:active {
   color: #0077A9;
 }
 
