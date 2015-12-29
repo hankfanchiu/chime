@@ -30,7 +30,7 @@ var Login = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
-  
+
   _disabled: function () {
     return (this.state.username === "") || (this.state.password === "");
   },
@@ -78,12 +78,12 @@ var Login = React.createClass({
           <Modal.Body>
             <Input type="text"
               label="Username"
-              placeholder="Enter username"
+              placeholder="Enter your username"
               valueLink={ this.linkState("username") } />
 
             <Input type="password"
               label="Password"
-              placeholder="Enter password"
+              placeholder="Enter your password"
               valueLink={ this.linkState("password") } />
 
             <a onClick={ this.showSignUp }>

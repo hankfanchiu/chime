@@ -31,7 +31,7 @@ var SignUp = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
-  
+
   _disabled: function () {
     return (
       (this.state.username === "") ||
@@ -84,13 +84,13 @@ var SignUp = React.createClass({
 
             <Input type="password"
               label="Password"
-              placeholder="Enter password"
+              placeholder="Enter a password"
               help="Use at least 6 characters."
               valueLink={ this.linkState("password") } />
 
             <Input type="email"
               label="Email Address"
-              placeholder="Enter email address"
+              placeholder="Enter your email address"
               valueLink={ this.linkState("email") } />
 
             <a onClick={ this.showLogin }>

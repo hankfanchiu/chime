@@ -16,7 +16,8 @@ var TracksIndex = React.createClass({
 
     return {
       tracks: TrackStore.getTracksByUsername(username),
-      clientUsername: SessionStore.getClientUsername()
+      clientUsername: SessionStore.getClientUsername(),
+      isLoggedIn: SessionStore.isLoggedIn()
     };
   },
 
@@ -56,7 +57,8 @@ var TracksIndex = React.createClass({
         <TracksIndexItem key={ track.id }
           track={ track }
           username={ this.props.params.username }
-          setTrackToAdd={ this._setTrackToAdd } />
+          setTrackToAdd={ this._setTrackToAdd }
+          isLoggedIn={ this.state.isLoggedIn } />
       );
 
       trackIndexItems.push(indexItem);

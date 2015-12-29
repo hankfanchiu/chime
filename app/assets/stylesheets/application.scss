@@ -57,19 +57,14 @@ main {
   padding-bottom: 100px;
 }
 
-a {
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
-}
-
 a:hover {
+  cursor: pointer;
   text-decoration: none;
   color: #222
 }
 
 a:active {
+  cursor: pointer;
   text-decoration: none;
   color: #0077A9;
 }

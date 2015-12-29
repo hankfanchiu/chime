@@ -144,4 +144,11 @@ div.audio-badge-text {
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+
+  a {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
 }
