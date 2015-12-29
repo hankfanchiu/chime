@@ -15,7 +15,7 @@ div.playlist-form-track {
     display: inline-block;
     text-align: center;
     width: 20px;
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   div.track-info {
@@ -31,4 +31,34 @@ div.playlist-form-track {
     display: inline-block;
     align-items: right;
   }
+}
+
+div.playlist-list-item {
+  text-align: justify;
+
+  div.playlist-thumbnail {
+    display: inline-block;
+    width: 60px;
+  }
+
+  div.playlist-info {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    overflow-x: hidden;
+    white-space: nowrap;
+    width: 190px;
+    padding: 0 10px;
+  }
+
+  div.button {
+    display: inline-block;
+    vertical-align: baseline;
+    text-align: right;
+  }
+}
+div.playlist-list-item::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
 }

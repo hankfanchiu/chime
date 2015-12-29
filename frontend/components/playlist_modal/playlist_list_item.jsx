@@ -3,6 +3,7 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
+var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");
 var History = require("react-router").History;
@@ -71,26 +72,29 @@ var PlaylistListItem = React.createClass({
 
     return (
       <ListGroupItem>
-        <Row>
-          <Col xs={ 2 } sm={ 2 } md={ 2 }>
-            <Thumbnail src={ firstTrack.img_thumb }
-              onClick={ this.goToPlaylist } />
-          </Col>
+        <div className="playlist-list-item">
+          <div className="playlist-thumbnail">
+            <Image src={ firstTrack.img_thumb } thumbnail />
+          </div>
 
-          <Col xs={ 7 } sm={ 7 } md={ 7 }>
-            <span className="playlist-title">
-              <a onClick={ this.goToPlaylist }>{ playlist.title }</a>
-            </span>
+          <div className="playlist-info">
+            <div className="playlist-title">
+              <span className="title">
+                { playlist.title }
+              </span>
+            </div>
 
-            <span className="playlist-track-count">
-              Tracks: { playlist.tracks.length }
-            </span>
-          </Col>
+            <div className="playlist-track-count">
+              <span className="grey-helper-text">
+                Tracks: { playlist.tracks.length }
+              </span>
+            </div>
+          </div>
 
-          <Col xs={ 3 } sm={ 3 } md={ 3 } style={{ textAlign: "right" }}>
+          <div className="button">
             { this._isAdded() ? this.removeButton() : this.addButton() }
-          </Col>
-        </Row>
+          </div>
+        </div>
       </ListGroupItem>
     );
   }
