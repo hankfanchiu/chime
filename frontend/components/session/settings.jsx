@@ -19,8 +19,8 @@ var Settings = React.createClass({
       show: SettingsStore.showModal(),
       disabled: true,
       user: user,
-      username: user.username,
       email: user.email,
+      description: user.description,
       avatarUrl: user.avatar_square
      };
   },
@@ -36,13 +36,9 @@ var Settings = React.createClass({
   _onChange: function () {
     this.setState(this.getInitialState());
   },
-  
+
   _disabled: function () {
-    return (
-      (this.state.username === "") ||
-      (this.state.email === "") ||
-      (this.state.disabled)
-    );
+    return (this.state.email === "") || (this.state.disabled);
   },
 
   _handleFile: function () {
@@ -64,16 +60,16 @@ var Settings = React.createClass({
     this.setState({ disabled: false, email: email });
   },
 
-  _handleUsernameChange: function () {
-    var username = this.refs.username.getValue();
-    this.setState({ disabled: false, username: username });
+  _handleDescriptionChange: function () {
+    var description = this.refs.description.getValue();
+    this.setState({ description: description });
   },
 
   _updateUser: function () {
     var formData = new FormData();
 
-    formData.append("user[username]", this.state.username);
     formData.append("user[email]", this.state.email);
+    formData.append("user[description]", this.state.description);
 
     if (this.state.img) {
       formData.append("user[avatar]", this.state.img);
@@ -112,19 +108,19 @@ var Settings = React.createClass({
             </Col>
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
-              <Input type="text"
-                label="Username"
-                ref="username"
-                value={ this.state.username }
-                placeholder="Update your username"
-                onChange={ this._handleUsernameChange } />
-
               <Input type="email"
                 label="Email Address"
                 ref="email"
                 value={ this.state.email }
                 placeholder="Update your email address"
                 onChange={ this._handleEmailChange } />
+
+              <Input type="textarea"
+                label="Profile Description"
+                ref="description"
+                value={ this.state.description }
+                placeholder="Let everyone know more about you!"
+                onChange={ this._handleDescriptionChange } />
             </Col>
           </Row>
         </Modal.Body>
