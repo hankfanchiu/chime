@@ -59,7 +59,10 @@ var PlaylistModal = React.createClass({
 
   render: function () {
     return (
-      <Modal onHide={ this.close } show={ this.state.show }>
+      <Modal onHide={ this.close }
+        dialogClassName="playlist-modal"
+        show={ this.state.show }>
+        
         <Modal.Header closeButton>
           <Modal.Title>
             <Nav bsStyle="pills"

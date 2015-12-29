@@ -57,15 +57,21 @@ main {
   padding-bottom: 100px;
 }
 
-a:hover {
-  cursor: pointer;
+a {
   text-decoration: none;
-  color: #222
+  cursor: pointer;
+  color: #0077A9;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: #222;
 }
 
 a:active {
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
   color: #0077A9;
 }
 
@@ -98,6 +104,21 @@ span.title {
   font-size: 12px;
   font-weight: bolder;
   color: #555;
+}
+
+a.track-username, a.track-title {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+a.track-username:hover, a.track-title:hover {
+  color: #222;
+}
+
+a.track-username:active, a.track-title:active {
+  color: #0077A9;
 }
 
 .clear:after {

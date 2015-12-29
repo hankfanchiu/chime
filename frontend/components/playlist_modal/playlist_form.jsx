@@ -3,7 +3,7 @@ var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
-var Thumbnail = require("react-bootstrap").Thumbnail;
+var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
 var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistStore = require("../../stores/playlist_store");
@@ -72,21 +72,35 @@ var PlaylistForm = React.createClass({
             placeholder="Describe your new playlist"
             valueLink={ this.linkState("description") } />
 
-          <Row>
-            <Col xs={ 2 } sm={ 2 } md={ 2 }>
-              <Thumbnail src={ this.props.track.img_hero } />
-            </Col>
+          <Input label="Tracks">
+            <div className="playlist-form-track">
+              <div className="track-thumbnail">
+                <Image src={ this.props.track.img_thumb } thumbnail />
+              </div>
 
-            <Col xs={ 10 } sm={ 10 } md={ 10 }>
-              <span className="track-username">
-                { this.props.track.user.username }
-              </span>
+              <div className="index">
+                1
+              </div>
 
-              <span className="track-title">
-                { this.props.track.title }
-              </span>
-            </Col>
-          </Row>
+              <div className="track-info">
+                <div>
+                  <span className="username">
+                    { this.props.track.user.username }
+                  </span>
+                </div>
+
+                <div>
+                  <span className="title">
+                    { this.props.track.title }
+                  </span>
+                </div>
+              </div>
+
+              <div className="button">
+                <Button disabled>Added</Button>
+              </div>
+            </div>
+          </Input>
         </Modal.Body>
 
         <Modal.Footer>
@@ -95,7 +109,7 @@ var PlaylistForm = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             type="submit">
-            Create Playlist
+            Save
           </Button>
         </Modal.Footer>
       </form>

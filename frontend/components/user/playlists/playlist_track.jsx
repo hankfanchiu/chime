@@ -21,22 +21,25 @@ var PlaylistTrack = React.createClass({
             <Image src={ track.img_hero } style={{ width: "30px" }} />
           </Col>
 
-          <Col xs={ 11 } sm={ 11 } md={ 11 }>
-            <Row>
-              <Col xs={ 1 } sm={ 1 } md={ 1 }>
-                { this.props.index }
-              </Col>
+          <Col xs={ 1 } sm={ 1 } md={ 1 }>
+            { this.props.index }
+          </Col>
 
-              <Col xs={ 10 } sm={ 10 } md={ 10 }>
-                { track.user.username }<br/>
+          <Col xs={ 9 } sm={ 9 } md={ 9 }>
+            <div>
+              <span className="username">
+                { track.user.username }
+              </span>
+            </div>
+            <div>
+              <span className="title">
                 { track.title }
-              </Col>
+              </span>
+            </div>
+          </Col>
 
-              <Col xs={ 1 } sm={ 1 } md={ 1 }>
-                <Glyphicon glyph="play" />
-              </Col>
-            </Row>
-
+          <Col xs={ 1 } sm={ 1 } md={ 1 }>
+            <Glyphicon glyph="play" />
           </Col>
         </Row>
       </ListGroupItem>

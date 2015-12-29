@@ -30,13 +30,15 @@ var Badge = React.createClass({
 
         <div className="audio-badge-text">
           <span className="username">
-            <a onClick={ this._goToUser }>
+            <a className="track-username track-username-small"
+              onClick={ this._goToUser }>
               { track.user.username }
             </a>
           </span>
 
           <span className="title">
-            <a onClick={ this._goToTrack }>
+            <a className="track-title track-title-small"
+              onClick={ this._goToTrack }>
               { track.title }
             </a>
           </span>

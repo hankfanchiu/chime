@@ -1,0 +1,34 @@
+div.playlist-modal {
+  max-width: 400px;
+}
+
+div.playlist-form-track {
+  position: relative;
+  display: block;
+
+  div.track-thumbnail {
+    display: inline-block;
+    width: 60px;
+  }
+
+  div.index {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    padding: 0 20px;
+  }
+
+  div.track-info {
+    display: inline-block;
+    vertical-align: middle;
+    overflow-x: hidden;
+    white-space: nowrap;
+    width: 200px;
+    padding: 0 10px;
+  }
+
+  div.button {
+    display: inline-block;
+    align-items: right;
+  }
+}

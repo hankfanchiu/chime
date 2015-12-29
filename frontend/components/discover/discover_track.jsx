@@ -34,7 +34,7 @@ var DiscoverTrack = React.createClass({
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
       PlaylistActions.showPlaylistModal();
-      
+
     } else {
       SessionActions.showLogin();
     }
@@ -63,14 +63,16 @@ var DiscoverTrack = React.createClass({
 
           <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">
-              <a onClick={ this.goToUserProfile }>
+              <a className="track-username track-username-small"
+                onClick={ this.goToUserProfile }>
                 { track.user.username }
               </a>
             </span>
 
             <div className="title-container">
               <span className="title">
-                <a onClick={ this.goToTrack }>
+                <a className="track-title track-title-small"
+                  onClick={ this.goToTrack }>
                   { track.title }
                 </a>
               </span>

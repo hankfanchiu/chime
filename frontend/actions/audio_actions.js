@@ -15,10 +15,9 @@ var AudioActions = {
     });
   },
 
-  setToIsEnded: function (time) {
+  setToIsEnded: function () {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.AUDIO_SET_TO_ENDED,
-      response: time
+      actionType: ActionTypes.AUDIO_SET_TO_ENDED
     });
   },
 
