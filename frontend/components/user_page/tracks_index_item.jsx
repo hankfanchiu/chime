@@ -4,11 +4,11 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
-var SessionActions = require("../../../actions/session_actions");
-var PlayerActions = require("../../../actions/player_actions");
-var PlaylistActions = require("../../../actions/playlist_actions");
-var AddToQueue = require("../../utility/add_to_queue");
-var AddToPlaylist = require("../../utility/add_to_playlist");
+var SessionActions = require("../../actions/session_actions");
+var PlayerActions = require("../../actions/player_actions");
+var PlaylistActions = require("../../actions/playlist_actions");
+var AddToQueue = require("../utility/add_to_queue");
+var AddToPlaylist = require("../utility/add_to_playlist");
 var History = require("react-router").History;
 
 var TracksIndexItem = React.createClass({

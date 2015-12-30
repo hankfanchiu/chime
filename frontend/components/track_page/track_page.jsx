@@ -1,12 +1,13 @@
 var React = require("react");
 var Grid = require("react-bootstrap").Grid;
-var SessionStore = require("../../../stores/session_store");
-var TrackStore = require("../../../stores/track_store");
-var TrackActions = require("../../../actions/track_actions");
-var PlayerActions = require("../../../actions/player_actions");
+var SessionStore = require("../../stores/session_store");
+var UserStore = require("../../stores/user_store");
+var TrackStore = require("../../stores/track_store");
+var TrackActions = require("../../actions/track_actions");
+var PlayerActions = require("../../actions/player_actions");
 var GiantPlayer = require("./giant_player");
 var TrackDetail = require("./track_detail");
-var PlaylistModal = require('../../playlist_modal/playlist_modal')
+var PlaylistModal = require('../playlist_modal/playlist_modal')
 
 var TrackPage = React.createClass({
   getInitialState: function () {
@@ -56,8 +57,7 @@ var TrackPage = React.createClass({
   },
 
   goToUser: function () {
-    var username = this.state.track.user.username;
-    var pathname = "/" + username;
+    var pathname = "/" + this.state.user.username;
 
     this.props.history.pushState(null, pathname);
   },

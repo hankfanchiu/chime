@@ -8,7 +8,7 @@ var NavItem = require("react-bootstrap").NavItem;
 var SessionStore = require("../../stores/session_store");
 var UserStore = require("../../stores/user_store");
 var UserActions = require("../../actions/user_actions");
-var UserSidebar = require("./user_sidebar/user_sidebar");
+var UserSidebar = require("./user_sidebar");
 
 var UserPage = React.createClass({
   getInitialState: function () {

@@ -1,6 +1,6 @@
 var React = require("react");
-var PlaylistStore = require("../../../stores/playlist_store");
-var PlaylistActions = require("../../../actions/playlist_actions");
+var PlaylistStore = require("../../stores/playlist_store");
+var PlaylistActions = require("../../actions/playlist_actions");
 
 var PlaylistDetail = require("./playlist_detail");
 

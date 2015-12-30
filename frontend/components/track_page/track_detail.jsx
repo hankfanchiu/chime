@@ -2,11 +2,12 @@ var React = require("react");
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
-var SessionActions = require("../../../actions/session_actions");
-var PlayerActions = require("../../../actions/player_actions");
-var PlaylistActions = require("../../../actions/playlist_actions");
-var AddToQueue = require("../../utility/add_to_queue");
-var AddToPlaylist = require("../../utility/add_to_playlist");
+var Glyphicon = require("react-bootstrap").Glyphicon;
+var SessionActions = require("../../actions/session_actions");
+var PlayerActions = require("../../actions/player_actions");
+var PlaylistActions = require("../../actions/playlist_actions");
+var AddToQueue = require("../utility/add_to_queue");
+var AddToPlaylist = require("../utility/add_to_playlist");
 
 var TrackDetail = React.createClass({
   _trackDescription: function () {
@@ -32,8 +33,7 @@ var TrackDetail = React.createClass({
   },
 
   render: function () {
-    var track = this.props.track;
-    var user = track.user;
+    var user = this.props.track.user;
 
     if (!user) { return <Row />; }
 

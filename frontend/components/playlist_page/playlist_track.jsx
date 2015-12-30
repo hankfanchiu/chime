@@ -1,5 +1,5 @@
 var React = require("react");
-var PlayerActions = require("../../../actions/player_actions");
+var PlayerActions = require("../../actions/player_actions");
 
 var PlaylistTrack = React.createClass({
   _addTrackToQueue: function () {

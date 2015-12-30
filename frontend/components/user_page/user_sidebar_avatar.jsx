@@ -1,7 +1,7 @@
 var React = require("react");
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Thumbnail = require("react-bootstrap").Thumbnail;
-var UserActions = require("../../../actions/user_actions");
+var UserActions = require("../../actions/user_actions");
 
 var UserSidebarAvatar = React.createClass({
   _handleFile: function () {

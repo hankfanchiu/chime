@@ -3,7 +3,7 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
-var PlayerActions = require("../../../actions/player_actions");
+var PlayerActions = require("../../actions/player_actions");
 
 var GiantPlayer = React.createClass({
   playTrack: function () {

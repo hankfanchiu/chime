@@ -1,9 +1,9 @@
 var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
-var SessionStore = require("../../../stores/session_store");
-var TrackStore = require("../../../stores/track_store");
-var PlaylistModal = require("../../playlist_modal/playlist_modal");
+var SessionStore = require("../../stores/session_store");
+var TrackStore = require("../../stores/track_store");
+var PlaylistModal = require("../playlist_modal/playlist_modal");
 var TracksIndexItem = require("./tracks_index_item");
 
 var TracksIndex = React.createClass({
