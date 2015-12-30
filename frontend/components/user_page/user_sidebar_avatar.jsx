@@ -14,7 +14,7 @@ var UserSidebarAvatar = React.createClass({
     UserActions.uploadImage(clientId, formData);
   },
 
-  renderNoUpload: function () {
+  noUpload: function () {
     return (
       <div className="avatar">
         <Thumbnail src={ this.props.user.avatar_square } />
@@ -23,7 +23,7 @@ var UserSidebarAvatar = React.createClass({
   },
 
   render: function () {
-    if (!this.props.isClient) { return this.renderNoUpload(); }
+    if (!this.props.isClient) { return this.noUpload(); }
 
     return (
       <div className="avatar">

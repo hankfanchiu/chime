@@ -68,8 +68,12 @@ var Settings = React.createClass({
     var description = this.refs.description.getValue();
     this.setState({ disabled: false, description: description });
   },
+  
+  close: function () {
+    UserActions.closeSettings();
+  },
 
-  _updateUser: function () {
+  updateUser: function () {
     var formData = new FormData();
 
     formData.append("user[email]", this.state.email);
@@ -80,10 +84,6 @@ var Settings = React.createClass({
     }
 
     UserActions.updateUser(this.state.user.id, formData);
-  },
-
-  close: function () {
-    UserActions.closeSettings();
   },
 
   render: function () {
@@ -136,7 +136,7 @@ var Settings = React.createClass({
 
           <Button bsStyle="primary"
             disabled={ this._disabled() }
-            onClick={ this._updateUser }>
+            onClick={ this.updateUser }>
             Update Account
           </Button>
         </Modal.Footer>

@@ -105,9 +105,7 @@ var PlaylistListItem = React.createClass({
 
           <section className="playlist-info">
             <header>
-              <span className="title">
-                { playlist.title }
-              </span>
+              <span className="title">{ playlist.title }</span>
             </header>
 
             <header>

@@ -13,6 +13,20 @@ var History = require("react-router").History;
 var DiscoverTrack = React.createClass({
   mixins: [History],
 
+  addToPlaylist: function () {
+    if (this.props.isLoggedIn) {
+      this.props.setTrackToAdd(this.props.track);
+      PlaylistActions.showPlaylistModal();
+
+    } else {
+      SessionActions.showLogin();
+    }
+  },
+
+  addToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
+  },
+
   goToTrack: function () {
     var track = this.props.track;
     var pathname = "/" + track.user.username + "/" + track.slug;
@@ -24,20 +38,6 @@ var DiscoverTrack = React.createClass({
     var pathname = "/" + this.props.track.user.username;
 
     this.history.pushState(null, pathname);
-  },
-
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
-  addToPlaylist: function () {
-    if (this.props.isLoggedIn) {
-      this.props.setTrackToAdd(this.props.track);
-      PlaylistActions.showPlaylistModal();
-
-    } else {
-      SessionActions.showLogin();
-    }
   },
 
   playTrack: function () {
@@ -71,8 +71,7 @@ var DiscoverTrack = React.createClass({
 
             <div className="title-container">
               <span className="title">
-                <a className="title title-small"
-                  onClick={ this.goToTrack }>
+                <a className="title title-small" onClick={ this.goToTrack }>
                   { track.title }
                 </a>
               </span>

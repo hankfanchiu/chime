@@ -66,10 +66,7 @@ var Login = React.createClass({
 
   render: function () {
     return (
-      <Modal bsSize="small"
-        onHide={ this.reset }
-        show={ this.state.show }>
-
+      <Modal bsSize="small" onHide={ this.reset } show={ this.state.show }>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>

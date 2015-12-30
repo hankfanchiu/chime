@@ -45,11 +45,11 @@ var PlaylistModal = React.createClass({
     PlaylistActions.closePlaylistModal();
   },
 
-  renderForm: function () {
+  form: function () {
     return <PlaylistForm close={ this.close } track={ this.props.track } />;
   },
 
-  renderList: function () {
+  list: function () {
     return (
       <PlaylistList close={ this.close }
         playlists={ this.state.playlists }
@@ -62,7 +62,7 @@ var PlaylistModal = React.createClass({
       <Modal onHide={ this.close }
         dialogClassName="playlist-modal"
         show={ this.state.show }>
-        
+
         <Modal.Header closeButton>
           <Modal.Title>
             <Nav bsStyle="pills"
@@ -75,7 +75,7 @@ var PlaylistModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
 
-        { this.state.showForm ? this.renderForm() : this.renderList() }
+        { this.state.showForm ? this.form() : this.list() }
       </Modal>
     );
   }

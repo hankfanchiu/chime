@@ -9,23 +9,23 @@ var UploadActions = require("../../actions/upload_actions");
 var UserActions = require("../../actions/user_actions");
 
 var LoggedIn = React.createClass({
-  _goToTracks: function () {
-    var tracks = "/" + this.props.user.username + "/tracks";
-
-    this.props.pushState(tracks);
-  },
-
-  _goToPlaylists: function () {
+  goToPlaylists: function () {
     var playlists = "/" + this.props.user.username + "/playlists";
 
     this.props.pushState(playlists);
   },
 
-  _logout: function () {
+  goToTracks: function () {
+    var tracks = "/" + this.props.user.username + "/tracks";
+
+    this.props.pushState(tracks);
+  },
+
+  logout: function () {
     this.props.pushState("/logout");
   },
 
-  renderDropdownTitle: function () {
+  dropdownTitle: function () {
     var style = { margin: "-5px 0 -5px 0", width: "20px", height: "20px" };
 
     return (
@@ -45,15 +45,15 @@ var LoggedIn = React.createClass({
         </NavItem>
 
         <NavDropdown id="user-dropdown"
-          title={ this.renderDropdownTitle() }>
+          title={ this.dropdownTitle() }>
 
-          <MenuItem onClick={ this._goToTracks }>
+          <MenuItem onClick={ this.goToTracks }>
             <Glyphicon glyph="music" />
             <span className="spacer spacer-small" />
             Tracks
           </MenuItem>
 
-          <MenuItem onClick={ this._goToPlaylists }>
+          <MenuItem onClick={ this.goToPlaylists }>
             <Glyphicon glyph="th-list" />
             <span className="spacer spacer-small" />
             Playlists
@@ -67,7 +67,7 @@ var LoggedIn = React.createClass({
 
           <MenuItem divider />
 
-          <MenuItem onClick={ this._logout }>
+          <MenuItem onClick={ this.logout }>
             <Glyphicon glyph="log-out" />
             <span className="spacer spacer-small" />
             Logout

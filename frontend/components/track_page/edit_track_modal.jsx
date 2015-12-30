@@ -79,6 +79,14 @@ var EditTrackModal = React.createClass({
     setTimeout(pushState, 300);
   },
 
+  _titleLabel: function () {
+    return <span className="required-label">Title</span>;
+  },
+
+  close: function () {
+    TrackActions.closeEditModal();
+  },
+
   update: function () {
     var trackId = this.props.track.id;
     var formData = new FormData();
@@ -91,14 +99,6 @@ var EditTrackModal = React.createClass({
     }
 
     TrackActions.updateTrack(trackId, formData);
-  },
-
-  _titleLabel: function () {
-    return <span className="required-label">Title</span>;
-  },
-
-  close: function () {
-    TrackActions.closeEditModal();
   },
 
   render: function () {

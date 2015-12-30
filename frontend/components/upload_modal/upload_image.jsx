@@ -11,16 +11,16 @@ var UploadImage = React.createClass({
   _handleFile: function () {
     var img = this.refs.file.files[0];
 
-    if (img === null) { return; }
+    if (img) {
+      var reader = new FileReader();
 
-    var reader = new FileReader();
+      reader.onloadend = function () {
+        this.setState({ imgUrl: reader.result });
+      }.bind(this);
 
-    reader.onloadend = function () {
-      this.setState({ imgUrl: reader.result });
-    }.bind(this);
-
-    reader.readAsDataURL(img);
-    this.props.setImg(img);
+      reader.readAsDataURL(img);
+      this.props.setImg(img);
+    }
   },
 
   render: function () {

@@ -43,7 +43,7 @@ var Discover = React.createClass({
     this.setState({ trackToAdd: track });
   },
 
-  renderDiscoverRows: function () {
+  discoverRows: function () {
     var tracks = this.state.tracks;
     var rows = [];
     var row;
@@ -82,15 +82,13 @@ var Discover = React.createClass({
   render: function () {
     return (
       <Grid>
-        <PageHeader>
-          Discover new chimes
-        </PageHeader>
+        <PageHeader>Discover new chimes</PageHeader>
 
         <p className="lead">
           See what's trending. Play it now, queue it up, or add to your own playlist.
         </p>
 
-        { this.renderDiscoverRows() }
+        { this.discoverRows() }
 
         <PlaylistModal track={ this.state.trackToAdd }
           clientUsername={ this.state.clientUsername } />

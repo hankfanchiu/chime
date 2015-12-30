@@ -28,7 +28,7 @@ var PlaylistsIndex = React.createClass({
     this.setState(this.getStatesFromStore());
   },
 
-  renderNoPlaylists: function () {
+  noPlaylists: function () {
     return (
       <ListGroup>
         <ListGroupItem>
@@ -38,7 +38,7 @@ var PlaylistsIndex = React.createClass({
     );
   },
 
-  renderPlaylistsIndexItems: function () {
+  playlistsIndexItems: function () {
     var playlistsIndexItems = [];
     var indexItem, playlist;
 
@@ -59,11 +59,11 @@ var PlaylistsIndex = React.createClass({
   render: function () {
     var playlistCount = Object.keys(this.state.playlists).length;
 
-    if (playlistCount === 0) { return this.renderNoPlaylists(); }
+    if (playlistCount === 0) { return this.noPlaylists(); }
 
     return (
       <ListGroup className="playlists-index">
-        { this.renderPlaylistsIndexItems() }
+        { this.playlistsIndexItems() }
       </ListGroup>
     );
   }

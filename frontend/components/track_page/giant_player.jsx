@@ -10,14 +10,6 @@ var GiantPlayer = React.createClass({
     PlayerActions.playTrackNow(this.props.track);
   },
 
-  renderUsername: function () {
-    var user = this.props.track.user;
-
-    if (user) {
-      return user.username;
-    }
-  },
-
   render: function () {
     var track = this.props.track;
 

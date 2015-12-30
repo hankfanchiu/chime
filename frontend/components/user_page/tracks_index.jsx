@@ -49,7 +49,7 @@ var TracksIndex = React.createClass({
     this.setState({ trackToDelete: track });
   },
 
-  renderNoTracks: function () {
+  noTracks: function () {
     return (
       <ListGroup>
         <ListGroupItem>This user has no tracks! :(</ListGroupItem>
@@ -57,7 +57,7 @@ var TracksIndex = React.createClass({
     );
   },
 
-  renderTrackIndexItems: function () {
+  trackIndexItems: function () {
     var trackIndexItems = [];
     var indexItem, track;
 
@@ -82,16 +82,17 @@ var TracksIndex = React.createClass({
   render: function () {
     var trackCount = Object.keys(this.state.tracks).length;
 
-    if (trackCount === 0) { return this.renderNoTracks(); }
+    if (trackCount === 0) { return this.noTracks(); }
 
     return (
       <ListGroup className="tracks-index">
-        { this.renderTrackIndexItems() }
+        { this.trackIndexItems() }
 
         <PlaylistModal track={ this.state.trackToAdd }
           clientUsername={ this.state.clientUsername } />
 
         <EditTrackModal track={ this.state.trackToEdit } />
+
         <DeleteTrackModal track={ this.state.trackToDelete } />
       </ListGroup>
     );

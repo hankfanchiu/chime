@@ -47,33 +47,18 @@ var Upload = React.createClass({
     return (!this.state.isUploaded) || (this.state.title === "");
   },
 
+  _progressState: function () {
+    if (this.state.progress === 100) { return "success"; }
+  },
+
   _redirectIfSaved: function () {
     var pathname = UploadStore.getTrackPathname();
     var pushState = this.history.pushState.bind(this, null, pathname);
 
-    if (!pathname) { return; }
-
-    this.setState({ title: "", description: "" });
-    setTimeout(pushState, 300);
-  },
-
-  _reset: function () {
-    UploadActions.resetUploadStore();
-    this.setState(this.getInitialState());
-  },
-
-  _save: function () {
-    var formData = new FormData();
-
-    formData.append("track[track_url]", this.state.publicUrl);
-    formData.append("track[title]", this.state.title);
-    formData.append("track[description]", this.state.description);
-
-    if (this.state.img) {
-      formData.append("track[img]", this.state.img);
+    if (pathname) {
+      this.setState({ title: "", description: "" });
+      setTimeout(pushState, 300);
     }
-
-    TrackActions.createTrack(formData);
   },
 
   _setImg: function (img) {
@@ -84,11 +69,7 @@ var Upload = React.createClass({
     return <span className="required-label">Title</span>;
     },
 
-  _progressState: function () {
-    if (this.state.progress === 100) { return "success"; }
-  },
-
-  renderAudioUpload: function () {
+  audioUpload: function () {
     if (!this.state.progress) { return <UploadAudio />; }
 
     var isComplete = (this.state.progress === 100);
@@ -102,6 +83,25 @@ var Upload = React.createClass({
           bsStyle={ this._progressState() } />
       </div>
     );
+  },
+
+  reset: function () {
+    UploadActions.resetUploadStore();
+    this.setState(this.getInitialState());
+  },
+
+  save: function () {
+    var formData = new FormData();
+
+    formData.append("track[track_url]", this.state.publicUrl);
+    formData.append("track[title]", this.state.title);
+    formData.append("track[description]", this.state.description);
+
+    if (this.state.img) {
+      formData.append("track[img]", this.state.img);
+    }
+
+    TrackActions.createTrack(formData);
   },
 
   render: function () {
@@ -134,17 +134,17 @@ var Upload = React.createClass({
                 placeholder="Describe your track"
                 valueLink={ this.linkState("description") } />
 
-              { this.renderAudioUpload() }
+              { this.audioUpload() }
             </Col>
           </Row>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={ this._reset }>Cancel</Button>
+          <Button onClick={ this.reset }>Cancel</Button>
 
           <Button bsStyle="primary"
             disabled={ this._disabled() }
-            onClick={ this._save }>
+            onClick={ this.save }>
             Save
           </Button>
         </Modal.Footer>

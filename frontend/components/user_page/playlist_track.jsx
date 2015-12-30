@@ -7,7 +7,7 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 
 var PlaylistTrack = React.createClass({
-  _playTrack: function () {
+  playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
 
@@ -15,15 +15,13 @@ var PlaylistTrack = React.createClass({
     var track = this.props.track;
 
     return (
-      <ListGroupItem className="track-list-item" onClick={ this._playTrack }>
+      <ListGroupItem className="track-list-item" onClick={ this.playTrack }>
         <figure className="track-image">
           <Image src={ track.img_hero } />
         </figure>
 
         <section className="track-index">
-          <span className="track-index">
-            { this.props.index }
-          </span>
+          <span className="track-index">{ this.props.index }</span>
         </section>
 
         <section className="track-info">
@@ -31,9 +29,7 @@ var PlaylistTrack = React.createClass({
             { track.user.username } &mdash;&nbsp;
           </span>
 
-          <span className="title title-thin">
-            { track.title }
-          </span>
+          <span className="title title-thin">{ track.title }</span>
         </section>
       </ListGroupItem>
     );

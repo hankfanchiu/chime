@@ -5,9 +5,9 @@ var UploadAudio = React.createClass({
   _handleFile: function () {
     var file = this.refs.file.files[0];
 
-    if (file === null) { return; }
-
-    UploadActions.startDirectUpload("tracks/audio", file);
+    if (file) {
+      UploadActions.startDirectUpload("tracks/audio", file);
+    }
   },
 
   render: function () {

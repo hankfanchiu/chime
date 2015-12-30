@@ -23,13 +23,13 @@ var EditTrackModal = React.createClass({
   componentWillReceiveProps: function (nextProps) {
     var track = nextProps.track;
 
-    if (!track) { return; }
-
-    this.setState({
-      title: track.title,
-      description: track.description,
-      imgUrl: track.img_square
-    });
+    if (track) {
+      this.setState({
+        title: track.title,
+        description: track.description,
+        imgUrl: track.img_square
+      });
+    }
   },
 
   componentWillUnmount: function () {
@@ -52,21 +52,29 @@ var EditTrackModal = React.createClass({
   _handleFile: function () {
     var img = this.refs.file.files[0];
 
-    if (img === null) { return; }
+    if (img) {
+      var reader = new FileReader();
 
-    var reader = new FileReader();
+      reader.onloadend = function () {
+        this.setState({ imgUrl: reader.result });
+      }.bind(this);
 
-    reader.onloadend = function () {
-      this.setState({ imgUrl: reader.result });
-    }.bind(this);
-
-    reader.readAsDataURL(img);
-    this.setState({ disabled: false, img: img });
+      reader.readAsDataURL(img);
+      this.setState({ disabled: false, img: img });
+    }
   },
 
   _handleTitleChange: function () {
     var title = this.refs.title.getValue();
     this.setState({ disabled: false, title: title });
+  },
+
+  _titleLabel: function () {
+    return <span className="required-label">Title</span>;
+  },
+
+  close: function () {
+    TrackActions.closeEditModal();
   },
 
   update: function () {
@@ -83,14 +91,6 @@ var EditTrackModal = React.createClass({
     TrackActions.updateTrack(trackId, formData);
   },
 
-  _titleLabel: function () {
-    return <span className="required-label">Title</span>;
-  },
-
-  close: function () {
-    TrackActions.closeEditModal();
-  },
-
   render: function () {
     return (
       <Modal onHide={ this.close }
@@ -98,9 +98,7 @@ var EditTrackModal = React.createClass({
         show={ this.state.show }>
 
         <Modal.Header closeButton>
-          <Modal.Title>
-            Edit Track
-          </Modal.Title>
+          <Modal.Title>Edit Track</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

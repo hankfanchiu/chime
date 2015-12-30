@@ -21,7 +21,6 @@ var router = (
   <Router history={ history }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ HomePage } />
-
       <Route name="discover" path="discover" component={ DiscoverPage } />
       <Route name="logout" path="logout" component={ Logout } />
 
@@ -32,7 +31,8 @@ var router = (
       </Route>
 
       <Route name="track" path=":username/:track" component={ TrackPage } />
-      <Route name="playlist" path=":username/playlists/:playlist"
+      <Route name="playlist"
+        path=":username/playlists/:playlist"
         component={ PlaylistPage } />
     </Route>
   </Router>

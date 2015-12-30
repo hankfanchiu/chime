@@ -59,14 +59,9 @@ var DeleteTrackModal = React.createClass({
 
   render: function () {
     return (
-      <Modal bsSize="small"
-        onHide={ this.close }
-        show={ this.state.show }>
-
+      <Modal bsSize="small" onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
-          <Modal.Title>
-            Delete Track
-          </Modal.Title>
+          <Modal.Title>Delete Track</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -76,9 +71,7 @@ var DeleteTrackModal = React.createClass({
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={ this.close }>
-            Cancel
-          </Button>
+          <Button onClick={ this.close }>Cancel</Button>
 
           <Button bsStyle="primary" onClick={ this.delete }>
             Delete Track

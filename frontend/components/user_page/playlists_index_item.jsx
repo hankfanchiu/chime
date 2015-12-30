@@ -22,38 +22,6 @@ var PlaylistsIndexItem = React.createClass({
     );
   },
 
-  trackImage: function () {
-    return (
-      <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
-        <span className="btn play-button" onClick={ this.playPlaylist }>
-          <Glyphicon glyph="play" className="play-icon"/>
-        </span>
-
-        <Image src={ this.props.playlist.tracks[0].img_thumb } thumbnail />
-      </Col>
-    );
-  },
-
-  sadMessage: function () {
-    return <p>This playlist has no chimes! :(</p>
-  },
-
-  tracksList: function () {
-    var playlist = this.props.playlist;
-    var tracks = playlist.tracks;
-
-    var tracksList = tracks.map(function (track, idx) {
-      return (
-        <PlaylistTrack key={ idx }
-          index={ idx + 1 }
-          track={ track }
-          playlistId={ playlist.id } />
-      );
-    });
-
-    return <ListGroup>{ tracksList }</ListGroup>;
-  },
-
   goToPlaylist: function () {
     var username = this.props.username;
     var slug = this.props.playlist.slug;
@@ -72,6 +40,38 @@ var PlaylistsIndexItem = React.createClass({
     PlayerActions.loadPlaylist(this.props.playlist);
   },
 
+  sadMessage: function () {
+    return <p>This playlist has no chimes! :(</p>
+  },
+
+  trackImage: function () {
+    return (
+      <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
+        <span className="btn play-button" onClick={ this.playPlaylist }>
+          <Glyphicon glyph="play" className="play-icon"/>
+        </span>
+
+        <Image src={ this.props.playlist.tracks[0].img_thumb } thumbnail />
+      </Col>
+    );
+  },
+
+  tracksList: function () {
+    var playlist = this.props.playlist;
+    var tracks = playlist.tracks;
+
+    var tracksList = tracks.map(function (track, idx) {
+      return (
+        <PlaylistTrack key={ idx }
+          index={ idx + 1 }
+          track={ track }
+          playlistId={ playlist.id } />
+      );
+    });
+
+    return <ListGroup>{ tracksList }</ListGroup>;
+  },
+
   render: function () {
     var playlist = this.props.playlist;
     var noTracks = (playlist.tracks.length === 0);
@@ -83,9 +83,7 @@ var PlaylistsIndexItem = React.createClass({
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <section className="time">
-              <p className="time">
-                Created { playlist.time_ago }
-              </p>
+              <p className="time">Created { playlist.time_ago }</p>
             </section>
 
             <section className="playlist-info">

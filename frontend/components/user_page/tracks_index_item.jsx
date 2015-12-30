@@ -18,11 +18,7 @@ var TracksIndexItem = React.createClass({
   _pushState: function (pathname) {
     this.history.pushState(null, pathname);
   },
-
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
+  
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
@@ -30,6 +26,10 @@ var TracksIndexItem = React.createClass({
     } else {
       SessionActions.showLogin();
     }
+  },
+
+  addToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
   },
 
   deleteButton: function () {
@@ -60,14 +60,14 @@ var TracksIndexItem = React.createClass({
     TrackActions.showEditModal();
   },
 
-  goToUser: function () {
-    var pathname = "/" + this.props.username;
+  goToTrack: function () {
+    var pathname = "/" + this.props.username + "/" + this.props.track.slug;
 
     this._pushState(pathname);
   },
 
-  goToTrack: function () {
-    var pathname = "/" + this.props.username + "/" + this.props.track.slug;
+  goToUser: function () {
+    var pathname = "/" + this.props.username;
 
     this._pushState(pathname);
   },

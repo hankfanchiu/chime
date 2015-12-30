@@ -39,45 +39,43 @@ var Navigation = React.createClass({
     this.history.pushState(null, pathname);
   },
 
-  _goToHome: function () {
-    this._pushState("/");
-  },
-
-  _goToDiscover: function () {
+  goToDiscover: function () {
     this._pushState("/discover");
   },
 
-  renderSessionStatus: function () {
-    if (this.state.isLoggedIn) {
-      return (
-        <LoggedIn user={ this.state.user } pushState={ this._pushState } />
-      );
-    } else {
-      return (
-        <LoggedOut pushState={ this._pushState } />
-      );
-    }
+  goToHome: function () {
+    this._pushState("/");
+  },
+
+  loggedIn: function () {
+    return (
+      <LoggedIn user={ this.state.user } pushState={ this._pushState } />
+    );
+  },
+
+  loggedOut: function () {
+    return <LoggedOut pushState={ this._pushState } />;
   },
 
   render: function () {
     return (
       <Navbar fixedTop>
         <Navbar.Header>
-          <Navbar.Brand onClick={ this._goToHome }>
+          <Navbar.Brand onClick={ this.goToHome }>
             Chime
           </Navbar.Brand>
         </Navbar.Header>
 
         <div id="navbar">
           <Nav>
-            <NavItem onClick={ this._goToDiscover }>
+            <NavItem onClick={ this.goToDiscover }>
               Discover
             </NavItem>
 
             <Search pushState={ this._pushState } />
           </Nav>
 
-          { this.renderSessionStatus() }
+          { this.state.isLoggedIn ? this.loggedIn() : this.loggedOut() }
         </div>
       </Navbar>
     );

@@ -4,10 +4,10 @@ var SessionActions = require("../../actions/session_actions");
 
 var Logout = React.createClass({
   componentWillMount: function () {
-    if (!SessionStore.isLoggedIn()) {
-      this.props.history.pushState(null, "/");
-    } else {
+    if (SessionStore.isLoggedIn()) {
       SessionActions.logout();
+    } else {
+      this.props.history.pushState(null, "/");
     }
   },
 
