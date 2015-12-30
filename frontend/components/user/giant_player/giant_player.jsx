@@ -42,7 +42,7 @@ var GiantPlayer = React.createClass({
             </span>
           </figure>
 
-          <section className="track-heading">
+          <section className="giant-track-heading">
             <h3 className="giant-username">
               <a onClick={ this.goToUser }>
                 { track.user.username }
