@@ -57,7 +57,7 @@ var TrackPage = React.createClass({
   },
 
   goToUser: function () {
-    var pathname = "/" + this.state.user.username;
+    var pathname = "/" + this.state.track.user.username;
 
     this.props.history.pushState(null, pathname);
   },

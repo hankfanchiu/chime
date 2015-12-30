@@ -50,7 +50,7 @@ class Track < ActiveRecord::Base
     styles: {
       hero: '30x30#',
       thumb: '200x200#',
-      square: '300x300#'
+      square: '350x350#'
     }
 
   validates_attachment_size :img, { less_than: 5.megabytes }

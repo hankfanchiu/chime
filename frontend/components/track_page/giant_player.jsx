@@ -25,13 +25,15 @@ var GiantPlayer = React.createClass({
 
     return (
       <Row className="giant-player">
-        <Col xs={ 8 } sm={ 8 } md={ 8 }>
+        <Col xs={ 1 } sm={ 1 } md={ 1 }>
           <figure className="play-button">
             <span className="btn play-button" onClick={ this.playTrack }>
               <Glyphicon glyph="play" className="play-icon"/>
             </span>
           </figure>
+        </Col>
 
+        <Col xs={ 7 } sm={ 7 } md={ 7 }>
           <section className="giant-track-heading">
             <h3 className="giant-username">
               <a onClick={ this.props.goToUser }>

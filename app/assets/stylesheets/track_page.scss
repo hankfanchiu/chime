@@ -48,11 +48,9 @@ figure.play-button {
 
 section.giant-track-heading {
   display: inline-block;
-  margin-left: 30px;
 }
 
 h3.giant-username {
-  margin: 5px 0;
 
   a {
     color: #999;
@@ -68,7 +66,7 @@ h3.giant-username {
 }
 
 h1.giant-title {
-  margin: 20px 0;
+  margin-top: 10px;
   color: #eee;
 }
 
@@ -80,20 +78,22 @@ span.giant-title {
 }
 
 h5.giant-track-time {
-  margin: 10px 0;
   color: #ddd;
   font-weight: normal;
 }
 
 section.track-buttons {
+  display: flex;
+  justify-content: space-between;
 
-  span.add-to-queue {
-    margin-right: 5px;
+  span {
+    display: inline-block;
     font-size: 10px;
+    margin-right: 3px;
   }
 
-  span.add-to-playlist {
-    font-size: 10px;
+  span:last-child {
+    margin-right: 0px;
   }
 }
 

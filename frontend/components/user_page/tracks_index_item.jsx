@@ -62,6 +62,12 @@ var TracksIndexItem = React.createClass({
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 } className="track-info">
+            <section className="time">
+              <p className="time">
+                Added { track.time_ago }
+              </p>
+            </section>
+
             <section className="track-heading">
               <h5 className="username">
                 <a className="username" onClick={ this.goToUser }>
@@ -69,15 +75,11 @@ var TracksIndexItem = React.createClass({
                 </a>
               </h5>
 
-              <h3 className="title">
+              <h4 className="title">
                 <a className="title" onClick={ this.goToTrack }>
                   { track.title }
                 </a>
-              </h3>
-
-              <p className="time">
-                Added { track.time_ago }
-              </p>
+              </h4>
             </section>
 
             <section className="buttons">

@@ -8,6 +8,8 @@ var PlayerActions = require("../../actions/player_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
+var EditButton = require("../utility/edit_button");
+var DeleteButton = require("../utility/delete_button");
 
 var TrackDetail = React.createClass({
   _trackDescription: function () {
@@ -20,11 +22,7 @@ var TrackDetail = React.createClass({
     }
   },
 
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
-  addToPlaylist: function () {
+  _addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       PlaylistActions.showPlaylistModal();
     } else {
@@ -32,8 +30,22 @@ var TrackDetail = React.createClass({
     }
   },
 
+  _addToQueue: function () {
+    PlayerActions.addTrackToQueue(this.props.track);
+  },
+
+  _deleteTrack: function () {
+    return;
+  },
+
+  _editTrack: function () {
+    return;
+  },
+
   render: function () {
     var user = this.props.track.user;
+    var deleteButton = <DeleteButton delete={ this._deleteTrack } />;
+    var editButton = <EditButton edit={ this._editTrack } />;
 
     if (!user) { return <Row />; }
 
@@ -56,9 +68,12 @@ var TrackDetail = React.createClass({
         </Col>
 
         <Col xs={ 4 } sm={ 4 } md={ 4 }>
-          <section className="track-buttons">
-            <AddToQueue addToQueue={ this.addToQueue } />
-            <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
+          <section className="track-buttons clear">
+            <AddToQueue addToQueue={ this._addToQueue } />
+            <AddToPlaylist addToPlaylist={ this._addToPlaylist } />
+
+            { this.props.isLoggedIn ? editButton : "" }
+            { this.props.isLoggedIn ? deleteButton : "" }
           </section>
         </Col>
       </Row>

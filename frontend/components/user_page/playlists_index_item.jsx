@@ -59,6 +59,12 @@ var PlaylistsIndexItem = React.createClass({
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
+            <section className="time">
+              <p className="time">
+                Created { playlist.time_ago }
+              </p>
+            </section>
+
             <section className="playlist-info">
               <h5 className="username">
                 <a className="username" onClick={ this.goToUser }>
@@ -66,15 +72,11 @@ var PlaylistsIndexItem = React.createClass({
                 </a>
               </h5>
 
-              <h3 className="title">
+              <h4 className="title">
                 <a className="title" onClick={ this.goToPlaylist }>
                   { playlist.title }
                 </a>
-              </h3>
-
-              <p className="time">
-                Created { playlist.time_ago }
-              </p>
+              </h4>
             </section>
 
             <ListGroup>
