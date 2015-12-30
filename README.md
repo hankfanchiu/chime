@@ -9,13 +9,15 @@
 Chime is a web application inspired by SoundCloud built using Ruby on Rails
 and React.js. Chime allows users to:
 
-- [x] Create an account
+- [x] Create and update a user account
 - [x] Sign In / Sign Out
 - [x] Search other users
-- [x] Upload and delete sound files
-- [x] Stream uploaded tracks without interruption
+- [x] Upload and delete audio files
+- [x] Stream tracks without interruption
+- [x] Add tracks to the audio playback queue
 - [x] Search for tracks by title
-- [x] Add tracks to playlists
+- [x] Create, edit, or delete playlists
+- [x] Add tracks to or remove tracks from playlists
 
 ## Design Docs
 * [DB schema][schema]
