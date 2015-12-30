@@ -14,7 +14,7 @@ var UploadAudio = React.createClass({
     return (
       <div className="upload-audio">
         <span className="btn btn-default btn-file">
-          <i className="fa fa-file-audio-o"></i> Upload audio
+          <i className="fa fa-file-audio-o"></i> <span className="required-label">Upload Audio</span>
 
           <input type="file" accept="audio/*" ref="file"
             onChange={ this._handleFile } />

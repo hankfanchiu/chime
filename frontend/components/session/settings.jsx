@@ -41,6 +41,10 @@ var Settings = React.createClass({
     return (this.state.email === "") || (this.state.disabled);
   },
 
+  _emailLabel: function () {
+    return <span className="required-label">Email Address</span>;
+  },
+
   _handleFile: function () {
     var reader = new FileReader();
     var img = this.refs.file.files[0];
@@ -109,7 +113,7 @@ var Settings = React.createClass({
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="email"
-                label="Email Address"
+                label={ this._emailLabel() }
                 ref="email"
                 value={ this.state.email }
                 placeholder="Update your email address"
