@@ -2,4 +2,4 @@ json.track do
   json.partial! "api/tracks/track", track: @track
 end
 
-json.success ["Track saved"]
+json.success ["New chime saved!"]

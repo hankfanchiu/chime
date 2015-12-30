@@ -19,6 +19,10 @@ UserStore.__onDispatch = function (payload) {
     case ActionTypes.CLIENT_RECEIVED:
       resetUser(response);
       break;
+
+    case ActionTypes.CLIENT_UPDATED:
+      if (!response.errors) { updateUser(response); }
+      break;
   };
 };
 
@@ -30,6 +34,14 @@ UserStore.find = function (username) {
 };
 
 var resetUser = function (user) {
+  _users[user.username] = user;
+
+  UserStore.__emitChange();
+};
+
+var updateUser = function (response) {
+  var user = response.user;
+
   _users[user.username] = user;
 
   UserStore.__emitChange();

@@ -30,7 +30,7 @@ var UserActions = {
   },
 
   updateUser: function (userId, formData) {
-    UserAPIUtils.updateUser(userId, formData, UserActions.receiveClient);
+    UserAPIUtils.updateUser(userId, formData, UserActions.receiveClientUpdated);
   },
 
   uploadImage: function (userId, formData) {
@@ -56,6 +56,13 @@ var UserActions = {
   receiveClient: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLIENT_RECEIVED,
+      response: response
+    });
+  },
+
+  receiveClientUpdated: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLIENT_UPDATED,
       response: response
     });
   }

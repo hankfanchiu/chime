@@ -24,6 +24,10 @@ SessionStore.__onDispatch = function (payload) {
       if (!response.errors) { setClient(response); }
       break;
 
+    case ActionTypes.CLIENT_UPDATED:
+      if (!response.errors) { updateClient(response); }
+      break;
+
   };
 };
 
@@ -66,6 +70,12 @@ var removeSession = function () {
 
 var setClient = function (user) {
   _client = user;
+
+  SessionStore.__emitChange();
+};
+
+var updateClient = function (response) {
+  _client = response.user;
 
   SessionStore.__emitChange();
 };

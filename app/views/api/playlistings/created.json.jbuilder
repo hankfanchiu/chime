@@ -5,4 +5,4 @@ json.track do
   json.partial! "api/tracks/track", track: @playlisting.track
 end
 
-json.success [ "Track added" ]
+json.success [ "Track added to playlist." ]

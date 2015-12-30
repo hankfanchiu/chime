@@ -20,7 +20,7 @@ SettingsStore.__onDispatch = function (payload) {
       setShowModal(false);
       break;
 
-    case ActionTypes.CLIENT_RECEIVED:
+    case ActionTypes.CLIENT_UPDATED:
       if (!response.errors) { setShowModal(false); }
       break;
 

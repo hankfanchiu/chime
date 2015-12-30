@@ -6,7 +6,7 @@ class Api::PlaylistingsController < ApplicationController
     @playlisting = Playlisting.new(playlisting_params)
 
     if @playlisting.save
-      render :playlisting_created
+      render :created
     else
       render json: { errors: @playlisting.errors.full_messages }
     end
@@ -18,7 +18,7 @@ class Api::PlaylistingsController < ApplicationController
     return not_found if @playlisting.nil?
 
     if @playlisting.destroy
-      render :playlisting_destroyed
+      render :destroyed
     else
       render json: { errors: @playlisting.errors.full_messages }
     end

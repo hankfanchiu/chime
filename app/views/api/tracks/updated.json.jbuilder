@@ -4,4 +4,4 @@ end
 
 json.old_slug @old_slug
 
-json.success ["Track updated"]
+json.success ["Your track has been updated."]

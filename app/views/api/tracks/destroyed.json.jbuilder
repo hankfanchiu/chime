@@ -3,4 +3,4 @@ json.track do
   json.username @track.user.username
 end
 
-json.success ["Track deleted"]
+json.success ["Your track has been wiped!"]

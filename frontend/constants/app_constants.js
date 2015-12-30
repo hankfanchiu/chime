@@ -11,6 +11,10 @@ module.exports = {
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
     CLIENT_RECEIVED: null,
+    CLIENT_UPDATED: null,
+
+    // User
+    USER_RECEIVED: null,
 
     // Sign Up modal
     SHOW_SIGN_UP_MODAL: null,
@@ -33,9 +37,6 @@ module.exports = {
 
     // Discover
     DISCOVER_TRACKS_RECEIVED: null,
-
-    // User
-    USER_RECEIVED: null,
 
     // Track
     SHOW_EDIT_TRACK_MODAL: null,

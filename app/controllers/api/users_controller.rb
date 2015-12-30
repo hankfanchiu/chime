@@ -8,7 +8,7 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login!(@user)
-      render :show
+      render :created
     else
       render json: { errors: @user.errors.full_messages }
     end
@@ -18,7 +18,7 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
 
     if @user.update(user_params)
-      render :show
+      render :updated
     else
       render json: { errors: @user.errors.full_messages }
     end
@@ -36,7 +36,7 @@ class Api::UsersController < ApplicationController
 
   def user_params
     permitted = [:username, :email, :description, :password, :avatar]
-    
+
     params.require(:user).permit(permitted)
   end
 
