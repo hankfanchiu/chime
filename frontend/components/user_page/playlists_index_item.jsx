@@ -12,14 +12,44 @@ var History = require("react-router").History;
 var PlaylistsIndexItem = React.createClass({
   mixins: [History],
 
-  _imageSrc: function () {
-    var firstTrack = this.props.playlist.tracks[0];
+  defaultImage: function () {
+    var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg";
 
-    if (firstTrack) {
-      return firstTrack.img_thumb;
-    } else {
-      return "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg";
-    }
+    return (
+      <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
+        <Image src={ src } thumbnail />
+      </Col>
+    );
+  },
+
+  trackImage: function () {
+    return (
+      <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
+        <span className="btn play-button" onClick={ this.playPlaylist }>
+          <Glyphicon glyph="play" className="play-icon"/>
+        </span>
+
+        <Image src={ this.props.playlist.tracks[0].img_thumb } thumbnail />
+      </Col>
+    );
+  },
+
+  sadMessage: function () {
+    return <p>This playlist has no chimes! :(</p>
+  },
+
+  tracksList: function () {
+    var tracks = this.props.playlist.tracks;
+    var tracksList = tracks.map(function (track, idx) {
+      return (
+        <PlaylistTrack key={ idx }
+          index={ idx + 1 }
+          track={ track }
+          playlistId={ playlist.id } />
+      );
+    });
+
+    return <ListGroup>{ tracksList }</ListGroup>;
   },
 
   goToPlaylist: function () {
@@ -40,32 +70,14 @@ var PlaylistsIndexItem = React.createClass({
     PlayerActions.loadPlaylist(this.props.playlist);
   },
 
-  renderPlaylistTrackList: function () {
-    var playlist = this.props.playlist;
-
-    return playlist.tracks.map(function (track, idx) {
-      return (
-        <PlaylistTrack key={ idx }
-          index={ idx + 1 }
-          track={ track }
-          playlistId={ playlist.id } />
-      );
-    });
-  },
-
   render: function () {
     var playlist = this.props.playlist;
+    var noTracks = (playlist.tracks.length === 0);
 
     return (
       <ListGroupItem className="playlist-index-item">
         <Row>
-          <Col xs={ 3 } sm={ 3 } md={ 3 } className="playlist-image">
-            <span className="btn play-button" onClick={ this.playPlaylist }>
-              <Glyphicon glyph="play" className="play-icon"/>
-            </span>
-
-            <Image src={ this._imageSrc() } thumbnail />
-          </Col>
+          { noTracks ? this.defaultImage() : this.trackImage() }
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <section className="time">
@@ -88,9 +100,7 @@ var PlaylistsIndexItem = React.createClass({
               </h4>
             </section>
 
-            <ListGroup>
-              { this.renderPlaylistTrackList() }
-            </ListGroup>
+            { noTracks ? this.sadMessage() : this.tracksList() }
           </Col>
         </Row>
       </ListGroupItem>
