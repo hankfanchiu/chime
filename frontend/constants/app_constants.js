@@ -31,6 +31,9 @@ module.exports = {
     DIRECT_UPLOAD_SUCCESS_RECEIVED: null,
     RESET_UPLOAD_STORE: null,
 
+    // Discover
+    DISCOVER_TRACKS_RECEIVED: null,
+
     // User
     USER_RECEIVED: null,
 

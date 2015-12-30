@@ -16,10 +16,6 @@ DiscoverStore.__onDispatch = function (payload) {
       resetTracks(response);
       break;
 
-    case ActionTypes.ADDITIONAL_DISCOVER_TRACKS_RECEIVED:
-      appendTracks(response);
-      break;
-
   };
 };
 
@@ -29,12 +25,6 @@ DiscoverStore.all = function () {
 
 var resetTracks = function (tracks) {
   _tracks = tracks;
-
-  DiscoverStore.__emitChange();
-};
-
-var appendTracks = function (tracks) {
-  _tracks.push(tracks);
 
   DiscoverStore.__emitChange();
 };
