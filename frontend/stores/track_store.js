@@ -11,6 +11,7 @@ var TrackStore = new Store(AppDispatcher);
 TrackStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
+  _updatedTrackPathname = null;
 
   switch (actionType) {
 
@@ -141,7 +142,7 @@ var updateTrack = function (response) {
   var username = updatedTrack.user.username;
 
   delete _tracks[username][oldSlug];
-  
+
   _tracks[username][newSlug] = updatedTrack;
   _updatedTrackPathname = "/" + username + "/" + newSlug;
   _showEditModal = false;
