@@ -7,9 +7,11 @@ var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
-var EditTrackImage = require("./edit_track_image");
+var History = require("react-router").History;
 
 var EditTrackModal = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return {
       show: TrackStore.showEditModal(),
@@ -35,6 +37,8 @@ var EditTrackModal = React.createClass({
 
   _onChange: function () {
     this.setState({ show: TrackStore.showEditModal() });
+
+    this._redirectIfSaved();
   },
 
   _disabled: function () {
@@ -64,6 +68,15 @@ var EditTrackModal = React.createClass({
   _handleTitleChange: function () {
     var title = this.refs.title.getValue();
     this.setState({ disabled: false, title: title });
+  },
+
+  _redirectIfSaved: function () {
+    var pathname = TrackStore.getUpdatedTrackPathname();
+    var pushState = this.history.pushState.bind(this, null, pathname);
+
+    if (!pathname) { return; }
+
+    setTimeout(pushState, 300);
   },
 
   update: function () {
@@ -127,7 +140,7 @@ var EditTrackModal = React.createClass({
               <Input type="textarea"
                 label="Description"
                 ref="description"
-                rows="5"
+                rows="4"
                 id="track-description"
                 placeholder="Oops! Your track has no description. Enter something to describe your track."
                 value={ this.state.description }

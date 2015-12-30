@@ -23,8 +23,10 @@ class Api::TracksController < ApplicationController
 
     return not_found if @track.nil?
 
+    @old_slug = @track.slug
+
     if @track.update(track_params)
-      render :show
+      render :updated
     else
       render json: { errors: @track.errors.full_messages }
     end

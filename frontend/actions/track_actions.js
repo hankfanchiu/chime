@@ -46,7 +46,7 @@ var TrackActions = {
     TrackAPIUtils.updateTrack(
       trackId,
       formData,
-      TrackActions.receiveTrack
+      TrackActions.receiveTrackUpdated
     );
   },
 
@@ -76,6 +76,13 @@ var TrackActions = {
   receiveTrackCreated: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.TRACK_CREATED,
+      response: response
+    });
+  },
+
+  receiveTrackUpdated: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.TRACK_UPDATED,
       response: response
     });
   }

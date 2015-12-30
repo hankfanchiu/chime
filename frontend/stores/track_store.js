@@ -4,6 +4,7 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var _showEditModal = false;
+var _updatedTrackPathname = null;
 var _tracks = {};
 var TrackStore = new Store(AppDispatcher);
 
@@ -30,7 +31,11 @@ TrackStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_CREATED:
-      if (!response.errors) { resetTrack(response); }
+      if (!response.errors) { addTrack(response); }
+      break;
+
+    case ActionTypes.TRACK_UPDATED:
+      if (!response.errors) { updateTrack(response); }
       break;
 
     case ActionTypes.USER_RECEIVED:
@@ -50,6 +55,10 @@ TrackStore.__onDispatch = function (payload) {
 
 TrackStore.showEditModal = function () {
   return _showEditModal;
+};
+
+TrackStore.getUpdatedTrackPathname = function () {
+  return _updatedTrackPathname;
 };
 
 TrackStore.all = function () {
@@ -111,6 +120,31 @@ var resetTrack = function (track) {
 
   _tracks[username] = _tracks[username] || {};
   _tracks[username][track.slug] = track;
+
+  TrackStore.__emitChange();
+};
+
+var addTrack = function (response) {
+  var newTrack = response.track;
+  var username = newTrack.user.username;
+
+  _tracks[username] = _tracks[username] || {};
+  _tracks[username][newTrack.slug] = newTrack;
+
+  TrackStore.__emitChange();
+};
+
+var updateTrack = function (response) {
+  var oldSlug = response.old_slug;
+  var updatedTrack = response.track;
+  var newSlug = updatedTrack.slug;
+  var username = updatedTrack.user.username;
+
+  delete _tracks[username][oldSlug];
+  
+  _tracks[username][newSlug] = updatedTrack;
+  _updatedTrackPathname = "/" + username + "/" + newSlug;
+  _showEditModal = false;
 
   TrackStore.__emitChange();
 };
