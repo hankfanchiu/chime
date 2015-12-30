@@ -67,11 +67,11 @@ var UserPage = React.createClass({
               onSelect={ this._handleSelect }>
 
               <NavItem eventKey={ tracks }>
-                <h4>Tracks</h4>
+                <h4 className="user-page-nav">Tracks</h4>
               </NavItem>
 
               <NavItem eventKey={ playlists }>
-                <h4>Playlists</h4>
+                <h4 className="user-page-nav">Playlists</h4>
               </NavItem>
             </Nav>
 
