@@ -4,18 +4,8 @@ var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../../actions/player_actions");
-var History = require("react-router").History;
 
 var GiantPlayer = React.createClass({
-  mixins: [History],
-
-  goToUser: function () {
-    var username = this.props.track.user.username;
-    var pathname = "/" + username;
-
-    this.history.pushState(null, pathname);
-  },
-
   playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
@@ -44,7 +34,7 @@ var GiantPlayer = React.createClass({
 
           <section className="giant-track-heading">
             <h3 className="giant-username">
-              <a onClick={ this.goToUser }>
+              <a onClick={ this.props.goToUser }>
                 { track.user.username }
               </a>
             </h3>

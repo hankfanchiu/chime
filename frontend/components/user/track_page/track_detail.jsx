@@ -41,13 +41,15 @@ var TrackDetail = React.createClass({
       <Row className="track-page-detail">
         <Col xs={ 2 } sm={ 2 } md={ 2 }>
           <Image src={ user.avatar_square } thumbnail />
-
-          <section className="username">
-            <h5 className="username">{ user.username }</h5>
-          </section>
         </Col>
 
         <Col xs={ 6 } sm={ 6 } md={ 6 } className="track-description">
+          <h5 className="username">
+            <a className="username" onClick={ this.props.goToUser }>
+              { user.username }
+            </a>
+          </h5>
+
           <p className="track-description">
             { this._trackDescription() }
           </p>

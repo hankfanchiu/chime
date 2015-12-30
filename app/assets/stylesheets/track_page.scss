@@ -98,14 +98,10 @@ section.track-buttons {
 }
 
 div.track-page-detail {
-  margin-top: 30px;
-
-  section.username {
-    margin-top: 10px;
-  }
+  padding-top: 30px;
 
   div.track-description {
-    min-height: 200px;
-    border-right: 1px solid #eee;
+    min-height: 180px;
+    border-right: 1px solid #ccc;
   }
 }
