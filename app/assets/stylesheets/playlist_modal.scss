@@ -2,6 +2,10 @@ div.playlist-modal {
   max-width: 400px;
 }
 
+textarea#playlist-description {
+  resize: none;
+}
+
 div.playlist-form-track {
   position: relative;
   display: block;

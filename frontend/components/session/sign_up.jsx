@@ -45,10 +45,6 @@ var SignUp = React.createClass({
     this.signUp();
   },
 
-  _label: function (label) {
-    return <span className="required-label">{ label }</span>;
-  },
-
   reset: function () {
     this.setState(this.getInitialState());
     SessionActions.closeSignUp();
@@ -82,18 +78,18 @@ var SignUp = React.createClass({
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
             <Input type="text"
-              label={ this._label("Username") }
+              label="Username"
               placeholder="Identify your unique self"
               valueLink={ this.linkState("username") } />
 
             <Input type="password"
-              label={ this._label("Password") }
+              label="Password"
               placeholder="Enter a password"
               help="Use at least 6 characters."
               valueLink={ this.linkState("password") } />
 
             <Input type="email"
-              label={ this._label("Email Address") }
+              label="Email Address"
               placeholder="Enter your email address"
               valueLink={ this.linkState("email") } />
 

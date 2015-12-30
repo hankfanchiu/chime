@@ -40,10 +40,6 @@ var Login = React.createClass({
     this.login();
   },
 
-  _label: function (label) {
-    return <span className="required-label">{ label }</span>;
-  },
-
   loginDemo: function () {
     var demoData = { username: "demo_user", password: "password" };
 
@@ -81,12 +77,12 @@ var Login = React.createClass({
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
             <Input type="text"
-              label={ this._label("Username") }
+              label="Username"
               placeholder="Enter your username"
               valueLink={ this.linkState("username") } />
 
             <Input type="password"
-              label={ this._label("Password") }
+              label="Password"
               placeholder="Enter your password"
               valueLink={ this.linkState("password") } />
 

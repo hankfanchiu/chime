@@ -75,6 +75,8 @@ var PlaylistForm = React.createClass({
 
           <Input type="textarea"
             label="Description"
+            id="playlist-description"
+            rows="5"
             placeholder="Describe your new playlist"
             valueLink={ this.linkState("description") } />
 
