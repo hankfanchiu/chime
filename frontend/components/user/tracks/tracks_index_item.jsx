@@ -61,19 +61,23 @@ var TracksIndexItem = React.createClass({
             <Image src={ track.img_square } thumbnail />
           </Col>
 
-          <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <section className="track-info">
+          <Col xs={ 9 } sm={ 9 } md={ 9 } className="track-info">
+            <section className="track-heading">
               <h5 className="username">
                 <a className="username" onClick={ this.goToUser }>
                   { track.user.username }
                 </a>
               </h5>
 
-              <h4 className="title">
+              <h3 className="title">
                 <a className="title" onClick={ this.goToTrack }>
                   { track.title }
                 </a>
-              </h4>
+              </h3>
+
+              <p className="time">
+                Added { track.time_ago }
+              </p>
             </section>
 
             <section className="buttons">

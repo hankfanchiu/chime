@@ -17,6 +17,7 @@
 #
 
 class Track < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
   extend FriendlyId
 
   INVALID_TRACK_TITLES = %w(tracks playlists)
@@ -78,6 +79,10 @@ class Track < ActiveRecord::Base
 
   def img_square
     self.img.url(:square)
+  end
+
+  def time_ago
+    time_ago_in_words(self.created_at) + " ago"
   end
 
   private

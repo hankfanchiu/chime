@@ -1,4 +1,4 @@
-json.extract! track, :id, :title, :slug, :track_url, :description
+json.extract! track, :id, :title, :slug, :track_url, :description, :time_ago
 
 json.img_hero      track.img_hero
 json.img_thumb     track.img_thumb

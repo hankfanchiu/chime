@@ -12,6 +12,7 @@
 #
 
 class Playlist < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
   extend FriendlyId
 
   belongs_to :user
@@ -41,6 +42,10 @@ class Playlist < ActiveRecord::Base
 
   def tracks_ordered
     self.tracks.order("playlistings.created_at")
+  end
+
+  def time_ago
+    time_ago_in_words(self.created_at) + " ago"
   end
 
   private

@@ -61,24 +61,12 @@ div.tracks-index {
     }
   }
 
-  section.track-info {
+  div.track-info {
+    text-align: justify;
+  }
+
+  section.track-heading {
     margin-bottom: 1em;
-  }
-
-  button.track-list-item {
-    padding: 8px;
-  }
-
-  figure.track-image {
-    display: inline-block;
-  }
-
-  section.track-index {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  section.track-info {
     display: inline-block;
   }
 

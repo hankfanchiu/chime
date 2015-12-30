@@ -106,10 +106,14 @@ span.grey-helper-text {
   color: #aaa
 }
 
-
-h5.username,
 span.username-large {
   font-size: 16px;
+  font-weight: normal;
+  color: #aaa
+}
+
+h5.username {
+  margin: 5px 0;
   font-weight: normal;
   color: #aaa
 }
@@ -120,15 +124,23 @@ span.title {
   color: #555;
 }
 
-h4.title,
 span.title-large {
   font-size: 20px;
+  color: #555;
+}
+
+h3.title {
+  margin-top: 5px;
   color: #555;
 }
 
 header.title-thin,
 span.title-thin {
   font-weight: normal
+}
+
+p.time {
+  font-size: 10px;
 }
 
 a.username,
