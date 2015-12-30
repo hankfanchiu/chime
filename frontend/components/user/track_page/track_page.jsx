@@ -61,7 +61,7 @@ var TrackPage = React.createClass({
 
         <TrackDetail track={ this.state.track } />
 
-        <PlaylistModal track={ this.state.trackToAdd }
+        <PlaylistModal track={ this.state.track }
           clientUsername={ this.state.clientUsername } />
       </Grid>
     );

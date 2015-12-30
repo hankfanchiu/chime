@@ -84,6 +84,10 @@ var Upload = React.createClass({
     if (this.state.progress === 100) { return "success"; }
   },
 
+  titleLabel: function () {
+    return <span className="required-label">Title</span>;
+  },
+
   renderAudioUpload: function () {
     if (!this.state.progress) { return <UploadAudio />; }
 
@@ -119,7 +123,7 @@ var Upload = React.createClass({
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="text"
-                label="Title"
+                label={ this.titleLabel() }
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
 

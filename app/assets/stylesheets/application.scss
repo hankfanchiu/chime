@@ -169,3 +169,10 @@ a.title:active {
   display: block;
   clear: both;
 }
+
+.required-label:after {
+  content: '*';
+  color: red;
+  display: inline-block;
+  margin-left: 2px;
+}
