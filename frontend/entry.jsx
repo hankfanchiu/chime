@@ -8,8 +8,8 @@ var createBrowserHistory = require("history/lib/createBrowserHistory");
 var history = createBrowserHistory();
 
 var App = require("./components/app");
-var Home = require("./components/home");
-var Discover = require("./components/discover/discover");
+var HomePage = require("./components/home_page");
+var DiscoverPage = require("./components/discover_page/discover_page");
 var Logout = require("./components/session/logout");
 var UserPage = require("./components/user_page/user_page");
 var TracksIndex = require("./components/user_page/tracks_index");
@@ -20,9 +20,9 @@ var PlaylistPage = require("./components/playlist_page/playlist_page");
 var router = (
   <Router history={ history }>
     <Route name="app" path="/" component={ App }>
-      <IndexRoute component={ Home } />
+      <IndexRoute component={ HomePage } />
 
-      <Route name="discover" path="discover" component={ Discover } />
+      <Route name="discover" path="discover" component={ DiscoverPage } />
       <Route name="logout" path="logout" component={ Logout } />
 
       <Route name="user" path=":username" component={ UserPage }>
