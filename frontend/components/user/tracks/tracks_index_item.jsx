@@ -62,7 +62,7 @@ var TracksIndexItem = React.createClass({
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <section className="playlist-info">
+            <section className="track-info">
               <h5 className="username">
                 <a className="username" onClick={ this.goToUser }>
                   { track.user.username }
@@ -76,8 +76,10 @@ var TracksIndexItem = React.createClass({
               </h4>
             </section>
 
-            <AddToQueue addToQueue={ this.addToQueue } />
-            <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
+            <section className="buttons">
+              <AddToQueue addToQueue={ this.addToQueue } />
+              <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
+            </section>
           </Col>
         </Row>
       </ListGroupItem>

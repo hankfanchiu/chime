@@ -8,7 +8,7 @@ div.tracks-index {
     border: 0px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   div.track-image {
@@ -80,5 +80,18 @@ div.tracks-index {
 
   section.track-info {
     display: inline-block;
+  }
+
+  section.buttons {
+    span.add-to-queue {
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 10px;
+    }
+
+    span.add-to-playlist {
+      display: inline-block;
+      font-size: 10px;
+    }
   }
 }
