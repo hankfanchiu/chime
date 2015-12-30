@@ -1,16 +1,84 @@
-div.tracks-index-item {
-  padding: 10px 0 10px 0;
+div.tracks-index {
 
-  div.image {
-    float: left;
+  div.track-index-item {
+    padding-bottom: 15px;
   }
 
-  img {
-    width: 120px;
+  span.track-index-item {
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0px;
+    margin-top: 10px;
   }
 
-  div.detail {
-    float: left;
-    padding: 10px;
+  div.track-image {
+    position: relative;
+  }
+
+  span.play-button {
+    position: absolute;
+    display: table;
+    left: 50%;
+    top: 37%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 0 0 2px 3px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #000;
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .glyphicon.play-icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 25px;
+    color: #bbb;
+  }
+
+  span.play-button:hover {
+    background: #111;
+
+    .glyphicon.play-icon {
+      color: #ddd;
+    }
+  }
+
+  span.play-button:active {
+    background: #000;
+
+    .glyphicon.play-icon {
+      color: #bbb;
+    }
+  }
+
+  div.track-image:hover {
+    span.btn {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+
+  section.track-info {
+    margin-bottom: 1em;
+  }
+
+  button.track-list-item {
+    padding: 8px;
+  }
+
+  figure.track-image {
+    display: inline-block;
+  }
+
+  section.track-index {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  section.track-info {
+    display: inline-block;
   }
 }

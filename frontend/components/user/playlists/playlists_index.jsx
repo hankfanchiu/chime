@@ -62,7 +62,7 @@ var PlaylistsIndex = React.createClass({
     if (playlistCount === 0) { return this.renderNoPlaylists(); }
 
     return (
-      <ListGroup className="playlist-index">
+      <ListGroup className="playlists-index">
         { this.renderPlaylistsIndexItems() }
       </ListGroup>
     );

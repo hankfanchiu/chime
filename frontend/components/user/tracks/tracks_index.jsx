@@ -73,7 +73,7 @@ var TracksIndex = React.createClass({
     if (trackCount === 0) { return this.renderNoTracks(); }
 
     return (
-      <ListGroup>
+      <ListGroup className="tracks-index">
         { this.renderTrackIndexItems() }
 
         <PlaylistModal track={ this.state.trackToAdd }

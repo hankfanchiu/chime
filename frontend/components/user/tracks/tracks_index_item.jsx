@@ -2,7 +2,8 @@ var React = require("react");
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Thumbnail = require("react-bootstrap").Thumbnail;
+var Image = require("react-bootstrap").Image;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var SessionActions = require("../../../actions/session_actions");
 var PlayerActions = require("../../../actions/player_actions");
 var PlaylistActions = require("../../../actions/playlist_actions");
@@ -50,27 +51,33 @@ var TracksIndexItem = React.createClass({
     var track = this.props.track;
 
     return (
-      <ListGroupItem>
-        <Row>
-          <Col xs={ 3 } sm={ 3 } md={ 3 }>
-            <Thumbnail src={ track.img_thumb }
-              onClick={ this.playTrack } />
+      <ListGroupItem className="track-index-item">
+        <Row className="track-index-item">
+          <Col xs={ 3 } sm={ 3 } md={ 3 } className="track-image">
+            <span className="btn play-button" onClick={ this.playTrack }>
+              <Glyphicon glyph="play" className="play-icon"/>
+            </span>
+
+            <Image src={ track.img_square } thumbnail />
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <div className="detail">
-              <p className="username">
-                <a onClick={ this.goToUser }>{ track.user.username }</a>
-              </p>
+            <section className="playlist-info">
+              <h5 className="username">
+                <a className="username" onClick={ this.goToUser }>
+                  { track.user.username }
+                </a>
+              </h5>
 
-              <p className="title">
-                <a onClick={ this.goToTrack }>{ track.title }</a>
-              </p>
+              <h4 className="title">
+                <a className="title" onClick={ this.goToTrack }>
+                  { track.title }
+                </a>
+              </h4>
+            </section>
 
-              <AddToQueue addToQueue={ this.addToQueue } />
-              <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
-
-            </div>
+            <AddToQueue addToQueue={ this.addToQueue } />
+            <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
           </Col>
         </Row>
       </ListGroupItem>
