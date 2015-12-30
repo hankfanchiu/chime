@@ -18,6 +18,18 @@ var TrackActions = {
     });
   },
 
+  showDeleteModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_DELETE_TRACK_MODAL
+    });
+  },
+
+  closeDeleteModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_DELETE_TRACK_MODAL
+    });
+  },
+
   // Request actions
 
   fetchTracks: function (username) {
@@ -53,7 +65,7 @@ var TrackActions = {
   deleteTrack: function (trackId) {
     TrackAPIUtils.deleteTrack(
       trackId,
-      TrackActions.receiveTrack
+      TrackActions.receiveTrackDeleted
     );
   },
 
@@ -83,6 +95,13 @@ var TrackActions = {
   receiveTrackUpdated: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.TRACK_UPDATED,
+      response: response
+    });
+  },
+
+  receiveTrackDeleted: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.TRACK_DELETED,
       response: response
     });
   }

@@ -88,7 +88,9 @@ var setResponseStatus = function (response) {
   UploadStore.__emitChange();
 };
 
-var setTrackPathname = function (track) {
+var setTrackPathname = function (response) {
+  var track = response.track;
+
   _showModal = false;
   _publicUrl = null;
   _progress = 0;

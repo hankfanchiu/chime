@@ -12,7 +12,7 @@ class Api::TracksController < ApplicationController
     @track = current_user.tracks.new(track_params)
 
     if @track.save
-      render :show
+      render :created
     else
       render json: { errors: @track.errors.full_messages }
     end
@@ -47,7 +47,7 @@ class Api::TracksController < ApplicationController
     return not_found if @track.nil?
 
     if @track.destroy
-      render json: { success: ["Track deleted"] }
+      render :destroyed
     else
       render json: { errors: @track.errors.full_messages }
     end

@@ -5,13 +5,20 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var _showEditModal = false;
 var _updatedTrackPathname = null;
+
+var _showDeleteModal = false;
+var _trackDeleted = false;
+
 var _tracks = {};
+
 var TrackStore = new Store(AppDispatcher);
 
 TrackStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
+
   _updatedTrackPathname = null;
+  _trackDeleted = false;
 
   switch (actionType) {
 
@@ -21,6 +28,14 @@ TrackStore.__onDispatch = function (payload) {
 
     case ActionTypes.CLOSE_EDIT_TRACK_MODAL:
       setShowEditModal(false);
+      break;
+
+    case ActionTypes.SHOW_DELETE_TRACK_MODAL:
+      setShowDeleteModal(true);
+      break;
+
+    case ActionTypes.CLOSE_DELETE_TRACK_MODAL:
+      setShowDeleteModal(false);
       break;
 
     case ActionTypes.TRACKS_RECEIVED:
@@ -37,6 +52,10 @@ TrackStore.__onDispatch = function (payload) {
 
     case ActionTypes.TRACK_UPDATED:
       if (!response.errors) { updateTrack(response); }
+      break;
+
+    case ActionTypes.TRACK_DELETED:
+      if (!response.errors) { deleteTrack(response); }
       break;
 
     case ActionTypes.USER_RECEIVED:
@@ -58,8 +77,16 @@ TrackStore.showEditModal = function () {
   return _showEditModal;
 };
 
+TrackStore.showDeleteModal = function () {
+  return _showDeleteModal;
+};
+
 TrackStore.getUpdatedTrackPathname = function () {
   return _updatedTrackPathname;
+};
+
+TrackStore.getTrackDeleted = function () {
+  return _trackDeleted;
 };
 
 TrackStore.all = function () {
@@ -85,6 +112,12 @@ TrackStore.find = function (username, slug) {
 
 var setShowEditModal = function (boolean) {
   _showEditModal = boolean;
+
+  TrackStore.__emitChange();
+};
+
+var setShowDeleteModal = function (boolean) {
+  _showDeleteModal = boolean;
 
   TrackStore.__emitChange();
 };
@@ -146,6 +179,19 @@ var updateTrack = function (response) {
   _tracks[username][newSlug] = updatedTrack;
   _updatedTrackPathname = "/" + username + "/" + newSlug;
   _showEditModal = false;
+
+  TrackStore.__emitChange();
+};
+
+var deleteTrack = function (response) {
+  var deletedTrack = response.track;
+  var slug = deletedTrack.slug;
+  var username = deletedTrack.username;
+
+  delete _tracks[username][slug];
+
+  _trackDeleted = true;
+  _showDeleteModal = false;
 
   TrackStore.__emitChange();
 };

@@ -40,10 +40,13 @@ module.exports = {
     // Track
     SHOW_EDIT_TRACK_MODAL: null,
     CLOSE_EDIT_TRACK_MODAL: null,
+    SHOW_DELETE_TRACK_MODAL: null,
+    CLOSE_DELETE_TRACK_MODAL: null,
     TRACKS_RECEIVED: null,
     TRACK_RECEIVED: null,
     TRACK_CREATED: null,
     TRACK_UPDATED: null,
+    TRACK_DELETED: null,
 
     // Playlist
     SHOW_PLAYLIST_MODAL: null,

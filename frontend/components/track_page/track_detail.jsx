@@ -35,10 +35,6 @@ var TrackDetail = React.createClass({
     PlayerActions.addTrackToQueue(this.props.track);
   },
 
-  _deleteTrack: function () {
-    return;
-  },
-
   render: function () {
     var user = this.props.track.user;
     var deleteButton = <DeleteButton delete={ this._deleteTrack } />;
