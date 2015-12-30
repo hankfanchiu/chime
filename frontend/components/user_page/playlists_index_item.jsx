@@ -12,6 +12,16 @@ var History = require("react-router").History;
 var PlaylistsIndexItem = React.createClass({
   mixins: [History],
 
+  _imageSrc: function () {
+    var firstTrack = this.props.playlist.tracks[0];
+
+    if (firstTrack) {
+      return firstTrack.img_thumb;
+    } else {
+      return "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg";
+    }
+  },
+
   goToPlaylist: function () {
     var username = this.props.username;
     var slug = this.props.playlist.slug;
@@ -45,7 +55,6 @@ var PlaylistsIndexItem = React.createClass({
 
   render: function () {
     var playlist = this.props.playlist;
-    var firstTrack = playlist.tracks[0];
 
     return (
       <ListGroupItem className="playlist-index-item">
@@ -55,7 +64,7 @@ var PlaylistsIndexItem = React.createClass({
               <Glyphicon glyph="play" className="play-icon"/>
             </span>
 
-            <Image src={ firstTrack.img_square } thumbnail />
+            <Image src={ this._imageSrc() } thumbnail />
           </Col>
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>

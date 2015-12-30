@@ -30,7 +30,6 @@ class Playlist < ActiveRecord::Base
     uniqueness: { scope: :user, case_sensitive: false }
 
   validates_presence_of :user
-  validates_presence_of :tracks
 
   def self.find_by_username_and_slug(username, slug)
     user = User.find_by(username: username)
