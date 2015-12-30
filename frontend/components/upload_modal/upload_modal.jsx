@@ -65,19 +65,14 @@ var Upload = React.createClass({
     this.setState({ img: img });
   },
 
-  _titleLabel: function () {
-    return <span className="required-label">Title</span>;
-    },
-
   audioUpload: function () {
     if (!this.state.progress) { return <UploadAudio />; }
 
     var isComplete = (this.state.progress === 100);
-    var status = (isComplete ? "Audio uploaded!" : "Uploading audio...");
 
     return (
       <div>
-        { status }
+        { isComplete ? "Audio uploaded!" : "Uploading audio..." }
 
         <ProgressBar now={ this.state.progress } active
           bsStyle={ this._progressState() } />
@@ -88,6 +83,10 @@ var Upload = React.createClass({
   reset: function () {
     UploadActions.resetUploadStore();
     this.setState(this.getInitialState());
+  },
+
+  titleLabel: function () {
+    return <span className="required-label">Title</span>;
   },
 
   save: function () {
@@ -108,7 +107,7 @@ var Upload = React.createClass({
     return (
       <Modal backdrop="static"
         dialogClassName="upload-modal"
-        onHide={ this._reset }
+        onHide={ this.reset }
         show={ this.state.show }>
 
         <Modal.Header closeButton>
@@ -123,7 +122,7 @@ var Upload = React.createClass({
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="text"
-                label={ this._titleLabel() }
+                label={ this.titleLabel() }
                 placeholder="Name your track"
                 valueLink={ this.linkState("title") } />
 

@@ -69,12 +69,12 @@ var EditTrackModal = React.createClass({
     this.setState({ disabled: false, title: title });
   },
 
-  _titleLabel: function () {
-    return <span className="required-label">Title</span>;
-  },
-
   close: function () {
     TrackActions.closeEditModal();
+  },
+
+  titleLabel: function () {
+    return <span className="required-label">Title</span>;
   },
 
   update: function () {
@@ -118,7 +118,7 @@ var EditTrackModal = React.createClass({
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="text"
-                label={ this._titleLabel() }
+                label={ this.titleLabel() }
                 ref="title"
                 placeholder="Change your track title"
                 help="Changing your track title will also change its URL!"

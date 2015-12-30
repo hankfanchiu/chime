@@ -41,10 +41,6 @@ var Settings = React.createClass({
     return (this.state.email === "") || (this.state.disabled);
   },
 
-  _emailLabel: function () {
-    return <span className="required-label">Email Address</span>;
-  },
-
   _handleFile: function () {
     var reader = new FileReader();
     var img = this.refs.file.files[0];
@@ -68,9 +64,13 @@ var Settings = React.createClass({
     var description = this.refs.description.getValue();
     this.setState({ disabled: false, description: description });
   },
-  
+
   close: function () {
     UserActions.closeSettings();
+  },
+
+  emailLabel: function () {
+    return <span className="required-label">Email Address</span>;
   },
 
   updateUser: function () {
@@ -113,7 +113,7 @@ var Settings = React.createClass({
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="email"
-                label={ this._emailLabel() }
+                label={ this.emailLabel() }
                 ref="email"
                 value={ this.state.email }
                 placeholder="Update your email address"

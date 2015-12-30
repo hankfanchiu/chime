@@ -45,10 +45,6 @@ var PlaylistForm = React.createClass({
     this.createPlaylist();
   },
 
-  _titleLabel: function () {
-    return <span className="required-label">Title</span>;
-  },
-
   createPlaylist: function () {
     var playlistData = {
       title: this.state.title,
@@ -64,12 +60,16 @@ var PlaylistForm = React.createClass({
     this.props.close();
   },
 
+  titleLabel: function () {
+    return <span className="required-label">Title</span>;
+  },
+
   render: function () {
     return (
       <form onSubmit={ this._handleSubmit }>
         <Modal.Body>
           <Input type="text"
-            label={ this._titleLabel() }
+            label={ this.titleLabel() }
             placeholder="Name your new playlist"
             valueLink={ this.linkState("title") } />
 
