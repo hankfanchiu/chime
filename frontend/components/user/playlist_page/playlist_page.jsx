@@ -1,7 +1,7 @@
 var React = require("react");
 var PlaylistStore = require("../../../stores/playlist_store");
 var PlaylistActions = require("../../../actions/playlist_actions");
-var GiantPlayer = require("../giant_player/giant_player");
+
 var PlaylistDetail = require("./playlist_detail");
 
 var PlaylistPage = React.createClass({
@@ -55,7 +55,7 @@ var PlaylistPage = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <GiantPlayer track={ this.state.track } />
+
 
           <PlaylistDetail playlist={ this.state.playlist }
             playTrack={ this._playTrack } />

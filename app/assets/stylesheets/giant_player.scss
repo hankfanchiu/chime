@@ -49,7 +49,6 @@ figure.play-button {
 section.giant-track-heading {
   display: inline-block;
   margin-left: 30px;
-  width: 600px;
 }
 
 h3.giant-username {
@@ -84,4 +83,17 @@ h5.giant-track-time {
   margin: 10px 0;
   color: #ddd;
   font-weight: normal;
+}
+
+section.giant-player-buttons {
+  margin: 10px 0;
+
+  span.add-to-queue {
+    margin-right: 5px;
+    font-size: 10px;
+  }
+
+  span.add-to-playlist {
+    font-size: 10px;
+  }
 }
