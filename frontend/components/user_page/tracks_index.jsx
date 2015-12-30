@@ -4,6 +4,8 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var SessionStore = require("../../stores/session_store");
 var TrackStore = require("../../stores/track_store");
 var PlaylistModal = require("../playlist_modal/playlist_modal");
+var EditTrackModal = require("./edit_track_modal");
+var DeleteTrackModal = require("./delete_track_modal");
 var TracksIndexItem = require("./tracks_index_item");
 
 var TracksIndex = React.createClass({
@@ -39,6 +41,14 @@ var TracksIndex = React.createClass({
     this.setState({ trackToAdd: track });
   },
 
+  _setTrackToEdit: function (track) {
+    this.setState({ trackToEdit: track });
+  },
+
+  _setTrackToDelete: function (track) {
+    this.setState({ trackToDelete: track });
+  },
+
   renderNoTracks: function () {
     return (
       <ListGroup>
@@ -58,6 +68,8 @@ var TracksIndex = React.createClass({
           track={ track }
           username={ this.props.params.username }
           setTrackToAdd={ this._setTrackToAdd }
+          setTrackToEdit={ this._setTrackToEdit }
+          setTrackToDelete={ this._setTrackToDelete }
           isLoggedIn={ this.state.isLoggedIn } />
       );
 
@@ -78,6 +90,9 @@ var TracksIndex = React.createClass({
 
         <PlaylistModal track={ this.state.trackToAdd }
           clientUsername={ this.state.clientUsername } />
+
+        <EditTrackModal track={ this.state.trackToEdit } />
+        <DeleteTrackModal track={ this.state.trackToDelete } />
       </ListGroup>
     );
   }

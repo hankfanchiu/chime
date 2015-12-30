@@ -174,7 +174,9 @@ var updateTrack = function (response) {
   var newSlug = updatedTrack.slug;
   var username = updatedTrack.user.username;
 
-  delete _tracks[username][oldSlug];
+  if (oldSlug !== newSlug) {
+    delete _tracks[username][oldSlug];
+  }
 
   _tracks[username][newSlug] = updatedTrack;
   _updatedTrackPathname = "/" + username + "/" + newSlug;

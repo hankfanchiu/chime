@@ -76,15 +76,14 @@ div.tracks-index {
   }
 
   section.buttons {
-    span.add-to-queue {
+    span {
       display: inline-block;
-      margin-right: 5px;
       font-size: 10px;
+      margin-right: 5px;
     }
 
-    span.add-to-playlist {
-      display: inline-block;
-      font-size: 10px;
+    span:last-child {
+      margin-right: 0px;
     }
   }
 }
