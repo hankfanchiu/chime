@@ -85,8 +85,7 @@ h5.giant-track-time {
   font-weight: normal;
 }
 
-section.giant-player-buttons {
-  margin: 10px 0;
+section.track-buttons {
 
   span.add-to-queue {
     margin-right: 5px;
@@ -95,5 +94,18 @@ section.giant-player-buttons {
 
   span.add-to-playlist {
     font-size: 10px;
+  }
+}
+
+div.track-page-detail {
+  margin-top: 30px;
+
+  section.username {
+    margin-top: 10px;
+  }
+
+  div.track-description {
+    min-height: 200px;
+    border-right: 1px solid #eee;
   }
 }
