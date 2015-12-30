@@ -113,11 +113,11 @@ var Upload = React.createClass({
 
         <Modal.Body>
           <Row>
-            <Col xs={ 4 } sm={ 4 } md={ 4 }>
+            <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <UploadImage setImg={ this._setImg } />
             </Col>
 
-            <Col xs={ 8 } sm={ 8 } md={ 8 }>
+            <Col xs={ 7 } sm={ 7 } md={ 7 }>
               <Input type="text"
                 label="Title"
                 placeholder="Name your track"
@@ -125,6 +125,8 @@ var Upload = React.createClass({
 
               <Input type="textarea"
                 label="Description"
+                rows="5"
+                id="track-description"
                 placeholder="Describe your track"
                 valueLink={ this.linkState("description") } />
 
