@@ -14,7 +14,11 @@ var PlaylistList = React.createClass({
     PlaylistingActions.deletePlaylisting(ids);
   },
 
-  renderPlaylists: function () {
+  sadMessage: function () {
+    return <p>You have no playlists! Create one to add this track.</p>
+  },
+
+  playlistList: function () {
     var playlistList = [];
     var listItem, playlist;
 
@@ -32,16 +36,17 @@ var PlaylistList = React.createClass({
       playlistList.push(listItem);
     }.bind(this));
 
-    return playlistList
+    return <ListGroup>{ playlistList }</ListGroup>;
   },
 
   render: function () {
+    var playlistCount = Object.keys(this.props.playlists).length;
+    var noPlaylists = (playlistCount === 0);
+
     return (
       <div>
         <Modal.Body>
-          <ListGroup>
-            { this.renderPlaylists() }
-          </ListGroup>
+          { noPlaylists ? this.sadMessage() : this.playlistList() }
         </Modal.Body>
 
         <Modal.Footer>

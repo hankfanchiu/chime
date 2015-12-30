@@ -39,7 +39,9 @@ var PlaylistsIndexItem = React.createClass({
   },
 
   tracksList: function () {
-    var tracks = this.props.playlist.tracks;
+    var playlist = this.props.playlist;
+    var tracks = playlist.tracks;
+
     var tracksList = tracks.map(function (track, idx) {
       return (
         <PlaylistTrack key={ idx }

@@ -13,7 +13,6 @@ var PlaylistListItem = React.createClass({
 
   _disabled: function () {
     var tracks = this.props.playlist.tracks;
-
     return (tracks.length === 1);
   },
 
@@ -28,15 +27,6 @@ var PlaylistListItem = React.createClass({
     return false;
   },
 
-  goToPlaylist: function () {
-    var username = SessionStore.getClientUsername();
-    var slug = this.props.playlist.slug;
-    var pathname = "/" + username + "/playlists/" + slug;
-
-    this.props.close();
-    this.history.pushState(null, pathname);
-  },
-
   add: function () {
     var ids = {
       playlist_id: this.props.playlist.id,
@@ -44,15 +34,6 @@ var PlaylistListItem = React.createClass({
     };
 
     this.props.addToPlaylist(ids);
-  },
-
-  remove: function () {
-    var ids = {
-      playlist_id: this.props.playlist.id,
-      track_id: this.props.track.id
-    };
-
-    this.props.removeFromPlaylist(ids);
   },
 
   addButton: function () {
@@ -65,6 +46,34 @@ var PlaylistListItem = React.createClass({
     );
   },
 
+  defaultImage: function () {
+    var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg";
+
+    return (
+      <div className="playlist-thumbnail">
+        <Image src={ src } thumbnail />
+      </div>
+    );
+  },
+
+  goToPlaylist: function () {
+    var username = SessionStore.getClientUsername();
+    var slug = this.props.playlist.slug;
+    var pathname = "/" + username + "/playlists/" + slug;
+
+    this.props.close();
+    this.history.pushState(null, pathname);
+  },
+
+  remove: function () {
+    var ids = {
+      playlist_id: this.props.playlist.id,
+      track_id: this.props.track.id
+    };
+
+    this.props.removeFromPlaylist(ids);
+  },
+
   removeButton: function () {
     return (
       <Button bsSize="small"
@@ -75,16 +84,24 @@ var PlaylistListItem = React.createClass({
     );
   },
 
+  trackImage: function () {
+    var firstTrack = this.props.playlist.tracks[0];
+
+    return (
+      <div className="playlist-thumbnail">
+        <Image src={ firstTrack.img_thumb } thumbnail />
+      </div>
+    );
+  },
+
   render: function () {
     var playlist = this.props.playlist;
-    var firstTrack = playlist.tracks[0];
+    var noTracks = (playlist.tracks.length === 0);
 
     return (
       <ListGroupItem>
         <div className="playlist-list-item">
-          <div className="playlist-thumbnail">
-            <Image src={ firstTrack.img_thumb } thumbnail />
-          </div>
+          { noTracks ? this.defaultImage() : this.trackImage() }
 
           <section className="playlist-info">
             <header>
