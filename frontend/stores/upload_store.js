@@ -14,6 +14,8 @@ UploadStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
+  _newTrackPathname = null;
+
   switch (actionType) {
 
     case ActionTypes.SHOW_UPLOAD_MODAL:
