@@ -33,11 +33,13 @@ var TrackAPIUtils = {
     });
   },
 
-  updateTrack: function (trackId, trackData, callback) {
+  updateTrack: function (trackId, formData, callback) {
     $.ajax({
       url: "/api/tracks/" + trackId,
       type: "PATCH",
-      data: { track: trackData },
+      data: formData,
+      processData: false,
+      contentType: false,
       success: callback
     });
   },

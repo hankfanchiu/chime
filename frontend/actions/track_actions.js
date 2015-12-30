@@ -4,6 +4,20 @@ var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
 var TrackActions = {
+  // UI actions
+
+  showEditModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_EDIT_TRACK_MODAL
+    });
+  },
+
+  closeEditModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_EDIT_TRACK_MODAL
+    });
+  },
+
   // Request actions
 
   fetchTracks: function (username) {
@@ -28,10 +42,10 @@ var TrackActions = {
     );
   },
 
-  updateTrack: function (trackId, trackData) {
+  updateTrack: function (trackId, formData) {
     TrackAPIUtils.updateTrack(
       trackId,
-      trackData,
+      formData,
       TrackActions.receiveTrack
     );
   },

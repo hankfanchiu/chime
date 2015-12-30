@@ -5,6 +5,7 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var SessionActions = require("../../actions/session_actions");
 var PlayerActions = require("../../actions/player_actions");
+var TrackActions = require("../../actions/track_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
@@ -38,14 +39,9 @@ var TrackDetail = React.createClass({
     return;
   },
 
-  _editTrack: function () {
-    return;
-  },
-
   render: function () {
     var user = this.props.track.user;
     var deleteButton = <DeleteButton delete={ this._deleteTrack } />;
-    var editButton = <EditButton edit={ this._editTrack } />;
 
     if (!user) { return <Row />; }
 
@@ -72,7 +68,7 @@ var TrackDetail = React.createClass({
             <AddToQueue addToQueue={ this._addToQueue } />
             <AddToPlaylist addToPlaylist={ this._addToPlaylist } />
 
-            { this.props.isLoggedIn ? editButton : "" }
+            { this.props.isLoggedIn ? <EditButton /> : "" }
             { this.props.isLoggedIn ? deleteButton : "" }
           </section>
         </Col>

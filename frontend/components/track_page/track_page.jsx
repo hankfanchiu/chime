@@ -7,7 +7,8 @@ var TrackActions = require("../../actions/track_actions");
 var PlayerActions = require("../../actions/player_actions");
 var GiantPlayer = require("./giant_player");
 var TrackDetail = require("./track_detail");
-var PlaylistModal = require('../playlist_modal/playlist_modal')
+var PlaylistModal = require("../playlist_modal/playlist_modal");
+var EditTrackModal = require("../edit_track_modal/edit_track_modal");
 
 var TrackPage = React.createClass({
   getInitialState: function () {
@@ -74,6 +75,8 @@ var TrackPage = React.createClass({
 
         <PlaylistModal track={ this.state.track }
           clientUsername={ this.state.clientUsername } />
+
+        <EditTrackModal track={ this.state.track } />
       </Grid>
     );
   }

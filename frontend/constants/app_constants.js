@@ -38,6 +38,8 @@ module.exports = {
     USER_RECEIVED: null,
 
     // Track
+    SHOW_EDIT_TRACK_MODAL: null,
+    CLOSE_EDIT_TRACK_MODAL: null,
     TRACKS_RECEIVED: null,
     TRACK_RECEIVED: null,
     TRACK_CREATED: null,

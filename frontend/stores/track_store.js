@@ -3,6 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var AppConstants = require("../constants/app_constants");
 var ActionTypes = AppConstants.ActionTypes;
 
+var _showEditModal = false;
 var _tracks = {};
 var TrackStore = new Store(AppDispatcher);
 
@@ -11,6 +12,14 @@ TrackStore.__onDispatch = function (payload) {
   var response = payload.response;
 
   switch (actionType) {
+
+    case ActionTypes.SHOW_EDIT_TRACK_MODAL:
+      setShowEditModal(true);
+      break;
+
+    case ActionTypes.CLOSE_EDIT_TRACK_MODAL:
+      setShowEditModal(false);
+      break;
 
     case ActionTypes.TRACKS_RECEIVED:
       if (!response.errors) { resetTracks(response); }
@@ -39,6 +48,10 @@ TrackStore.__onDispatch = function (payload) {
   };
 };
 
+TrackStore.showEditModal = function () {
+  return _showEditModal;
+};
+
 TrackStore.all = function () {
   var tracksCopy = jQuery.extend({}, _tracks);
 
@@ -58,6 +71,12 @@ TrackStore.find = function (username, slug) {
   var trackCopy = jQuery.extend({}, track);
 
   return trackCopy;
+};
+
+var setShowEditModal = function (boolean) {
+  _showEditModal = boolean;
+
+  TrackStore.__emitChange();
 };
 
 var resetTracks = function (tracks) {

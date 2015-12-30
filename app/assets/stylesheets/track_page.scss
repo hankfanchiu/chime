@@ -48,6 +48,7 @@ figure.play-button {
 
 section.giant-track-heading {
   display: inline-block;
+  margin-left: 10px;
 }
 
 h3.giant-username {
@@ -67,6 +68,7 @@ h3.giant-username {
 
 h1.giant-title {
   margin-top: 10px;
+  margin-left: 10px;
   color: #eee;
 }
 
@@ -83,13 +85,12 @@ h5.giant-track-time {
 }
 
 section.track-buttons {
-  display: flex;
-  justify-content: space-between;
+  text-align: right;
 
   span {
     display: inline-block;
     font-size: 10px;
-    margin-right: 3px;
+    margin-right: 5px;
   }
 
   span:last-child {

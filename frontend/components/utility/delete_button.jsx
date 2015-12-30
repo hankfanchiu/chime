@@ -6,7 +6,7 @@ var DeleteButton = React.createClass({
     return (
       <span className="btn btn-default delete"
         onClick={ this.props.delete }>
-        <Glyphicon glyph="trash" className="delete-icon"/> Delete
+        <Glyphicon glyph="trash" className="delete-icon"/>
       </span>
     );
   }

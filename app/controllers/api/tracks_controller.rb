@@ -19,8 +19,7 @@ class Api::TracksController < ApplicationController
   end
 
   def update
-    username, slug = params[:username], params[:id]
-    @track = Track.find_by_username_and_slug(username, slug)
+    @track = Track.find_by(id: params[:id])
 
     return not_found if @track.nil?
 
@@ -41,8 +40,7 @@ class Api::TracksController < ApplicationController
   end
 
   def destroy
-    username, slug = params[:username], params[:id]
-    @track = Track.find_by_username_and_slug(username, slug)
+    @track = Track.find_by(id: params[:id])
 
     return not_found if @track.nil?
 
