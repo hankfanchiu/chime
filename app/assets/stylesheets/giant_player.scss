@@ -1,0 +1,80 @@
+div.giant-player {
+  background-image:
+    url("https://s3-us-west-1.amazonaws.com/chime-audio-assets/background.jpg");
+  padding: 30px 20px;
+}
+
+figure.play-button {
+  display: inline-block;
+  vertical-align: 55px;
+  margin: 0;
+
+  span.play-button {
+    display: table;
+    text-align: center;
+    padding: 0 0 2px 3px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background: #000;
+    opacity: 1;
+  }
+
+  .glyphicon.play-icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 35px;
+    color: #bbb;
+  }
+
+  span.play-button:hover {
+    background: #111;
+
+    .glyphicon.play-icon {
+      color: #ddd;
+    }
+  }
+
+  span.play-button:active {
+    background: #000;
+
+    .glyphicon.play-icon {
+      color: #bbb;
+    }
+  }
+}
+
+section.track-heading {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+h3.giant-username {
+  a {
+    color: #999;
+  }
+
+  a:hover {
+    color: #ccc;
+  }
+
+  a:active {
+    color: #0077A9;
+  }
+}
+
+h1.giant-title {
+  color: #eee;
+}
+
+span.giant-title {
+  background: #222;
+  padding: 5px 15px;
+  line-height: 1.5em;
+}
+
+h5.giant-track-time {
+  margin: 20px 0;
+  color: #ddd;
+  font-weight: normal;
+}

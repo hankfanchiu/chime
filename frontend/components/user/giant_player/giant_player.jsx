@@ -1,13 +1,23 @@
 var React = require("react");
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Image = require("react-bootstrap").Image;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../../actions/player_actions");
+var History = require("react-router").History;
 
 var GiantPlayer = React.createClass({
-  _playTrack: function () {
-    PlayerActions.playTrackNow(this.props.track);
+  mixins: [History],
+
+  goToUser: function () {
+    var username = this.props.track.user.username;
+    var pathname = "/" + username;
+
+    this.history.pushState(null, pathname);
   },
 
-  _addTrackToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
+  playTrack: function () {
+    PlayerActions.playTrackNow(this.props.track);
   },
 
   renderUsername: function () {
@@ -21,31 +31,40 @@ var GiantPlayer = React.createClass({
   render: function () {
     var track = this.props.track;
 
+    if (!track.user) { return <Row />; }
+
     return (
-      <div className="row">
-        <div className="tracks tracks-index-item clear">
-          <div className="image" onClick={ this._playTrack }>
-            <img src={ track.img_thumb } />
-          </div>
+      <Row className="giant-player">
+        <Col xs={ 8 } sm={ 8 } md={ 8 }>
+          <figure className="play-button">
+            <span className="btn play-button" onClick={ this.playTrack }>
+              <Glyphicon glyph="play" className="play-icon"/>
+            </span>
+          </figure>
 
-          <div className="detail">
-            <p className="username">
-              { this.renderUsername() }
-            </p>
-
-            <p className="title">
-              { track.title }
-            </p>
-
-            <p>
-              <a onClick={ this._addTrackToQueue }>
-                <i className="fa fa-plus"></i> Add to queue
+          <section className="track-heading">
+            <h3 className="giant-username">
+              <a onClick={ this.goToUser }>
+                { track.user.username }
               </a>
-            </p>
+            </h3>
 
-          </div>
-        </div>
-      </div>
+            <h1 className="giant-title">
+              <span className="giant-title">
+                { track.title }
+              </span>
+            </h1>
+
+            <h5 className="giant-track-time">
+              Added { track.time_ago }
+            </h5>
+          </section>
+        </Col>
+
+        <Col xs={ 4 } sm={ 4 } md={ 4 }>
+          <Image src={ track.img_square } thumbnail />
+        </Col>
+      </Row>
     );
   }
 });

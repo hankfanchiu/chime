@@ -1,8 +1,11 @@
 var React = require("react");
+var Grid = require("react-bootstrap").Grid;
+var SessionStore = require("../../../stores/session_store");
 var TrackStore = require("../../../stores/track_store");
 var TrackActions = require("../../../actions/track_actions");
 var GiantPlayer = require("../giant_player/giant_player");
 var TrackDetail = require("./track_detail");
+var PlaylistModal = require('../../playlist_modal/playlist_modal')
 
 var TrackPage = React.createClass({
   getInitialState: function () {
@@ -13,7 +16,11 @@ var TrackPage = React.createClass({
     var username = this.props.params.username;
     var slug = this.props.params.track;
 
-    return { track: TrackStore.find(username, slug) };
+    return {
+      track: TrackStore.find(username, slug),
+      clientUsername: SessionStore.getClientUsername(),
+      isLoggedIn: SessionStore.isLoggedIn()
+    };
   },
 
   componentWillMount: function () {
@@ -49,11 +56,14 @@ var TrackPage = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
+      <Grid>
         <GiantPlayer track={ this.state.track } />
 
         <TrackDetail track={ this.state.track } />
-      </div>
+
+        <PlaylistModal track={ this.state.trackToAdd }
+          clientUsername={ this.state.clientUsername } />
+      </Grid>
     );
   }
 });
