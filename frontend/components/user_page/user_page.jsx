@@ -4,7 +4,6 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
-
 var SessionStore = require("../../stores/session_store");
 var UserStore = require("../../stores/user_store");
 var UserActions = require("../../actions/user_actions");

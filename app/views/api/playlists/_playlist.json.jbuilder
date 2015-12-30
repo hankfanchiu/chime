@@ -5,9 +5,10 @@ json.tracks playlist.tracks_ordered do |track|
 end
 
 json.user do
-  json.extract! playlist.user, :id, :username
-
-  json.avatar_hero      playlist.user.avatar_hero
-  json.avatar_thumb     playlist.user.avatar_thumb
-  json.avatar_square    playlist.user.avatar_square
+  json.extract! playlist.user,
+    :id,
+    :username,
+    :avatar_hero,
+    :avatar_thumb,
+    :avatar_square
 end

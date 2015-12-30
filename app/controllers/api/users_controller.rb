@@ -25,7 +25,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:tracks).friendly.find(params[:id])
+    @user = User.friendly.find(params[:id])
 
     return not_found if @user.nil?
 
