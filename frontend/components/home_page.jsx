@@ -9,7 +9,7 @@ var Home = React.createClass({
     return (
       <Grid>
         <PageHeader>
-          See what's trending
+          This is the Home Page of Chime
         </PageHeader>
       </Grid>
     );
