@@ -23,6 +23,11 @@ p, span {
   font-family: "Droid Sans", sans-serif;
 }
 
+div.app {
+  position: relative;
+  min-height: 100%;
+}
+
 .navbar-default {
   background-color: #222;
   border: none;
@@ -66,7 +71,7 @@ p, span {
 
 main {
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 380px;
 }
 
 .page-header {
@@ -96,6 +101,8 @@ a:active {
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
   background-color: #222;
   padding: 40px 0 120px 0;
 
