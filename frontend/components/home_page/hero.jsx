@@ -1,5 +1,4 @@
 var React = require("react");
-var Search = require("./search");
 
 var Hero = React.createClass({
   render: function () {
@@ -29,12 +28,10 @@ var Hero = React.createClass({
 
             <div className="hero-button">
               <a className="hero-button" onClick={ this.props.goToDiscover }>
-                Start Listening
+                Start Exploring
               </a>
             </div>
           </section>
-
-          <Search />
         </section>
       </section>
     );

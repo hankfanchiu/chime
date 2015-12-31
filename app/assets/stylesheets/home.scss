@@ -1,5 +1,6 @@
-nav.home-page-nav {
-  background-color: none;
+nav.navbar.home-page-nav {
+  margin-bottom: 0;
+  border-radius: 0;
 }
 
 main.home-page {
@@ -32,7 +33,7 @@ section.mask {
 
 section.hero-message {
   position: relative;
-  top: 25%;
+  top: 30%;
   width: 100%;
   min-width: 970px;
   text-align: center;
@@ -45,20 +46,20 @@ section.hero-message {
   }
 
   h3.hero {
-    margin-top: 10px;
+    margin-top: 15px;
     color: white;
     font-size: 28px;
     line-height: 1.5em;
   }
 
   div.hero-button {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   a.hero-button {
     padding: 12px 25px;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 3px;
     text-decoration: none;
     background: rgba(150,150,150,0.5);
@@ -69,17 +70,112 @@ section.hero-message {
   }
 }
 
-section.hero-search-container {
-  position: absolute;
-  bottom: 0;
-  height: 100px;
-  width: 100%;
-  min-width: 970px;
-  background: rgba(0,0,0,0.8);
+div.home-page-hits {
+  padding: 20px 0 60px 0;
+
+  section.explore-button {
+    text-align: center;
+    margin: 40px 0 20px 0;
+  }
+
+  a.explore-button {
+    padding: 12px 25px;
+    color: white;
+    font-size: 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    background: #222
+  }
+
+  a.explore-button:hover {
+    background: #555;
+  }
 }
 
-section.hero-search-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 30px;
+h2.home-page-heading {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+div.random-track {
+  position: relative;
+
+  span.play-button {
+    position: absolute;
+    display: table;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 0 0 2px 3px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background: #000;
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .glyphicon.play-icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 35px;
+    color: #bbb;
+  }
+
+  span.play-button:hover {
+    background: #111;
+
+    .glyphicon.play-icon {
+      color: #ddd;
+    }
+  }
+
+  span.play-button:active {
+    background: #000;
+
+    .glyphicon.play-icon {
+      color: #bbb;
+    }
+  }
+}
+
+div.random-track:hover {
+  span.btn {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+section.home-page-join {
+  padding: 20px 0 60px 0;
+  background: #333;
+  color: white;
+  text-align: center;
+
+  section.join-button {
+    margin-bottom: 15px;
+  }
+
+  a.join-button {
+    padding: 12px 60px;
+    color: white;
+    font-size: 20px;
+    border-radius: 3px;
+    text-decoration: none;
+    background: #0077A9;
+    letter-spacing: 0.2em;
+  }
+
+  a.join-button:hover {
+    background: #000;
+  }
+}
+
+section.join-message {
+  padding: 20px;
+  margin: 0 30px;
+  font-size: 18px;
+  text-align: center;
 }

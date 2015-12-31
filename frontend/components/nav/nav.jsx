@@ -58,7 +58,7 @@ var Navigation = React.createClass({
 
   render: function () {
     return (
-      <Navbar fixedTop className="solid-nav nav-shadow">
+      <Navbar fixedTop className="nav-shadow">
         <Navbar.Header>
           <Navbar.Brand onClick={ this.goToHome }>
             Chime

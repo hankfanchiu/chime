@@ -1,9 +1,11 @@
 var React = require("react");
 var Grid = require("react-bootstrap").Grid;
-var Row = require("react-bootstrap").Row;
-var Col = require("react-bootstrap").Col;
 var SessionStore = require("../../stores/session_store");
+var DiscoverStore = require("../../stores/discover_store");
+var DiscoverActions = require("../../actions/discover_actions");
 var Hero = require("./hero");
+var RandomTracks = require("./random_tracks");
+var Join = require("./join");
 
 var HomePage = React.createClass({
   getInitialState: function () {
@@ -11,17 +13,23 @@ var HomePage = React.createClass({
   },
 
   getStateFromStore: function () {
-    return { isLoggedIn: SessionStore.isLoggedIn() };
+    return {
+      tracks: DiscoverStore.all(),
+      isLoggedIn: SessionStore.isLoggedIn()
+    };
   },
 
   componentWillMount: function () {
     var isLoggedIn = SessionStore.isLoggedIn();
 
     if (isLoggedIn) { this.goToDiscover(); }
+
+    DiscoverActions.fetchTracks();
   },
 
   componentDidMount: function () {
-    this.listenerToken = SessionStore.addListener(this._onChange);
+    this.sessionListener = SessionStore.addListener(this._onChange);
+    this.discoverListener = DiscoverStore.addListener(this._onChange);
   },
 
   componentWillUpdate: function (nextProps, nextState) {
@@ -29,7 +37,8 @@ var HomePage = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.sessionListener.remove();
+    this.discoverListener.remove();
   },
 
   _onChange: function () {
@@ -45,11 +54,10 @@ var HomePage = React.createClass({
       <main className="home-page">
         <Hero goToDiscover={ this.goToDiscover } />
 
-        <Grid>
-          <Row>
-            text here
-          </Row>
-        </Grid>
+        <RandomTracks tracks={ this.state.tracks }
+          goToDiscover={ this.goToDiscover } />
+
+        <Join />
       </main>
     );
   }

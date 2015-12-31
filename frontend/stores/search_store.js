@@ -17,6 +17,7 @@ SearchStore.__onDispatch = function (payload) {
     case ActionTypes.SEARCH_RESULTS_RECEIVED:
       resetSearchResults(response)
       break;
+
   }
 };
 

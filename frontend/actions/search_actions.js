@@ -8,7 +8,7 @@ var SearchActions = {
 
   fetchResults: function (query) {
     if (query === "") { return; }
-    
+
     SearchAPIUtils.fetchResults(query, SearchActions.receiveResults);
   },
 

@@ -7,7 +7,7 @@ var SearchAPIUtils = {
       type: "GET",
       success: callback
     });
-  },
+  }
 };
 
 module.exports = SearchAPIUtils;
