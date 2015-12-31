@@ -29,23 +29,21 @@ var Badge = React.createClass({
         </div>
 
         <section className="audio-badge-text">
-          <header>
-            <span className="username">
-              <a className="username username-small"
-                onClick={ this._goToUser }>
-                { track.user.username }
-              </a>
-            </span>
-          </header>
+          <span className="username">
+            <a className="username username-small"
+              onClick={ this._goToUser }>
+              { track.user.username }
+            </a>
+          </span>
 
-          <header>
+          <div className="title-container">
             <span className="title">
               <a className="title title-small"
                 onClick={ this._goToTrack }>
                 { track.title }
               </a>
             </span>
-          </header>
+          </div>
         </section>
 
       </div>

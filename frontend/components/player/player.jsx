@@ -1,4 +1,5 @@
 var React = require("react");
+var Navbar = require("react-bootstrap").Navbar;
 var AudioStore = require("../../stores/audio_store");
 var PlayerStore = require("../../stores/player_store");
 var PlayerActions = require("../../actions/player_actions");
@@ -77,10 +78,10 @@ var Player = React.createClass({
     if (PlayerStore.queueIsEmpty()) { return <div />; }
 
     return (
-      <div className="player">
-        <div className="controller">
+      <Navbar fixedBottom id="player" className="nav-shadow">
+        <section className="controller">
 
-          <div className="audio-controller">
+          <figure className="audio-controller">
             <BackwardButton playPreviousTrack={ this._playPreviousTrack }/>
 
             <PlayButton playAudio={ this._playAudio }
@@ -89,9 +90,9 @@ var Player = React.createClass({
               isPaused={ this.state.isPaused } />
 
             <ForwardButton playNextTrack={ this._playNextTrack }/>
-          </div>
+          </figure>
 
-          <div className="audio-timeline">
+          <figure className="audio-timeline">
             <TimeLabel currentTime={ this.state.currentTime } />
 
             <ProgressBar seekTo={ this._seekTo }
@@ -99,14 +100,14 @@ var Player = React.createClass({
               duration={ this.state.duration } />
 
             <DurationLabel duration={ this.state.duration } />
-          </div>
+          </figure>
 
-          <div className="audio-badge">
+          <figure className="audio-badge">
             <Badge track={ this.state.track } />
-          </div>
+          </figure>
 
-        </div>
-      </div>
+        </section>
+      </Navbar>
     );
   }
 });

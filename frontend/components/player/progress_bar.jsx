@@ -17,7 +17,7 @@ var ProgressBar = React.createClass({
     var position = 0;
     if (this.props.currentTime > 0) {
        var percent = this.props.currentTime / this.props.duration;
-       position = percent * 300; // Pixel width of audio progress background
+       position = percent * 350; // Pixel width of audio progress background
     }
 
     return (
