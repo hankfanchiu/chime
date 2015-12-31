@@ -26,19 +26,19 @@ var HomePage = React.createClass({
           </section>
 
           <section className="hero-message">
-            <h1 className="hero">Let's chime in.</h1>
+            <h1 className="hero">Let's chime in</h1>
 
             <h3 className="hero">
-              Listen to tunes by your favorite artists.
-            </h3>
-
-            <h3 className="hero">
+              Listen to tunes by your favorite artists. <br/>
               Share your own and be discovered.
             </h3>
 
-            <span className="hero-button" onClick={ this.goToDiscover }>
-              Get Started
-            </span>
+            <div className="hero-button">
+              <a className="hero-button"
+                onClick={ this.goToDiscover }>
+                Start Listening
+              </a>
+            </div>
           </section>
 
           <Search />
