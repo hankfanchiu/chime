@@ -9,13 +9,13 @@ saviours = User.create!(
   email: "spaceinvader@chime.audio",
   password: "password"
 )
-# 
-# hank = User.create!(
-#   username: "hankfanchiu",
-#   email: "fanchiu.hank@gmail.com",
-#   password: "password"
-# )
-#
+
+hank = User.create!(
+  username: "HankFanchiu",
+  email: "hank@fanchiu.com",
+  password: "password"
+)
+
 # track1 = saviours.tracks.create!(
 #   title: "Marvin Gaye - Ain't No Mountain High Enough",
 #   track_url: "https://s3-us-west-1.amazonaws.com/chime-audio-assets-dev/tracks/audio/a5f50646-375b-4a23-8902-4c942cd5a6bc.mp3",
