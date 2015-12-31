@@ -28,7 +28,7 @@
     "flux": "^2.1.1",
     "history": "1.13.x",
     "keymirror": "^0.1.1",
-    "react": "^0.14.3",
+    "react": "^0.14.5",
     "react-addons-linked-state-mixin": "^0.14.5",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
