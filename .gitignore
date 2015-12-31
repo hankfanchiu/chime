@@ -20,7 +20,7 @@ bundle.js
 bundle.js.map
 
 # Assets for testing
-/public/assets
+/public/files
 
 # Heroku environment config vars
 .env
