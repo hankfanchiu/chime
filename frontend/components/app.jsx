@@ -7,6 +7,7 @@ var SignUp = require("./session/sign_up");
 var Login = require("./session/login");
 var Settings = require("./session/settings");
 var UploadModal = require("./upload_modal/upload_modal");
+var Footer = require("./footer/footer");
 var Player = require("./player/player");
 var Audio = require("./audio");
 
@@ -33,10 +34,9 @@ var App = React.createClass({
 
         { this.props.children }
 
-        <footer>
-          <Player />
-        </footer>
+        <Footer />
 
+        <Player />
         <Audio />
       </div>
     );
