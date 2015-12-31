@@ -11,10 +11,12 @@ var UploadAudio = React.createClass({
   },
 
   render: function () {
+    var label = <span className="required-label">Upload Audio</span>;
+
     return (
       <div className="upload-audio">
         <span className="btn btn-default btn-file">
-          <i className="fa fa-file-audio-o"></i> <span className="required-label">Upload Audio</span>
+          <i className="fa fa-file-audio-o"></i> { label }
 
           <input type="file" accept="audio/*" ref="file"
             onChange={ this._handleFile } />

@@ -18,8 +18,14 @@
 @import 'bootstrap';
 
 .navbar-default {
-  background-color: #005284;
-  border-color: #333;
+  background-color: #2D2D2D;
+  border: none;
+}
+
+#nav-shadow {
+  -webkit-box-shadow: 0 1px 10px 1px #111;
+     -moz-box-shadow: 0 1px 10px 1px #111;
+          box-shadow: 0 1px 10px 1px #111;
 }
 
 .navbar-fixed-top {
@@ -81,6 +87,29 @@ a:active {
   text-decoration: none;
   cursor: pointer;
   color: #0077A9;
+}
+
+header#home {
+  z-index: -1;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  height: 600px;
+  min-width: 970px;
+  overflow: hidden;
+}
+
+section.hero-module {
+  background: #000;
+
+  section.video-container {
+    background: #000;
+  }
+
+  video {
+    width: 100%;
+  }
 }
 
 footer {

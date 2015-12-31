@@ -19,8 +19,8 @@
 bundle.js
 bundle.js.map
 
-# Sample tracks
-/public/assets/tracks/**
+# Assets for testing
+/public/assets
 
 # Heroku environment config vars
 .env
