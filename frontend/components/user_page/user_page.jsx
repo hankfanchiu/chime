@@ -54,30 +54,32 @@ var UserPage = React.createClass({
     var playlists = "/" + username + "/playlists";
 
     return (
-      <Grid>
-        <Row>
-          <UserSidebar user={ this.state.user }
-            client={ this.state.client }
-            isClient={ this.state.isClient } />
+      <main>
+        <Grid>
+          <Row>
+            <UserSidebar user={ this.state.user }
+              client={ this.state.client }
+              isClient={ this.state.isClient } />
 
-          <Col xs={ 9 } sm={ 9 } md={ 9 }>
-            <Nav bsStyle="tabs"
-              activeKey={ this.props.location.pathname }
-              onSelect={ this._handleSelect }>
+            <Col xs={ 9 } sm={ 9 } md={ 9 }>
+              <Nav bsStyle="tabs"
+                activeKey={ this.props.location.pathname }
+                onSelect={ this._handleSelect }>
 
-              <NavItem eventKey={ tracks }>
-                <h4 className="user-page-nav">Tracks</h4>
-              </NavItem>
+                <NavItem eventKey={ tracks }>
+                  <h4 className="user-page-nav">Tracks</h4>
+                </NavItem>
 
-              <NavItem eventKey={ playlists }>
-                <h4 className="user-page-nav">Playlists</h4>
-              </NavItem>
-            </Nav>
+                <NavItem eventKey={ playlists }>
+                  <h4 className="user-page-nav">Playlists</h4>
+                </NavItem>
+              </Nav>
 
-            { this.props.children }
-          </Col>
-        </Row>
-      </Grid>
+              { this.props.children }
+            </Col>
+          </Row>
+        </Grid>
+      </main>
     );
   }
 });

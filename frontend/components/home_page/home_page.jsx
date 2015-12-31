@@ -1,51 +1,56 @@
 var React = require("react");
-var Search = require("./search");
+var Grid = require("react-bootstrap").Grid;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var SessionStore = require("../../stores/session_store");
+var Hero = require("./hero");
 
 var HomePage = React.createClass({
+  getInitialState: function () {
+    return this.getStateFromStore();
+  },
+
+  getStateFromStore: function () {
+    return { isLoggedIn: SessionStore.isLoggedIn() };
+  },
+
+  componentWillMount: function () {
+    var isLoggedIn = SessionStore.isLoggedIn();
+
+    if (isLoggedIn) { this.goToDiscover(); }
+  },
+
+  componentDidMount: function () {
+    this.listenerToken = SessionStore.addListener(this._onChange);
+  },
+
+  componentWillUpdate: function (nextProps, nextState) {
+    if (nextState.isLoggedIn) { this.goToDiscover(); }
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
+  },
+
   goToDiscover: function () {
     this.props.history.pushState(null, "/discover");
   },
 
   render: function () {
-    var root = "https://s3-us-west-1.amazonaws.com/chime-audio-assets";
-
     return (
-      <div className="home">
-        <section className="hero-module">
-          <div className="mask" />
+      <main className="home-page">
+        <Hero goToDiscover={ this.goToDiscover } />
 
-          <section className="video-container">
-            <video autoPlay loop preload className="hero">
-
-              <source src={ root + "/video/hero.mp4" } type="video/mp4" />
-              <source src={ root + "/video/hero.webm" } type="video/webm" />
-              <source src={ root + "/video/hero.ogv" } type="video/ogg" />
-
-              Your browser does not support the <code>video</code> tag.
-            </video>
-          </section>
-
-          <section className="hero-message">
-            <h1 className="hero">Let's chime in</h1>
-
-            <h3 className="hero">
-              Listen to tunes by your favorite artists. <br/>
-              Share your own and be discovered.
-            </h3>
-
-            <div className="hero-button">
-              <a className="hero-button"
-                onClick={ this.goToDiscover }>
-                Start Listening
-              </a>
-            </div>
-          </section>
-
-          <Search />
-        </section>
-
-
-      </div>
+        <Grid>
+          <Row>
+            text here
+          </Row>
+        </Grid>
+      </main>
     );
   }
 });

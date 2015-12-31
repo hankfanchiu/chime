@@ -2,7 +2,6 @@ var React = require("react");
 var Navbar = require("react-bootstrap").Navbar;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
-var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
 var LoggedOut = require("./logged_out");
@@ -59,7 +58,7 @@ var Navigation = React.createClass({
 
   render: function () {
     return (
-      <Navbar fixedTop id="nav-shadow">
+      <Navbar fixedTop className="solid-nav nav-shadow">
         <Navbar.Header>
           <Navbar.Brand onClick={ this.goToHome }>
             Chime

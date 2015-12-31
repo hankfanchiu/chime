@@ -5,10 +5,8 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var _showEditModal = false;
 var _updatedTrackPathname = null;
-
 var _showDeleteModal = false;
 var _trackDeleted = false;
-
 var _tracks = {};
 
 var TrackStore = new Store(AppDispatcher);
@@ -87,12 +85,6 @@ TrackStore.getUpdatedTrackPathname = function () {
 
 TrackStore.getTrackDeleted = function () {
   return _trackDeleted;
-};
-
-TrackStore.all = function () {
-  var tracksCopy = jQuery.extend({}, _tracks);
-
-  return tracksCopy;
 };
 
 TrackStore.getTracksByUsername = function (username) {

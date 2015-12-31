@@ -1,45 +1,47 @@
+nav.home-page-nav {
+  background-color: none;
+}
+
+main.home-page {
+  padding-top: 0;
+}
+
 section.hero-module {
-  z-index: -1;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
+  position: relative;
   height: 600px;
   min-width: 970px;
   overflow: hidden;
+}
 
-  div.mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
-    opacity: 0.5;
-  }
-
-  section.video-container {
-    background: #000;
-    height: 600px;
-    overflow: hidden;
-  }
+section.video-container {
+  height: 600px;
+  background: black;
 
   video.hero {
     width: 100%;
   }
 }
 
-section.hero-message {
-  z-index: 1;
+section.mask {
   position: absolute;
+  top: 0;
+  width: 100%;
+  height: 600px;
+  background: rgba(0,0,0,0.5);
+}
+
+section.hero-message {
+  position: relative;
+  top: 25%;
   width: 100%;
   min-width: 970px;
-  bottom: 30%;
   text-align: center;
   letter-spacing: 2px;
 
   h1.hero {
     color: white;
     font-weight: 700;
-    font-size: 66px;
+    font-size: 60px;
   }
 
   h3.hero {
@@ -59,10 +61,25 @@ section.hero-message {
     font-size: 14px;
     border-radius: 3px;
     text-decoration: none;
-    background: rgba(255,255,255,0.5);
+    background: rgba(150,150,150,0.5);
   }
 
   a.hero-button:hover {
     background: rgba(0,0,0,0.5);
   }
+}
+
+section.hero-search-container {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  min-width: 970px;
+  background: rgba(0,0,0,0.8);
+}
+
+section.hero-search-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 30px;
 }

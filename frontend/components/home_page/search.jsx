@@ -21,14 +21,16 @@ var Search = React.createClass({
 
   render: function () {
     return (
-      <section className="hero-search">
-        <form onSubmit={ this._handleSearch }>
-          <Input type="text"
-            ref="search"
-            placeholder="Search for Tracks and Artists"
-            buttonAfter={ this.searchButton() }
-            onChange={ this._handleQueryChange } />
-        </form>
+      <section className="hero-search-container">
+        <section className="hero-search-form-container">
+          <form onSubmit={ this._handleSearch }>
+            <Input type="text"
+              ref="search"
+              placeholder="Search for artists and tracks"
+              buttonAfter={ this.searchButton() }
+              onChange={ this._handleQueryChange } />
+          </form>
+        </section>
       </section>
     );
   }

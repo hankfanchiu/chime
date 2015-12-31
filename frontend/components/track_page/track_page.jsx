@@ -68,20 +68,22 @@ var TrackPage = React.createClass({
 
   render: function () {
     return (
-      <Grid>
-        <GiantPlayer track={ this.state.track }
-          goToUser={ this.goToUser } />
+      <main>
+        <Grid>
+          <GiantPlayer track={ this.state.track }
+            goToUser={ this.goToUser } />
 
-        <TrackDetail track={ this.state.track }
-          isLoggedIn={ this.state.isLoggedIn }
-          goToUser={ this.goToUser } />
+          <TrackDetail track={ this.state.track }
+            isLoggedIn={ this.state.isLoggedIn }
+            goToUser={ this.goToUser } />
 
-        <PlaylistModal track={ this.state.track }
-          clientUsername={ this.state.clientUsername } />
+          <PlaylistModal track={ this.state.track }
+            clientUsername={ this.state.clientUsername } />
 
-        <EditTrackModal track={ this.state.track } />
-        <DeleteTrackModal track={ this.state.track } />
-      </Grid>
+          <EditTrackModal track={ this.state.track } />
+          <DeleteTrackModal track={ this.state.track } />
+        </Grid>
+      </main>
     );
   }
 });

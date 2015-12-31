@@ -53,14 +53,16 @@ var PlaylistPage = React.createClass({
 
   render: function () {
     return (
-      <div className="container">
-        <div className="row">
+      <main>
+        <div className="container">
+          <div className="row">
 
 
-          <PlaylistDetail playlist={ this.state.playlist }
-            playTrack={ this._playTrack } />
+            <PlaylistDetail playlist={ this.state.playlist }
+              playTrack={ this._playTrack } />
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 });

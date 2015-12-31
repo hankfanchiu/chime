@@ -2,6 +2,7 @@ var React = require("react");
 var SessionStore = require("../stores/session_store");
 var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
+var HomePageNav = require("./nav/home_page_nav");
 var SignUp = require("./session/sign_up");
 var Login = require("./session/login");
 var Settings = require("./session/settings");
@@ -19,18 +20,18 @@ var App = React.createClass({
   },
 
   render: function () {
+    var onHomePage = (this.props.location.pathname === "/");
+
     return (
       <div className="app">
-        <Nav />
+        { onHomePage ? <HomePageNav /> : <Nav /> }
 
         <SignUp />
         <Login />
         <Settings />
         <UploadModal />
 
-        <main>
-          { this.props.children }
-        </main>
+        { this.props.children }
 
         <footer>
           <Player />

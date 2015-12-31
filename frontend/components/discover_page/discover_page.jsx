@@ -81,18 +81,20 @@ var Discover = React.createClass({
 
   render: function () {
     return (
-      <Grid>
-        <PageHeader>Discover new chimes</PageHeader>
+      <main>
+        <Grid>
+          <PageHeader>Discover new chimes</PageHeader>
 
-        <p className="lead">
-          See what's trending. Play it now, queue it up, or add to your own playlist.
-        </p>
+          <p className="lead">
+            See what's trending. Play it now, queue it up, or add to your own playlist.
+          </p>
 
-        { this.discoverRows() }
+          { this.discoverRows() }
 
-        <PlaylistModal track={ this.state.trackToAdd }
-          clientUsername={ this.state.clientUsername } />
-      </Grid>
+          <PlaylistModal track={ this.state.trackToAdd }
+            clientUsername={ this.state.clientUsername } />
+        </Grid>
+      </main>
     );
   }
 });
