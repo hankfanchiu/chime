@@ -8,7 +8,7 @@ var createBrowserHistory = require("history/lib/createBrowserHistory");
 var history = createBrowserHistory();
 
 var App = require("./components/app");
-var HomePage = require("./components/home_page");
+var HomePage = require("./components/home_page/home_page");
 var DiscoverPage = require("./components/discover_page/discover_page");
 var Logout = require("./components/session/logout");
 var UserPage = require("./components/user_page/user_page");
