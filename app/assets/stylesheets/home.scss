@@ -150,9 +150,16 @@ div.random-track:hover {
 
 section.home-page-join {
   padding: 20px 0 60px 0;
-  background: #333;
+  background: #555;
   color: white;
   text-align: center;
+
+  section.join-message {
+    padding: 20px;
+    margin: 0 30px;
+    font-size: 18px;
+    text-align: center;
+  }
 
   section.join-button {
     margin-bottom: 15px;
@@ -171,11 +178,4 @@ section.home-page-join {
   a.join-button:hover {
     background: #000;
   }
-}
-
-section.join-message {
-  padding: 20px;
-  margin: 0 30px;
-  font-size: 18px;
-  text-align: center;
 }

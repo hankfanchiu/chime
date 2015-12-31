@@ -1,6 +1,11 @@
 var React = require("react");
+var SessionActions = require("../../actions/session_actions");
 
 var Join = React.createClass({
+  signUp: function () {
+    SessionActions.showSignUp();
+  },
+
   render: function () {
     var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/concert.jpeg";
 
@@ -26,7 +31,7 @@ var Join = React.createClass({
 
           <section className="join-button">
             <a className="join-button" onClick={ this.signUp }>
-              CREATE ACCOUNT
+              SIGN UP FOR FREE
             </a>
           </section>
         </div>
