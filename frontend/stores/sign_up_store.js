@@ -21,7 +21,7 @@ SignUpStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.SIGN_UP_RESPONSE:
-      setShowModal(!!response.errors);
+      if (!response.errors) { setShowModal(false); }
       break;
 
   };

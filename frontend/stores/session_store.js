@@ -12,6 +12,10 @@ SessionStore.__onDispatch = function (payload) {
 
   switch (actionType) {
 
+    case ActionTypes.SIGN_UP_RESPONSE:
+      if (!response.errors) { setSession(response); }
+      break;
+
     case ActionTypes.LOGIN_RESPONSE:
       if (!response.errors) { setSession(response); }
       break;
