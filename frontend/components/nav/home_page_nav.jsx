@@ -17,7 +17,7 @@ var Navigation = React.createClass({
 
   render: function () {
     return (
-      <Navbar className="home-page-nav nav-shadow">
+      <Navbar className="home-page-nav">
         <Navbar.Header>
           <Navbar.Brand onClick={ this.goToHome }>
             Chime
