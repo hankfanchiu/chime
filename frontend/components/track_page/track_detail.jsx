@@ -79,8 +79,8 @@ var TrackDetail = React.createClass({
             <AddToQueue addToQueue={ this.addToQueue } />
             <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
-            { this.props.isLoggedIn ? this.editButton() : "" }
-            { this.props.isLoggedIn ? this.deleteButton() : "" }
+            { this.props.isClient ? this.editButton() : "" }
+            { this.props.isClient ? this.deleteButton() : "" }
           </section>
         </Col>
       </Row>

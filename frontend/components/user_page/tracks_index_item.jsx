@@ -18,7 +18,7 @@ var TracksIndexItem = React.createClass({
   _pushState: function (pathname) {
     this.history.pushState(null, pathname);
   },
-  
+
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
@@ -115,8 +115,8 @@ var TracksIndexItem = React.createClass({
               <AddToQueue addToQueue={ this.addToQueue } />
               <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
-              { this.props.isLoggedIn ? this.editButton() : "" }
-              { this.props.isLoggedIn ? this.deleteButton() : "" }
+              { this.props.isClient ? this.editButton() : "" }
+              { this.props.isClient ? this.deleteButton() : "" }
             </section>
           </Col>
         </Row>

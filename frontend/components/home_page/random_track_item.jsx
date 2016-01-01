@@ -32,7 +32,7 @@ var RandomTrackItem = React.createClass({
     if (!track) { return <Col />; }
 
     return (
-      <Col xs={ 6 } sm={ 3 } md={ 3 }>
+      <Col xs={ 3 } sm={ 3 } md={ 3 }>
         <div className="random-track">
           <span className="btn play-button" onClick={ this.playTrack }>
             <Glyphicon glyph="play" className="play-icon"/>

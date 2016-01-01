@@ -23,7 +23,8 @@ var TrackPage = React.createClass({
     return {
       track: TrackStore.find(username, slug),
       clientUsername: SessionStore.getClientUsername(),
-      isLoggedIn: SessionStore.isLoggedIn()
+      isLoggedIn: SessionStore.isLoggedIn(),
+      isClient: SessionStore.isClient(username)
     };
   },
 
@@ -74,8 +75,9 @@ var TrackPage = React.createClass({
             goToUser={ this.goToUser } />
 
           <TrackDetail track={ this.state.track }
+            goToUser={ this.goToUser }
             isLoggedIn={ this.state.isLoggedIn }
-            goToUser={ this.goToUser } />
+            isClient={ this.state.isClient } />
 
           <PlaylistModal track={ this.state.track }
             clientUsername={ this.state.clientUsername } />

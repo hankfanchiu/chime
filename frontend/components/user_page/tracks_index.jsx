@@ -19,7 +19,8 @@ var TracksIndex = React.createClass({
     return {
       tracks: TrackStore.getTracksByUsername(username),
       clientUsername: SessionStore.getClientUsername(),
-      isLoggedIn: SessionStore.isLoggedIn()
+      isLoggedIn: SessionStore.isLoggedIn(),
+      isClient: SessionStore.isClient(username)
     };
   },
 
@@ -70,7 +71,8 @@ var TracksIndex = React.createClass({
           setTrackToAdd={ this._setTrackToAdd }
           setTrackToEdit={ this._setTrackToEdit }
           setTrackToDelete={ this._setTrackToDelete }
-          isLoggedIn={ this.state.isLoggedIn } />
+          isLoggedIn={ this.state.isLoggedIn }
+          isClient={ this.state.isClient } />
       );
 
       trackIndexItems.push(indexItem);
