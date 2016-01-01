@@ -30,7 +30,7 @@ Chime is a single-page application built on Rails and React.js, with many depend
 
 ## Future Implementations
 
-Chime is only a few degrees above being considered an MVP. The features that will be added in the future are listed in the [future implementations][future] outline.
+Chime is only a few degrees above being considered an MVP. The features that will be added are listed in the [future implementations][future] outline.
 
 [chime]: http://chime.audio
 [proposal]: ./docs/proposal.md
