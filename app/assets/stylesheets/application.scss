@@ -16,11 +16,11 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import url(https://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
 
 h1, h2, h3, h4, h5, h6,
 p, span {
-  font-family: "Droid Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 div.app {
@@ -56,6 +56,16 @@ div.app {
 
 .navbar .nav > li > a:hover {
   color: #eee
+}
+
+a.nav-logo img {
+  margin-top: 12px;
+  height: 28px;
+  opacity: 0.85;
+}
+
+a.nav-logo:hover img {
+  opacity: 1;
 }
 
 .container {
@@ -102,7 +112,7 @@ footer {
   height: 300px;
   clear: both;
   background-color: #222;
-  padding: 40px 0 120px 0;
+  padding: 40px 0 100px 0;
 
   section.footer-wrapper {
     width: 100%;
@@ -111,11 +121,21 @@ footer {
     table-layout: fixed;
   }
 
+  a.logo img {
+    vertical-align: top;
+    opacity: 0.5;
+    width: 80px;
+  }
+
+  a.logo:hover img {
+    opacity: 1;
+  }
+
   ul.footer-nav {
     display: table-cell;
     padding: 0;
     list-style: none;
-    color: #999;
+    color: #ccc;
   }
 
   li {
@@ -123,13 +143,13 @@ footer {
   }
 
   h5 {
-    font-weight: 700;
     margin-bottom: 15px;
   }
 
   a {
     color: #999;
     font-size: 14px;
+    font-weight: 300;
   }
 
   a.logo {

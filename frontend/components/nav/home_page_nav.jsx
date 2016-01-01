@@ -19,9 +19,9 @@ var Navigation = React.createClass({
     return (
       <Navbar className="home-page-nav">
         <Navbar.Header>
-          <Navbar.Brand onClick={ this.goToHome }>
-            Chime
-          </Navbar.Brand>
+          <a className="nav-logo" onClick={ this.goToHome }>
+            <img src="/assets/chime.png" alt="Chime" />
+          </a>
         </Navbar.Header>
 
         <div id="navbar">

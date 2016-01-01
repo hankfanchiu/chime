@@ -14,7 +14,9 @@ var Footer = React.createClass({
         <section className="footer-wrapper container">
           <ul className="footer-nav">
             <h4>
-              <a className="logo" onClick={ this.goToHome }>Chime</a>
+              <a className="logo" onClick={ this.goToHome }>
+                <img src="/assets/logo.png" alt="Chime" />  
+              </a>
             </h4>
           </ul>
 

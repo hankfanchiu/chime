@@ -19,10 +19,10 @@ var Hero = React.createClass({
 
         <section className="mask">
           <section className="hero-message">
-            <h1 className="hero">Musician to Musician</h1>
+            <h1 className="hero">EXPERIENCE AMAZING</h1>
 
             <h3 className="hero">
-              Listen to tunes by your favorite artists. <br/>
+              Stream music by your favorite artists. <br/>
               Share your own and be discovered.
             </h3>
 

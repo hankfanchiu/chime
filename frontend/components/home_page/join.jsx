@@ -13,12 +13,10 @@ var Join = React.createClass({
       <section className="home-page-join">
         <div className="container">
           <h2 className="home-page-heading">
-            Join the community
+            All the music you'll ever need is right here
           </h2>
 
           <section className="join-message">
-            <p>All the music you'll ever need is right here.</p>
-
             <p>Connect with artists, and discover up-and-coming musicians.</p>
 
             <p>Explore, add, and save your favorite tunes.</p>
