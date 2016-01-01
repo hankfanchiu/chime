@@ -15,7 +15,7 @@ class S3Presigner
     )
 
     s3 = Aws::S3::Resource.new(region: "us-west-1", credentials: creds)
-    bucket = s3.bucket("chime-audio-assets-dev")
+    bucket = s3.bucket(ENV["S3_BUCKET"])
     object = bucket.object(upload_key)
 
     params = { acl: "public-read" }
