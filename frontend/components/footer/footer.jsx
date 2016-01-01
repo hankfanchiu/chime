@@ -9,15 +9,13 @@ var Footer = React.createClass({
   },
 
   render: function () {
+    var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/logo.png";
+
     return (
       <footer className="footer">
         <section className="footer-wrapper container">
           <ul className="footer-nav">
-            <h4>
-              <a className="logo" onClick={ this.goToHome }>
-                <img src="/assets/logo.png" alt="Chime" />  
-              </a>
-            </h4>
+            <a className="logo" onClick={ this.goToHome }>Chime</a>
           </ul>
 
           <ul className="footer-nav">

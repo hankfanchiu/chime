@@ -58,13 +58,22 @@ div.app {
   color: #eee
 }
 
-a.nav-logo img {
-  margin-top: 12px;
-  height: 28px;
+a.nav-logo {
+  background: asset-url("chime.png") no-repeat 0 0;
+  background-size: contain;
+  display: block;
+  margin-top: 9px;
+  margin-right: 20px;
+  padding-bottom: 30px;
+  height: 30px;
+  width: 100px;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
   opacity: 0.85;
 }
 
-a.nav-logo:hover img {
+a.nav-logo:hover {
   opacity: 1;
 }
 
@@ -121,13 +130,20 @@ footer {
     table-layout: fixed;
   }
 
-  a.logo img {
-    vertical-align: top;
-    opacity: 0.5;
+  a.logo {
+    background: asset-url("logo.png") no-repeat 0 0;
+    background-size: contain;
+    display: block;
+    padding-bottom: 80px;
+    height: 0;
     width: 80px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    opacity: 0.5;
   }
 
-  a.logo:hover img {
+  a.logo:hover {
     opacity: 1;
   }
 
@@ -150,10 +166,6 @@ footer {
     color: #999;
     font-size: 14px;
     font-weight: 300;
-  }
-
-  a.logo {
-    font-size: 20px;
   }
 
   a:hover {
