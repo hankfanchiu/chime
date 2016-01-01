@@ -18,19 +18,19 @@ The core features of Chime are:
 
 ## Project Design
 
-Chime was designed and created in three weeks. A [Proposal][proposal] was drafted to help provide an implementation timeline during the development process. A [Database Schema][schema] was prepared alongside the design proposal.
+Chime was designed and created in three weeks. A [proposal][proposal] was drafted to help provide an implementation timeline during the development process. A [database schema][schema] was prepared alongside the design proposal.
 
 ## Technology
 
 Chime is a single-page application built on Rails and React.js, with many dependencies in both the backend and the frontend.
 
-- [Backend Technology][backend]
-- [Frontend Technology][frontend]
-- [File Storage][file storage] via Amazon Simple Storage Services (S3)
+- [Backend technology][backend]
+- [Frontend technology][frontend]
+- [File storage][file storage] via Amazon Simple Storage Services (S3)
 
 ## Future Implementations
 
-Chime is only a few degrees above being considered an MVP. The features that will be added in the future are listed in the [Future Implementations][future] outline.
+Chime is only a few degrees above being considered an MVP. The features that will be added in the future are listed in the [future implementations][future] outline.
 
 [chime]: http://chime.audio
 [proposal]: ./docs/proposal.md
