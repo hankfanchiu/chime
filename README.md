@@ -1,12 +1,12 @@
 # Chime
 
-[Chime.audio][chime] is a web application for users to stream and share music. Inspired by SoundCloud, Chime allows users to upload their own tracks, create playlists, and discover music by other artists.
+[Chime.audio][chime] is a web application for users to stream and share music.
+
+Inspired by SoundCloud, Chime allows users to upload their own tracks, create playlists, and discover music by other artists.
 
 Chime is a personal project by Hank Fanchiu.
 
 ## Features
-
-The core features of Chime are:
 
 - User accounts with secure authentication
 - Music streaming with controls and no interruption
@@ -18,7 +18,11 @@ The core features of Chime are:
 
 ## Project Design
 
-Chime was designed and created in three weeks. A [proposal][proposal] was drafted to help provide an implementation timeline during the development process. A [database schema][schema] was prepared alongside the design proposal.
+Chime was designed and created in three weeks.
+
+A [proposal][proposal] was drafted to help provide an implementation timeline during the development process.
+
+A [database schema][schema] was prepared alongside the design proposal.
 
 ## Technology
 
@@ -30,7 +34,9 @@ Chime is a single-page application built on Rails and React.js, with many depend
 
 ## Future Implementations
 
-Chime is only a few degrees above being considered an MVP. The features that will be added are listed in the [future implementations][future] outline.
+Chime is only a few degrees above being considered an MVP.
+
+The features that will be added are listed in the [future implementations][future] outline.
 
 [chime]: http://chime.audio
 [proposal]: ./docs/proposal.md
