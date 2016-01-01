@@ -1,4 +1,4 @@
-# Documentation
+# Proposal
 
 [http://chime.audio](http://chime.audio)
 

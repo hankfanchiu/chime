@@ -1,6 +1,8 @@
 # File Storage on S3
 
-Both direct upload and pass-through upload are employed for this application.
+Audio and image files are stored on Amazon Simple Storage Services (S3).
+
+The two file types follow separate implementations - direct upload and pass-through upload.
 
 Due to the large file sizes, audio files are uploaded directly to S3. Meanwhile, images are uploaded through Rails and processed by Paperclip. Using the AWS SDK, Paperclip uploads the image files to the appropriate S3 bucket.
 
