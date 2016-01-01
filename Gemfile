@@ -25,9 +25,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Puma as the app server
 gem 'puma'
-
+# Handle server errors
+gem 'rails_12factor', group: :production
+# New Relic for analyzing server errors
 gem 'newrelic_rpm'
-# Rack Timeout
+# Rack Timeout to abort requests that take too long
 gem "rack-timeout"
 # Amazon Web Services SDK for S3 file storage.
 gem 'aws-sdk'
