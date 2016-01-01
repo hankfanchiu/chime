@@ -1,61 +1,102 @@
 # Chime
 
-[chime.audio][chime]
+[Chime.audio](http://chime.audio) is a web application for users to stream and share music. Inspired by SoundCloud, Chime allows users to upload their own tracks, create playlists, and discover music by other artists.
 
-[chime]: http://www.chime.audio
+Chime is a personal project by Hank Fanchiu.
 
-## Minimum Viable Product
+## Features
 
-Chime is a web application inspired by SoundCloud built using Ruby on Rails
-and React.js. Chime allows users to:
+The core features of Chime are:
 
-- [x] Create and update a user account
-- [x] Sign In / Sign Out
-- [x] Search other users
-- [x] Upload and delete audio files
-- [x] Stream tracks without interruption
-- [x] Add tracks to the audio playback queue
-- [x] Search for tracks by title
-- [x] Create, edit, or delete playlists
-- [x] Add tracks to or remove tracks from playlists
+- User accounts with secure authentication
 
-## Design Docs
-* [DB schema][schema]
+- Music streaming with controls and no interruption
 
-[schema]: ./docs/schema.md
+- Audio uploading and management
 
-## Implementation Timeline
+- Image attachments for users and audio tracks
 
-### Phase 1: User Authentication (0.5 days)
+- Adding tracks to a temporary queue for playback
 
-I will begin by implementing user signup and authentication (via
-BCrypt). There will be a basic landing page after signup that will contain the
-container for the application's root React component.
+- Playlists of music tracks to playback tunes in sequence
 
-### Phase 2: Flux Architecture (0.5 days)
-I will set up Flux, the React Router, and the React view structure for the main application. The music tracks will live in a Tracks Store.
+- Searching for users and tracks
 
-### Phase 3: Tracks & Playlists (1 day)
-Using an API for track uploads, I will add API routes to serve track URLs as JSON. I will add Playlist and Playlisting to allow users to create playlists and add tracks to playlists.
+## Project Proposal
 
-### Phase 4: Audio Playback & Stream Bar (1 day)
-I will use the native HTML5 audio to stream the tracks. To test the audio stream, I will create a stream bar in the UI, which persists at the bottom of the page.
+Chime was designed and created in three weeks. A [design proposal][proposal] was drafted to help provide an implementation timeline during the development process.
 
-### Phase 5: Track Likes and Comments (1 day)
-I will add new Comment and Like models for tracks. Corresponding routes, controllers, and views will be set up.
+[proposal]: ./docs/proposal.md
 
-### Phase 6: Main Feed, Nav, Sidebar Views (2 days)
-I will add the main page that the user will see after logging in. This feed
-will contain followed users' tracks. The nav and sidebar views will be created.
+## Technology
 
-### Phase 7: Cleanup (2 days)
+Chime is a single-page application built on Rails and React.js.
 
-Devote time to perfecting the UI.
+Audio and image files are stored on Amazon Simple Storage Services (S3). The two file types follow a separate implementations, which are detailed in the [File Storage][file storage] documentation.
 
-### Bonus
+[file storage]: ./docs/file_storage.md
 
-- Popular tracks in feed
-- User account email activation
-- Playlist likes (polymorphic Like model)
-- Equalizer UI
-- Fancy animations
+### Backend
+
+Chime is built on Ruby on Rails and hosted by Heroku. The backend is purely responsible for serving JSON.
+
+PostgreSQL is a must for Heroku.
+
+Other notable dependencies include:
+
+- Paperclip and ImageMagick (image attachment)
+
+- Amazon Web Services SDK (file storage on Amazon Simple Storage Service (S3))
+
+- BCrypt (password-hashing for a secure authentication system)
+
+- FriendlyId (slugging usernames, track titles, playlist titles)
+
+### Frontend
+
+Because it is a single-page application, Chime utilizes React.js and follows the Flux architecture to deliver the frontend application.
+
+Webpack conveniently bundles all of the frontend components and Flux parts.
+
+jQuery is only used to make API calls with the Rails server.
+
+Site layout and styling are done with Bootstrap and Sass. React Bootstrap expedited the building out of the React components that utilized Bootstrap.
+
+Other frontend dependencies are:
+
+- React DOM
+- React Router
+- React History
+- React Linked State Mixin
+- Keymirror
+- Babel (for JSX)
+
+## Future Implementations
+
+Chime is only a few degrees above being considered an MVP. There are still many more features that will be added.
+
+### Commenting
+
+Users will be able to comment on both tracks and playlists.
+
+### Liking
+
+Users will be able to "like" tracks, and keep a collection of all "liked" tracks.
+
+### Play Count
+
+Each playback of a track will increment the track's play count. The most played tracks will be listed as the "popular hits".
+
+### Track Category
+
+Artists will be able to categorize their uploaded tracks by tags and genre. This will allow users to search track by categories.
+
+### Following Users
+
+Similar to "liking" tracks, users will be able to follow artists and see a feed of recently uploaded tracks by their followees.
+
+### Other Features
+
+- Account activation via email
+- Client session on multiple browsers (multiple session)
+- Authentication integration with Facebook and Google+
