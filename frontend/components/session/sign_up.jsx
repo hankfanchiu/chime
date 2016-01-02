@@ -16,11 +16,11 @@ var SignUp = React.createClass({
       show: SignUpStore.showModal(),
       errors: SignUpStore.getErrors(),
       username: "",
-      usernameValid: true,
+      usernameValid: false,
       email: "",
-      emailValid: true,
+      emailValid: false,
       password: "",
-      passwordValid: true
+      passwordValid: false
     };
   },
 
