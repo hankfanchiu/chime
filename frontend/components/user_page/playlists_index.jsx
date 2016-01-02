@@ -1,6 +1,7 @@
 var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var SessionStore = require("../../stores/session_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
@@ -12,18 +13,25 @@ var PlaylistsIndex = React.createClass({
 
   getStateFromStore: function () {
     var username = this.props.params.username;
-    var playlists = PlaylistStore.getPlaylistsByUsername(username);
 
-    return { playlists: playlists };
+    return {
+      playlists: PlaylistStore.getPlaylistsByUsername(username),
+      clientUsername: SessionStore.getClientUsername(),
+      isLoggedIn: SessionStore.isLoggedIn(),
+      isClient: SessionStore.isClient(username)
+    };
   },
 
   componentDidMount: function () {
-    this.listenerToken = PlaylistStore.addListener(this._onChange);
+    this.playlistListener = PlaylistStore.addListener(this._onChange);
+    this.sessionListener = SessionStore.addListener(this._onChange);
+
     PlaylistActions.fetchPlaylists(this.props.params.username);
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.playlistListener.remove();
+    this.sessionListener.remove();
   },
 
   _onChange: function () {

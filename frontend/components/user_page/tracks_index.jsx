@@ -3,6 +3,7 @@ var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var SessionStore = require("../../stores/session_store");
 var TrackStore = require("../../stores/track_store");
+var TrackActions = require("../../actions/track_actions");
 var PlaylistModal = require("../playlist_modal/playlist_modal");
 var EditTrackModal = require("./edit_track_modal");
 var DeleteTrackModal = require("./delete_track_modal");
@@ -27,6 +28,8 @@ var TracksIndex = React.createClass({
   componentDidMount: function () {
     this.trackListener = TrackStore.addListener(this._onChange);
     this.sessionListener = SessionStore.addListener(this._onChange);
+
+    TrackActions.fetchTracks(this.props.params.username);
   },
 
   componentWillUnmount: function () {
