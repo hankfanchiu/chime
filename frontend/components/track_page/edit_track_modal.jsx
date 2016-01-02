@@ -15,8 +15,8 @@ var EditTrackModal = React.createClass({
 
   getInitialState: function () {
     return {
-      errors: TrackModalsStore.getErrors(),
       disabled: true,
+      errors: TrackModalsStore.getErrors(),
       show: TrackModalsStore.showEditModal()
     };
   },

@@ -2,6 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
@@ -11,8 +12,9 @@ var TrackActions = require("../../actions/track_actions");
 var EditTrackModal = React.createClass({
   getInitialState: function () {
     return {
-      show: TrackModalsStore.showEditModal(),
-      disabled: true
+      disabled: true,
+      errors: TrackModalsStore.getErrors(),
+      show: TrackModalsStore.showEditModal()
     };
   },
 
@@ -37,7 +39,10 @@ var EditTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ show: TrackModalsStore.showEditModal() });
+    this.setState({
+      errors: TrackModalsStore.getErrors(),
+      show: TrackModalsStore.showEditModal()
+    });
   },
 
   _disabled: function () {
@@ -46,6 +51,7 @@ var EditTrackModal = React.createClass({
 
   _handleDescriptionChange: function () {
     var description = this.refs.description.getValue();
+
     this.setState({ disabled: false, description: description });
   },
 
@@ -66,11 +72,28 @@ var EditTrackModal = React.createClass({
 
   _handleTitleChange: function () {
     var title = this.refs.title.getValue();
+
     this.setState({ disabled: false, title: title });
   },
 
   close: function () {
     TrackActions.closeEditModal();
+  },
+
+  errors: function () {
+    if (this.state.errors.length === 1) {
+      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    }
+
+    var errorList = this.state.errors.map(function (error, idx) {
+      return <li key={ idx }>{ error }</li>;
+    });
+
+    return (
+      <Alert bsStyle="danger">
+        <ul>{ errorList }</ul>
+      </Alert>
+    );
   },
 
   titleLabel: function () {
@@ -92,6 +115,8 @@ var EditTrackModal = React.createClass({
   },
 
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal onHide={ this.close }
         dialogClassName="edit-track-modal"
@@ -102,6 +127,8 @@ var EditTrackModal = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
+          { noErrors ? "" : this.errors() }
+          
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <div className="upload-img">
