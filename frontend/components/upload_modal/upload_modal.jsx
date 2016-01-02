@@ -2,6 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Button = require("react-bootstrap").Button;
@@ -18,6 +19,7 @@ var UploadModal = React.createClass({
 
   getInitialState: function () {
     return {
+      errors: UploadStore.getErrors(),
       show: UploadStore.showModal(),
       title: "",
       description: ""
@@ -34,6 +36,7 @@ var UploadModal = React.createClass({
 
   _onChange: function () {
     this.setState({
+      errors: UploadStore.getErrors(),
       show: UploadStore.showModal(),
       publicUrl: UploadStore.getPublicUrl(),
       progress: UploadStore.getProgress(),
@@ -54,11 +57,13 @@ var UploadModal = React.createClass({
 
   _redirectIfSaved: function () {
     var pathname = this.state.pathname;
-    var pushState = this.history.pushState.bind(this, null, pathname);
 
     if (pathname) {
       this.setState({ title: "", description: "" });
-      setTimeout(pushState, 300);
+
+      setTimeout(function () {
+        this.history.pushState(null, pathname);
+      }.bind(this), 300);
     }
   },
 
@@ -81,13 +86,25 @@ var UploadModal = React.createClass({
     );
   },
 
+  errors: function () {
+    if (this.state.errors.length === 1) {
+      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    }
+
+    var errorList = this.state.errors.map(function (error, idx) {
+      return <li key={ idx }>{ error }</li>;
+    });
+
+    return (
+      <Alert bsStyle="danger">
+        <ul>{ errorList }</ul>
+      </Alert>
+    );
+  },
+
   reset: function () {
     this.setState({ title: "", description: "" });
     UploadActions.closeUploadModal();
-  },
-
-  titleLabel: function () {
-    return <span className="required-label">Title</span>;
   },
 
   save: function () {
@@ -104,7 +121,13 @@ var UploadModal = React.createClass({
     TrackActions.createTrack(formData);
   },
 
+  titleLabel: function () {
+    return <span className="required-label">Title</span>;
+  },
+
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal backdrop="static"
         dialogClassName="upload-modal"
@@ -116,6 +139,8 @@ var UploadModal = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
+          { noErrors ? "" : this.errors() }
+          
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <UploadImage setImg={ this._setImg } />

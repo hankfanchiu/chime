@@ -7,6 +7,7 @@ var _publicUrl = null;
 var _progress = 0;
 var _responseStatus = null;
 var _newTrackPathname = null;
+var _errors = [];
 var UploadStore = new Store(AppDispatcher);
 
 UploadStore.__onDispatch = function (payload) {
@@ -14,6 +15,7 @@ UploadStore.__onDispatch = function (payload) {
   var response = payload.response;
 
   _newTrackPathname = null;
+  _errors = [];
 
   switch (actionType) {
 
@@ -38,7 +40,9 @@ UploadStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_CREATED:
-      if (!response.errors) {
+      if (response.errors) {
+        recordErrors(response.errors);
+      } else {
         recordTrackCreated(response);
       }
       break;
@@ -66,6 +70,10 @@ UploadStore.getTrackPathname = function () {
   return _newTrackPathname;
 };
 
+UploadStore.getErrors = function () {
+  return _errors.slice();
+};
+
 var setShowModal = function (boolean) {
   _showModal = boolean;
 
@@ -87,6 +95,12 @@ var updateProgress = function (percent) {
 
 var setResponseStatus = function (response) {
   _responseStatus = response.status;
+
+  UploadStore.__emitChange();
+};
+
+var recordErrors = function (errors) {
+  _errors = errors;
 
   UploadStore.__emitChange();
 };

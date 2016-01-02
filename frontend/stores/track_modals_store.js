@@ -41,7 +41,9 @@ TrackModalsStore.__onDispatch = function (payload) {
 
     // Responses
     case ActionTypes.TRACK_DELETED:
-      if (!response.errors) {
+      if (response.errors) {
+        recordErrors(response.errors);
+      } else {
         recordTrackDeleted();
       }
 
