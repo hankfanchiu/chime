@@ -65,7 +65,8 @@ var SignUp = React.createClass({
 
   _handleUsernameChange: function () {
     var username = this.refs.username.getValue();
-    var usernameValid = (username !== "");
+    var hasNonStandard = /[^\w]/.test(username);
+    var usernameValid = !hasNonStandard;
 
     this.setState({ username: username, usernameValid: usernameValid });
   },
@@ -73,12 +74,6 @@ var SignUp = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
     this.signUp();
-  },
-
-  _helpEmail: function () {
-    if ((this.state.email.length > 0) && (!this.state.emailValid)) {
-      return "Invalid email address";
-    }
   },
 
   _helpPassword: function () {
@@ -179,7 +174,6 @@ var SignUp = React.createClass({
               ref="email"
               bsStyle={ this.styleEmail() }
               hasFeedback
-              help={ this._helpEmail() }
               placeholder="Enter your email address"
               onChange={ this._handleEmailChange } />
 
