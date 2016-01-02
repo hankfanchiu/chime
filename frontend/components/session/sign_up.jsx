@@ -6,18 +6,15 @@ var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
 var SignUpStore = require("../../stores/sign_up_store");
-var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
 var SignUp = React.createClass({
-  mixins: [LinkedStateMixin, History],
+  mixins: [History],
 
   getInitialState: function () {
     return {
       show: SignUpStore.showModal(),
       errors: SignUpStore.getErrors(),
-      username: "",
-      email: "",
       password: ""
     };
   },
@@ -36,15 +33,71 @@ var SignUp = React.createClass({
 
   _disabled: function () {
     return (
-      (this.state.username === "") ||
-      (this.state.email === "") ||
-      (this.state.password.length < 6)
+      (!this.state.usernameValid) ||
+      (!this.state.emailValid) ||
+      (!this.state.passwordValid)
     );
+  },
+
+  _handleEmailChange: function () {
+    var email = this.refs.email.getValue();
+    var emailInput = this.refs.email.getInputDOMNode();
+    var emailValid = emailInput.checkValidity();
+
+    this.setState({ email: email, emailValid: emailValid });
+  },
+
+  _handlePasswordChange: function () {
+    var password = this.refs.password.getValue();
+    var passwordValid = (password.length >= 6);
+
+    this.setState({ password: password, passwordValid: passwordValid });
+  },
+
+  _handleUsernameChange: function () {
+    var username = this.refs.username.getValue();
+    var usernameValid = (username !== "");
+
+    this.setState({ username: username, usernameValid: usernameValid });
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
     this.signUp();
+  },
+
+  _helpEmail: function () {
+    if (this.state.emailValid === false) {
+      return "Invalid email address";
+    }
+  },
+
+  _helpPassword: function () {
+    if (this.state.passwordValid === false) {
+      return "Password must be at least 6 characters"
+    }
+  },
+
+  styleEmail: function () {
+    var email = this.state.email;
+
+    if (email && email.length > 0) {
+      return (this.state.emailValid ? "success" : "error");
+    }
+  },
+
+  stylePassword: function () {
+    if (this.state.password.length > 0) {
+      return (this.state.passwordValid ? "success" : "error");
+    }
+  },
+
+  styleUsername: function () {
+    var username = this.state.username;
+
+    if (username && username.length > 0) {
+      return (this.state.usernameValid ? "success" : "error");
+    }
   },
 
   errors: function () {
@@ -58,9 +111,7 @@ var SignUp = React.createClass({
 
     return (
       <Alert bsStyle="danger">
-        <ul>
-          { errorList }
-        </ul>
+        <ul>{ errorList }</ul>
       </Alert>
     );
   },
@@ -94,25 +145,38 @@ var SignUp = React.createClass({
           <Modal.Title>Create Account</Modal.Title>
         </Modal.Header>
 
-        <form onSubmit={ this._handleSubmit }>
+        <form onSubmit={ this._handleSubmit } ref="form">
           <Modal.Body>
             { noErrors ? "" : this.errors() }
 
             <Input type="text"
+              value={ this.state.username }
               label="Username"
+              ref="username"
+              bsStyle={ this.styleUsername() }
+              hasFeedback
               placeholder="Identify your unique self"
-              valueLink={ this.linkState("username") } />
+              onChange={ this._handleUsernameChange } />
 
             <Input type="password"
+              value={ this.state.password }
               label="Password"
+              ref="password"
+              bsStyle={ this.stylePassword() }
+              hasFeedback
+              help={ this._helpPassword() }
               placeholder="Enter a password"
-              help="Use at least 6 characters."
-              valueLink={ this.linkState("password") } />
+              onChange={ this._handlePasswordChange } />
 
             <Input type="email"
+              value={ this.state.email }
               label="Email Address"
+              ref="email"
+              bsStyle={ this.styleEmail() }
+              hasFeedback
+              help={ this._helpEmail() }
               placeholder="Enter your email address"
-              valueLink={ this.linkState("email") } />
+              onChange={ this._handleEmailChange } />
 
             <a onClick={ this.showLogin }>
               Already have an account?
