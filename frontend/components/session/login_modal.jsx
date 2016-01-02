@@ -5,24 +5,24 @@ var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
-var LoginStore = require("../../stores/login_store");
+var LoginModalStore = require("../../stores/login_modal_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
-var Login = React.createClass({
+var LoginModal = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
     return {
-      show: LoginStore.showModal(),
-      errors: LoginStore.getErrors(),
+      show: LoginModalStore.showModal(),
+      errors: LoginModalStore.getErrors(),
       username: "",
       password: ""
     };
   },
 
   componentDidMount: function () {
-    this.listenerToken = LoginStore.addListener(this._onChange);
+    this.listenerToken = LoginModalStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -61,13 +61,13 @@ var Login = React.createClass({
   },
 
   reset: function () {
-    SessionActions.closeLogin();
+    SessionActions.closeLoginModal();
     this.setState(this.getInitialState());
   },
 
   showSignUp: function () {
     this.reset();
-    SessionActions.showSignUp();
+    SessionActions.showSignUpModalModal();
   },
 
   render: function () {
@@ -112,4 +112,4 @@ var Login = React.createClass({
   }
 });
 
-module.exports = Login;
+module.exports = LoginModal;

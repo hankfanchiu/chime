@@ -4,9 +4,9 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
 var _errors = [];
-var SignUpStore = new Store(AppDispatcher);
+var SignUpModalStore = new Store(AppDispatcher);
 
-SignUpStore.__onDispatch = function (payload) {
+SignUpModalStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
@@ -29,18 +29,18 @@ SignUpStore.__onDispatch = function (payload) {
   };
 };
 
-SignUpStore.showModal = function () {
+SignUpModalStore.showModal = function () {
   return _showModal;
 };
 
-SignUpStore.getErrors = function () {
+SignUpModalStore.getErrors = function () {
   return _errors.slice();
 };
 
 var setShowModal = function (boolean) {
   _showModal = boolean;
 
-  SignUpStore.__emitChange();
+  SignUpModalStore.__emitChange();
 };
 
-module.exports = SignUpStore;
+module.exports = SignUpModalStore;

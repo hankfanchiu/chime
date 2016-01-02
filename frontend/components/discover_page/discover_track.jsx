@@ -19,7 +19,7 @@ var DiscoverTrack = React.createClass({
       PlaylistActions.showCreateModal();
 
     } else {
-      SessionActions.showLogin();
+      SessionActions.showLoginModal();
     }
   },
 

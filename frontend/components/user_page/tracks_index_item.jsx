@@ -24,7 +24,7 @@ var TracksIndexItem = React.createClass({
       this.props.setTrackToAdd(this.props.track);
       PlaylistActions.showCreateModal();
     } else {
-      SessionActions.showLogin();
+      SessionActions.showLoginModal();
     }
   },
 

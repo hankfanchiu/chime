@@ -7,11 +7,11 @@ var LoggedOut = React.createClass({
   render: function () {
     return (
       <Nav pullRight>
-        <NavItem onSelect={ SessionActions.showSignUp }>
+        <NavItem onSelect={ SessionActions.showSignUpModal }>
           Sign Up
         </NavItem>
 
-        <NavItem onSelect={ SessionActions.showLogin }>
+        <NavItem onSelect={ SessionActions.showLoginModal }>
           Login
         </NavItem>
       </Nav>

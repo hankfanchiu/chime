@@ -4,9 +4,9 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
 var _errors = [];
-var LoginStore = new Store(AppDispatcher);
+var LoginModalStore = new Store(AppDispatcher);
 
-LoginStore.__onDispatch = function (payload) {
+LoginModalStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
@@ -29,18 +29,18 @@ LoginStore.__onDispatch = function (payload) {
   };
 };
 
-LoginStore.showModal = function () {
+LoginModalStore.showModal = function () {
   return _showModal;
 };
 
-LoginStore.getErrors = function () {
+LoginModalStore.getErrors = function () {
   return _errors.slice();
 };
 
 var setShowModal = function (boolean) {
   _showModal = boolean;
 
-  LoginStore.__emitChange();
+  LoginModalStore.__emitChange();
 };
 
-module.exports = LoginStore;
+module.exports = LoginModalStore;

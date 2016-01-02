@@ -6,13 +6,13 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 var SessionActions = {
   // Sign up modal actions
 
-  showSignUp: function () {
+  showSignUpModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_SIGN_UP_MODAL
     });
   },
 
-  closeSignUp: function () {
+  closeSignUpModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLOSE_SIGN_UP_MODAL
     });
@@ -20,13 +20,13 @@ var SessionActions = {
 
   // Login modal actions
 
-  showLogin: function () {
+  showLoginModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_LOGIN_MODAL
     });
   },
 
-  closeLogin: function () {
+  closeLoginModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLOSE_LOGIN_MODAL
     });

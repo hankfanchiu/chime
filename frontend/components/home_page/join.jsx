@@ -3,12 +3,10 @@ var SessionActions = require("../../actions/session_actions");
 
 var Join = React.createClass({
   signUp: function () {
-    SessionActions.showSignUp();
+    SessionActions.showSignUpModal();
   },
 
   render: function () {
-    var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/concert.jpeg";
-
     return (
       <section className="home-page-join">
         <div className="container">

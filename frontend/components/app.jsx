@@ -3,8 +3,8 @@ var SessionStore = require("../stores/session_store");
 var SessionActions = require("../actions/session_actions");
 var Nav = require("./nav/nav");
 var HomePageNav = require("./nav/home_page_nav");
-var SignUp = require("./session/sign_up");
-var Login = require("./session/login");
+var SignUpModal = require("./session/sign_up_modal");
+var LoginModal = require("./session/login_modal");
 var Settings = require("./session/settings");
 var UploadModal = require("./upload_modal/upload_modal");
 var Footer = require("./footer/footer");
@@ -27,8 +27,8 @@ var App = React.createClass({
       <div className="app">
         { onHomePage ? <HomePageNav /> : <Nav /> }
 
-        <SignUp />
-        <Login />
+        <SignUpModal />
+        <LoginModal />
         <Settings />
         <UploadModal />
 

@@ -5,16 +5,16 @@ var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
-var SignUpStore = require("../../stores/sign_up_store");
+var SignUpModalStore = require("../../stores/sign_up_modal_store");
 var History = require("react-router").History;
 
-var SignUp = React.createClass({
+var SignUpModal = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
     return {
-      show: SignUpStore.showModal(),
-      errors: SignUpStore.getErrors(),
+      show: SignUpModalStore.showModal(),
+      errors: SignUpModalStore.getErrors(),
       username: "",
       usernameValid: false,
       email: "",
@@ -25,7 +25,7 @@ var SignUp = React.createClass({
   },
 
   componentDidMount: function () {
-    this.listenerToken = SignUpStore.addListener(this._onChange);
+    this.listenerToken = SignUpModalStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -34,8 +34,8 @@ var SignUp = React.createClass({
 
   _onChange: function () {
     this.setState({
-      show: SignUpStore.showModal(),
-      errors: SignUpStore.getErrors(),
+      show: SignUpModalStore.showModal(),
+      errors: SignUpModalStore.getErrors(),
       password: ""
     });
   },
@@ -102,7 +102,7 @@ var SignUp = React.createClass({
 
   errors: function () {
     if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ errors }</Alert>;
+      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
     }
 
     var errorList = this.state.errors.map(function (error, idx) {
@@ -118,12 +118,12 @@ var SignUp = React.createClass({
 
   reset: function () {
     this.setState(this.getInitialState());
-    SessionActions.closeSignUp();
+    SessionActions.closeSignUpModal();
   },
 
   showLogin: function () {
     this.reset();
-    SessionActions.showLogin();
+    SessionActions.showLoginModal();
   },
 
   signUp: function () {
@@ -196,4 +196,4 @@ var SignUp = React.createClass({
   }
 });
 
-module.exports = SignUp;
+module.exports = SignUpModal;
