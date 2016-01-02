@@ -11,9 +11,9 @@ var UploadActions = {
     });
   },
 
-  resetUploadStore: function () {
+  closeUploadModal: function () {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.RESET_UPLOAD_STORE
+      actionType: ActionTypes.CLOSE_UPLOAD_MODAL
     });
   },
 

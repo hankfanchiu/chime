@@ -5,19 +5,19 @@ var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
-var TrackStore = require("../../stores/track_store");
+var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
 
 var EditTrackModal = React.createClass({
   getInitialState: function () {
     return {
-      show: TrackStore.showEditModal(),
+      show: TrackModalsStore.showEditModal(),
       disabled: true
     };
   },
 
   componentDidMount: function () {
-    this.listenerToken = TrackStore.addListener(this._onChange);
+    this.listenerToken = TrackModalsStore.addListener(this._onChange);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -37,7 +37,7 @@ var EditTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ show: TrackStore.showEditModal() });
+    this.setState({ show: TrackModalsStore.showEditModal() });
   },
 
   _disabled: function () {

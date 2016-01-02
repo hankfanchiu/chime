@@ -5,15 +5,15 @@ var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Button = require("react-bootstrap").Button;
-var TrackActions = require("../../actions/track_actions");
-var UploadActions = require("../../actions/upload_actions");
 var UploadStore = require("../../stores/upload_store");
+var UploadActions = require("../../actions/upload_actions");
+var TrackActions = require("../../actions/track_actions");
 var UploadAudio = require("./upload_audio");
 var UploadImage = require("./upload_image");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
-var Upload = React.createClass({
+var UploadModal = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
@@ -37,7 +37,8 @@ var Upload = React.createClass({
       show: UploadStore.showModal(),
       publicUrl: UploadStore.getPublicUrl(),
       progress: UploadStore.getProgress(),
-      isUploaded: UploadStore.isUploaded()
+      isUploaded: UploadStore.isUploaded(),
+      pathname: UploadStore.getTrackPathname()
     });
 
     this._redirectIfSaved();
@@ -52,7 +53,7 @@ var Upload = React.createClass({
   },
 
   _redirectIfSaved: function () {
-    var pathname = UploadStore.getTrackPathname();
+    var pathname = this.state.pathname;
     var pushState = this.history.pushState.bind(this, null, pathname);
 
     if (pathname) {
@@ -81,8 +82,8 @@ var Upload = React.createClass({
   },
 
   reset: function () {
-    UploadActions.resetUploadStore();
-    this.setState(this.getInitialState());
+    this.setState({ title: "", description: "" });
+    UploadActions.closeUploadModal();
   },
 
   titleLabel: function () {
@@ -152,4 +153,4 @@ var Upload = React.createClass({
   }
 });
 
-module.exports = Upload;
+module.exports = UploadModal;

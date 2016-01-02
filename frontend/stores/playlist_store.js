@@ -12,31 +12,45 @@ PlaylistStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.PLAYLISTS_RECEIVED:
-      if (!response.errors) { resetPlaylists(response); }
+      if (!response.errors) {
+        resetPlaylists(response);
+      }
       break;
 
     case ActionTypes.PLAYLIST_RECEIVED:
-      if (!response.errors) { setPlaylist(response); }
+      if (!response.errors) {
+        setPlaylist(response);
+      }
       break;
 
     case ActionTypes.PLAYLIST_CREATED:
-      if (!response.errors) { setPlaylist(response); }
+      if (!response.errors) {
+        setPlaylist(response);
+      }
       break;
 
     case ActionTypes.PLAYLIST_UPDATED:
-      if (!response.errors) { updatePlaylist(response); }
+      if (!response.errors) {
+        updatePlaylist(response);
+      }
       break;
 
     case ActionTypes.PLAYLIST_DELETED:
-      if (!response.errors) { deletePlaylist(response); }
+      if (!response.errors) {
+        deletePlaylist(response);
+      }
       break;
 
     case ActionTypes.PLAYLISTING_CREATED:
-      if (!response.errors) { addTrackToPlaylist(response); }
+      if (!response.errors) {
+        addTrackToPlaylist(response);
+      }
       break;
 
     case ActionTypes.PLAYLISTING_DELETED:
-      if (!response.errors) { removeTrackFromPlaylist(response); }
+      if (!response.errors) {
+        removeTrackFromPlaylist(response);
+      }
       break;
 
     case ActionTypes.LOGIN_RESPONSE:

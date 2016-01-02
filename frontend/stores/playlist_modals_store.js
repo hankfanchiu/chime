@@ -61,9 +61,7 @@ PlaylistModalsStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.PLAYLIST_DELETED:
-      if (response.errors) {
-        _errors = response.errors;
-      } else {
+      if (!response.errors) {
         recordPlaylistDeleted();
       }
 

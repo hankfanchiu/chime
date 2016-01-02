@@ -1,7 +1,7 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Button = require("react-bootstrap").Button;
-var TrackStore = require("../../stores/track_store");
+var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
 var History = require("react-router").History;
 
@@ -9,15 +9,11 @@ var DeleteTrackModal = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return this.getStateFromStore();
-  },
-
-  getStateFromStore: function () {
-    return { show: TrackStore.showDeleteModal() };
+    return { show: TrackModalsStore.showDeleteModal() };
   },
 
   componentDidMount: function () {
-    this.listenerToken = TrackStore.addListener(this._onChange);
+    this.listenerToken = TrackModalsStore.addListener(this._onChange);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -33,20 +29,7 @@ var DeleteTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getStateFromStore());
-
-    this._redirectIfDeleted();
-  },
-
-  _redirectIfDeleted: function () {
-    var trackDeleted = TrackStore.getTrackDeleted();
-
-    if (!trackDeleted) { return; }
-
-    var pathname = "/" + this.username;
-    var pushState = this.history.pushState.bind(this, null, pathname);
-
-    setTimeout(pushState, 300);
+    this.setState({ show: TrackModalsStore.showDeleteModal() });
   },
 
   close: function () {

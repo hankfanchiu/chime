@@ -30,10 +30,10 @@ module.exports = {
 
     // Upload
     SHOW_UPLOAD_MODAL: null,
+    CLOSE_UPLOAD_MODAL: null,
     PUBLIC_URL_RECEIVED: null,
     DIRECT_UPLOAD_PROGRESS_RECEIVED: null,
     DIRECT_UPLOAD_SUCCESS_RECEIVED: null,
-    RESET_UPLOAD_STORE: null,
 
     // Discover
     DISCOVER_TRACKS_RECEIVED: null,

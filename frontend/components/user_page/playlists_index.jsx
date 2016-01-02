@@ -2,6 +2,7 @@ var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var PlaylistStore = require("../../stores/playlist_store");
+var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
@@ -18,6 +19,7 @@ var PlaylistsIndex = React.createClass({
 
   componentDidMount: function () {
     this.listenerToken = PlaylistStore.addListener(this._onChange);
+    PlaylistActions.fetchPlaylists(this.props.params.username);
   },
 
   componentWillUnmount: function () {

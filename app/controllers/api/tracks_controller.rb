@@ -46,6 +46,8 @@ class Api::TracksController < ApplicationController
 
     return not_found if @track.nil?
 
+    @playlistings = @track.playlistings
+
     if @track.destroy
       render :destroyed
     else

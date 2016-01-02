@@ -18,7 +18,11 @@ UploadStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.SHOW_UPLOAD_MODAL:
-      setShowModal();
+      setShowModal(true);
+      break;
+
+    case ActionTypes.CLOSE_UPLOAD_MODAL:
+      resetUploadStore();
       break;
 
     case ActionTypes.PUBLIC_URL_RECEIVED:
@@ -34,12 +38,11 @@ UploadStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_CREATED:
-      if (!response.errors) { setTrackPathname(response); }
+      if (!response.errors) {
+        recordTrackCreated(response);
+      }
       break;
 
-    case ActionTypes.RESET_UPLOAD_STORE:
-      resetUploadStore();
-      break;
   };
 };
 
@@ -56,15 +59,15 @@ UploadStore.getProgress = function () {
 };
 
 UploadStore.isUploaded = function () {
-  return _responseStatus === 200;
+  return (_responseStatus === 200);
 };
 
 UploadStore.getTrackPathname = function () {
   return _newTrackPathname;
 };
 
-var setShowModal = function () {
-  _showModal = true;
+var setShowModal = function (boolean) {
+  _showModal = boolean;
 
   UploadStore.__emitChange();
 };
@@ -88,24 +91,24 @@ var setResponseStatus = function (response) {
   UploadStore.__emitChange();
 };
 
-var setTrackPathname = function (response) {
+var recordTrackCreated = function (response) {
   var track = response.track;
+  var pathname = "/" + track.user.username + "/" + track.slug;
 
+  _newTrackPathname = pathname;
   _showModal = false;
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
-  _newTrackPathname = "/" + track.user.username + "/" + track.slug;
 
   UploadStore.__emitChange();
-};
+}
 
 var resetUploadStore = function () {
   _showModal = false;
   _publicUrl = null;
   _progress = 0;
   _responseStatus = null;
-  _newTrackPathname = null;
 
   UploadStore.__emitChange();
 };

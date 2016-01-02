@@ -2,38 +2,14 @@ var Store = require("flux/utils").Store;
 var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
-var _showEditModal = false;
-var _updatedTrackPathname = null;
-var _showDeleteModal = false;
-var _trackDeleted = false;
 var _tracks = {};
-
 var TrackStore = new Store(AppDispatcher);
 
 TrackStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
-  _updatedTrackPathname = null;
-  _trackDeleted = false;
-
   switch (actionType) {
-
-    case ActionTypes.SHOW_EDIT_TRACK_MODAL:
-      setShowEditModal(true);
-      break;
-
-    case ActionTypes.CLOSE_EDIT_TRACK_MODAL:
-      setShowEditModal(false);
-      break;
-
-    case ActionTypes.SHOW_DELETE_TRACK_MODAL:
-      setShowDeleteModal(true);
-      break;
-
-    case ActionTypes.CLOSE_DELETE_TRACK_MODAL:
-      setShowDeleteModal(false);
-      break;
 
     case ActionTypes.TRACKS_RECEIVED:
       if (!response.errors) { resetTracks(response); }
@@ -44,7 +20,7 @@ TrackStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_CREATED:
-      if (!response.errors) { addTrack(response); }
+      if (!response.errors) { setTrack(response); }
       break;
 
     case ActionTypes.TRACK_UPDATED:
@@ -69,22 +45,6 @@ TrackStore.__onDispatch = function (payload) {
   };
 };
 
-TrackStore.showEditModal = function () {
-  return _showEditModal;
-};
-
-TrackStore.showDeleteModal = function () {
-  return _showDeleteModal;
-};
-
-TrackStore.getUpdatedTrackPathname = function () {
-  return _updatedTrackPathname;
-};
-
-TrackStore.getTrackDeleted = function () {
-  return _trackDeleted;
-};
-
 TrackStore.getTracksByUsername = function (username) {
   var tracks = _tracks[username];
 
@@ -96,18 +56,6 @@ TrackStore.find = function (username, slug) {
   var track = userTracks[slug];
 
   return (track ? jQuery.extend({}, track) : null);
-};
-
-var setShowEditModal = function (boolean) {
-  _showEditModal = boolean;
-
-  TrackStore.__emitChange();
-};
-
-var setShowDeleteModal = function (boolean) {
-  _showDeleteModal = boolean;
-
-  TrackStore.__emitChange();
 };
 
 var resetTracks = function (tracks) {
@@ -147,16 +95,6 @@ var setTrack = function (response) {
   TrackStore.__emitChange();
 };
 
-var addTrack = function (response) {
-  var newTrack = response.track;
-  var username = newTrack.user.username;
-
-  _tracks[username] = _tracks[username] || {};
-  _tracks[username][newTrack.slug] = newTrack;
-
-  TrackStore.__emitChange();
-};
-
 var updateTrack = function (response) {
   var oldSlug = response.old_slug;
   var updatedTrack = response.track;
@@ -168,8 +106,6 @@ var updateTrack = function (response) {
   }
 
   _tracks[username][newSlug] = updatedTrack;
-  _updatedTrackPathname = "/" + username + "/" + newSlug;
-  _showEditModal = false;
 
   TrackStore.__emitChange();
 };
@@ -180,9 +116,6 @@ var deleteTrack = function (response) {
   var username = deletedTrack.username;
 
   delete _tracks[username][slug];
-
-  _trackDeleted = true;
-  _showDeleteModal = false;
 
   TrackStore.__emitChange();
 };
