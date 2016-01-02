@@ -31,10 +31,11 @@ UserStore.__onDispatch = function (payload) {
 };
 
 UserStore.find = function (username) {
-  var user = _users[username] || {};
-  var userCopy = jQuery.extend({}, user);
+  var user = _users[username];
 
-  return userCopy;
+  if (!user) { return null; }
+  
+  return jQuery.extend({}, user);
 };
 
 var setUser = function (response) {

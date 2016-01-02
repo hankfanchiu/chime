@@ -82,9 +82,7 @@ var TracksIndex = React.createClass({
   },
 
   render: function () {
-    var trackCount = Object.keys(this.state.tracks).length;
-
-    if (trackCount === 0) { return this.noTracks(); }
+    if (!this.state.tracks) { return this.noTracks(); }
 
     return (
       <ListGroup className="tracks-index">

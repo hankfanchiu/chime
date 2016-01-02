@@ -36,7 +36,7 @@ var TrackPage = React.createClass({
     this.userListener = UserStore.addListener(this._onChange);
     this.trackListener = TrackStore.addListener(this._onChange);
     this.sessionListener = SessionStore.addListener(this._onChange);
-    
+
     UserActions.fetchUser(username);
   },
 
@@ -47,10 +47,10 @@ var TrackPage = React.createClass({
     var sameUser = (this.props.params.username === nextUser);
     var sameTrack = (this.props.params.track === nextTrack);
 
-    if (!sameTrack && !sameUser) {
-      UserActions.fetchUser(nextUser);
-    } else if (!sameTrack && sameUser) {
+    if (sameUser && !sameTrack) {
       TrackActions.fetchTrack(nextUser, nextTrack);
+    } else if (!sameUser) {
+      UserActions.fetchUser(nextUser);
     }
   },
 

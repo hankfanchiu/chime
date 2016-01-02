@@ -75,40 +75,33 @@ PlaylistStore.showModal = function () {
   return _showModal;
 };
 
-PlaylistStore.all = function () {
-  var playlistsCopy = jQuery.extend({}, _playlists);
-
-  return playlistsCopy;
-};
-
 PlaylistStore.getPlaylistsByUsername = function (username) {
-  var playlists = _playlists[username] || {};
-  var playlistsCopy = jQuery.extend({}, playlists);
+  var userPlaylists = _playlists[username];
 
-  return playlistsCopy;
+  if (!userPlaylists) { return null; }
+
+  return jQuery.extend({}, userPlaylists);
 };
 
 PlaylistStore.find = function (username, slug) {
-  var playlist = (_playlists[username] ? _playlists[username][slug] : {});
+  var userPlaylists = _playlists[username] || {};
+  var foundPlaylist = userPlaylists[slug];
 
-  var playlistCopy = jQuery.extend({}, playlist);
+  if (!foundPlaylist) { return null; }
 
-  return playlistCopy;
+  return jQuery.extend({}, foundPlaylist);
 };
 
 PlaylistStore.playlistContainsTrack = function (playlistSlug, trackId) {
   var clientPlaylist = _clientPlaylists[playlistId];
 
-  if (!clientPlaylist) { return; }
+  if (!clientPlaylist) { return false; }
 
-  var tracks = clientPlaylist.tracks;
-  var foundIndex = -1;
-
-  tracks.findIndex(function (possibleTrack, index) {
-    if (possibleTrack.id === trackId) { foundIndex = index; }
+  var foundIndex = clientPlaylist.tracks.findIndex(function (track) {
+    return (track.id === trackId);
   });
 
-  return foundIndex !== -1;
+  return (foundIndex !== -1);
 };
 
 PlaylistStore.getNewPlaylistPathname = function () {

@@ -4,15 +4,37 @@ var UserSidebarAvatar = require("./user_sidebar_avatar");
 
 var UserSidebar = React.createClass({
   playlistCount: function () {
-    return Object.keys(this.props.playlists).length;
+    var playlists = this.props.playlists;
+
+    if (!playlists) {
+      return 0;
+    } else {
+      return Object.keys(this.props.playlists).length;
+    }
   },
 
   trackCount: function () {
-    return Object.keys(this.props.tracks).length;
+    var tracks = this.props.tracks;
+
+    if (!tracks) {
+      return 0;
+    } else {
+      return Object.keys(this.props.tracks).length;
+    }
+  },
+
+  renderNoUser: function () {
+    return (
+      <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar">
+
+      </Col>
+    );
   },
 
   render: function () {
     var user = this.props.user;
+
+    if (!user) { return this.renderNoUser(); }
 
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar">

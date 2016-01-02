@@ -12,7 +12,7 @@ var PlaylistDetail = React.createClass({
     PlaylistingActions.deletePlaylisting(data);
   },
 
-  renderTracks: function () {
+  tracks: function () {
     var tracks = this.props.playlist.tracks;
     var playTrack = this.props.playTrack;
 
@@ -27,15 +27,13 @@ var PlaylistDetail = React.createClass({
   render: function () {
     var playlist = this.props.playlist;
 
-    if (!playlist) {
-      return <div className="row" />;
-    }
+    if (!playlist) { return <div className="row" />; }
 
     return (
       <div className="row">
         <h1>{ playlist.title }</h1>
 
-        { this.renderTracks() }
+        { this.tracks() }
       </div>
     );
   }
