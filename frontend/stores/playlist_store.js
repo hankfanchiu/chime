@@ -159,7 +159,8 @@ var setPlaylist = function (response) {
   PlaylistStore.__emitChange();
 };
 
-var addPlaylist = function (playlist) {
+var addPlaylist = function (response) {
+  var playlist = response.playlist;
   var username = playlist.user.username;
   var pathname = "/" + username + "/playlists/" + playlist.slug;
 
