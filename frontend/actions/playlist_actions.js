@@ -3,8 +3,9 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var PlaylistActions = {
-  // UI actions
+  // UI ACTIONS
 
+  // Modal to add tracks to playlists, or to create a new playlist:
   showCreateModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_CREATE_PLAYLIST_MODAL
@@ -17,7 +18,33 @@ var PlaylistActions = {
     });
   },
 
-  // Request actions
+  // Modal to confirm deleting a playlist:
+  showDeleteModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_DELETE_PLAYLIST_MODAL
+    });
+  },
+
+  closeDeleteModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_DELETE_PLAYLIST_MODAL
+    });
+  },
+
+  // Modal to edit and update a playlist:
+  showEditModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SHOW_EDIT_PLAYLIST_MODAL
+    });
+  },
+
+  closeEditModal: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLOSE_EDIT_PLAYLIST_MODAL
+    });
+  },
+
+  // REQUEST ACTIONS
 
   fetchPlaylists: function (username) {
     PlaylistAPIUtils.fetchPlaylists(
@@ -37,7 +64,7 @@ var PlaylistActions = {
   createPlaylist: function (playlistData) {
     PlaylistAPIUtils.createPlaylist(
       playlistData,
-      PlaylistActions.receiveCreatedPlaylist
+      PlaylistActions.receivePlaylistCreated
     );
   },
 
@@ -45,18 +72,18 @@ var PlaylistActions = {
     PlaylistAPIUtils.updatePlaylist(
       playlistId,
       playlistData,
-      PlaylistActions.receivePlaylist
+      PlaylistActions.receivePlaylistUpdated
     );
   },
 
   deletePlaylist: function (playlistId) {
     PlaylistAPIUtils.deletePlaylist(
       playlistId,
-      PlaylistActions.receivePlaylist
+      PlaylistActions.receivePlaylistDeleted
     );
   },
 
-  // Response actions
+  // RESPONSE ACTIONS
 
   receivePlaylists: function (response) {
     AppDispatcher.dispatch({
@@ -72,9 +99,23 @@ var PlaylistActions = {
     });
   },
 
-  receiveCreatedPlaylist: function (response) {
+  receivePlaylistCreated: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAYLIST_CREATED,
+      response: response
+    });
+  },
+
+  receivePlaylistUpdated: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAYLIST_UPDATED,
+      response: response
+    });
+  },
+
+  receivePlaylistDeleted: function (response) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.PLAYLIST_DELETED,
       response: response
     });
   }

@@ -2,7 +2,6 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
-var SessionStore = require("../../stores/session_store");
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
