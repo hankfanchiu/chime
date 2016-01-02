@@ -1,5 +1,6 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
+var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
 var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
@@ -9,7 +10,10 @@ var DeleteTrackModal = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return { show: TrackModalsStore.showDeleteModal() };
+    return {
+      errors: TrackModalsStore.getErrors(),
+      show: TrackModalsStore.showDeleteModal()
+    };
   },
 
   componentDidMount: function () {
@@ -19,9 +23,9 @@ var DeleteTrackModal = React.createClass({
   componentWillReceiveProps: function (nextProps) {
     var track = nextProps.track;
 
-    if (!track) { return; }
-
-    this.username = nextProps.track.user.username;
+    if (track) {
+      this.username = track.user.username;
+    }
   },
 
   componentWillUnmount: function () {
@@ -29,7 +33,10 @@ var DeleteTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ show: TrackModalsStore.showDeleteModal() });
+    this.setState({
+      errors: TrackModalsStore.getErrors(),
+      show: TrackModalsStore.showDeleteModal()
+    });
   },
 
   close: function () {
@@ -40,7 +47,17 @@ var DeleteTrackModal = React.createClass({
     TrackActions.deleteTrack(this.props.track.id);
   },
 
+  errors: function () {
+    return (
+      <Alert bsStyle="danger">
+        An error has occurred. Please refresh the page and try again.
+      </Alert>
+    );
+  },
+
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal bsSize="small" onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -48,6 +65,8 @@ var DeleteTrackModal = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
+          { noErrors ? "" : this.errors() }
+
           <p>Are you sure you want to permanently delete this track?</p>
 
           <p>There's no undoing this delete!</p>
