@@ -26,7 +26,7 @@
     "babel-loader": "^6.2.0",
     "babel-preset-react": "^6.3.13",
     "flux": "^2.1.1",
-    "history": "^1.13.1",
+    "history": "^1.17.0",
     "keymirror": "^0.1.1",
     "react": "^0.14.5",
     "react-addons-linked-state-mixin": "^0.14.5",
