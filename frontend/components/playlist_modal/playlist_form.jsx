@@ -8,7 +8,6 @@ var Input = require("react-bootstrap").Input;
 var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
-var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
@@ -38,7 +37,7 @@ var PlaylistForm = React.createClass({
   },
 
   _disabled: function () {
-    return this.state.title === "";
+    return (this.state.title === "");
   },
 
   _handleSubmit: function (e) {

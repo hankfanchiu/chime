@@ -2,26 +2,14 @@ var Store = require("flux/utils").Store;
 var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
-var _showModal = false;
 var _playlists = {};
-var _newPlaylistPathname = null;
 var PlaylistStore = new Store(AppDispatcher);
 
 PlaylistStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
-  _newPlaylistPathname = null;
-
   switch (actionType) {
-
-    case ActionTypes.SHOW_PLAYLIST_MODAL:
-      setShowModal(true);
-      break;
-
-    case ActionTypes.CLOSE_PLAYLIST_MODAL:
-      setShowModal(false);
-      break;
 
     case ActionTypes.PLAYLISTS_RECEIVED:
       if (!response.errors) { resetPlaylists(response); }
@@ -32,7 +20,7 @@ PlaylistStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.PLAYLIST_CREATED:
-      if (!response.errors) { addPlaylist(response); }
+      if (!response.errors) { setPlaylist(response); }
       break;
 
     case ActionTypes.PLAYLIST_UPDATED:
@@ -71,10 +59,6 @@ PlaylistStore.__onDispatch = function (payload) {
   };
 };
 
-PlaylistStore.showModal = function () {
-  return _showModal;
-};
-
 PlaylistStore.getPlaylistsByUsername = function (username) {
   var userPlaylists = _playlists[username];
 
@@ -100,23 +84,13 @@ PlaylistStore.playlistContainsTrack = function (playlistSlug, trackId) {
   return (foundIndex !== -1);
 };
 
-PlaylistStore.getNewPlaylistPathname = function () {
-  return _newPlaylistPathname;
-};
-
-var setShowModal = function (boolean) {
-  _showModal = boolean;
-
-  PlaylistStore.__emitChange();
-};
-
 var resetPlaylists = function (playlists) {
   var username;
+
   _playlists = {};
 
   playlists.forEach(function (playlist) {
     username = playlist.user.username;
-
     _playlists[username] = _playlists[username] || {};
     _playlists[username][playlist.slug] = playlist;
   });
@@ -148,17 +122,6 @@ var setPlaylist = function (response) {
   PlaylistStore.__emitChange();
 };
 
-var addPlaylist = function (response) {
-  var playlist = response.playlist;
-  var username = playlist.user.username;
-  var pathname = "/" + username + "/playlists/" + playlist.slug;
-
-  _showModal = false;
-  _newPlaylistPathname = pathname;
-
-  PlaylistStore.__emitChange();
-};
-
 var updatePlaylist = function (response) {
   var oldSlug = response.old_slug;
   var updatedPlaylist = response.playlist;
@@ -170,8 +133,6 @@ var updatePlaylist = function (response) {
   }
 
   _playlists[username][newSlug] = updatedPlaylist;
-  _updatedPlaylistPathname = "/" + username + "/playlists/" + newSlug;
-  _showEditModal = false;
 
   PlaylistStore.__emitChange();
 };
@@ -182,9 +143,6 @@ var deletePlaylist = function (response) {
   var username = deletedPlaylist.username;
 
   delete _playlists[username][slug];
-
-  _playlistDeleted = true;
-  _showDeleteModal = false;
 
   PlaylistStore.__emitChange();
 };
