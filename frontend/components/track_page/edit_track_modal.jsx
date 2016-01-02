@@ -2,6 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
@@ -14,8 +15,9 @@ var EditTrackModal = React.createClass({
 
   getInitialState: function () {
     return {
-      show: TrackModalsStore.showEditModal(),
-      disabled: true
+      errors: TrackModalsStore.getErrors(),
+      disabled: true,
+      show: TrackModalsStore.showEditModal()
     };
   },
 
@@ -26,13 +28,13 @@ var EditTrackModal = React.createClass({
   componentWillReceiveProps: function (nextProps) {
     var track = nextProps.track;
 
-    if (!track) { return; }
-
-    this.setState({
-      title: track.title,
-      description: track.description,
-      imgUrl: track.img_square
-    });
+    if (track) {
+      this.setState({
+        title: track.title,
+        description: track.description,
+        imgUrl: track.img_square
+      });
+    }
   },
 
   componentWillUnmount: function () {
@@ -41,11 +43,12 @@ var EditTrackModal = React.createClass({
 
   _onChange: function () {
     this.setState({
-      show: TrackModalsStore.showEditModal(),
-      pathname: TrackModalsStore.getUpdatedTrackPathname()
+      errors: TrackModalsStore.getErrors(),
+      pathname: TrackModalsStore.getUpdatedTrackPathname(),
+      show: TrackModalsStore.showEditModal()
     });
 
-    this._redirectIfSaved();
+    this._redirectIfTitleChange();
   },
 
   _disabled: function () {
@@ -77,18 +80,34 @@ var EditTrackModal = React.createClass({
     this.setState({ disabled: false, title: title });
   },
 
-  _redirectIfSaved: function () {
-    var pathname = this.state.pathname;
+  _redirectIfTitleChange: function () {
+    var newPathname = this.state.pathname;
 
-    if (pathname) {
-      var pushState = this.history.pushState.bind(this, null, pathname);
-      
-      setTimeout(pushState, 300);
+    if (newPathname && (newPathname !== this.props.pathname)) {
+      setTimeout(function () {
+        this.history.pushState(null, newPathname);
+      }.bind(this), 300);
     }
   },
 
   close: function () {
     TrackActions.closeEditModal();
+  },
+
+  errors: function () {
+    if (this.state.errors.length === 1) {
+      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    }
+
+    var errorList = this.state.errors.map(function (error, idx) {
+      return <li key={ idx }>{ error }</li>;
+    });
+
+    return (
+      <Alert bsStyle="danger">
+        <ul>{ errorList }</ul>
+      </Alert>
+    );
   },
 
   titleLabel: function () {
@@ -110,6 +129,8 @@ var EditTrackModal = React.createClass({
   },
 
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal onHide={ this.close }
         dialogClassName="edit-track-modal"
@@ -120,6 +141,8 @@ var EditTrackModal = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
+          { noErrors ? "" : this.errors() }
+
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <div className="upload-img">
@@ -138,7 +161,7 @@ var EditTrackModal = React.createClass({
               <Input type="text"
                 label={ this.titleLabel() }
                 ref="title"
-                placeholder="Change your track title"
+                placeholder="Edit your track title"
                 help="Changing your track title will also change its URL!"
                 value={ this.state.title }
                 onChange={ this._handleTitleChange } />

@@ -26,7 +26,7 @@ After the upload finishes successfully, the client--still storing the public URL
 
 For image files that on average are less than 5MB, a pass-through upload is sufficient.
 
-Upon submitting a new track, or updating a user or track, the image file (if attached) is included as form data in a POST/PATCH request to the server. The Paperclip gem does its magic with the AWS SDK, and posts the image file to S3.
+Upon submitting a new track, or updating a user or track, the image file (if attached) is included as form data in a POST/PATCH request to the server. The Paperclip gem does its magic with the AWS SDK, and posts the image file to S3. The image attachment data is stored in the database, along with the public URL to the image file on S3.
 
 ## Environments
 

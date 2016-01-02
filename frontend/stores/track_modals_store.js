@@ -49,7 +49,7 @@ TrackModalsStore.__onDispatch = function (payload) {
 
     case ActionTypes.TRACK_UPDATED:
       if (response.errors) {
-        _errors = response.errors;
+        recordErrors(response.errors);
       } else {
         recordTrackUpdated(response);
       }
@@ -74,6 +74,10 @@ TrackModalsStore.getUpdatedTrackPathname = function () {
   return _updatedTrackPathname;
 };
 
+TrackModalsStore.getErrors = function () {
+  return _errors.slice();
+};
+
 var setShowDeleteModal = function (boolean) {
   _showDeleteModal = boolean;
 
@@ -82,6 +86,12 @@ var setShowDeleteModal = function (boolean) {
 
 var setShowEditModal = function (boolean) {
   _showEditModal = boolean;
+
+  TrackModalsStore.__emitChange();
+};
+
+var recordErrors = function (errors) {
+  _errors = errors;
 
   TrackModalsStore.__emitChange();
 };

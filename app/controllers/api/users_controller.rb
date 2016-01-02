@@ -42,16 +42,12 @@ class Api::UsersController < ApplicationController
 
   def prevent_if_username_exists
     if user_exists?
-      username_not_available
+      render json: { errors: ["Username is not available"] }
       false
     end
   end
 
   def user_exists?
     User.exists?(username: params[:user][:username])
-  end
-
-  def username_not_available
-    render json: { errors: ["Username is not available"] }
   end
 end

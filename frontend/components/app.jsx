@@ -6,7 +6,7 @@ var HomePageNav = require("./nav/home_page_nav");
 var SignUpModal = require("./session/sign_up_modal");
 var LoginModal = require("./session/login_modal");
 var SettingsModal = require("./session/settings_modal");
-var TrackUploadModal = require("./track_upload_modal/track_upload_modal");
+var UploadModal = require("./upload_modal/upload_modal");
 var Footer = require("./footer/footer");
 var Player = require("./player/player");
 var Audio = require("./audio");
@@ -30,7 +30,7 @@ var App = React.createClass({
         <SignUpModal />
         <LoginModal />
         <SettingsModal />
-        <TrackUploadModal />
+        <UploadModal />
 
         { this.props.children }
 

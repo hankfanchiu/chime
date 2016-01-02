@@ -82,24 +82,6 @@ var SignUpModal = React.createClass({
     }
   },
 
-  styleEmail: function () {
-    if (this.state.email.length > 0) {
-      return (this.state.emailValid ? "success" : "error");
-    }
-  },
-
-  stylePassword: function () {
-    if (this.state.password.length > 0) {
-      return (this.state.passwordValid ? "success" : "error");
-    }
-  },
-
-  styleUsername: function () {
-    if (this.state.username.length > 0) {
-      return (this.state.usernameValid ? "success" : "error");
-    }
-  },
-
   errors: function () {
     if (this.state.errors.length === 1) {
       return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
@@ -134,6 +116,24 @@ var SignUpModal = React.createClass({
     };
 
     UserActions.createUser(userData);
+  },
+
+  styleEmail: function () {
+    if (this.state.email.length > 0) {
+      return (this.state.emailValid ? "success" : "error");
+    }
+  },
+
+  stylePassword: function () {
+    if (this.state.password.length > 0) {
+      return (this.state.passwordValid ? "success" : "error");
+    }
+  },
+
+  styleUsername: function () {
+    if (this.state.username.length > 0) {
+      return (this.state.usernameValid ? "success" : "error");
+    }
   },
 
   render: function () {
