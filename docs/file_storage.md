@@ -14,7 +14,7 @@ Upon selecting an audio file, the client initiates a direct upload.
 
 First, the frontend application requests for a presigned URL and a public URL from the server. The presigned URL is for making the POST request to the appropriate and authorized S3 bucket. The public URL is eventually stored in the database as the track's audio URL.
 
-In the backend, Rails fetches for these URLs through the AWS SDK.
+In the backend, Rails fetches for these URLs through the AWS SDK, and delivers them as JSON to the client.
 
 When the signed URLs are received, the client automatically makes a second request, this time to S3. Included in the request is the audio file. The traditional XMLHttpRequest API is used for this process.
 
@@ -24,9 +24,9 @@ After the upload finishes successfully, the client--still storing the public URL
 
 ## Pass-Through Upload
 
-For image files that, on average, are less than 5MB, a pass-through upload is sufficient.
+For image files that on average are less than 5MB, a pass-through upload is sufficient.
 
-On submit of a new track, or a user or track update, the image file is included as form data in a POST/PATCH request to the server. The Paperclip gem does its magic with the AWS SDK, and posts the image file to S3.
+Upon submitting a new track, or updating a user or track, the image file (if attached) is included as form data in a POST/PATCH request to the server. The Paperclip gem does its magic with the AWS SDK, and posts the image file to S3.
 
 ## Environments
 
