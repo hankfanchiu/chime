@@ -40,7 +40,6 @@ UploadStore.__onDispatch = function (payload) {
     case ActionTypes.RESET_UPLOAD_STORE:
       resetUploadStore();
       break;
-
   };
 };
 

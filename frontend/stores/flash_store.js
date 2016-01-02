@@ -7,12 +7,23 @@ var _errors = [];
 var FlashStore = new Store(AppDispatcher);
 
 FlashStore.__onDispatch = function (payload) {
+  var actionType = payload.actionType;
   var response = payload.response;
 
-  _success = response.success;
-  _errors = response.errors;
+  switch (actionType) {
 
-  FlashStore.__emitChange();
+    case ActionTypes.LOGIN_RESPONSE:
+      clearFlash();
+      break;
+
+    case ActionTypes.USER_CREATED:
+      clearFlash();
+      break;
+
+    default:
+      setFlash(response);
+      break;
+  };
 };
 
 FlashStore.success = function () {
@@ -21,6 +32,18 @@ FlashStore.success = function () {
 
 FlashStore.errors = function () {
   return _errors.slice();
+};
+
+var setFlash = function (response) {
+  _success = response.success || [];
+  _errors = response.errors || [];
+
+  FlashStore.__emitChange();
+};
+
+var clearFlash = function () {
+  _success = [];
+  _errors = [];
 };
 
 module.exports = FlashStore;

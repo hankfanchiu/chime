@@ -40,7 +40,6 @@ AudioStore.__onDispatch = function (payload) {
     case ActionTypes.AUDIO_DURATION_RECEIVED:
       setDuration(response);
       break;
-
   };
 };
 

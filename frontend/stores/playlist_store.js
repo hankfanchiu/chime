@@ -68,7 +68,6 @@ PlaylistStore.__onDispatch = function (payload) {
         updatePlaylists(response);
       }
       break;
-
   };
 };
 

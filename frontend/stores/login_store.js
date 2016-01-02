@@ -3,11 +3,14 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
+var _errors = [];
 var LoginStore = new Store(AppDispatcher);
 
 LoginStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
+
+  _errors = [];
 
   switch (actionType) {
 
@@ -20,14 +23,18 @@ LoginStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
+      _errors = response.errors || [];
       setShowModal(!!response.errors);
       break;
-
   };
 };
 
 LoginStore.showModal = function () {
   return _showModal;
+};
+
+LoginStore.getErrors = function () {
+  return _errors.slice();
 };
 
 var setShowModal = function (boolean) {

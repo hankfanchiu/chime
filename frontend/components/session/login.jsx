@@ -1,5 +1,6 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
@@ -14,6 +15,7 @@ var Login = React.createClass({
   getInitialState: function () {
     return {
       show: LoginStore.showModal(),
+      errors: LoginStore.getErrors(),
       username: "",
       password: ""
     };
@@ -38,6 +40,10 @@ var Login = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
     this.login();
+  },
+
+  errors: function () {
+    return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
   },
 
   loginDemo: function () {
@@ -65,6 +71,8 @@ var Login = React.createClass({
   },
 
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal bsSize="small" onHide={ this.reset } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -73,6 +81,8 @@ var Login = React.createClass({
 
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
+            { noErrors ? "" : this.errors() }
+
             <Input type="text"
               label="Username"
               placeholder="Enter your username"

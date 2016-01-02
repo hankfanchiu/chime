@@ -14,7 +14,6 @@ DiscoverStore.__onDispatch = function (payload) {
     case ActionTypes.DISCOVER_TRACKS_RECEIVED:
       resetTracks(response);
       break;
-
   };
 };
 

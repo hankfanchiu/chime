@@ -66,7 +66,6 @@ TrackStore.__onDispatch = function (payload) {
         updateTracks(response);
       }
       break;
-
   };
 };
 

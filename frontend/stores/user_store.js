@@ -27,7 +27,6 @@ UserStore.__onDispatch = function (payload) {
     case ActionTypes.CLIENT_RECEIVED:
       if (!response.errors) { setUser(response); }
       break;
-
   };
 };
 
@@ -40,7 +39,7 @@ UserStore.find = function (username) {
 
 var setUser = function (response) {
   var user = response.user;
-  
+
   _users[user.username] = user;
 
   UserStore.__emitChange();

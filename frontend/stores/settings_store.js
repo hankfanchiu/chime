@@ -22,7 +22,6 @@ SettingsStore.__onDispatch = function (payload) {
     case ActionTypes.USER_UPDATED:
       if (!response.errors) { setShowModal(false); }
       break;
-
   };
 };
 

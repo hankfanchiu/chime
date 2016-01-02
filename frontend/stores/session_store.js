@@ -30,7 +30,6 @@ SessionStore.__onDispatch = function (payload) {
     case ActionTypes.CLIENT_RECEIVED:
       if (!response.errors) { setClient(response); }
       break;
-
   };
 };
 

@@ -22,7 +22,6 @@ SignUpStore.__onDispatch = function (payload) {
     case ActionTypes.USER_CREATED:
       if (!response.errors) { setShowModal(false); }
       break;
-
   };
 };
 
