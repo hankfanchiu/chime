@@ -3,6 +3,7 @@ var Modal = require("react-bootstrap").Modal;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
 var SessionStore = require("../../stores/session_store");
+var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistForm = require("./playlist_form");
@@ -18,18 +19,20 @@ var PlaylistModal = React.createClass({
 
   getStateFromStore: function () {
     var clientUsername = this.props.clientUsername;
-    var show = PlaylistStore.showModal();
+    var show = PlaylistModalsStore.showCreateModal();
     var playlists = PlaylistStore.getPlaylistsByUsername(clientUsername);
 
     return { show: show, playlists: playlists };
   },
 
   componentDidMount: function () {
-    this.listenerToken = PlaylistStore.addListener(this._onChange);
+    this.modalListener = PlaylistModalsStore.addListener(this._onChange);
+    this.playlistListener = PlaylistStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.modalListener.remove();
+    this.playlistListener.remove();
   },
 
   _onChange: function () {
@@ -42,7 +45,7 @@ var PlaylistModal = React.createClass({
 
   close: function () {
     this.setState({ showForm: false });
-    PlaylistActions.closePlaylistModal();
+    PlaylistActions.closeCreateModal();
   },
 
   form: function () {

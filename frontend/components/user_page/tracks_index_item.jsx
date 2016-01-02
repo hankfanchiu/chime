@@ -22,7 +22,7 @@ var TracksIndexItem = React.createClass({
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
-      PlaylistActions.showPlaylistModal();
+      PlaylistActions.showCreateModal();
     } else {
       SessionActions.showLogin();
     }

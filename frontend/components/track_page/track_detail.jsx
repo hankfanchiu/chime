@@ -25,7 +25,7 @@ var TrackDetail = React.createClass({
 
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
-      PlaylistActions.showPlaylistModal();
+      PlaylistActions.showCreateModal();
     } else {
       SessionActions.showLogin();
     }

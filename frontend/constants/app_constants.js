@@ -60,9 +60,17 @@ module.exports = {
     PLAYLIST_UPDATED: null,
     PLAYLIST_DELETED: null,
 
-    // New playlist modal
-    SHOW_PLAYLIST_MODAL: null,
-    CLOSE_PLAYLIST_MODAL: null,
+    // Create playlist modal
+    SHOW_CREATE_PLAYLIST_MODAL: null,
+    CLOSE_CREATE_PLAYLIST_MODAL: null,
+
+    // Edit playlist modal
+    SHOW_EDIT_PLAYLIST_MODAL: null,
+    CLOSE_EDIT_PLAYLIST_MODAL: null,
+
+    // Delete playlist modal
+    SHOW_DELETE_PLAYLIST_MODAL: null,
+    CLOSE_DELETE_PLAYLIST_MODAL: null,
 
     // Playlisting
     PLAYLISTING_CREATED: null,

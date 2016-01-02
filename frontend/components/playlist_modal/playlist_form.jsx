@@ -7,8 +7,9 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Input = require("react-bootstrap").Input;
 var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
-var PlaylistActions = require("../../actions/playlist_actions");
+var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistStore = require("../../stores/playlist_store");
+var PlaylistActions = require("../../actions/playlist_actions");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
@@ -20,7 +21,7 @@ var PlaylistForm = React.createClass({
   },
 
   componentDidMount: function () {
-    this.listenerToken = PlaylistStore.addListener(this._onChange);
+    this.listenerToken = PlaylistModalsStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -28,7 +29,7 @@ var PlaylistForm = React.createClass({
   },
 
   _onChange: function () {
-    var pathname = PlaylistStore.getNewPlaylistPathname();
+    var pathname = PlaylistModalsStore.getNewPlaylistPathname();
 
     if (pathname) {
       this.setState(this.getInitialState);

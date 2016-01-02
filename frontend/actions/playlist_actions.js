@@ -5,15 +5,15 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 var PlaylistActions = {
   // UI actions
 
-  showPlaylistModal: function () {
+  showCreateModal: function () {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.SHOW_PLAYLIST_MODAL
+      actionType: ActionTypes.SHOW_CREATE_PLAYLIST_MODAL
     });
   },
 
-  closePlaylistModal: function () {
+  closeCreateModal: function () {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.CLOSE_PLAYLIST_MODAL
+      actionType: ActionTypes.CLOSE_CREATE_PLAYLIST_MODAL
     });
   },
 
