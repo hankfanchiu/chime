@@ -1,5 +1,6 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
@@ -14,6 +15,7 @@ var SignUp = React.createClass({
   getInitialState: function () {
     return {
       show: SignUpStore.showModal(),
+      errors: SignUpStore.getErrors(),
       username: "",
       email: "",
       password: ""
@@ -36,13 +38,31 @@ var SignUp = React.createClass({
     return (
       (this.state.username === "") ||
       (this.state.email === "") ||
-      (this.state.password === "")
+      (this.state.password.length < 6)
     );
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
     this.signUp();
+  },
+
+  errors: function () {
+    if (this.state.errors.length === 1) {
+      return <Alert bsStyle="danger">{ errors }</Alert>;
+    }
+
+    var errorList = this.state.errors.map(function (error, idx) {
+      return <li key={ idx }>{ error }</li>;
+    });
+
+    return (
+      <Alert bsStyle="danger">
+        <ul>
+          { errorList }
+        </ul>
+      </Alert>
+    );
   },
 
   reset: function () {
@@ -66,17 +86,18 @@ var SignUp = React.createClass({
   },
 
   render: function () {
-    return (
-      <Modal bsSize="small"
-        onHide={ this.reset }
-        show={ this.state.show }>
+    var noErrors = (this.state.errors.length === 0);
 
+    return (
+      <Modal bsSize="small" onHide={ this.reset } show={ this.state.show }>
         <Modal.Header closeButton>
           <Modal.Title>Create Account</Modal.Title>
         </Modal.Header>
 
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
+            { noErrors ? "" : this.errors() }
+
             <Input type="text"
               label="Username"
               placeholder="Identify your unique self"

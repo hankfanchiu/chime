@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  INVALID_USERNAMES = %w(discover collect login logout signup settings upload)
+  INVALID_USERNAMES =
+    %w(discover collect about contact new edit index session login logout signup settings tracks playlists users admin stylesheets assets javascripts images)
 
   has_many :tracks, dependent: :destroy
   has_many :playlists, dependent: :destroy
@@ -39,16 +40,24 @@ class User < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false },
     exclusion: { in: INVALID_USERNAMES },
-    length: { maximum: 30 }
+    length: { in: 4..30 },
+    format: { without: /\s/ }
 
   validates :password,
-    length: { minimum: 6, allow_nil: true }
+    length: {
+      minimum: 6,
+      allow_nil: true,
+      message: "must be at least 6 characters"
+    }
 
   validates_presence_of :password_digest
 
   validates :email,
     presence: true,
-    format: { with: VALID_EMAIL_REGEX }
+    format: {
+      with: VALID_EMAIL_REGEX,
+      message: "address is invalid"
+    }
 
   validates :session_token,
     presence: true,
