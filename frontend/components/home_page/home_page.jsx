@@ -19,16 +19,10 @@ var HomePage = React.createClass({
     };
   },
 
-  componentWillMount: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.goToDiscover();
-    }
-  },
-
   componentDidMount: function () {
     this.sessionListener = SessionStore.addListener(this._onChange);
     this.discoverListener = DiscoverStore.addListener(this._onChange);
-    
+
     DiscoverActions.fetchTracks();
   },
 

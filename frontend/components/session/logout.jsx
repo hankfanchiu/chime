@@ -6,19 +6,15 @@ var Logout = React.createClass({
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
       SessionActions.logout();
-    } else {
-      this.props.history.pushState(null, "/");
     }
   },
 
   componentDidMount: function () {
-    this.props.history.pushState(null, "/");
+    this.props.history.replaceState(null, "/discover");
   },
 
   render: function () {
-    return (
-      <p>You have been logged out.</p>
-    );
+    return <p>You have been logged out.</p>;
   }
 });
 

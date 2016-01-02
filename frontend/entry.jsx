@@ -15,13 +15,29 @@ var TracksIndex = require("./components/user_page/tracks_index");
 var PlaylistsIndex = require("./components/user_page/playlists_index");
 var TrackPage = require("./components/track_page/track_page");
 var PlaylistPage = require("./components/playlist_page/playlist_page");
+var SessionStore = require("./stores/session_store");
+
+var preventIfLoggedIn = function (nextState, replaceState) {
+  if (SessionStore.isLoggedIn()) {
+    replaceState({ nextPathname: nextState.location.pathname }, "/discover");
+  }
+};
+
+var requireLogin = function (nextState, replaceState) {
+  if (!SessionStore.isLoggedIn()) {
+    replaceState({ nextPathname: nextState.location.pathname }, "/discover");
+  }
+};
 
 var routes = (
   <Router history={ createHistory() }>
     <Route name="app" path="/" component={ App }>
-      <IndexRoute component={ HomePage } />
+      <IndexRoute component={ HomePage } onEnter={ preventIfLoggedIn }/>
       <Route name="discover" path="discover" component={ DiscoverPage } />
-      <Route name="logout" path="logout" component={ Logout } />
+      <Route name="logout"
+        path="logout"
+        component={ Logout }
+        onEnter={ requireLogin } />
 
       <Route name="user" path=":username" component={ UserPage }>
         <IndexRedirect to="tracks" />
