@@ -15,7 +15,12 @@ var SignUp = React.createClass({
     return {
       show: SignUpStore.showModal(),
       errors: SignUpStore.getErrors(),
-      password: ""
+      username: "",
+      usernameValid: true,
+      email: "",
+      emailValid: true,
+      password: "",
+      passwordValid: true
     };
   },
 
@@ -28,7 +33,11 @@ var SignUp = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getInitialState());
+    this.setState({
+      show: SignUpStore.showModal(),
+      errors: SignUpStore.getErrors(),
+      password: ""
+    });
   },
 
   _disabled: function () {
@@ -67,21 +76,19 @@ var SignUp = React.createClass({
   },
 
   _helpEmail: function () {
-    if (this.state.emailValid === false) {
+    if ((this.state.email.length > 0) && (!this.state.emailValid)) {
       return "Invalid email address";
     }
   },
 
   _helpPassword: function () {
-    if (this.state.passwordValid === false) {
+    if ((this.state.password.length > 0) && (!this.state.passwordValid)) {
       return "Password must be at least 6 characters"
     }
   },
 
   styleEmail: function () {
-    var email = this.state.email;
-
-    if (email && email.length > 0) {
+    if (this.state.email.length > 0) {
       return (this.state.emailValid ? "success" : "error");
     }
   },
@@ -93,9 +100,7 @@ var SignUp = React.createClass({
   },
 
   styleUsername: function () {
-    var username = this.state.username;
-
-    if (username && username.length > 0) {
+    if (this.state.username.length > 0) {
       return (this.state.usernameValid ? "success" : "error");
     }
   },
