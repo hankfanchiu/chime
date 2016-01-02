@@ -59,7 +59,7 @@ var LoggedIn = React.createClass({
             Playlists
           </MenuItem>
 
-          <MenuItem onClick={ UserActions.showSettings }>
+          <MenuItem onClick={ UserActions.showSettingsModal }>
             <Glyphicon glyph="cog" />
             <span className="spacer spacer-small" />
             Settings

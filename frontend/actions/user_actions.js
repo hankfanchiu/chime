@@ -6,13 +6,13 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 var UserActions = {
   // UI actions
 
-  showSettings: function () {
+  showSettingsModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_SETTINGS_MODAL
     });
   },
 
-  closeSettings: function () {
+  closeSettingsModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLOSE_SETTINGS_MODAL
     });

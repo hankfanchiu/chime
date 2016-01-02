@@ -3,9 +3,9 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
-var SettingsStore = new Store(AppDispatcher);
+var SettingsModalStore = new Store(AppDispatcher);
 
-SettingsStore.__onDispatch = function (payload) {
+SettingsModalStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
@@ -25,14 +25,14 @@ SettingsStore.__onDispatch = function (payload) {
   };
 };
 
-SettingsStore.showModal = function () {
+SettingsModalStore.showModal = function () {
   return _showModal;
 };
 
 var setShowModal = function (boolean) {
   _showModal = boolean;
 
-  SettingsStore.__emitChange();
+  SettingsModalStore.__emitChange();
 };
 
-module.exports = SettingsStore;
+module.exports = SettingsModalStore;

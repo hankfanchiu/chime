@@ -7,7 +7,7 @@ var Thumbnail = require("react-bootstrap").Thumbnail;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
-var SettingsStore = require("../../stores/settings_store");
+var SettingsModalStore = require("../../stores/settings_modal_store");
 var SessionStore = require("../../stores/session_store");
 var UserActions = require("../../actions/user_actions");
 
@@ -16,7 +16,7 @@ var Settings = React.createClass({
     var client = SessionStore.getClient();
 
     return {
-      show: SettingsStore.showModal(),
+      show: SettingsModalStore.showModal(),
       disabled: true,
       clientId: client.id,
       email: client.email,
@@ -26,7 +26,7 @@ var Settings = React.createClass({
   },
 
   componentDidMount: function () {
-    this.listenerToken = SettingsStore.addListener(this._onChange);
+    this.listenerToken = SettingsModalStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -66,7 +66,7 @@ var Settings = React.createClass({
   },
 
   close: function () {
-    UserActions.closeSettings();
+    UserActions.closeSettingsModal();
   },
 
   emailLabel: function () {
