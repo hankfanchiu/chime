@@ -1,8 +1,7 @@
 var UserAPIUtils = require("../utils/user_api_utils");
 var UploadAPIUtils = require("../utils/upload_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
-var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var UserActions = {
   // UI actions
@@ -26,15 +25,11 @@ var UserActions = {
   },
 
   createUser: function (userData) {
-    UserAPIUtils.createUser(userData, UserActions.receiveSignUpResponse);
+    UserAPIUtils.createUser(userData, UserActions.receiveUserCreated);
   },
 
   updateUser: function (userId, formData) {
-    UserAPIUtils.updateUser(userId, formData, UserActions.receiveClientUpdated);
-  },
-
-  uploadImage: function (userId, formData) {
-    UserAPIUtils.uploadImage(userId, formData, UserActions.receiveClient);
+    UserAPIUtils.updateUser(userId, formData, UserActions.receiveUserUpdated);
   },
 
   // Response actions
@@ -46,23 +41,16 @@ var UserActions = {
     });
   },
 
-  receiveSignUpResponse: function (response) {
+  receiveUserCreated: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.SIGN_UP_RESPONSE,
+      actionType: ActionTypes.USER_CREATED,
       response: response
     });
   },
 
-  receiveClient: function (response) {
+  receiveUserUpdated: function (response) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.CLIENT_RECEIVED,
-      response: response
-    });
-  },
-
-  receiveClientUpdated: function (response) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.CLIENT_UPDATED,
+      actionType: ActionTypes.USER_UPDATED,
       response: response
     });
   }

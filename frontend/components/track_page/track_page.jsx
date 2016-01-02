@@ -2,6 +2,7 @@ var React = require("react");
 var Grid = require("react-bootstrap").Grid;
 var SessionStore = require("../../stores/session_store");
 var UserStore = require("../../stores/user_store");
+var UserActions = require("../../actions/user_actions");
 var TrackStore = require("../../stores/track_store");
 var TrackActions = require("../../actions/track_actions");
 var PlayerActions = require("../../actions/player_actions");
@@ -22,22 +23,21 @@ var TrackPage = React.createClass({
 
     return {
       track: TrackStore.find(username, slug),
+      user: UserStore.find(username),
       clientUsername: SessionStore.getClientUsername(),
       isLoggedIn: SessionStore.isLoggedIn(),
       isClient: SessionStore.isClient(username)
     };
   },
 
-  componentWillMount: function () {
-    var username = this.props.params.username;
-    var slug = this.props.params.track;
-
-    TrackActions.fetchTrack(username, slug);
-  },
-
   componentDidMount: function () {
+    var username = this.props.params.username;
+
+    this.userListener = UserStore.addListener(this._onChange);
     this.trackListener = TrackStore.addListener(this._onChange);
     this.sessionListener = SessionStore.addListener(this._onChange);
+    
+    UserActions.fetchUser(username);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -47,12 +47,15 @@ var TrackPage = React.createClass({
     var sameUser = (this.props.params.username === nextUser);
     var sameTrack = (this.props.params.track === nextTrack);
 
-    if (sameUser && sameTrack) { return; }
-
-    TrackActions.fetchTrack(nextUser, nextTrack);
+    if (!sameTrack && !sameUser) {
+      UserActions.fetchUser(nextUser);
+    } else if (!sameTrack && sameUser) {
+      TrackActions.fetchTrack(nextUser, nextTrack);
+    }
   },
 
   componentWillUnmount: function () {
+    this.userListener.remove();
     this.trackListener.remove();
     this.sessionListener.remove();
   },
@@ -62,7 +65,7 @@ var TrackPage = React.createClass({
   },
 
   goToUser: function () {
-    var pathname = "/" + this.state.track.user.username;
+    var pathname = "/" + this.state.user.username;
 
     this.props.history.pushState(null, pathname);
   },
@@ -75,6 +78,7 @@ var TrackPage = React.createClass({
             goToUser={ this.goToUser } />
 
           <TrackDetail track={ this.state.track }
+            user={ this.state.user }
             goToUser={ this.goToUser }
             isLoggedIn={ this.state.isLoggedIn }
             isClient={ this.state.isClient } />

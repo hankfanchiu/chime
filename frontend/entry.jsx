@@ -4,8 +4,7 @@ var Router = require("react-router").Router;
 var Route = require("react-router").Route;
 var IndexRoute = require("react-router").IndexRoute;
 var IndexRedirect = require("react-router").IndexRedirect;
-var createBrowserHistory = require("history/lib/createBrowserHistory");
-var history = createBrowserHistory();
+var createHistory = require("history").createHistory;
 
 var App = require("./components/app");
 var HomePage = require("./components/home_page/home_page");
@@ -17,8 +16,8 @@ var PlaylistsIndex = require("./components/user_page/playlists_index");
 var TrackPage = require("./components/track_page/track_page");
 var PlaylistPage = require("./components/playlist_page/playlist_page");
 
-var router = (
-  <Router history={ history }>
+var routes = (
+  <Router history={ createHistory() }>
     <Route name="app" path="/" component={ App }>
       <IndexRoute component={ HomePage } />
       <Route name="discover" path="discover" component={ DiscoverPage } />
@@ -39,5 +38,5 @@ var router = (
 );
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(router, document.getElementById('root'));
+  ReactDOM.render(routes, document.getElementById('root'));
 });

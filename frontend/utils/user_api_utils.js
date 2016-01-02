@@ -23,26 +23,7 @@ var UserAPIUtils = {
       data: formData,
       processData: false,
       contentType: false,
-      success: callback
-    });
-  },
-
-  uploadImage: function (userId, formData, callback) {
-    $.ajax({
-      url: "/api/users/" + userId,
-      type: "PUT",
-      data: formData,
-      processData: false,
-      contentType: false,
       dataType: "json",
-      success: callback
-    });
-  },
-
-  deleteUser: function (userId, callback) {
-    $.ajax({
-      url: "/api/users/" + userId,
-      type: "DELETE",
       success: callback
     });
   }

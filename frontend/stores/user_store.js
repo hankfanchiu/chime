@@ -13,16 +13,21 @@ UserStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.USER_RECEIVED:
-      resetUser(response);
+      if (!response.errors) { setUser(response); }
+      break;
+
+    case ActionTypes.USER_CREATED:
+      if (!response.errors) { setUser(response); }
+      break;
+
+    case ActionTypes.USER_UPDATED:
+      if (!response.errors) { setUser(response); }
       break;
 
     case ActionTypes.CLIENT_RECEIVED:
-      resetUser(response);
+      if (!response.errors) { setUser(response); }
       break;
 
-    case ActionTypes.CLIENT_UPDATED:
-      if (!response.errors) { updateUser(response); }
-      break;
   };
 };
 
@@ -33,15 +38,9 @@ UserStore.find = function (username) {
   return userCopy;
 };
 
-var resetUser = function (user) {
-  _users[user.username] = user;
-
-  UserStore.__emitChange();
-};
-
-var updateUser = function (response) {
+var setUser = function (response) {
   var user = response.user;
-
+  
   _users[user.username] = user;
 
   UserStore.__emitChange();

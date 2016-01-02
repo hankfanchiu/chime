@@ -21,13 +21,11 @@ var Discover = React.createClass({
     };
   },
 
-  componentWillMount: function () {
-    DiscoverActions.fetchTracks();
-  },
-
   componentDidMount: function () {
     this.discoverListener = DiscoverStore.addListener(this._onChange);
     this.sessionListener = SessionStore.addListener(this._onChange);
+    
+    DiscoverActions.fetchTracks();
   },
 
   componentWillUnmount: function () {

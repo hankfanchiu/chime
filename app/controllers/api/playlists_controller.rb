@@ -12,7 +12,7 @@ class Api::PlaylistsController < ApplicationController
     @playlist = current_user.playlists.new(playlist_params)
 
     if @playlist.save
-      render :show
+      render :created
     else
       render json: { errors: @playlist.errors.full_messages }
     end
@@ -23,8 +23,10 @@ class Api::PlaylistsController < ApplicationController
 
     return not_found if @playlist.nil?
 
+    @old_slug = @playlist.slug
+
     if @playlist.update(playlist_params)
-      render :show
+      render :updated
     else
       render json: { errors: @playlist.errors.full_messages }
     end
@@ -45,7 +47,7 @@ class Api::PlaylistsController < ApplicationController
     return not_found if @playlist.nil?
 
     if @playlist.destroy
-      render json: { success: ["Playlist deleted"] }
+      render :destroyed
     else
       render json: { errors: @playlist.errors.full_messages }
     end

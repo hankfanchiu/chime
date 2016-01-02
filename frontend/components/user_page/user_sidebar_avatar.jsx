@@ -11,7 +11,7 @@ var UserSidebarAvatar = React.createClass({
 
     formData.append("user[avatar]", img);
 
-    UserActions.uploadImage(clientId, formData);
+    UserActions.updateUser(clientId, formData);
   },
 
   noUpload: function () {

@@ -9,8 +9,6 @@ var Footer = React.createClass({
   },
 
   render: function () {
-    var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/logo.png";
-
     return (
       <footer className="footer">
         <section className="footer-wrapper container">

@@ -6,10 +6,10 @@ var PlaylistsIndexItem = require("./playlists_index_item");
 
 var PlaylistsIndex = React.createClass({
   getInitialState: function () {
-    return this.getStatesFromStore();
+    return this.getStateFromStore();
   },
 
-  getStatesFromStore: function () {
+  getStateFromStore: function () {
     var username = this.props.params.username;
     var playlists = PlaylistStore.getPlaylistsByUsername(username);
 
@@ -25,7 +25,7 @@ var PlaylistsIndex = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getStatesFromStore());
+    this.setState(this.getStateFromStore());
   },
 
   noPlaylists: function () {

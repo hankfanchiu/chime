@@ -3,43 +3,41 @@ var Col = require("react-bootstrap").Col;
 var UserSidebarAvatar = require("./user_sidebar_avatar");
 
 var UserSidebar = React.createClass({
-  userTrackCount: function () {
-    var tracks = this.props.user.tracks;
-
-    return (tracks ? tracks.length : 0);
+  playlistCount: function () {
+    return Object.keys(this.props.playlists).length;
   },
 
-  userPlaylistCount: function () {
-    var playlists = this.props.user.playlists;
-
-    return (playlists ? playlists.length : 0);
+  trackCount: function () {
+    return Object.keys(this.props.tracks).length;
   },
 
   render: function () {
+    var user = this.props.user;
+
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar">
-        <UserSidebarAvatar user={ this.props.user }
+        <UserSidebarAvatar user={ user }
           client={ this.props.client }
           isClient={ this.props.isClient } />
 
-        <h2>{ this.props.user.username }</h2>
+        <h2>{ user.username }</h2>
 
         <section className="user-asset-count">
           <div className="user-asset">
             <h4 className="grey-heading">
-              Tracks: { this.userTrackCount() }
+              Tracks: { this.trackCount() }
             </h4>
           </div>
 
           <div className="user-asset">
             <h4 className="grey-heading">
-              Playlists: { this.userPlaylistCount() }
+              Playlists: { this.playlistCount() }
             </h4>
           </div>
         </section>
 
         <section className="user-profile">
-          { this.props.user.description }
+          { user.description }
         </section>
       </Col>
     );

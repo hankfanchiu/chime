@@ -12,7 +12,7 @@ var Player = require("./player/player");
 var Audio = require("./audio");
 
 var App = React.createClass({
-  componentWillMount: function () {
+  componentDidMount: function () {
     var username = SessionStore.getClientUsername();
 
     if (username) {

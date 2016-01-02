@@ -1,7 +1,6 @@
 var Store = require("flux/utils").Store;
 var AppDispatcher = require("../dispatcher/dispatcher");
-var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
 var SettingsStore = new Store(AppDispatcher);
@@ -20,7 +19,7 @@ SettingsStore.__onDispatch = function (payload) {
       setShowModal(false);
       break;
 
-    case ActionTypes.CLIENT_UPDATED:
+    case ActionTypes.USER_UPDATED:
       if (!response.errors) { setShowModal(false); }
       break;
 

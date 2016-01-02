@@ -52,7 +52,7 @@ var TrackDetail = React.createClass({
   },
 
   render: function () {
-    var user = this.props.track.user;
+    var user = this.props.user;
 
     if (!user) { return <Row />; }
 

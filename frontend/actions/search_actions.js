@@ -1,7 +1,6 @@
 var SearchAPIUtils = require("../utils/search_api_utils");
 var AppDispatcher = require("../dispatcher/dispatcher");
-var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var SearchActions = {
   // Request actions

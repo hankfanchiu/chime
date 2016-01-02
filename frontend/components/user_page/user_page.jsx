@@ -7,41 +7,54 @@ var NavItem = require("react-bootstrap").NavItem;
 var SessionStore = require("../../stores/session_store");
 var UserStore = require("../../stores/user_store");
 var UserActions = require("../../actions/user_actions");
+var TrackStore = require("../../stores/track_store");
+var PlaylistStore = require("../../stores/playlist_store");
 var UserSidebar = require("./user_sidebar");
 
 var UserPage = React.createClass({
   getInitialState: function () {
-    return this.getStatesFromStore();
+    return this.getStateFromStore();
   },
 
-  getStatesFromStore: function () {
+  getStateFromStore: function () {
     var username = this.props.params.username;
 
     return {
       user: UserStore.find(username),
+      tracks: TrackStore.getTracksByUsername(username),
+      playlists: PlaylistStore.getPlaylistsByUsername(username),
       client: SessionStore.getClient(),
       isClient: SessionStore.isClient(username)
     };
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
+    this.userListener = UserStore.addListener(this._onChange);
+    this.sessionListener = SessionStore.addListener(this._onChange);
+    this.trackListener = TrackStore.addListener(this._onChange);
+    this.playlistListener = PlaylistStore.addListener(this._onChange);
+
     UserActions.fetchUser(this.props.params.username);
   },
 
-  componentDidMount: function () {
-    this.listenerToken = UserStore.addListener(this._onChange);
-  },
-
   componentWillReceiveProps: function (nextProps) {
-    UserActions.fetchUser(nextProps.params.username);
+    var nextUser = nextProps.params.username;
+    var sameUser = (this.props.params.username === nextUser);
+
+    if (!sameUser) {
+      UserActions.fetchUser(nextUser);
+    }
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
+    this.userListener.remove();
+    this.sessionListener.remove();
+    this.trackListener.remove();
+    this.playlistListener.remove();
   },
 
   _onChange: function () {
-    this.setState(this.getStatesFromStore());
+    this.setState(this.getStateFromStore());
   },
 
   _handleSelect: function (selectKey) {
@@ -50,14 +63,16 @@ var UserPage = React.createClass({
 
   render: function () {
     var username = this.props.params.username;
-    var tracks = "/" + username + "/tracks";
-    var playlists = "/" + username + "/playlists";
+    var trackPathname = "/" + username + "/tracks";
+    var playlistPathname = "/" + username + "/playlists";
 
     return (
       <main>
         <Grid>
           <Row>
             <UserSidebar user={ this.state.user }
+              tracks={ this.state.tracks }
+              playlists={ this.state.playlists }
               client={ this.state.client }
               isClient={ this.state.isClient } />
 
@@ -66,11 +81,11 @@ var UserPage = React.createClass({
                 activeKey={ this.props.location.pathname }
                 onSelect={ this._handleSelect }>
 
-                <NavItem eventKey={ tracks }>
+                <NavItem eventKey={ trackPathname }>
                   <h4 className="user-page-nav">Tracks</h4>
                 </NavItem>
 
-                <NavItem eventKey={ playlists }>
+                <NavItem eventKey={ playlistPathname }>
                   <h4 className="user-page-nav">Playlists</h4>
                 </NavItem>
               </Nav>

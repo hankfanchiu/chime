@@ -16,15 +16,12 @@ var PlaylistPage = React.createClass({
     return { playlist: PlaylistStore.find(username, slug) };
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
     var username = this.props.params.username;
     var slug = this.props.params.playlist;
 
-    PlaylistActions.fetchPlaylist(username, slug);
-  },
-
-  componentDidMount: function () {
     this.listenerToken = PlaylistStore.addListener(this._onChange);
+    PlaylistActions.fetchPlaylist(username, slug);
   },
 
   componentWillReceiveProps: function (nextProps) {

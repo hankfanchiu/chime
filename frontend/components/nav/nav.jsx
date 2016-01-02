@@ -12,10 +12,10 @@ var Navigation = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return this.getStatesFromStore();
+    return this.getStateFromStore();
   },
 
-  getStatesFromStore: function () {
+  getStateFromStore: function () {
     return {
       isLoggedIn: SessionStore.isLoggedIn(),
       user: SessionStore.getClient()
@@ -31,7 +31,7 @@ var Navigation = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getStatesFromStore());
+    this.setState(this.getStateFromStore());
   },
 
   _pushState: function (pathname) {

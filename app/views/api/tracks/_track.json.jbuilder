@@ -10,5 +10,5 @@ json.extract! track,
   :img_square
 
 json.user do
-  json.extract! track.user, :id, :username, :avatar_square
+  json.extract! track.user, :username
 end

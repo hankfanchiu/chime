@@ -7,14 +7,14 @@ module.exports = {
     SEARCH_RESULTS_RECEIVED: null,
 
     // Session
-    SIGN_UP_RESPONSE: null,
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
     CLIENT_RECEIVED: null,
-    CLIENT_UPDATED: null,
 
     // User
     USER_RECEIVED: null,
+    USER_CREATED: null,
+    USER_UPDATED: null,
 
     // Sign Up modal
     SHOW_SIGN_UP_MODAL: null,
@@ -39,22 +39,30 @@ module.exports = {
     DISCOVER_TRACKS_RECEIVED: null,
 
     // Track
-    SHOW_EDIT_TRACK_MODAL: null,
-    CLOSE_EDIT_TRACK_MODAL: null,
-    SHOW_DELETE_TRACK_MODAL: null,
-    CLOSE_DELETE_TRACK_MODAL: null,
     TRACKS_RECEIVED: null,
     TRACK_RECEIVED: null,
     TRACK_CREATED: null,
     TRACK_UPDATED: null,
     TRACK_DELETED: null,
 
+    // Edit track modal
+    SHOW_EDIT_TRACK_MODAL: null,
+    CLOSE_EDIT_TRACK_MODAL: null,
+
+    // Delete track modal
+    SHOW_DELETE_TRACK_MODAL: null,
+    CLOSE_DELETE_TRACK_MODAL: null,
+
     // Playlist
-    SHOW_PLAYLIST_MODAL: null,
-    CLOSE_PLAYLIST_MODAL: null,
     PLAYLISTS_RECEIVED: null,
     PLAYLIST_RECEIVED: null,
     PLAYLIST_CREATED: null,
+    PLAYLIST_UPDATED: null,
+    PLAYLIST_DELETED: null,
+
+    // New playlist modal
+    SHOW_PLAYLIST_MODAL: null,
+    CLOSE_PLAYLIST_MODAL: null,
 
     // Playlisting
     PLAYLISTING_CREATED: null,

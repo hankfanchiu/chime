@@ -13,15 +13,15 @@ var UserActions = require("../../actions/user_actions");
 
 var Settings = React.createClass({
   getInitialState: function () {
-    var user = SessionStore.getClient();
+    var client = SessionStore.getClient();
 
     return {
       show: SettingsStore.showModal(),
       disabled: true,
-      user: user,
-      email: user.email,
-      description: user.description,
-      avatarUrl: user.avatar_square
+      clientId: client.id,
+      email: client.email,
+      description: client.description,
+      avatarUrl: client.avatar_square
      };
   },
 
@@ -83,7 +83,7 @@ var Settings = React.createClass({
       formData.append("user[avatar]", this.state.img);
     }
 
-    UserActions.updateUser(this.state.user.id, formData);
+    UserActions.updateUser(this.state.clientId, formData);
   },
 
   render: function () {

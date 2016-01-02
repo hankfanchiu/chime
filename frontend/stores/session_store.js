@@ -1,7 +1,6 @@
 var Store = require("flux/utils").Store;
 var AppDispatcher = require("../dispatcher/dispatcher");
-var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _client = {};
 var SessionStore = new Store(AppDispatcher);
@@ -12,10 +11,6 @@ SessionStore.__onDispatch = function (payload) {
 
   switch (actionType) {
 
-    case ActionTypes.SIGN_UP_RESPONSE:
-      if (!response.errors) { setSession(response); }
-      break;
-
     case ActionTypes.LOGIN_RESPONSE:
       if (!response.errors) { setSession(response); }
       break;
@@ -24,12 +19,16 @@ SessionStore.__onDispatch = function (payload) {
       removeSession();
       break;
 
-    case ActionTypes.CLIENT_RECEIVED:
+    case ActionTypes.USER_CREATED:
+      if (!response.errors) { setSession(response); }
+      break;
+
+    case ActionTypes.USER_UPDATED:
       if (!response.errors) { setClient(response); }
       break;
 
-    case ActionTypes.CLIENT_UPDATED:
-      if (!response.errors) { updateClient(response); }
+    case ActionTypes.CLIENT_RECEIVED:
+      if (!response.errors) { setClient(response); }
       break;
 
   };
@@ -40,7 +39,7 @@ SessionStore.isLoggedIn = function () {
 };
 
 SessionStore.isClient = function (username) {
-  return _client.username === username;
+  return (_client.username === username);
 };
 
 SessionStore.getClient = function () {
@@ -54,10 +53,12 @@ SessionStore.getClientId = function () {
 };
 
 SessionStore.getClientUsername = function () {
-  return _client.username || localStorage.getItem("client");
+  return (_client.username || localStorage.getItem("client"));
 };
 
-var setSession = function (user) {
+var setSession = function (response) {
+  var user = response.user;
+
   localStorage.setItem("client", user.username);
   _client = user;
 
@@ -72,13 +73,7 @@ var removeSession = function () {
   SessionStore.__emitChange();
 };
 
-var setClient = function (user) {
-  _client = user;
-
-  SessionStore.__emitChange();
-};
-
-var updateClient = function (response) {
+var setClient = function (response) {
   _client = response.user;
 
   SessionStore.__emitChange();

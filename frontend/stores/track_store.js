@@ -1,7 +1,6 @@
 var Store = require("flux/utils").Store;
 var AppDispatcher = require("../dispatcher/dispatcher");
-var AppConstants = require("../constants/app_constants");
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showEditModal = false;
 var _updatedTrackPathname = null;
@@ -41,7 +40,7 @@ TrackStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.TRACK_RECEIVED:
-      if (!response.errors) { resetTrack(response); }
+      if (!response.errors) { setTrack(response); }
       break;
 
     case ActionTypes.TRACK_CREATED:
@@ -129,19 +128,20 @@ var resetTracks = function (tracks) {
 };
 
 var updateTracks = function (response) {
-  var username = response.username;
+  var user = response.user;
   var tracks = response.tracks;
 
-  _tracks[username] = _tracks[username] || {};
+  _tracks[user.username] = _tracks[user.username] || {};
 
   tracks.forEach(function (track) {
-    _tracks[username][track.slug] = track;
+    _tracks[user.username][track.slug] = track;
   });
 
   TrackStore.__emitChange();
 };
 
-var resetTrack = function (track) {
+var setTrack = function (response) {
+  var track = response.track;
   var username = track.user.username;
 
   _tracks[username] = _tracks[username] || {};
