@@ -33,9 +33,7 @@ UserStore.__onDispatch = function (payload) {
 UserStore.find = function (username) {
   var user = _users[username];
 
-  if (!user) { return null; }
-  
-  return jQuery.extend({}, user);
+  return (user ? jQuery.extend({}, user) : null);
 };
 
 var setUser = function (response) {

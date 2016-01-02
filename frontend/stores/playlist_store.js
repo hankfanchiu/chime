@@ -78,18 +78,14 @@ PlaylistStore.showModal = function () {
 PlaylistStore.getPlaylistsByUsername = function (username) {
   var userPlaylists = _playlists[username];
 
-  if (!userPlaylists) { return null; }
-
-  return jQuery.extend({}, userPlaylists);
+  return (userPlaylists ? jQuery.extend({}, userPlaylists) : null);
 };
 
 PlaylistStore.find = function (username, slug) {
   var userPlaylists = _playlists[username] || {};
   var foundPlaylist = userPlaylists[slug];
 
-  if (!foundPlaylist) { return null; }
-
-  return jQuery.extend({}, foundPlaylist);
+  return (foundPlaylist ? jQuery.extend({}, foundPlaylist) : null);
 };
 
 PlaylistStore.playlistContainsTrack = function (playlistSlug, trackId) {

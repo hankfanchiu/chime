@@ -13,7 +13,7 @@ var GiantPlayer = React.createClass({
   render: function () {
     var track = this.props.track;
 
-    if (!track.user) { return <Row />; }
+    if (!track) { return <Row />; }
 
     return (
       <Row className="giant-player">

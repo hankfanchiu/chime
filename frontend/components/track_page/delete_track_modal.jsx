@@ -21,8 +21,10 @@ var DeleteTrackModal = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
-    if (nextProps.track.user) {
-      this.username = nextProps.track.user.username;
+    var track = nextProps.track;
+
+    if (track) {
+      this.username = track.user.username;
     }
   },
 

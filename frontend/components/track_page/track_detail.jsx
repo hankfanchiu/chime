@@ -12,12 +12,14 @@ var AddToPlaylist = require("../utility/add_to_playlist");
 
 var TrackDetail = React.createClass({
   trackDescription: function () {
-    var description = this.props.track.description;
+    var track = this.props.track;
 
-    if (description === "") {
+    if (!track) {
+      return "";
+    } else if (track.description === "") {
       return "This track has no description!";
     } else {
-      return description;
+      return track.description;
     }
   },
 

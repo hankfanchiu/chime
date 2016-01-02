@@ -6,21 +6,13 @@ var UserSidebar = React.createClass({
   playlistCount: function () {
     var playlists = this.props.playlists;
 
-    if (!playlists) {
-      return 0;
-    } else {
-      return Object.keys(this.props.playlists).length;
-    }
+    return (playlists ? Object.keys(playlists).length : 0);
   },
 
   trackCount: function () {
     var tracks = this.props.tracks;
 
-    if (!tracks) {
-      return 0;
-    } else {
-      return Object.keys(this.props.tracks).length;
-    }
+    return (tracks ? Object.keys(tracks).length : 0);
   },
 
   renderNoUser: function () {

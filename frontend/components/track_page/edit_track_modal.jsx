@@ -24,10 +24,14 @@ var EditTrackModal = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
+    var track = nextProps.track;
+
+    if (!track) { return; }
+
     this.setState({
-      title: nextProps.track.title,
-      description: nextProps.track.description,
-      imgUrl: nextProps.track.img_square
+      title: track.title,
+      description: track.description,
+      imgUrl: track.img_square
     });
   },
 
@@ -108,9 +112,7 @@ var EditTrackModal = React.createClass({
         show={ this.state.show }>
 
         <Modal.Header closeButton>
-          <Modal.Title>
-            Edit Track
-          </Modal.Title>
+          <Modal.Title>Edit Track</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

@@ -88,18 +88,14 @@ TrackStore.getTrackDeleted = function () {
 TrackStore.getTracksByUsername = function (username) {
   var tracks = _tracks[username];
 
-  if (!tracks) { return null; }
-
-  return jQuery.extend({}, tracks);
+  return (tracks ? jQuery.extend({}, tracks) : null);
 };
 
 TrackStore.find = function (username, slug) {
   var userTracks = _tracks[username] || {};
-  var track = _tracks[username][slug];
+  var track = userTracks[slug];
 
-  if (!track) { return null; }
-
-  return jQuery.extend({}, track);
+  return (track ? jQuery.extend({}, track) : null);
 };
 
 var setShowEditModal = function (boolean) {
