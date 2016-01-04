@@ -1,5 +1,4 @@
 var React = require("react");
-var Search = require("./search");
 
 var Hero = React.createClass({
   render: function () {

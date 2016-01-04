@@ -34,7 +34,7 @@ section.mask {
 
 section.hero-message {
   position: relative;
-  top: 30%;
+  top: 25%;
   width: 100%;
   min-width: 970px;
   text-align: center;
@@ -70,6 +70,92 @@ section.hero-message {
     background: rgba(0,0,0,0.5);
   }
 }
+
+section.home-page-search-container {
+  position: relative;
+  margin-top: -100px;
+  width: 100%;
+  min-width: 970px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+}
+
+section.home-page-search-bar {
+  margin: 0 auto;
+  width: 600px;
+}
+
+div.search-group {
+  margin-bottom: 0;
+}
+
+figure.home-page-search-results {
+  position: absolute;
+  z-index: 1;
+  width: 600px;
+
+  div.search-option {
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    box-sizing: border-box;
+    background-color: #222;
+    color: #ccc;
+    font-weight: 300;
+    padding: 5px 10px;
+    border-left: 1px solid #222;
+    border-right: 1px solid #222;
+  }
+
+  div.search-option:first-child {
+    border-top: 1px solid #222;
+  }
+
+  div.search-option:last-child {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom: 1px solid #222;
+  }
+
+  div.search-option:hover {
+    background-color: #999;
+    color: white;
+  }
+
+  div.search-option-image {
+    display: inline-block;
+    vertical-align: top;
+    padding: 1px;
+    width: 22px;
+    height: 22px;
+  }
+
+  img.search-option-image {
+    margin: -5px 0 -5px 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  div.search-option-name {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px;
+    padding: 2px;
+    flex-grow: 1;
+  }
+
+  div.search-option-type {
+    display: inline-block;
+    vertical-align: top;
+    padding: 4px 0px 1px 1px;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+  }
+}
+
 
 div.home-page-hits {
   padding: 20px 0 60px 0;

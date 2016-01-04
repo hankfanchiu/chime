@@ -4,6 +4,7 @@ var SessionStore = require("../../stores/session_store");
 var DiscoverStore = require("../../stores/discover_store");
 var DiscoverActions = require("../../actions/discover_actions");
 var Hero = require("./hero");
+var Search = require("./search");
 var RandomTracks = require("./random_tracks");
 var Join = require("./join");
 
@@ -47,6 +48,8 @@ var HomePage = React.createClass({
     return (
       <main className="home-page">
         <Hero goToDiscover={ this.goToDiscover } />
+
+        <Search />
 
         <RandomTracks tracks={ this.state.tracks }
           goToDiscover={ this.goToDiscover } />
