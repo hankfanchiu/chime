@@ -1,20 +1,20 @@
 @media(min-width:1200px) {
   input#search-input {
-    width: 620px;
+    width: 580px;
   }
 
   figure.search-results {
-    width: 659px;
+    width: 619px;
   }
 }
 
 input#search-input {
-  min-width: 480px;
+  min-width: 420px;
 }
 
 figure.search-results {
   position: absolute;
-  min-width: 519px;
+  min-width: 459px;
 }
 
 div.search-option {
