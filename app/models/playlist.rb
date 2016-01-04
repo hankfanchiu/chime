@@ -31,12 +31,12 @@ class Playlist < ActiveRecord::Base
 
   validates_presence_of :user
 
+  def self.find_by_username(username)
+    self.joins(:user).where(users: { username: username })
+  end
+
   def self.find_by_username_and_slug(username, slug)
-    user = User.find_by(username: username)
-
-    return nil unless user
-
-    user.playlists.find_by(slug: slug)
+    self.find_by_username(username).find_by(slug: slug)
   end
 
   def tracks_ordered

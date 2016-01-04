@@ -29,6 +29,15 @@ var PlaylistsIndex = React.createClass({
     PlaylistActions.fetchPlaylists(this.props.params.username);
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    var nextUser = nextProps.params.username;
+    var sameUser = (this.props.params.username === nextUser);
+
+    if (!sameUser) {
+      PlaylistActions.fetchPlaylists(nextUser);
+    }
+  },
+
   componentWillUnmount: function () {
     this.playlistListener.remove();
     this.sessionListener.remove();
@@ -41,9 +50,7 @@ var PlaylistsIndex = React.createClass({
   noPlaylists: function () {
     return (
       <ListGroup>
-        <ListGroupItem>
-          This user has no playlists! :(
-        </ListGroupItem>
+        <ListGroupItem>This user has no playlists! :(</ListGroupItem>
       </ListGroup>
     );
   },

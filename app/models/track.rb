@@ -57,20 +57,16 @@ class Track < ActiveRecord::Base
   validates_attachment_content_type :img,
     content_type: ["image/jpeg", "image/gif", "image/png"]
 
+  def self.find_by_username(username)
+    self.joins(:user).where(users: { username: username })
+  end
+
   def self.find_by_username_and_slug(username, slug)
-    user = User.find_by(username: username)
-
-    return nil unless user
-
-    user.tracks.find_by(slug: slug)
+    self.find_by_username.find_by(slug: slug)
   end
 
   def self.search(query)
     self.includes(:user).where("title ILIKE ?", "%#{query}%")
-  end
-
-  def self.find_by_username(username)
-    self.joins(:user).where(users: { username: username })
   end
 
   def img_hero

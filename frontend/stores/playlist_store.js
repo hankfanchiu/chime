@@ -13,7 +13,7 @@ PlaylistStore.__onDispatch = function (payload) {
 
     case ActionTypes.PLAYLISTS_RECEIVED:
       if (!response.errors) {
-        resetPlaylists(response);
+        setPlaylists(response);
       }
       break;
 
@@ -98,10 +98,8 @@ PlaylistStore.playlistContainsTrack = function (playlistSlug, trackId) {
   return (foundIndex !== -1);
 };
 
-var resetPlaylists = function (playlists) {
+var setPlaylists = function (playlists) {
   var username;
-
-  _playlists = {};
 
   playlists.forEach(function (playlist) {
     username = playlist.user.username;

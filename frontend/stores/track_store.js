@@ -12,23 +12,33 @@ TrackStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.TRACKS_RECEIVED:
-      if (!response.errors) { resetTracks(response); }
+      if (!response.errors) {
+        setTracks(response);
+      }
       break;
 
     case ActionTypes.TRACK_RECEIVED:
-      if (!response.errors) { setTrack(response); }
+      if (!response.errors) {
+        setTrack(response);
+      }
       break;
 
     case ActionTypes.TRACK_CREATED:
-      if (!response.errors) { setTrack(response); }
+      if (!response.errors) {
+        setTrack(response);
+      }
       break;
 
     case ActionTypes.TRACK_UPDATED:
-      if (!response.errors) { updateTrack(response); }
+      if (!response.errors) {
+        updateTrack(response);
+      }
       break;
 
     case ActionTypes.TRACK_DELETED:
-      if (!response.errors) { deleteTrack(response); }
+      if (!response.errors) {
+        deleteTrack(response);
+      }
       break;
 
     case ActionTypes.USER_RECEIVED:
@@ -58,10 +68,8 @@ TrackStore.find = function (username, slug) {
   return (track ? jQuery.extend({}, track) : null);
 };
 
-var resetTracks = function (tracks) {
+var setTracks = function (tracks) {
   var username;
-  
-  _tracks = {};
 
   tracks.forEach(function (track) {
     username = track.user.username;
