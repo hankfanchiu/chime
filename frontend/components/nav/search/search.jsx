@@ -31,6 +31,10 @@ var Search = React.createClass({
     });
   },
 
+  _clearQuery: function () {
+    this.setState({ query: "" });
+  },
+
   _clearResults: function () {
     SearchActions.clearResults();
     this.setState({ showResults: false });
@@ -51,7 +55,7 @@ var Search = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
 
-
+    // TODO go to search results page
   },
 
   _queryForResults: function (query) {
@@ -68,7 +72,7 @@ var Search = React.createClass({
 
   searchResults: function () {
     return (
-      <SearchResults clearResults={ this._clearResults }
+      <SearchResults clearQuery={ this._clearQuery }
         tracks={ this.state.tracks }
         users={ this.state.users } />
     );
@@ -79,10 +83,11 @@ var Search = React.createClass({
 
     return (
       <Navbar.Form pullLeft>
-        <form onSubmit={ this._handleSubmit } onBlur={ this._test }>
+        <form onSubmit={ this._handleSubmit } onBlur={ this._clearResults }>
           <Input type="text"
             ref="input"
             id="search-input"
+            value={ this.state.query }
             label="Search"
             labelClassName="sr-only"
             addonAfter={ searchIcon }
@@ -91,7 +96,6 @@ var Search = React.createClass({
 
           { this.state.showResults ? this.searchResults() : "" }
         </form>
-
       </Navbar.Form>
     );
   }

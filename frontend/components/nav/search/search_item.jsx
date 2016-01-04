@@ -8,25 +8,12 @@ var SearchItem = React.createClass({
 
   goToPage: function () {
     this.history.pushState(null, this.props.pathname);
-
-    this.props.clearResults();
-  },
-
-  itemType: function () {
-    if (this.props.type === "user") {
-      return (
-        <Glyphicon glyph="user" />
-      );
-    } else if (this.props.type === "track") {
-      return (
-        <Glyphicon glyph="music" />
-      );
-    }
+    this.props.clearQuery();
   },
 
   render: function () {
     return (
-      <div className="search-option" onClick={ this.goToPage }>
+      <div className="search-option" onMouseDown={ this.goToPage }>
         <div className="search-option-image">
           <Image src={ this.props.imageUrl } className="search-option-image" />
         </div>
@@ -36,7 +23,7 @@ var SearchItem = React.createClass({
         </div>
 
         <div className="search-option-type">
-          { this.itemType() }
+          <Glyphicon glyph={ this.props.glyph } />
         </div>
       </div>
     );
