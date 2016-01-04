@@ -5,7 +5,7 @@ var NavItem = require("react-bootstrap").NavItem;
 var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
 var LoggedOut = require("./logged_out");
-var Search = require("./search/search");
+var Search = require("./search");
 var History = require("react-router").History;
 
 var Navigation = React.createClass({
