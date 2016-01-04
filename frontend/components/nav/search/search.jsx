@@ -36,8 +36,9 @@ var Search = React.createClass({
     this.setState({ showResults: false });
   },
 
-  _handleSearchChange: function () {
+  _handleQueryChange: function () {
     var query = this.refs.input.getValue();
+
     this.setState({ query: query });
 
     if (query === "") {
@@ -45,6 +46,12 @@ var Search = React.createClass({
     } else {
       this._queryForResults(query);
     }
+  },
+
+  _handleSubmit: function (e) {
+    e.preventDefault();
+
+
   },
 
   _queryForResults: function (query) {
@@ -61,7 +68,7 @@ var Search = React.createClass({
 
   searchResults: function () {
     return (
-      <SearchResults
+      <SearchResults clearResults={ this._clearResults }
         tracks={ this.state.tracks }
         users={ this.state.users } />
     );
@@ -72,16 +79,19 @@ var Search = React.createClass({
 
     return (
       <Navbar.Form pullLeft>
-        <Input type="text"
-          ref="input"
-          label="Search"
-          labelClassName="sr-only"
-          addonAfter={ searchIcon }
-          placeholder="Search for Tracks and Users"
-          onChange={ this._handleSearchChange }
-          onBlur={ this._clearResults } />
+        <form onSubmit={ this._handleSubmit } onBlur={ this._test }>
+          <Input type="text"
+            ref="input"
+            id="search-input"
+            label="Search"
+            labelClassName="sr-only"
+            addonAfter={ searchIcon }
+            placeholder="Search for artists and tracks"
+            onChange={ this._handleQueryChange } />
 
-        { this.state.showResults ? this.searchResults() : "" }
+          { this.state.showResults ? this.searchResults() : "" }
+        </form>
+
       </Navbar.Form>
     );
   }

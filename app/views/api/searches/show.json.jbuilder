@@ -7,6 +7,6 @@ end
 json.set! :tracks do
   json.array! @tracks do |track|
     json.extract! track, :title, :slug, :img_hero
-    json.user track.user.username
+    json.username track.user.username
   end
 end

@@ -3,34 +3,44 @@ var SearchItem = require("./search_item");
 
 var SearchResults = React.createClass({
   trackResults: function () {
+    var clearResults = this.props.clearResults;
+
     return this.props.tracks.map(function (track, idx) {
       return (
         <SearchItem key={ idx }
-          displayName={ track.title }
-          pathname={ "/" + track.user + "/" + track.slug } />
+          displayName={ track.username + ", " + track.title }
+          imageUrl={ track.img_hero }
+          type="track"
+          pathname={ "/" + track.username + "/" + track.slug }
+          clearResults={ clearResults } />
       );
     })
   },
 
   userResults: function () {
+    var clearResults = this.props.clearResults;
+
     return this.props.users.map(function (user, idx) {
       return (
         <SearchItem key={ idx }
           displayName={ user.username }
-          pathname={ "/" + user.username } />
+          imageUrl={ user.avatar_hero }
+          type="user"
+          pathname={ "/" + user.username }
+          clearResults={ clearResults } />
       );
     })
   },
 
   render: function () {
     return (
-      <div className="search-results">
+      <figure className="search-results">
 
         { this.userResults() }
 
         { this.trackResults() }
 
-      </div>
+      </figure>
     );
   }
 });
