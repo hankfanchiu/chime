@@ -1,14 +1,17 @@
 var React = require("react");
+var History = require("react-router").History;
 
 var SearchItem = React.createClass({
-  _handleClick: function () {
-    this.props.handleSearchClick(this.props.pathname);
+  mixins: [History],
+
+  goToPage: function () {
+    this.history.pushState(null, this.props.pathname);
   },
 
   render: function () {
     return (
       <div className="search-option">
-        <a onClick={ this._handleClick }>{ this.props.displayName }</a>
+        <a onClick={ this.goToPage }>{ this.props.displayName }</a>
       </div>
     );
   }

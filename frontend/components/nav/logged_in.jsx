@@ -7,22 +7,25 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var UploadActions = require("../../actions/upload_actions");
 var UserActions = require("../../actions/user_actions");
+var History = require("react-router").History;
 
 var LoggedIn = React.createClass({
-  goToPlaylists: function () {
-    var playlists = "/" + this.props.user.username + "/playlists";
+  mixins: [History],
 
-    this.props.pushState(playlists);
+  goToPlaylists: function () {
+    var pathname = "/" + this.props.user.username + "/playlists";
+
+    this.history.pushState(null, pathname);
   },
 
   goToTracks: function () {
-    var tracks = "/" + this.props.user.username + "/tracks";
+    var pathname = "/" + this.props.user.username + "/tracks";
 
-    this.props.pushState(tracks);
+    this.history.pushState(null, pathname);
   },
 
   logout: function () {
-    this.props.pushState("/logout");
+    this.history.pushState(null, "/logout");
   },
 
   dropdownTitle: function () {
@@ -31,7 +34,9 @@ var LoggedIn = React.createClass({
     return (
       <span>
         <Image src={ this.props.user.avatar_hero } style={ style } />
+        
         <span className="spacer spacer-small"></span>
+
         { this.props.user.username }
       </span>
     );

@@ -2,27 +2,21 @@ var React = require("react");
 var SearchItem = require("./search_item");
 
 var SearchResults = React.createClass({
-  renderTrackResults: function () {
-    var handleSearchClick = this.props.handleSearchClick;
-
+  trackResults: function () {
     return this.props.tracks.map(function (track, idx) {
       return (
         <SearchItem key={ idx }
           displayName={ track.title }
-          handleSearchClick={ handleSearchClick }
           pathname={ "/" + track.user + "/" + track.slug } />
       );
     })
   },
 
-  renderUserResults: function () {
-    var handleSearchClick = this.props.handleSearchClick;
-
+  userResults: function () {
     return this.props.users.map(function (user, idx) {
       return (
         <SearchItem key={ idx }
           displayName={ user.username }
-          handleSearchClick={ handleSearchClick }
           pathname={ "/" + user.username } />
       );
     })
@@ -32,10 +26,10 @@ var SearchResults = React.createClass({
     return (
       <div className="search-results">
 
-        { this.renderUserResults() }
+        { this.userResults() }
 
-        { this.renderTrackResults() }
-        
+        { this.trackResults() }
+
       </div>
     );
   }

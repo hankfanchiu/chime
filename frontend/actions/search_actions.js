@@ -3,6 +3,14 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var SearchActions = {
+  // Clear Search Store
+
+  clearResults: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CLEAR_SEARCH_RESULTS
+    });
+  },
+
   // Request actions
 
   fetchResults: function (query) {

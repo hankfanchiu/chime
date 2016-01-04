@@ -34,33 +34,29 @@ var Navigation = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
-  _pushState: function (pathname) {
-    this.history.pushState(null, pathname);
-  },
-
   goToDiscover: function () {
-    this._pushState("/discover");
+    this.history.pushState(null, "/discover");
   },
 
   goToHome: function () {
-    this._pushState("/");
+    this.history.pushState(null, "/");
   },
 
   loggedIn: function () {
-    return (
-      <LoggedIn user={ this.state.user } pushState={ this._pushState } />
-    );
+    return <LoggedIn user={ this.state.user } />;
   },
 
   loggedOut: function () {
-    return <LoggedOut pushState={ this._pushState } />;
+    return <LoggedOut />;
   },
 
   render: function () {
     return (
       <Navbar fixedTop>
         <Navbar.Header>
-          <a className="nav-logo" onClick={ this.goToHome }>Chime</a>
+          <a className="nav-logo" onClick={ this.goToHome }>
+            Chime
+          </a>
         </Navbar.Header>
 
         <div id="navbar">
@@ -69,7 +65,7 @@ var Navigation = React.createClass({
               Discover
             </NavItem>
 
-            <Search pushState={ this._pushState } />
+            <Search />
           </Nav>
 
           { this.state.isLoggedIn ? this.loggedIn() : this.loggedOut() }

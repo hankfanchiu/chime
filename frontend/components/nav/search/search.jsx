@@ -1,8 +1,7 @@
 var React = require("react");
-var ReactBootstrap = require("react-bootstrap");
-var Navbar = ReactBootstrap.Navbar;
-var Input = ReactBootstrap.Input;
-var Glyphicon = ReactBootstrap.Glyphicon;
+var Navbar = require("react-bootstrap").Navbar;
+var Input = require("react-bootstrap").Input;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var SearchActions = require("../../../actions/search_actions");
 var SearchStore = require("../../../stores/search_store");
 var SearchResults = require("./search_results");
@@ -11,9 +10,9 @@ var Search = React.createClass({
   getInitialState: function () {
     return {
       query: "",
-      users: SearchStore.getUserResults(),
+      showResults: false,
       tracks: SearchStore.getTrackResults(),
-      showResults: false
+      users: SearchStore.getUserResults()
     };
   },
 
@@ -27,35 +26,44 @@ var Search = React.createClass({
 
   _onChange: function () {
     this.setState({
-      users: SearchStore.getUserResults(),
-      tracks: SearchStore.getTrackResults()
+      tracks: SearchStore.getTrackResults(),
+      users: SearchStore.getUserResults()
     });
+  },
+
+  _clearResults: function () {
+    SearchActions.clearResults();
+    this.setState({ showResults: false });
   },
 
   _handleSearchChange: function () {
     var query = this.refs.input.getValue();
+    this.setState({ query: query });
 
-    if (query === "") { return; }
+    if (query === "") {
+      this._clearResults();
+    } else {
+      this._queryForResults(query);
+    }
+  },
 
-    if (this.promise) { clearInterval(this.promise); }
+  _queryForResults: function (query) {
+    if (this.promise) {
+      clearInterval(this.promise);
+    }
 
-    this.setState({ query: query, showResults: true });
     this.promise = setTimeout(function () {
       SearchActions.fetchResults(query.toLowerCase());
-    }.bind(this), 200);
+    }, 200);
+
+    this.setState({ showResults: true });
   },
 
-  _handleSearchClick: function (pathname) {
-    this.props.pushState(pathname);
-  },
-
-  renderSearchResults: function () {
-    if (!this.state.showResults) { return; }
-
+  searchResults: function () {
     return (
-      <SearchResults handleSearchClick={ this._handleSearchClick }
-        users={ this.state.users }
-        tracks={ this.state.tracks } />
+      <SearchResults
+        tracks={ this.state.tracks }
+        users={ this.state.users } />
     );
   },
 
@@ -70,9 +78,10 @@ var Search = React.createClass({
           labelClassName="sr-only"
           addonAfter={ searchIcon }
           placeholder="Search for Tracks and Users"
-          onChange={ this._handleSearchChange } />
+          onChange={ this._handleSearchChange }
+          onBlur={ this._clearResults } />
 
-        { this.renderSearchResults() }
+        { this.state.showResults ? this.searchResults() : "" }
       </Navbar.Form>
     );
   }

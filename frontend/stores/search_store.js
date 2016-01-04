@@ -13,7 +13,11 @@ SearchStore.__onDispatch = function (payload) {
   switch (actionType) {
 
     case ActionTypes.SEARCH_RESULTS_RECEIVED:
-      resetSearchResults(response)
+      resetSearchResults(response);
+      break;
+
+    case ActionTypes.CLEAR_SEARCH_RESULTS:
+      clearSearchResults();
       break;
   };
 };
@@ -29,6 +33,13 @@ SearchStore.getTrackResults = function () {
 var resetSearchResults = function (response) {
   _userMatches = response.users;
   _trackMatches = response.tracks;
+
+  SearchStore.__emitChange();
+};
+
+var clearSearchResults = function () {
+  _userMatches = [];
+  _trackMatches = [];
 
   SearchStore.__emitChange();
 };

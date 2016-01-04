@@ -5,6 +5,7 @@ module.exports = {
   ActionTypes: keyMirror({
     // Search
     SEARCH_RESULTS_RECEIVED: null,
+    CLEAR_SEARCH_RESULTS: null,
 
     // Session
     LOGIN_RESPONSE: null,
