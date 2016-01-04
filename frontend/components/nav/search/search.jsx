@@ -11,8 +11,8 @@ var Search = React.createClass({
     return {
       query: "",
       showResults: false,
-      tracks: SearchStore.getTrackResults(),
-      users: SearchStore.getUserResults()
+      tracks: SearchStore.getTopTrackResults(5),
+      users: SearchStore.getTopUserResults(5)
     };
   },
 
@@ -26,8 +26,8 @@ var Search = React.createClass({
 
   _onChange: function () {
     this.setState({
-      tracks: SearchStore.getTrackResults(),
-      users: SearchStore.getUserResults()
+      tracks: SearchStore.getTopTrackResults(5),
+      users: SearchStore.getTopUserResults(5)
     });
   },
 

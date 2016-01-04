@@ -22,12 +22,20 @@ SearchStore.__onDispatch = function (payload) {
   };
 };
 
-SearchStore.getUserResults = function () {
+SearchStore.getAllUserResults = function () {
   return _userMatches.slice();
 };
 
-SearchStore.getTrackResults = function () {
+SearchStore.getAllTrackResults = function () {
   return _trackMatches.slice();
+};
+
+SearchStore.getTopUserResults = function (num) {
+  return _userMatches.slice(0, num);
+};
+
+SearchStore.getTopTrackResults = function (num) {
+  return _trackMatches.slice(0, num);
 };
 
 var resetSearchResults = function (response) {
