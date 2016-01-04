@@ -15,7 +15,9 @@ var PlaylistList = React.createClass({
   },
 
   sadMessage: function () {
-    return <p>You have no playlists! Create one to add this track.</p>
+    return (
+      <p>You have no playlists! Create a playlist to add this track.</p>
+    );
   },
 
   playlistList: function () {
@@ -40,13 +42,10 @@ var PlaylistList = React.createClass({
   },
 
   render: function () {
-    var playlistCount = Object.keys(this.props.playlists).length;
-    var noPlaylists = (playlistCount === 0);
-
     return (
       <div>
         <Modal.Body>
-          { noPlaylists ? this.sadMessage() : this.playlistList() }
+          { this.props.playlists ? this.playlistList() : this.sadMessage()}
         </Modal.Body>
 
         <Modal.Footer>

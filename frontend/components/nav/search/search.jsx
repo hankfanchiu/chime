@@ -2,8 +2,8 @@ var React = require("react");
 var Navbar = require("react-bootstrap").Navbar;
 var Input = require("react-bootstrap").Input;
 var Glyphicon = require("react-bootstrap").Glyphicon;
-var SearchActions = require("../../../actions/search_actions");
 var SearchStore = require("../../../stores/search_store");
+var SearchActions = require("../../../actions/search_actions");
 var SearchResults = require("./search_results");
 
 var Search = React.createClass({
