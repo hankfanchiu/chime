@@ -17,9 +17,7 @@ var UserSidebar = React.createClass({
 
   renderNoUser: function () {
     return (
-      <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar">
-
-      </Col>
+      <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar" />
     );
   },
 
@@ -34,7 +32,9 @@ var UserSidebar = React.createClass({
           client={ this.props.client }
           isClient={ this.props.isClient } />
 
-        <h2>{ user.username }</h2>
+        <section className="user-username">
+          <h2>{ user.username }</h2>
+        </section>
 
         <section className="user-asset-count">
           <div className="user-asset">

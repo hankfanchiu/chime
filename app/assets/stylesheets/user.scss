@@ -8,6 +8,12 @@ h4.user-page-nav {
 }
 
 div.user-sidebar {
+  section.user-username {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+
   section.user-asset-count {
     width: 100%;
   }
