@@ -105,6 +105,7 @@ var resetPlaylists = function (playlists) {
 
   playlists.forEach(function (playlist) {
     username = playlist.user.username;
+
     _playlists[username] = _playlists[username] || {};
     _playlists[username][playlist.slug] = playlist;
   });
@@ -113,13 +114,12 @@ var resetPlaylists = function (playlists) {
 };
 
 var updatePlaylists = function (response) {
+  var playlists = response.playlists;
   var user = response.user;
   var username = user.username;
-  var playlists = response.playlists;
-
-  _playlists[username] = _playlists[username] || {};
 
   playlists.forEach(function (playlist) {
+    _playlists[username] = _playlists[username] || {};
     _playlists[username][playlist.slug] = playlist;
   });
 

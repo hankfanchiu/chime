@@ -4,7 +4,11 @@ class Api::TracksController < ApplicationController
   before_action :prevent_if_title_exists, only: [:create, :update]
 
   def index
-    @tracks = Track.all.includes(:user)
+    if params[:username]
+      @tracks = Track.find_by_username(params[:username])
+    else
+      @tracks = Track.all.includes(:user)
+    end
 
     render :index
   end

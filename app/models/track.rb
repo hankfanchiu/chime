@@ -69,6 +69,10 @@ class Track < ActiveRecord::Base
     self.includes(:user).where("title ILIKE ?", "%#{query}%")
   end
 
+  def self.find_by_username(username)
+    self.joins(:user).where(users: { username: username })
+  end
+
   def img_hero
     self.img.url(:hero)
   end

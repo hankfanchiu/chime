@@ -32,6 +32,15 @@ var TracksIndex = React.createClass({
     TrackActions.fetchTracks(this.props.params.username);
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    var nextUser = nextProps.params.username;
+    var sameUser = (this.props.params.username === nextUser);
+
+    if (!sameUser) {
+      TrackActions.fetchTracks(nextUser);
+    }
+  },
+
   componentWillUnmount: function () {
     this.trackListener.remove();
     this.sessionListener.remove();

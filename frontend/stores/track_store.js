@@ -60,6 +60,7 @@ TrackStore.find = function (username, slug) {
 
 var resetTracks = function (tracks) {
   var username;
+  
   _tracks = {};
 
   tracks.forEach(function (track) {
@@ -73,13 +74,13 @@ var resetTracks = function (tracks) {
 };
 
 var updateTracks = function (response) {
-  var user = response.user;
   var tracks = response.tracks;
-
-  _tracks[user.username] = _tracks[user.username] || {};
+  var user = response.user;
+  var username = user.username;
 
   tracks.forEach(function (track) {
-    _tracks[user.username][track.slug] = track;
+    _tracks[username] = _tracks[username] || {};
+    _tracks[username][track.slug] = track;
   });
 
   TrackStore.__emitChange();
