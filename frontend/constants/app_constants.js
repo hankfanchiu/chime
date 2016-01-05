@@ -31,6 +31,7 @@ module.exports = {
     USER_RECEIVED: null,
     USER_CREATED: null,
     USER_UPDATED: null,
+    UPLOAD_AVATAR_INITIATED: null,
 
     // Upload
     SHOW_UPLOAD_MODAL: null,

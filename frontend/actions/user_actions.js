@@ -50,6 +50,18 @@ var UserActions = {
     );
   },
 
+  uploadAvatar: function (userId, formData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.UPLOAD_AVATAR_INITIATED
+    });
+
+    UserAPIUtils.updateUser(
+      userId,
+      formData,
+      UserActions.receiveUserUpdated
+    );
+  },
+
   // Response actions
 
   receiveUser: function (response) {
