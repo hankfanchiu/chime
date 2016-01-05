@@ -73,6 +73,10 @@ var PlaylistActions = {
   },
 
   updatePlaylist: function (playlistId, playlistData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.UPDATE_PLAYLIST_INITIATED
+    });
+
     PlaylistAPIUtils.updatePlaylist(
       playlistId,
       playlistData,
@@ -81,6 +85,10 @@ var PlaylistActions = {
   },
 
   deletePlaylist: function (playlistId) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.DELETE_PLAYLIST_INITIATED
+    });
+
     PlaylistAPIUtils.deletePlaylist(
       playlistId,
       PlaylistActions.receivePlaylistDeleted

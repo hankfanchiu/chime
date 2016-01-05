@@ -2,30 +2,30 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
-var TrackModalsStore = require("../../stores/track_modals_store");
-var TrackActions = require("../../actions/track_actions");
+var PlaylistModalsStore = require("../../stores/playlist_modals_store");
+var PlaylistActions = require("../../actions/playlist_actions");
 var History = require("react-router").History;
 
-var DeleteTrackModal = React.createClass({
+var DeletePlaylistModal = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
     return {
-      errors: TrackModalsStore.getErrors(),
-      isDeleting: TrackModalsStore.isDeleting(),
-      show: TrackModalsStore.showDeleteModal()
+      errors: PlaylistModalsStore.getErrors(),
+      isDeleting: PlaylistModalsStore.isDeleting(),
+      show: PlaylistModalsStore.showDeleteModal()
     };
   },
 
   componentDidMount: function () {
-    this.listenerToken = TrackModalsStore.addListener(this._onChange);
+    this.listenerToken = PlaylistModalsStore.addListener(this._onChange);
   },
 
   componentWillReceiveProps: function (nextProps) {
-    var track = nextProps.track;
+    var playlist = nextProps.playlist;
 
-    if (track) {
-      this.username = track.user.username;
+    if (playlist) {
+      this.username = playlist.user.username;
     }
   },
 
@@ -38,15 +38,15 @@ var DeleteTrackModal = React.createClass({
   },
 
   _buttonState: function () {
-    return (this.state.isDeleting ? "Deleting Track..." : "Delete Track");
+    return (this.state.isDeleting ? "Deleting Playlist..." : "Delete Playlist");
   },
 
   close: function () {
-    TrackActions.closeDeleteModal();
+    PlaylistActions.closeDeleteModal();
   },
 
   delete: function () {
-    TrackActions.deleteTrack(this.props.track.id);
+    PlaylistActions.deletePlaylist(this.props.playlist.id);
   },
 
   errors: function () {
@@ -63,15 +63,13 @@ var DeleteTrackModal = React.createClass({
     return (
       <Modal bsSize="small" onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
-          <Modal.Title>Delete Track</Modal.Title>
+          <Modal.Title>Delete Playlist</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           { noErrors ? "" : this.errors() }
 
-          <p>Are you sure you want to permanently delete this track?</p>
-
-          <p>There's no undoing this delete!</p>
+          <p>Are you sure you want to delete this playlist?</p>
         </Modal.Body>
 
         <Modal.Footer>
@@ -88,4 +86,4 @@ var DeleteTrackModal = React.createClass({
   }
 });
 
-module.exports = DeleteTrackModal;
+module.exports = DeletePlaylistModal;

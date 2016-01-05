@@ -44,10 +44,6 @@ var DeleteTrackModal = React.createClass({
     return (this.state.isDeleting ? "Deleting Track..." : "Delete Track");
   },
 
-  _disabled: function () {
-    return this.state.isDeleting;
-  },
-
   _redirectIfDeleted: function () {
     var trackDeleted = this.state.trackDeleted;
 
@@ -97,7 +93,7 @@ var DeleteTrackModal = React.createClass({
           <Button onClick={ this.close }>Cancel</Button>
 
           <Button bsStyle="primary"
-            disabled={ this._disabled() }
+            disabled={ this.state.isDeleting }
             onClick={ this.delete }>
             { this._buttonState() }
           </Button>

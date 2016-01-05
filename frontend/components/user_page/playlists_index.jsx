@@ -5,6 +5,8 @@ var SessionStore = require("../../stores/session_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistsIndexItem = require("./playlists_index_item");
+var EditPlaylistModal = require("./edit_playlist_modal");
+var DeletePlaylistModal = require("./delete_playlist_modal");
 
 var PlaylistsIndex = React.createClass({
   getInitialState: function () {
@@ -38,6 +40,14 @@ var PlaylistsIndex = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  _setPlaylistToEdit: function (playlist) {
+    this.setState({ playlistToEdit: playlist });
+  },
+
+  _setPlaylistToDelete: function (playlist) {
+    this.setState({ playlistToDelete: playlist });
+  },
+
   noPlaylists: function () {
     return (
       <ListGroup>
@@ -55,7 +65,10 @@ var PlaylistsIndex = React.createClass({
       indexItem = (
         <PlaylistsIndexItem key={ playlist.id }
           playlist={ playlist }
-          username={ this.props.params.username } />
+          username={ this.props.params.username }
+          setPlaylistToDelete={ this._setPlaylistToDelete }
+          setPlaylistToEdit={ this._setPlaylistToEdit }
+          isClient={ this.state.isClient } />
       );
 
       playlistsIndexItems.push(indexItem);
@@ -70,6 +83,10 @@ var PlaylistsIndex = React.createClass({
     return (
       <ListGroup className="playlists-index">
         { this.playlistsIndexItems() }
+
+        <EditPlaylistModal playlist={ this.state.playlistToEdit } />
+
+        <DeletePlaylistModal playlist={ this.state.playlistToDelete } />
       </ListGroup>
     );
   }

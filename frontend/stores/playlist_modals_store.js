@@ -7,9 +7,11 @@ var _isSaving = false;
 var _newPlaylistPathname = null;
 
 var _showDeleteModal = false;
+var _isDeleting = false;
 var _playlistDeleted = false;
 
 var _showEditModal = false;
+var _isUpdating = false;
 var _updatedPlaylistPathname = null;
 
 var _errors = [];
@@ -61,29 +63,47 @@ PlaylistModalsStore.__onDispatch = function (payload) {
       _isSaving = false;
 
       if (response.errors) {
-        _errors = response.errors;
+        recordErrors(response.errors);
       } else {
         recordPlaylistCreated(response);
       }
 
       break;
 
+    case ActionTypes.DELETE_PLAYLIST_INITIATED:
+      setIsDeleting();
+      break;
+
     case ActionTypes.PLAYLIST_DELETED:
-      if (!response.errors) {
+      _isDeleting = false;
+
+      if (response.errors) {
+        recordErrors(response.errors);
+      } else {
         recordPlaylistDeleted();
       }
 
       break;
 
+    case ActionTypes.UPDATE_PLAYLIST_INITIATED:
+      setIsUpdating();
+      break;
+
     case ActionTypes.PLAYLIST_UPDATED:
+      _isUpdating = false;
+
       if (response.errors) {
-        _errors = response.errors;
+        recordErrors(response.errors);
       } else {
         recordPlaylistUpdated(response);
       }
 
       break;
   };
+};
+
+PlaylistModalsStore.getErrors = function () {
+  return _errors.slice();
 };
 
 PlaylistModalsStore.showCreateModal = function () {
@@ -100,6 +120,14 @@ PlaylistModalsStore.showEditModal = function () {
 
 PlaylistModalsStore.isSaving = function () {
   return _isSaving;
+};
+
+PlaylistModalsStore.isDeleting = function () {
+  return _isDeleting;
+};
+
+PlaylistModalsStore.isUpdating = function () {
+  return _isUpdating;
 };
 
 PlaylistModalsStore.getNewPlaylistPathname = function () {
@@ -138,6 +166,18 @@ var setIsSaving = function () {
   PlaylistModalsStore.__emitChange();
 };
 
+var setIsDeleting = function () {
+  _isDeleting = true;
+
+  PlaylistModalsStore.__emitChange();
+};
+
+var setIsUpdating = function () {
+  _isUpdating = true;
+
+  PlaylistModalsStore.__emitChange();
+};
+
 var recordPlaylistCreated = function (response) {
   var playlist = response.playlist;
   var username = playlist.user.username;
@@ -163,6 +203,12 @@ var recordPlaylistUpdated = function (response) {
 
   _updatedPlaylistPathname = "/" + username + "/playlists/" + newSlug;
   _showEditModal = false;
+
+  PlaylistModalsStore.__emitChange();
+};
+
+var recordErrors = function (errors) {
+  _errors = response.errors;
 
   PlaylistModalsStore.__emitChange();
 };

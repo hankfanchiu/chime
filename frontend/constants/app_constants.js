@@ -33,6 +33,13 @@ module.exports = {
     USER_UPDATED: null,
     UPLOAD_AVATAR_INITIATED: null,
 
+    // Track
+    TRACKS_RECEIVED: null,
+    TRACK_RECEIVED: null,
+    TRACK_CREATED: null,
+    TRACK_UPDATED: null,
+    TRACK_DELETED: null,
+
     // Upload
     SHOW_UPLOAD_MODAL: null,
     CLOSE_UPLOAD_MODAL: null,
@@ -41,25 +48,18 @@ module.exports = {
     DIRECT_UPLOAD_SUCCESS_RECEIVED: null,
     CREATE_TRACK_INITIATED: null,
 
-    // Discover
-    DISCOVER_TRACKS_RECEIVED: null,
-
-    // Track
-    TRACKS_RECEIVED: null,
-    TRACK_RECEIVED: null,
-    TRACK_CREATED: null,
-    TRACK_UPDATED: null,
-    TRACK_DELETED: null,
+    // Delete track modal
+    SHOW_DELETE_TRACK_MODAL: null,
+    CLOSE_DELETE_TRACK_MODAL: null,
+    DELETE_TRACK_INITIATED: null,
 
     // Edit track modal
     SHOW_EDIT_TRACK_MODAL: null,
     CLOSE_EDIT_TRACK_MODAL: null,
     UPDATE_TRACK_INITIATED: null,
 
-    // Delete track modal
-    SHOW_DELETE_TRACK_MODAL: null,
-    CLOSE_DELETE_TRACK_MODAL: null,
-    DELETE_TRACK_INITIATED: null,
+    // Discover
+    DISCOVER_TRACKS_RECEIVED: null,
 
     // Playlist
     PLAYLISTS_RECEIVED: null,
@@ -73,13 +73,15 @@ module.exports = {
     CLOSE_CREATE_PLAYLIST_MODAL: null,
     CREATE_PLAYLIST_INITIATED: null,
 
-    // Edit playlist modal
-    SHOW_EDIT_PLAYLIST_MODAL: null,
-    CLOSE_EDIT_PLAYLIST_MODAL: null,
-
     // Delete playlist modal
     SHOW_DELETE_PLAYLIST_MODAL: null,
     CLOSE_DELETE_PLAYLIST_MODAL: null,
+    DELETE_PLAYLIST_INITIATED: null,
+
+    // Edit playlist modal
+    SHOW_EDIT_PLAYLIST_MODAL: null,
+    CLOSE_EDIT_PLAYLIST_MODAL: null,
+    UPDATE_PLAYLIST_INITIATED: null,
 
     // Playlisting
     PLAYLISTING_CREATED: null,

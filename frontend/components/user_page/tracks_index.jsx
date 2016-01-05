@@ -44,13 +44,13 @@ var TracksIndex = React.createClass({
   _setTrackToAdd: function (track) {
     this.setState({ trackToAdd: track });
   },
+  
+  _setTrackToDelete: function (track) {
+    this.setState({ trackToDelete: track });
+  },
 
   _setTrackToEdit: function (track) {
     this.setState({ trackToEdit: track });
-  },
-
-  _setTrackToDelete: function (track) {
-    this.setState({ trackToDelete: track });
   },
 
   noTracks: function () {
@@ -72,8 +72,8 @@ var TracksIndex = React.createClass({
           track={ track }
           username={ this.props.params.username }
           setTrackToAdd={ this._setTrackToAdd }
-          setTrackToEdit={ this._setTrackToEdit }
           setTrackToDelete={ this._setTrackToDelete }
+          setTrackToEdit={ this._setTrackToEdit }
           isLoggedIn={ this.state.isLoggedIn }
           isClient={ this.state.isClient } />
       );

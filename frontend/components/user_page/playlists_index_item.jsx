@@ -6,6 +6,7 @@ var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
+var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistTrack = require("./playlist_track");
 var History = require("react-router").History;
 
@@ -20,6 +21,34 @@ var PlaylistsIndexItem = React.createClass({
         <Image src={ src } thumbnail />
       </Col>
     );
+  },
+
+  deleteButton: function () {
+    return (
+      <span className="btn btn-default delete"
+        onClick={ this.deletePlaylist }>
+        <Glyphicon glyph="trash" className="delete-icon"/>
+      </span>
+    );
+  },
+
+  deletePlaylist: function () {
+    this.props.setPlaylistToDelete(this.props.playlist);
+    PlaylistActions.showDeleteModal();
+  },
+
+  editButton: function () {
+    return (
+      <span className="btn btn-default edit"
+        onClick={ this.editPlaylist }>
+        <Glyphicon glyph="edit" className="edit-icon"/>
+      </span>
+    );
+  },
+
+  editPlaylist: function () {
+    this.props.setPlaylistToEdit(this.props.playlist);
+    PlaylistActions.showEditModal();
   },
 
   goToPlaylist: function () {
@@ -98,6 +127,11 @@ var PlaylistsIndexItem = React.createClass({
                   { playlist.title }
                 </a>
               </h4>
+            </section>
+
+            <section className="buttons">
+              { this.props.isClient ? this.editButton() : "" }
+              { this.props.isClient ? this.deleteButton() : "" }
             </section>
 
             { noTracks ? this.sadMessage() : this.tracksList() }
