@@ -70,7 +70,7 @@ var PlaylistsIndexItem = React.createClass({
   },
 
   sadMessage: function () {
-    return <p>This playlist has no chimes! :(</p>
+    return <p>This playlist has no tracks yet</p>
   },
 
   trackImage: function () {

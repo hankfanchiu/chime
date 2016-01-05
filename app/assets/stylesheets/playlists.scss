@@ -82,4 +82,14 @@ div.playlists-index {
   section.track-info {
     display: inline-block;
   }
+
+  section.buttons span {
+    display: inline-block;
+    font-size: 10px;
+    margin-right: 5px;
+  }
+
+  section.buttons span:last-child {
+    margin-right: 0px;
+  }
 }
