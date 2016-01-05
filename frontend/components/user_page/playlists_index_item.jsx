@@ -129,12 +129,12 @@ var PlaylistsIndexItem = React.createClass({
               </h4>
             </section>
 
+            { noTracks ? this.sadMessage() : this.tracksList() }
+
             <section className="buttons">
               { this.props.isClient ? this.editButton() : "" }
               { this.props.isClient ? this.deleteButton() : "" }
             </section>
-
-            { noTracks ? this.sadMessage() : this.tracksList() }
           </Col>
         </Row>
       </ListGroupItem>

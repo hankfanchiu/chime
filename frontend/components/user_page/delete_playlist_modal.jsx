@@ -38,7 +38,11 @@ var DeletePlaylistModal = React.createClass({
   },
 
   _buttonState: function () {
-    return (this.state.isDeleting ? "Deleting Playlist..." : "Delete Playlist");
+    if (this.state.isDeleting) {
+      return "Deleting Playlist...";
+    } else {
+      return "Delete Playlist";
+    }
   },
 
   close: function () {
@@ -69,7 +73,7 @@ var DeletePlaylistModal = React.createClass({
         <Modal.Body>
           { noErrors ? "" : this.errors() }
 
-          <p>Are you sure you want to delete this playlist?</p>
+          <p>Are you sure you want to permanently delete this playlist?</p>
         </Modal.Body>
 
         <Modal.Footer>

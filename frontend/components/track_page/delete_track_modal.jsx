@@ -84,9 +84,13 @@ var DeleteTrackModal = React.createClass({
         <Modal.Body>
           { noErrors ? "" : this.errors() }
 
-          <p>Are you sure you want to permanently delete this track?</p>
+          <p>
+            Are you sure you want to permanently delete this track?
+          </p>
 
-          <p>There's no undoing this delete!</p>
+          <p>
+            You will no longer have access to the uploaded audio and image files once the track is deleted.
+          </p>
         </Modal.Body>
 
         <Modal.Footer>

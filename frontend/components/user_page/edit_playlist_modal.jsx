@@ -90,22 +90,19 @@ var EditPlaylistModal = React.createClass({
 
   update: function () {
     var playlistId = this.props.playlist.id;
-    var formData = new FormData();
+    var data = {
+      title: this.state.title,
+      description: this.state.description
+    };
 
-    formData.append("playlist[title]", this.state.title);
-    formData.append("playlist[description]", this.state.description);
-
-    PlaylistActions.updatePlaylist(playlistId, formData);
+    PlaylistActions.updatePlaylist(playlistId, data);
   },
 
   render: function () {
     var noErrors = (this.state.errors.length === 0);
 
     return (
-      <Modal onHide={ this.close }
-        dialogClassName="edit-playlist-modal"
-        show={ this.state.show }>
-
+      <Modal onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
           <Modal.Title>Edit Playlist</Modal.Title>
         </Modal.Header>
