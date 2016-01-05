@@ -19,7 +19,6 @@ var SignUpModal = React.createClass({
       username: "",
       usernameValid: false,
       email: "",
-      emailValid: false,
       password: "",
       passwordValid: false
     };
@@ -50,17 +49,14 @@ var SignUpModal = React.createClass({
     return (
       (this.state.isSigningUp) ||
       (!this.state.usernameValid) ||
-      (!this.state.emailValid) ||
       (!this.state.passwordValid)
     );
   },
 
   _handleEmailChange: function () {
     var email = this.refs.email.getValue();
-    var emailInput = this.refs.email.getInputDOMNode();
-    var emailValid = emailInput.checkValidity();
 
-    this.setState({ email: email, emailValid: emailValid });
+    this.setState({ email: email });
   },
 
   _handlePasswordChange: function () {
@@ -73,18 +69,20 @@ var SignUpModal = React.createClass({
   _handleUsernameChange: function () {
     var username = this.refs.username.getValue();
     var hasNonStandard = /[^\w]/.test(username);
-    var usernameValid = !hasNonStandard;
+    var isWithinLength = (username.length >= 4 && username.length <= 20);
+    var usernameValid = !hasNonStandard && isWithinLength;
 
     this.setState({ username: username, usernameValid: usernameValid });
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
+
     this.signUp();
   },
 
-  _helpPassword: function () {
-    if ((this.state.password.length > 0) && (!this.state.passwordValid)) {
+  _passwordHelp: function () {
+    if ((this.state.password.length > 0) && !this.state.passwordValid) {
       return "Password must be at least 6 characters"
     }
   },
@@ -123,12 +121,6 @@ var SignUpModal = React.createClass({
     };
 
     UserActions.createUser(userData);
-  },
-
-  styleEmail: function () {
-    if (this.state.email.length > 0) {
-      return (this.state.emailValid ? "success" : "error");
-    }
   },
 
   stylePassword: function () {
@@ -171,7 +163,7 @@ var SignUpModal = React.createClass({
               ref="password"
               bsStyle={ this.stylePassword() }
               hasFeedback
-              help={ this._helpPassword() }
+              help={ this._passwordHelp() }
               placeholder="Enter a password"
               onChange={ this._handlePasswordChange } />
 
@@ -179,8 +171,6 @@ var SignUpModal = React.createClass({
               value={ this.state.email }
               label="Email Address"
               ref="email"
-              bsStyle={ this.styleEmail() }
-              hasFeedback
               placeholder="Enter your email address"
               onChange={ this._handleEmailChange } />
 

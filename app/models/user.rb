@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false },
     exclusion: { in: INVALID_USERNAMES },
-    length: { in: 4..30 },
+    length: { in: 4..20 },
     format: { without: /\s/ }
 
   validates :password,
