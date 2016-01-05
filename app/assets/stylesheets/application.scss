@@ -18,8 +18,9 @@
 @import 'bootstrap';
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
 
+body,
 h1, h2, h3, h4, h5, h6,
-p, span {
+p, span, a {
   font-family: "Roboto", sans-serif;
 }
 
