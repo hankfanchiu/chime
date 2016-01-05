@@ -70,6 +70,10 @@ var TrackActions = {
   },
 
   deleteTrack: function (trackId) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.DELETE_TRACK_INITIATED
+    });
+
     TrackAPIUtils.deleteTrack(
       trackId,
       TrackActions.receiveTrackDeleted

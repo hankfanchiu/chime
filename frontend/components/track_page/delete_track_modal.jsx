@@ -12,7 +12,9 @@ var DeleteTrackModal = React.createClass({
   getInitialState: function () {
     return {
       errors: TrackModalsStore.getErrors(),
-      show: TrackModalsStore.showDeleteModal()
+      isDeleting: TrackModalsStore.isDeleting(),
+      show: TrackModalsStore.showDeleteModal(),
+      trackDeleted: TrackModalsStore.getTrackDeleted()
     };
   },
 
@@ -33,12 +35,17 @@ var DeleteTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({
-      errors: TrackModalsStore.getErrors(),
-      show: TrackModalsStore.showDeleteModal()
-    });
+    this.setState(this.getInitialState());
 
     this._redirectIfDeleted();
+  },
+
+  _buttonState: function () {
+    return (this.state.isDeleting ? "Deleting Track..." : "Delete Track");
+  },
+
+  _disabled: function () {
+    return this.state.isDeleting;
   },
 
   _redirectIfDeleted: function () {
@@ -89,8 +96,10 @@ var DeleteTrackModal = React.createClass({
         <Modal.Footer>
           <Button onClick={ this.close }>Cancel</Button>
 
-          <Button bsStyle="primary" onClick={ this.delete }>
-            Delete Track
+          <Button bsStyle="primary"
+            disabled={ this._disabled() }
+            onClick={ this.delete }>
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </Modal>

@@ -59,6 +59,7 @@ module.exports = {
     // Delete track modal
     SHOW_DELETE_TRACK_MODAL: null,
     CLOSE_DELETE_TRACK_MODAL: null,
+    DELETE_TRACK_INITIATED: null,
 
     // Playlist
     PLAYLISTS_RECEIVED: null,
