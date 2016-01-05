@@ -16,7 +16,12 @@ var PlaylistForm = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return { title: "", description: "" };
+    return {
+      isSaving: PlaylistModalsStore.isSaving(),
+      pathname: PlaylistModalsStore.getNewPlaylistPathname(),
+      title: "",
+      description: ""
+    };
   },
 
   componentDidMount: function () {
@@ -28,21 +33,34 @@ var PlaylistForm = React.createClass({
   },
 
   _onChange: function () {
-    var pathname = PlaylistModalsStore.getNewPlaylistPathname();
+    this.setState({
+      isSaving: PlaylistModalsStore.isSaving(),
+      pathname: PlaylistModalsStore.getNewPlaylistPathname(),
+    });
 
-    if (pathname) {
-      this.setState(this.getInitialState);
-      this.history.pushState(null, pathname);
-    }
+    this._redirectIfSaved();
+  },
+
+  _buttonState: function () {
+    return (this.state.isSaving ? "Saving..." : "Save");
   },
 
   _disabled: function () {
-    return (this.state.title === "");
+    return (this.state.isSaving) || (this.state.title === "");
   },
 
   _handleSubmit: function (e) {
     e.preventDefault();
     this.createPlaylist();
+  },
+
+  _redirectIfSaved: function () {
+    var pathname = this.state.pathname;
+
+    if (pathname) {
+      this.setState({ title: "", description: "" });
+      this.history.pushState(null, pathname);
+    }
   },
 
   createPlaylist: function () {
@@ -113,7 +131,7 @@ var PlaylistForm = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             type="submit">
-            Save
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </form>

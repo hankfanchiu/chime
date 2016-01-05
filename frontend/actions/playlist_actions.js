@@ -62,6 +62,10 @@ var PlaylistActions = {
   },
 
   createPlaylist: function (playlistData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CREATE_PLAYLIST_INITIATED
+    });
+
     PlaylistAPIUtils.createPlaylist(
       playlistData,
       PlaylistActions.receivePlaylistCreated

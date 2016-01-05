@@ -3,11 +3,13 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showCreateModal = false;
-var _showDeleteModal = false;
-var _showEditModal = false;
-
+var _isSaving = false;
 var _newPlaylistPathname = null;
+
+var _showDeleteModal = false;
 var _playlistDeleted = false;
+
+var _showEditModal = false;
 var _updatedPlaylistPathname = null;
 
 var _errors = [];
@@ -51,7 +53,13 @@ PlaylistModalsStore.__onDispatch = function (payload) {
       break;
 
     // Responses
+    case ActionTypes.CREATE_PLAYLIST_INITIATED:
+      setIsSaving();
+      break;
+
     case ActionTypes.PLAYLIST_CREATED:
+      _isSaving = false;
+
       if (response.errors) {
         _errors = response.errors;
       } else {
@@ -90,6 +98,10 @@ PlaylistModalsStore.showEditModal = function () {
   return _showEditModal;
 };
 
+PlaylistModalsStore.isSaving = function () {
+  return _isSaving;
+};
+
 PlaylistModalsStore.getNewPlaylistPathname = function () {
   return _newPlaylistPathname;
 };
@@ -116,6 +128,12 @@ var setShowDeleteModal = function (boolean) {
 
 var setShowEditModal = function (boolean) {
   _showEditModal = boolean;
+
+  PlaylistModalsStore.__emitChange();
+};
+
+var setIsSaving = function () {
+  _isSaving = true;
 
   PlaylistModalsStore.__emitChange();
 };

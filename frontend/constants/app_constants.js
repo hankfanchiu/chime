@@ -71,6 +71,7 @@ module.exports = {
     // Create playlist modal
     SHOW_CREATE_PLAYLIST_MODAL: null,
     CLOSE_CREATE_PLAYLIST_MODAL: null,
+    CREATE_PLAYLIST_INITIATED: null,
 
     // Edit playlist modal
     SHOW_EDIT_PLAYLIST_MODAL: null,
