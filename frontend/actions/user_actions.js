@@ -21,7 +21,10 @@ var UserActions = {
   // Request actions
 
   fetchUser: function (username) {
-    UserAPIUtils.fetchUser(username, UserActions.receiveUser);
+    UserAPIUtils.fetchUser(
+      username,
+      UserActions.receiveUser
+    );
   },
 
   createUser: function (userData) {
@@ -29,11 +32,22 @@ var UserActions = {
       actionType: ActionTypes.SIGN_UP_INITIATED
     });
 
-    UserAPIUtils.createUser(userData, UserActions.receiveUserCreated);
+    UserAPIUtils.createUser(
+      userData,
+      UserActions.receiveUserCreated
+    );
   },
 
   updateUser: function (userId, formData) {
-    UserAPIUtils.updateUser(userId, formData, UserActions.receiveUserUpdated);
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SAVE_SETTINGS_INITIATED
+    });
+
+    UserAPIUtils.updateUser(
+      userId,
+      formData,
+      UserActions.receiveUserUpdated
+    );
   },
 
   // Response actions

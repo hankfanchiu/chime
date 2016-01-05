@@ -1,6 +1,7 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var PageHeader = require("react-bootstrap").PageHeader;
+var Alert = require("react-bootstrap").Alert;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
@@ -16,6 +17,8 @@ var Settings = React.createClass({
     var client = SessionStore.getClient();
 
     return {
+      errors: SettingsModalStore.getErrors(),
+      isSaving: SettingsModalStore.isSaving(),
       show: SettingsModalStore.showModal(),
       disabled: true,
       clientId: client.id,
@@ -37,8 +40,16 @@ var Settings = React.createClass({
     this.setState(this.getInitialState());
   },
 
+  _buttonState: function () {
+    return (this.state.isSaving ? "Updating Account..." : "Update Account");
+  },
+
   _disabled: function () {
-    return (this.state.email === "") || (this.state.disabled);
+    return (
+      (this.state.isSaving) ||
+      (this.state.email === "") ||
+      (this.state.disabled)
+    );
   },
 
   _handleFile: function () {
@@ -73,6 +84,22 @@ var Settings = React.createClass({
     return <span className="required-label">Email Address</span>;
   },
 
+  errors: function () {
+    if (this.state.errors.length === 1) {
+      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    }
+
+    var errorList = this.state.errors.map(function (error, idx) {
+      return <li key={ idx }>{ error }</li>;
+    });
+
+    return (
+      <Alert bsStyle="danger">
+        <ul>{ errorList }</ul>
+      </Alert>
+    );
+  },
+
   updateUser: function () {
     var formData = new FormData();
 
@@ -87,6 +114,8 @@ var Settings = React.createClass({
   },
 
   render: function () {
+    var noErrors = (this.state.errors.length === 0);
+
     return (
       <Modal dialogClassName="settings-modal"
         onHide={ this.close }
@@ -97,6 +126,8 @@ var Settings = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
+          { noErrors ? "" : this.errors() }
+
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <div className="avatar">
@@ -137,7 +168,7 @@ var Settings = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             onClick={ this.updateUser }>
-            Update Account
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </Modal>

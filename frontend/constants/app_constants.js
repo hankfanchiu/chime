@@ -20,6 +20,7 @@ module.exports = {
     // Settings modal
     SHOW_SETTINGS_MODAL: null,
     CLOSE_SETTINGS_MODAL: null,
+    SAVE_SETTINGS_INITIATED: null,
 
     // Session
     LOGIN_RESPONSE: null,
