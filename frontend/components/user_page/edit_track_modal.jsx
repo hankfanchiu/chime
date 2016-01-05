@@ -14,6 +14,7 @@ var EditTrackModal = React.createClass({
     return {
       disabled: true,
       errors: TrackModalsStore.getErrors(),
+      isUpdating: TrackModalsStore.isUpdating(),
       show: TrackModalsStore.showEditModal()
     };
   },
@@ -39,14 +40,19 @@ var EditTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({
-      errors: TrackModalsStore.getErrors(),
-      show: TrackModalsStore.showEditModal()
-    });
+    this.setState(this.getInitialState());
+  },
+
+  _buttonState: function () {
+    return (this.state.isUpdating ? "Updating Track..." : "Update Track");
   },
 
   _disabled: function () {
-    return (this.state.title === "") || (this.state.disabled);
+    return (
+      (this.state.isUpdating) ||
+      (this.state.title === "") ||
+      (this.state.disabled)
+    );
   },
 
   _handleDescriptionChange: function () {
@@ -128,7 +134,7 @@ var EditTrackModal = React.createClass({
 
         <Modal.Body>
           { noErrors ? "" : this.errors() }
-          
+
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <div className="upload-img">
@@ -170,7 +176,7 @@ var EditTrackModal = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             onClick={ this.update }>
-            Update Track
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </Modal>
