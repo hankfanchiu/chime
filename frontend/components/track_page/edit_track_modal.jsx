@@ -17,6 +17,8 @@ var EditTrackModal = React.createClass({
     return {
       disabled: true,
       errors: TrackModalsStore.getErrors(),
+      isUpdating: TrackModalsStore.isUpdating(),
+      pathname: TrackModalsStore.getUpdatedTrackPathname(),
       show: TrackModalsStore.showEditModal()
     };
   },
@@ -42,41 +44,47 @@ var EditTrackModal = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({
-      errors: TrackModalsStore.getErrors(),
-      pathname: TrackModalsStore.getUpdatedTrackPathname(),
-      show: TrackModalsStore.showEditModal()
-    });
+    this.setState(this.getInitialState());
 
     this._redirectIfTitleChange();
   },
 
+  _buttonState: function () {
+    return (this.state.isUpdating ? "Updating Track..." : "Update Track");
+  },
+
   _disabled: function () {
-    return (this.state.title === "") || (this.state.disabled);
+    return (
+      (this.state.isUpdating) ||
+      (this.state.title === "") ||
+      (this.state.disabled)
+    );
   },
 
   _handleDescriptionChange: function () {
     var description = this.refs.description.getValue();
+
     this.setState({ disabled: false, description: description });
   },
 
   _handleFile: function () {
     var img = this.refs.file.files[0];
 
-    if (img === null) { return; }
+    if (img) {
+      var reader = new FileReader();
 
-    var reader = new FileReader();
+      reader.onloadend = function () {
+        this.setState({ imgUrl: reader.result });
+      }.bind(this);
 
-    reader.onloadend = function () {
-      this.setState({ imgUrl: reader.result });
-    }.bind(this);
-
-    reader.readAsDataURL(img);
-    this.setState({ disabled: false, img: img });
+      reader.readAsDataURL(img);
+      this.setState({ disabled: false, img: img });
+    }
   },
 
   _handleTitleChange: function () {
     var title = this.refs.title.getValue();
+
     this.setState({ disabled: false, title: title });
   },
 
@@ -184,7 +192,7 @@ var EditTrackModal = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             onClick={ this.update }>
-            Update Track
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </Modal>

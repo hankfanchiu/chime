@@ -54,6 +54,7 @@ module.exports = {
     // Edit track modal
     SHOW_EDIT_TRACK_MODAL: null,
     CLOSE_EDIT_TRACK_MODAL: null,
+    UPDATE_TRACK_INITIATED: null,
 
     // Delete track modal
     SHOW_DELETE_TRACK_MODAL: null,

@@ -3,9 +3,10 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showDeleteModal = false;
-var _showEditModal = false;
-
 var _trackDeleted = false;
+
+var _showEditModal = false;
+var _isUpdating = false;
 var _updatedTrackPathname = null;
 
 var _errors = [];
@@ -49,7 +50,13 @@ TrackModalsStore.__onDispatch = function (payload) {
 
       break;
 
+    case ActionTypes.UPDATE_TRACK_INITIATED:
+      setIsUpdating();
+      break;
+
     case ActionTypes.TRACK_UPDATED:
+      _isUpdating = false;
+
       if (response.errors) {
         recordErrors(response.errors);
       } else {
@@ -66,6 +73,10 @@ TrackModalsStore.showDeleteModal = function () {
 
 TrackModalsStore.showEditModal = function () {
   return _showEditModal;
+};
+
+TrackModalsStore.isUpdating = function () {
+  return _isUpdating;
 };
 
 TrackModalsStore.getTrackDeleted = function () {
@@ -88,6 +99,12 @@ var setShowDeleteModal = function (boolean) {
 
 var setShowEditModal = function (boolean) {
   _showEditModal = boolean;
+
+  TrackModalsStore.__emitChange();
+};
+
+var setIsUpdating = function () {
+  _isUpdating = true;
 
   TrackModalsStore.__emitChange();
 };

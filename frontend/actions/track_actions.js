@@ -58,6 +58,10 @@ var TrackActions = {
   },
 
   updateTrack: function (trackId, formData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.UPDATE_TRACK_INITIATED
+    });
+
     TrackAPIUtils.updateTrack(
       trackId,
       formData,

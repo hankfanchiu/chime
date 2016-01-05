@@ -62,7 +62,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.find_by_username_and_slug(username, slug)
-    self.find_by_username.find_by(slug: slug)
+    self.find_by_username(username).find_by(slug: slug)
   end
 
   def self.search(query)

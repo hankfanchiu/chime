@@ -1,7 +1,6 @@
 class Api::TracksController < ApplicationController
   before_action :require_login, only: [:create, :update, :destroy]
   before_action :require_owner, only: [:update, :destroy]
-  before_action :prevent_if_title_exists, only: [:create, :update]
 
   def index
     if params[:username]
@@ -68,18 +67,5 @@ class Api::TracksController < ApplicationController
     track_owned = current_user.tracks.exists?(id: params[:id])
 
     forbidden unless track_owned
-  end
-
-  def prevent_if_title_exists
-    if title_exists?
-      render json: {
-        errors: ["Another track of yours already exists with that title!"]
-      }
-      false
-    end
-  end
-
-  def title_exists?
-    Track.exists?(user_id: current_user.id, title: params[:track][:title])
   end
 end
