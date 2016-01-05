@@ -25,6 +25,10 @@ var UserActions = {
   },
 
   createUser: function (userData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.SIGN_UP_INITIATED
+    });
+
     UserAPIUtils.createUser(userData, UserActions.receiveUserCreated);
   },
 

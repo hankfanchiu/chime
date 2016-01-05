@@ -13,8 +13,9 @@ var SignUpModal = React.createClass({
 
   getInitialState: function () {
     return {
-      show: SignUpModalStore.showModal(),
       errors: SignUpModalStore.getErrors(),
+      isSigningUp: SignUpModalStore.isSigningUp(),
+      show: SignUpModalStore.showModal(),
       username: "",
       usernameValid: false,
       email: "",
@@ -34,14 +35,20 @@ var SignUpModal = React.createClass({
 
   _onChange: function () {
     this.setState({
-      show: SignUpModalStore.showModal(),
       errors: SignUpModalStore.getErrors(),
+      isSigningUp: SignUpModalStore.isSigningUp(),
+      show: SignUpModalStore.showModal(),
       password: ""
     });
   },
 
+  _buttonState: function () {
+    return (this.state.isSigningUp ? "Creating Account..." : "Sign Up");
+  },
+
   _disabled: function () {
     return (
+      (this.state.isSigningUp) ||
       (!this.state.usernameValid) ||
       (!this.state.emailValid) ||
       (!this.state.passwordValid)
@@ -187,7 +194,7 @@ var SignUpModal = React.createClass({
               bsStyle="primary"
               disabled={ this._disabled() }
               onClick={ this.signUp }>
-              Sign Up
+              { this._buttonState() }
             </Button>
           </Modal.Footer>
         </form>

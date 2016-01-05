@@ -35,7 +35,7 @@ var LoginModal = React.createClass({
   },
 
   _buttonState: function () {
-    return (this.state.isLoggingIn ? "Logging In" : "Login");
+    return (this.state.isLoggingIn ? "Logging In..." : "Login");
   },
 
   _disabled: function () {

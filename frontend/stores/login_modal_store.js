@@ -24,17 +24,18 @@ LoginModalStore.__onDispatch = function (payload) {
       break;
 
     case ActionTypes.LOGIN_INITIATED:
-      setIsLoggingIn(true);
+      setIsLoggingIn();
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
       _isLoggingIn = false;
-      
+
       if (response.errors) {
         recordErrors(response.errors);
       } else {
         setShowModal(false);
       }
+
       break;
   };
 };
@@ -57,8 +58,8 @@ var setShowModal = function (boolean) {
   LoginModalStore.__emitChange();
 };
 
-var setIsLoggingIn = function (boolean) {
-  _isLoggingIn = boolean;
+var setIsLoggingIn = function () {
+  _isLoggingIn = true;
 
   LoginModalStore.__emitChange();
 };

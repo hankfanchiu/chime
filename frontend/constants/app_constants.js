@@ -10,17 +10,18 @@ module.exports = {
     // Sign Up modal
     SHOW_SIGN_UP_MODAL: null,
     CLOSE_SIGN_UP_MODAL: null,
+    SIGN_UP_INITIATED: null,
 
     // Login modal
     SHOW_LOGIN_MODAL: null,
     CLOSE_LOGIN_MODAL: null,
+    LOGIN_INITIATED: null,
 
     // Settings modal
     SHOW_SETTINGS_MODAL: null,
     CLOSE_SETTINGS_MODAL: null,
 
     // Session
-    LOGIN_INITIATED: null,
     LOGIN_RESPONSE: null,
     LOGOUT_RESPONSE: null,
     CLIENT_RECEIVED: null,
