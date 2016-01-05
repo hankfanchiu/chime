@@ -7,16 +7,6 @@ module.exports = {
     SEARCH_RESULTS_RECEIVED: null,
     CLEAR_SEARCH_RESULTS: null,
 
-    // Session
-    LOGIN_RESPONSE: null,
-    LOGOUT_RESPONSE: null,
-    CLIENT_RECEIVED: null,
-
-    // User
-    USER_RECEIVED: null,
-    USER_CREATED: null,
-    USER_UPDATED: null,
-
     // Sign Up modal
     SHOW_SIGN_UP_MODAL: null,
     CLOSE_SIGN_UP_MODAL: null,
@@ -28,6 +18,17 @@ module.exports = {
     // Settings modal
     SHOW_SETTINGS_MODAL: null,
     CLOSE_SETTINGS_MODAL: null,
+
+    // Session
+    LOGIN_INITIATED: null,
+    LOGIN_RESPONSE: null,
+    LOGOUT_RESPONSE: null,
+    CLIENT_RECEIVED: null,
+
+    // User
+    USER_RECEIVED: null,
+    USER_CREATED: null,
+    USER_UPDATED: null,
 
     // Upload
     SHOW_UPLOAD_MODAL: null,

@@ -14,8 +14,9 @@ var LoginModal = React.createClass({
 
   getInitialState: function () {
     return {
-      show: LoginModalStore.showModal(),
       errors: LoginModalStore.getErrors(),
+      isLoggingIn: LoginModalStore.isLoggingIn(),
+      show: LoginModalStore.showModal(),
       username: "",
       password: ""
     };
@@ -33,8 +34,16 @@ var LoginModal = React.createClass({
     this.setState(this.getInitialState());
   },
 
+  _buttonState: function () {
+    return (this.state.isLoggingIn ? "Logging In" : "Login");
+  },
+
   _disabled: function () {
-    return (this.state.username === "") || (this.state.password === "");
+    return (
+      (this.state.isLoggingIn) ||
+      (this.state.username === "") ||
+      (this.state.password === "")
+    );
   },
 
   _handleSubmit: function (e) {
@@ -104,7 +113,7 @@ var LoginModal = React.createClass({
             <Button type="submit"
               bsStyle="primary"
               disabled={ this._disabled() }
-              onClick={ this.login }>Login</Button>
+              onClick={ this.login }>{ this._buttonState() }</Button>
           </Modal.Footer>
         </form>
       </Modal>

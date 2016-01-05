@@ -35,6 +35,10 @@ var SessionActions = {
   // Request actions
 
   login: function (userData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.LOGIN_INITIATED
+    });
+
     SessionAPIUtils.login(userData, SessionActions.receiveLogin);
   },
 
