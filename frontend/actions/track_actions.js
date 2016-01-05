@@ -47,6 +47,10 @@ var TrackActions = {
   },
 
   createTrack: function (trackData) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.CREATE_TRACK_INITIATED
+    });
+
     TrackAPIUtils.createTrack(
       trackData,
       TrackActions.receiveTrackCreated

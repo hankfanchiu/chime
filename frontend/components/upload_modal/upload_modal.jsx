@@ -20,6 +20,7 @@ var UploadModal = React.createClass({
   getInitialState: function () {
     return {
       errors: UploadStore.getErrors(),
+      isSaving: UploadStore.isSaving(),
       show: UploadStore.showModal(),
       title: "",
       description: ""
@@ -36,6 +37,7 @@ var UploadModal = React.createClass({
 
   _onChange: function () {
     this.setState({
+      isSaving: UploadStore.isSaving(),
       errors: UploadStore.getErrors(),
       show: UploadStore.showModal(),
       publicUrl: UploadStore.getPublicUrl(),
@@ -47,8 +49,16 @@ var UploadModal = React.createClass({
     this._redirectIfSaved();
   },
 
+  _buttonState: function () {
+    return (this.state.isSaving ? "Saving..." : "Save");
+  },
+
   _disabled: function () {
-    return (!this.state.isUploaded) || (this.state.title === "");
+    return (
+      (this.state.isSaving) ||
+      (!this.state.isUploaded) ||
+      (this.state.title === "")
+    );
   },
 
   _progressState: function () {
@@ -140,7 +150,7 @@ var UploadModal = React.createClass({
 
         <Modal.Body>
           { noErrors ? "" : this.errors() }
-          
+
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
               <UploadImage setImg={ this._setImg } />
@@ -170,7 +180,7 @@ var UploadModal = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             onClick={ this.save }>
-            Save
+            { this._buttonState() }
           </Button>
         </Modal.Footer>
       </Modal>

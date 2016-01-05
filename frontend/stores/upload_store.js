@@ -3,6 +3,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showModal = false;
+var _isSaving = false;
 var _publicUrl = null;
 var _progress = 0;
 var _responseStatus = null;
@@ -39,15 +40,30 @@ UploadStore.__onDispatch = function (payload) {
       setResponseStatus(response);
       break;
 
+    case ActionTypes.CREATE_TRACK_INITIATED:
+      setIsSaving();
+      break;
+
     case ActionTypes.TRACK_CREATED:
+      _isSaving = false;
+
       if (response.errors) {
         recordErrors(response.errors);
       } else {
         recordTrackCreated(response);
       }
+
       break;
 
   };
+};
+
+UploadStore.getErrors = function () {
+  return _errors.slice();
+};
+
+UploadStore.isSaving = function () {
+  return _isSaving;
 };
 
 UploadStore.showModal = function () {
@@ -68,10 +84,6 @@ UploadStore.isUploaded = function () {
 
 UploadStore.getTrackPathname = function () {
   return _newTrackPathname;
-};
-
-UploadStore.getErrors = function () {
-  return _errors.slice();
 };
 
 var setShowModal = function (boolean) {
@@ -95,6 +107,12 @@ var updateProgress = function (percent) {
 
 var setResponseStatus = function (response) {
   _responseStatus = response.status;
+
+  UploadStore.__emitChange();
+};
+
+var setIsSaving = function () {
+  _isSaving = true;
 
   UploadStore.__emitChange();
 };

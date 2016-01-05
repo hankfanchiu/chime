@@ -37,6 +37,7 @@ module.exports = {
     PUBLIC_URL_RECEIVED: null,
     DIRECT_UPLOAD_PROGRESS_RECEIVED: null,
     DIRECT_UPLOAD_SUCCESS_RECEIVED: null,
+    CREATE_TRACK_INITIATED: null,
 
     // Discover
     DISCOVER_TRACKS_RECEIVED: null,
