@@ -105,19 +105,11 @@ PlayerStore.getNextTrack = function () {
 };
 
 PlayerStore.isCurrentTrack = function (track) {
-  return (_track === track);
+  return (_track.id === track.id);
 };
 
 PlayerStore.queueIsEmpty = function () {
   return (_queue.length === 0);
-};
-
-PlayerStore.queueIsEnded = function () {
-  return (_queueIndex === _queue.length - 1);
-};
-
-PlayerStore.isInQueue = function (track) {
-  return (_queue.indexOf(track) !== -1);
 };
 
 var setPlayRequest = function () {
@@ -156,7 +148,7 @@ var resetRequests = function () {
 var resetTrackAndQueue = function (track) {
   _queue = [track];
   _queueIndex = 0;
-  _track = track;
+  _track = _queue[_queueIndex];
 
   PlayerStore.__emitChange();
 };
@@ -200,12 +192,20 @@ var loadNextTrackUntilEnd = function () {
 };
 
 var pushTrackToQueue = function (track) {
-  if (_queue.indexOf(track) !== -1) { return; }
+  if (isInQueue(track)) { return; }
 
   _queue.push(track);
   _track = _queue[_queueIndex];
 
   PlayerStore.__emitChange();
+};
+
+var isInQueue = function (track) {
+  var index = _queue.findIndex(function (queuedTrack) {
+    return (queuedTrack.id === track.id);
+  });
+
+  return (index !== -1);
 };
 
 var loadPlaylistToQueue = function (playlist) {
