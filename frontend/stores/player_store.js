@@ -95,15 +95,17 @@ PlayerStore.getNextTrack = function () {
   var nextTrack = _queue[_queueIndex + 1];
   var nextTrackCopy;
 
-  if (nextTrack === undefined) { return null; }
-
-  nextTrackCopy = jQuery.extend({}, nextTrack);
+  if (nextTrack === undefined) {
+    nextTrackCopy = null;
+  } else {
+    nextTrackCopy = jQuery.extend({}, nextTrack);
+  }
 
   return nextTrackCopy;
-}
+};
 
 PlayerStore.isCurrentTrack = function (track) {
-  return _track === track;
+  return (_track === track);
 };
 
 PlayerStore.queueIsEmpty = function () {
@@ -160,7 +162,7 @@ var resetTrackAndQueue = function (track) {
 };
 
 var loadNextTrackInQueue = function () {
-  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
+  if (_queue.length <== 1) { return; }
 
   if (_queueIndex === _queue.length - 1) {
     _queueIndex = 0;
@@ -174,7 +176,7 @@ var loadNextTrackInQueue = function () {
 };
 
 var loadPreviousTrackInQueue = function () {
-  if ((_queue.length === 0) || (_queue.length === 1)) { return; }
+  if (_queue.length <== 1) { return; }
 
   if (_queueIndex === 0) {
     _queueIndex = _queue.length - 1;
@@ -192,18 +194,19 @@ var loadNextTrackUntilEnd = function () {
   if (_queueIndex === _queue.length - 1) { return; }
 
   _queueIndex += 1;
-
   _track = _queue[_queueIndex];
 
   PlayerStore.__emitChange();
 };
 
 var pushTrackToQueue = function (track) {
-  if (PlayerStore.isInQueue(track)) { return; }
+  if (_queue.indexOf(track) === -1) { return; }
 
   _queue.push(track);
 
-  if (!_track.id) { _track = track; }
+  if (_track === {}) {
+    _track = track;
+  }
 
   PlayerStore.__emitChange();
 };
