@@ -162,7 +162,7 @@ var resetTrackAndQueue = function (track) {
 };
 
 var loadNextTrackInQueue = function () {
-  if (_queue.length <== 1) { return; }
+  if (_queue.length <= 1) { return; }
 
   if (_queueIndex === _queue.length - 1) {
     _queueIndex = 0;
@@ -176,7 +176,7 @@ var loadNextTrackInQueue = function () {
 };
 
 var loadPreviousTrackInQueue = function () {
-  if (_queue.length <== 1) { return; }
+  if (_queue.length <= 1) { return; }
 
   if (_queueIndex === 0) {
     _queueIndex = _queue.length - 1;
