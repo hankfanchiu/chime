@@ -200,13 +200,10 @@ var loadNextTrackUntilEnd = function () {
 };
 
 var pushTrackToQueue = function (track) {
-  if (_queue.indexOf(track) === -1) { return; }
+  if (_queue.indexOf(track) !== -1) { return; }
 
   _queue.push(track);
-
-  if (_track === {}) {
-    _track = track;
-  }
+  _track = _queue[_queueIndex];
 
   PlayerStore.__emitChange();
 };
