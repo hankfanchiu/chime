@@ -5,9 +5,9 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 var _isPlaying = false;
 var _isPaused = false;
 var _isEnded = false;
-var _currentTime = null;
+var _currentTime = 0;
 var _volume = null;
-var _duration = null;
+var _duration = 0;
 
 var AudioStore = new Store(AppDispatcher);
 
@@ -87,6 +87,9 @@ var setIsEnded = function () {
   _isPlaying = false;
   _isPaused = false;
   _isEnded = true;
+  _currentTime = 0;
+  _volume = null;
+  _duration = 0;
 
   AudioStore.__emitChange();
 };
