@@ -18,7 +18,6 @@ var Audio = React.createClass({
   },
 
   componentDidMount: function () {
-    this._addAudioEventListeners();
     this.listenerToken = PlayerStore.addListener(this._onChange);
   },
 
@@ -43,30 +42,7 @@ var Audio = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this._removeAudioEventListeners();
     this.listenerToken.remove();
-  },
-
-  _addAudioEventListeners: function () {
-    var audio = this.refs.audio;
-
-    audio.addEventListener("playing", this._handlePlaying);
-    audio.addEventListener("pause", this._handlePause);
-    audio.addEventListener("ended", this._handleEnded);
-    audio.addEventListener("timeupdate", this._handleTimeUpdate, false);
-    audio.addEventListener("volumechange", this._handleVolumeChange, false);
-    audio.addEventListener("durationchange", this._handleDurationChange, false);
-  },
-
-  _removeAudioEventListeners: function () {
-    var audio = this.refs.audio;
-
-    audio.removeEventListener("playing", this._handlePlaying);
-    audio.removeEventListener("pause", this._handlePause);
-    audio.removeEventListener("ended", this._handleEnded);
-    audio.removeEventListener("timeupdate", this._handleTimeUpdate);
-    audio.removeEventListener("volumechange", this._handleVolumeChange);
-    audio.removeEventListener("durationchange", this._handleDurationChange);
   },
 
   _onChange: function () {
@@ -93,23 +69,28 @@ var Audio = React.createClass({
   },
 
   _handleTimeUpdate: function () {
-    var currentTime = this.refs.audio.currentTime;
-    AudioActions.setCurrentTime(currentTime);
+    AudioActions.setCurrentTime(this.refs.audio.currentTime);
   },
 
   _handleVolumeChange: function () {
-    var volume = this.refs.audio.volume;
-    AudioActions.setVolume(volume);
+    AudioActions.setVolume(this.refs.audio.volume);
   },
 
   _handleDurationChange: function () {
-    var duration = this.refs.audio.duration;
-    AudioActions.setDuration(duration);
+    AudioActions.setDuration(this.refs.audio.duration);
   },
 
   render: function () {
     return (
-      <audio ref="audio" id="audio">
+      <audio ref="audio"
+        id="audio"
+        onPlaying={ this._handlePlaying }
+        onPause={ this._handlePause }
+        onEnded={ this._handleEnded }
+        onTimeUpdate={ this._handleTimeUpdate }
+        onVolumeChange={ this._handleVolumeChange }
+        onDurationChange={ this._handleDurationChange }>
+
         <p>Your browser does not support the <code>audio</code> element.</p>
       </audio>
     );
