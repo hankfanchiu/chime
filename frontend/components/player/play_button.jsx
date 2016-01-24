@@ -2,11 +2,7 @@ var React = require("react");
 
 var PlayButton = React.createClass({
   _togglePlayPause: function () {
-    if (this.props.isPlaying) {
-      this.props.pauseAudio();
-    } else if (this.props.isPaused) {
-      this.props.playAudio();
-    }
+    this.props.isPlaying ? this.props.pauseAudio() : this.props.playAudio();
   },
 
   playPauseClassName: function () {
