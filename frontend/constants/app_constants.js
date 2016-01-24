@@ -92,6 +92,7 @@ module.exports = {
     PAUSE_AUDIO: null,
     SEEK_TO: null,
     ADJUST_VOLUME_TO: null,
+    RESET_PLAYER_REQUESTS: null,
 
     PLAY_TRACK_NOW: null,
     PLAY_NEXT_TRACK: null,

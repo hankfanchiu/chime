@@ -1,5 +1,6 @@
 var React = require("react");
 var PlayerStore = require("../stores/player_store");
+var PlayerActions = require("../actions/player_actions");
 var AudioActions = require("../actions/audio_actions");
 
 var Audio = React.createClass({
@@ -22,23 +23,11 @@ var Audio = React.createClass({
   },
 
   componentWillUpdate: function (nextProps, nextState) {
-    if (this.refs.audio.trackId !== nextState.track.id) {
-      this._setTrack(nextState.track);
-    }
-
-    if (nextState.pauseRequested) {
-      this.refs.audio.pause();
-    } else {
-      this.refs.audio.play();
-    }
-
-    if (nextState.seekTo) {
-      this.refs.audio.currentTime = nextState.seekTo;
-    }
-
-    if (nextState.adjustVolumeTo) {
-      this.refs.audio.volume = nextState.adjustVolumeTo;
-    }
+    this._handleNextTrack(nextState.track);
+    this._handlePlayRequested(nextState.playRequested);
+    this._handlePauseRequested(nextState.pauseRequested);
+    this._handleSeekTo(nextState.seekTo);
+    this._handleAdjustVolumeTo(nextState.adjustVolumeTo);
   },
 
   componentWillUnmount: function () {
@@ -49,11 +38,38 @@ var Audio = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
-  _setTrack: function (track) {
-    this.refs.audio.trackId = track.id;
-    this.refs.audio.src = track.track_url;
-    this.refs.audio.load();
-    this.refs.audio.play();
+  _handleNextTrack: function (track) {
+    if (this.refs.audio.trackId !== track.id) {
+      this._setTrack(track);
+    }
+  },
+
+  _handlePlayRequested: function (playRequested) {
+    if (playRequested) {
+      this.refs.audio.play();
+      PlayerActions.resetRequests();
+    }
+  },
+
+  _handlePauseRequested: function (pauseRequested) {
+    if (pauseRequested) {
+      audio.pause();
+      PlayerActions.resetRequests();
+    }
+  },
+
+  _handleSeekTo: function (seekTo) {
+    if (seekTo) {
+      this.refs.audio.currentTime = seekTo;
+      PlayerActions.resetRequests();
+    }
+  },
+
+  _handleAdjustVolumeTo: function (adjustVolumeTo) {
+    if (adjustVolumeTo) {
+      this.refs.audio.volume = adjustVolumeTo;
+      PlayerActions.resetRequests();
+    }
   },
 
   _handlePlaying: function () {
@@ -78,6 +94,15 @@ var Audio = React.createClass({
 
   _handleDurationChange: function () {
     AudioActions.setDuration(this.refs.audio.duration);
+  },
+
+  _setTrack: function (track) {
+    var audio = this.refs.audio;
+
+    audio.trackId = track.id;
+    audio.src = track.track_url;
+    audio.load();
+    audio.play();
   },
 
   render: function () {

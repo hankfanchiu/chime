@@ -38,6 +38,10 @@ PlayerStore.__onDispatch = function (payload) {
       setAdjustVolumeTo(response);
       break;
 
+    case ActionTypes.RESET_PLAYER_REQUESTS:
+      resetRequests();
+      break;
+
     case ActionTypes.PLAY_TRACK_NOW:
       resetTrackAndQueue(track);
       break;
@@ -114,37 +118,35 @@ PlayerStore.isInQueue = function (track) {
   return (_queue.indexOf(track) !== -1);
 };
 
-var resetRequests = function () {
-  _playRequested = false;
-  _pauseRequested = false;
-  _seekTo = null;
-  _adjustVolumeTo = null;
-};
-
 var setPlayRequest = function () {
-  resetRequests();
   _playRequested = true;
 
   PlayerStore.__emitChange();
 };
 
 var setPauseRequest = function () {
-  resetRequests();
   _pauseRequested = true;
 
   PlayerStore.__emitChange();
 };
 
 var setSeekTo = function (time) {
-  resetRequests();
   _seekTo = time;
 
   PlayerStore.__emitChange();
 };
 
 var setAdjustVolumeTo = function (volume) {
-  resetRequests();
   _adjustVolumeTo = volume;
+
+  PlayerStore.__emitChange();
+};
+
+var resetRequests = function () {
+  _playRequested = false;
+  _pauseRequested = false;
+  _seekTo = null;
+  _adjustVolumeTo = null;
 
   PlayerStore.__emitChange();
 };

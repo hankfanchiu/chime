@@ -2,8 +2,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var PlayerActions = {
-  // Direct actions for the HTML audio element
-
+  // Direct actions for the HTML audio element:
   playAudio: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAY_AUDIO
@@ -30,8 +29,14 @@ var PlayerActions = {
     });
   },
 
-  // Actions regarding tracks, queue, and playlist
+  // Clearing user actions from Player Store:
+  resetRequests: function () {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.RESET_PLAYER_REQUESTS
+    });
+  },
 
+  // Actions regarding tracks, queue, and playlist:
   playTrackNow: function (track) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAY_TRACK_NOW,
