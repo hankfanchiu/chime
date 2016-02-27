@@ -9,9 +9,9 @@ var scrollToTop = function () {
 };
 
 var router = (
-  <Router onUpdate={ scrollToTop } history={ createHistory() }>
-    { routes }
-  </Router>
+  <Router routes={ routes }
+    onUpdate={ scrollToTop }
+    history={ createHistory() } />
 );
 
 document.addEventListener("DOMContentLoaded", function () {
