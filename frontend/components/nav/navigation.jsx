@@ -1,11 +1,12 @@
 var React = require("react");
+var Link = require("react-router").Link;
 var Navbar = require("react-bootstrap").Navbar;
 var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
 var SessionStore = require("../../stores/session_store");
 var LoggedIn = require("./logged_in");
 var LoggedOut = require("./logged_out");
-var Search = require("./search");
+var Search = require("../search/search");
 var History = require("react-router").History;
 
 var Navigation = React.createClass({
@@ -38,10 +39,6 @@ var Navigation = React.createClass({
     this.history.pushState(null, "/discover");
   },
 
-  goToHome: function () {
-    this.history.pushState(null, "/");
-  },
-
   loggedIn: function () {
     return <LoggedIn user={ this.state.user } />;
   },
@@ -54,9 +51,9 @@ var Navigation = React.createClass({
     return (
       <Navbar fixedTop>
         <Navbar.Header>
-          <a className="nav-logo" onClick={ this.goToHome }>
+          <Link className="nav-logo" to="/">
             Chime
-          </a>
+          </Link>
         </Navbar.Header>
 
         <div id="navbar">
@@ -65,7 +62,10 @@ var Navigation = React.createClass({
               Discover
             </NavItem>
 
-            <Search />
+            <Navbar.Form pullLeft>
+              <Search id="search-input"
+                searchResultsName="search-results" />
+            </Navbar.Form>
           </Nav>
 
           { this.state.isLoggedIn ? this.loggedIn() : this.loggedOut() }

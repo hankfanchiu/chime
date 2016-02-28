@@ -34,12 +34,9 @@ var SearchResults = React.createClass({
 
   render: function () {
     return (
-      <figure className="search-results">
-
+      <figure className={ this.props.name}>
         { this.userResults() }
-
         { this.trackResults() }
-
       </figure>
     );
   }

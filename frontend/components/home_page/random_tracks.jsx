@@ -2,7 +2,6 @@ var React = require("react");
 var ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
-var PageHeader = require("react-bootstrap").PageHeader;
 var RandomTrackItem = require("./random_track_item");
 var ExploreButton = require("./explore_button");
 
@@ -54,10 +53,12 @@ var RandomTracks = React.createClass({
           transitionEnterTimeout={ 500 }
           transitionLeaveTimeout={ 300 }>
 
-          { noTracks ? "" : this.trackRows() }
+          { noTracks ? null : this.trackRows() }
         </ReactCSSTransitionGroup>
 
-        <ExploreButton />
+        <ExploreButton name="explore-button">
+          Discover what else is trending
+        </ExploreButton>
       </Grid>
     );
   }

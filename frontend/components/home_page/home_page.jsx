@@ -1,10 +1,9 @@
 var React = require("react");
-var Grid = require("react-bootstrap").Grid;
 var SessionStore = require("../../stores/session_store");
 var DiscoverStore = require("../../stores/discover_store");
 var DiscoverActions = require("../../actions/discover_actions");
 var Hero = require("./hero");
-var Search = require("./search");
+var Search = require("../search/search");
 var RandomTracks = require("./random_tracks");
 var Join = require("./join");
 
@@ -40,19 +39,19 @@ var HomePage = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
-  goToDiscover: function () {
-    this.props.history.pushState(null, "/discover");
-  },
-
   render: function () {
     return (
       <main className="home-page">
-        <Hero goToDiscover={ this.goToDiscover } />
+        <Hero />
 
-        <Search />
+        <section className="home-page-search-container">
+          <section className="home-page-search-bar">
+            <Search groupClassName="search-group"
+              searchResultsName="home-page-search-results"/>
+          </section>
+        </section>
 
         <RandomTracks tracks={ this.state.tracks } />
-
         <Join />
       </main>
     );

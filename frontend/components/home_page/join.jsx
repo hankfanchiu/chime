@@ -1,11 +1,7 @@
 var React = require("react");
-var SessionActions = require("../../actions/session_actions");
+var JoinButton = require("./join_button");
 
 var Join = React.createClass({
-  signUp: function () {
-    SessionActions.showSignUpModal();
-  },
-
   render: function () {
     return (
       <section className="home-page-join">
@@ -16,20 +12,15 @@ var Join = React.createClass({
 
           <section className="join-message">
             <p>Connect with artists, and discover up-and-coming musicians.</p>
-
             <p>Explore, add, and save your favorite tunes.</p>
             <p>Create playlists to put the tracks on repeat later.</p>
-
             <br/>
-
             <p>Ready to chime in?</p>
           </section>
 
-          <section className="join-button">
-            <a className="join-button" onClick={ this.signUp }>
-              SIGN UP FOR FREE
-            </a>
-          </section>
+          <JoinButton name="join-button">
+            SIGN UP FOR FREE
+          </JoinButton>
         </div>
       </section>
     );

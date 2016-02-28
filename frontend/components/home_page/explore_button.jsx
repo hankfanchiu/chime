@@ -1,20 +1,14 @@
 var React = require("react");
-var History = require("react-router").History;
+var Link = require("react-router").Link;
 
 var ExploreButton = React.createClass({
-  mixins: [History],
-
-  goToDiscover: function () {
-    this.history.pushState(null, "/discover");
-  },
-
   render: function () {
     return (
-      <section className="explore-button">
-        <a className="explore-button" onClick={ this.goToDiscover }>
-          Discover what else is trending
-        </a>
-      </section>
+      <figure className={ this.props.name }>
+        <Link className={ this.props.name } to="/discover">
+          { this.props.children }
+        </Link>
+      </figure>
     );
   }
 });

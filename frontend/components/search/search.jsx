@@ -1,12 +1,11 @@
 var React = require("react");
-var Navbar = require("react-bootstrap").Navbar;
 var Input = require("react-bootstrap").Input;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var SearchStore = require("../../stores/search_store");
 var SearchActions = require("../../actions/search_actions");
-var SearchResults = require("./search_results");
+var SearchResults = require("../search/search_results");
 
-var Search = React.createClass({
+var HomeSearch = React.createClass({
   getInitialState: function () {
     return {
       query: "",
@@ -35,24 +34,24 @@ var Search = React.createClass({
     this.setState({ query: "" });
   },
 
-  _clearResults: function () {
+  clearResults: function () {
     SearchActions.clearResults();
     this.setState({ showResults: false });
   },
 
-  _handleQueryChange: function () {
+  handleQueryChange: function () {
     var query = this.refs.input.getValue();
 
     this.setState({ query: query });
 
     if (query === "") {
-      this._clearResults();
+      this.clearResults();
     } else {
       this._queryForResults(query);
     }
   },
 
-  _handleSubmit: function (e) {
+  handleSubmit: function (e) {
     e.preventDefault();
 
     // TODO go to search results page
@@ -70,35 +69,39 @@ var Search = React.createClass({
     this.setState({ showResults: true });
   },
 
+  searchIcon: function () {
+    return <Glyphicon glyph="search" />;
+  },
+
   searchResults: function () {
     return (
-      <SearchResults clearQuery={ this._clearQuery }
+      <SearchResults name={ this.props.searchResultsName }
+        clearQuery={ this._clearQuery }
         tracks={ this.state.tracks }
         users={ this.state.users } />
     );
   },
 
   render: function () {
-    var searchIcon = <Glyphicon glyph="search" />;
-
     return (
-      <Navbar.Form pullLeft>
-        <form onSubmit={ this._handleSubmit } onBlur={ this._clearResults }>
-          <Input type="text"
-            ref="input"
-            id="search-input"
-            value={ this.state.query }
-            label="Search"
-            labelClassName="sr-only"
-            addonAfter={ searchIcon }
-            placeholder="Search for artists and tracks"
-            onChange={ this._handleQueryChange } />
+      <form onSubmit={ this.handleSubmit }
+        onBlur={ this.clearResults }>
 
-          { this.state.showResults ? this.searchResults() : "" }
-        </form>
-      </Navbar.Form>
+        <Input type="text"
+          ref="input"
+          id={ this.props.id }
+          value={ this.state.query }
+          label="Search"
+          labelClassName="sr-only"
+          groupClassName={ this.props.groupClassName }
+          addonAfter={ this.searchIcon() }
+          placeholder="Search for artists and tracks"
+          onChange={ this.handleQueryChange } />
+
+        { this.state.showResults ? this.searchResults() : "" }
+      </form>
     );
   }
 });
 
-module.exports = Search;
+module.exports = HomeSearch;
