@@ -51,8 +51,7 @@ var HomePage = React.createClass({
 
         <Search />
 
-        <RandomTracks tracks={ this.state.tracks }
-          goToDiscover={ this.goToDiscover } />
+        <RandomTracks tracks={ this.state.tracks } />
 
         <Join />
       </main>
