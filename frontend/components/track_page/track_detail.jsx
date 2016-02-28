@@ -4,7 +4,6 @@ var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var SessionActions = require("../../actions/session_actions");
-var PlayerActions = require("../../actions/player_actions");
 var TrackActions = require("../../actions/track_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
@@ -29,10 +28,6 @@ var TrackDetail = React.createClass({
     } else {
       SessionActions.showLoginModal();
     }
-  },
-
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
   },
 
   deleteButton: function () {
@@ -78,7 +73,7 @@ var TrackDetail = React.createClass({
 
         <Col xs={ 4 } sm={ 4 } md={ 4 }>
           <section className="track-buttons clear">
-            <AddToQueue addToQueue={ this.addToQueue } />
+            <AddToQueue track={ this.props.track } />
             <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
             { this.props.isClient ? this.editButton() : "" }

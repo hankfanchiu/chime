@@ -2,7 +2,6 @@ var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var SessionActions = require("../../actions/session_actions");
-var PlayerActions = require("../../actions/player_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
@@ -20,10 +19,6 @@ var DiscoverTrack = React.createClass({
     }
   },
 
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
   render: function () {
     var track = this.props.track;
 
@@ -35,7 +30,7 @@ var DiscoverTrack = React.createClass({
           <RoundPlayButton track={ track } />
 
           <div className="discover-track-buttons">
-            <AddToQueue addToQueue={ this.addToQueue } />
+            <AddToQueue track={ track } />
             <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
           </div>
 
