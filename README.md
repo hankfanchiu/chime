@@ -41,8 +41,8 @@ Chime is only a few degrees above being considered an MVP.
 The features that will be added are listed in the [future implementations][future] outline.
 
 [chime]: https://chime.audio
-[home page]: ./docs/home_page.png "Chime home page"
-[tracks]: ./docs/tracks.png "A user's tracks"
+[home page]: ./docs/images/home_page.png "Chime home page"
+[tracks]: ./docs/images/tracks.png "A user's tracks"
 [proposal]: ./docs/proposal.md
 [schema]: ./docs/schema.md
 [backend]: ./docs/backend.md
