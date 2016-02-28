@@ -51,14 +51,6 @@ var PlaylistsIndexItem = React.createClass({
     PlaylistActions.showEditModal();
   },
 
-  goToPlaylist: function () {
-    var username = this.props.username;
-    var slug = this.props.playlist.slug;
-    var pathname = "/" + username + "/playlists/" + slug;
-
-    this.history.pushState(null, pathname);
-  },
-
   goToUser: function () {
     var pathname = "/" + this.props.username;
 
@@ -123,9 +115,7 @@ var PlaylistsIndexItem = React.createClass({
               </h5>
 
               <h4 className="title">
-                <a className="title" onClick={ this.goToPlaylist }>
-                  { playlist.title }
-                </a>
+                { playlist.title }
               </h4>
             </section>
 

@@ -8,7 +8,6 @@ var _userPlaylistPathname = null;
 
 var _showDeleteModal = false;
 var _isDeleting = false;
-var _playlistDeleted = false;
 
 var _showEditModal = false;
 var _isUpdating = false;
@@ -22,7 +21,6 @@ PlaylistModalsStore.__onDispatch = function (payload) {
   var response = payload.response;
 
   _userPlaylistPathname = null;
-  _playlistDeleted = false;
   _errors = [];
 
   switch (actionType) {
@@ -130,10 +128,6 @@ PlaylistModalsStore.isUpdating = function () {
 
 PlaylistModalsStore.getUserPlaylistPathname = function () {
   return _userPlaylistPathname;
-};
-
-PlaylistModalsStore.getPlaylistDeleted = function () {
-  return _playlistDeleted;
 };
 
 var setShowCreateModal = function (boolean) {

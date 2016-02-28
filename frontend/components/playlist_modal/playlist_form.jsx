@@ -14,10 +14,7 @@ var PlaylistForm = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
-    return {
-      title: "",
-      description: ""
-    };
+    return { title: "" };
   },
 
   componentDidMount: function () {
@@ -61,7 +58,6 @@ var PlaylistForm = React.createClass({
   createPlaylist: function () {
     var playlistData = {
       title: this.state.title,
-      description: this.state.description,
       track_ids: [this.props.track.id]
     }
 
@@ -85,13 +81,6 @@ var PlaylistForm = React.createClass({
             label={ this.titleLabel() }
             placeholder="Name your new playlist"
             valueLink={ this.linkState("title") } />
-
-          <Input type="textarea"
-            label="Description"
-            id="playlist-description"
-            rows="5"
-            placeholder="Describe your new playlist"
-            valueLink={ this.linkState("description") } />
 
           <AddedTrack track={ this.props.track } />
         </Modal.Body>

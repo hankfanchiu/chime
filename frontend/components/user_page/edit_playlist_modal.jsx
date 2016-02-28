@@ -25,10 +25,7 @@ var EditPlaylistModal = React.createClass({
     var playlist = nextProps.playlist;
 
     if (playlist) {
-      this.setState({
-        title: playlist.title,
-        description: playlist.description
-      });
+      this.setState({ title: playlist.title });
     }
   },
 
@@ -50,12 +47,6 @@ var EditPlaylistModal = React.createClass({
       (this.state.title === "") ||
       (this.state.disabled)
     );
-  },
-
-  _handleDescriptionChange: function () {
-    var description = this.refs.description.getValue();
-
-    this.setState({ disabled: false, description: description });
   },
 
   _handleTitleChange: function () {
@@ -90,10 +81,7 @@ var EditPlaylistModal = React.createClass({
 
   update: function () {
     var playlistId = this.props.playlist.id;
-    var data = {
-      title: this.state.title,
-      description: this.state.description
-    };
+    var data = { title: this.state.title };
 
     PlaylistActions.updatePlaylist(playlistId, data);
   },
@@ -102,7 +90,7 @@ var EditPlaylistModal = React.createClass({
     var noErrors = (this.state.errors.length === 0);
 
     return (
-      <Modal onHide={ this.close } show={ this.state.show }>
+      <Modal onHide={ this.close } show={ this.state.show } bsSize="small">
         <Modal.Header closeButton>
           <Modal.Title>Edit Playlist</Modal.Title>
         </Modal.Header>
@@ -114,18 +102,8 @@ var EditPlaylistModal = React.createClass({
             label={ this.titleLabel() }
             ref="title"
             placeholder="Update your playlist title"
-            help="Changing your playlist title will also change its URL!"
             value={ this.state.title }
             onChange={ this._handleTitleChange } />
-
-          <Input type="textarea"
-            label="Description"
-            ref="description"
-            rows="4"
-            id="playlist-description"
-            placeholder="Oops! Your playlist has no description. Enter something to describe your playlist."
-            value={ this.state.description }
-            onChange={ this._handleDescriptionChange } />
         </Modal.Body>
 
         <Modal.Footer>

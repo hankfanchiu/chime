@@ -11,7 +11,6 @@ var UserPage = require("./components/user_page/user_page");
 var TracksIndex = require("./components/user_page/tracks_index");
 var PlaylistsIndex = require("./components/user_page/playlists_index");
 var TrackPage = require("./components/track_page/track_page");
-var PlaylistPage = require("./components/playlist_page/playlist_page");
 var SessionStore = require("./stores/session_store");
 
 var preventIfLoggedIn = function (nextState, replaceState) {
@@ -42,9 +41,6 @@ var routes = (
     </Route>
 
     <Route name="track" path=":username/:track" component={ TrackPage } />
-    <Route name="playlist"
-      path=":username/playlists/:playlist"
-      component={ PlaylistPage } />
   </Route>
 );
 
