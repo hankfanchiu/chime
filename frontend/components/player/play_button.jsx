@@ -1,26 +1,30 @@
 var React = require("react");
+var PlayerActions = require("../../actions/player_actions");
 
 var PlayButton = React.createClass({
-  _togglePlayPause: function () {
-    this.props.isPlaying ? this.props.pauseAudio() : this.props.playAudio();
+  togglePlayPause: function () {
+    if (this.props.isPlaying) {
+      PlayerActions.pauseAudio();
+    } else {
+      PlayerActions.playAudio();
+    }
   },
 
   playPauseClassName: function () {
-    var className = "controller-button fa";
+    var className = "controller-button fa fa-";
 
     if (this.props.isPlaying) {
-      className += " fa-pause";
+      return className + "pause";
     } else {
-      className += " fa-play";
+      return className + "play";
     }
-
-    return className;
   },
 
   render: function () {
     return (
       <div className="controller-button">
-        <a onClick={ this._togglePlayPause }>
+        <a onClick={ this.togglePlayPause }>
+
           <i className={ this.playPauseClassName() }></i>
         </a>
       </div>

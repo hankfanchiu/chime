@@ -4,12 +4,16 @@ var TimeFormatterMixin = require("../../mixins/time_formatter_mixin");
 var TimeLabel = React.createClass({
   mixins: [TimeFormatterMixin],
 
-  renderCurrentTime: function () {
-    if (this.props.currentTime == undefined) {
-      return "00:00";
+  time: function () {
+    if (this.props.time) {
+      return this.secondsToTime(this.props.time);
     } else {
-      return this.secondsToTime(this.props.currentTime);
+      return "00:00";
     }
+  },
+
+  spanClassName: function () {
+    return "audio-" + this.props.name;
   },
 
 	render: function() {
@@ -17,10 +21,9 @@ var TimeLabel = React.createClass({
       <div className="audio-time-container">
         <div className="audio-time">
 
-    			<span className="audio-time">
-            { this.renderCurrentTime() }
+    			<span className={ this.spanClassName() }>
+            { this.time() }
           </span>
-
         </div>
       </div>
 		);

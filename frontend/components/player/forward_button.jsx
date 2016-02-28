@@ -1,14 +1,16 @@
 var React = require("react");
+var PlayerActions = require("../../actions/player_actions");
 
 var ForwardButton = React.createClass({
-  _playNextTrack: function () {
-    this.props.playNextTrack();
+  playNextTrack: function () {
+    PlayerActions.playNextTrack();
   },
 
   render: function () {
     return (
       <div className="controller-button">
-        <a onClick={ this._playNextTrack }>
+        <a onClick={ this.playNextTrack }>
+
           <i className="controller-button fa fa-forward"></i>
         </a>
       </div>

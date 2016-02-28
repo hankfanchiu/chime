@@ -1,7 +1,8 @@
 var React = require("react");
+var PlayerActions = require("../../actions/player_actions");
 
 var ProgressBar = React.createClass({
-  _seekTo: function (e) {
+  seekTo: function (e) {
 		var container = this.refs.progressBar;
 		var containerStartX = container.offsetLeft;
     var containerWidth = container.offsetWidth;
@@ -10,32 +11,33 @@ var ProgressBar = React.createClass({
 
     var time = this.props.duration * percent;
 
-		this.props.seekTo(time);
+		PlayerActions.seekTo(time);
+  },
+
+  position: function () {
+    if (this.props.currentTime > 0) {
+      // Pixel width of audio progress background is 350px:
+      return (this.props.currentTime / this.props.duration) * 350;
+    } else {
+      return 0;
+    }
   },
 
   render: function () {
-    var position = 0;
-    if (this.props.currentTime > 0) {
-       var percent = this.props.currentTime / this.props.duration;
-       position = percent * 350; // Pixel width of audio progress background
-    }
-
     return (
       <div className="audio-progress-container">
-        <div className="audio-progress" onClick={ this._seekTo }>
+        <div className="audio-progress" onClick={ this.seekTo }>
 
           <div ref="progressBar"
             className="audio-progress-background"
             style={{ marginLeft: "5px" }}>
 
             <div ref="progress" className="audio-progress-bar"
-              style={{ width: position + "px" }} />
+              style={{ width: this.position() + "px" }} />
 
             <div className="audio-progress-bar-handle"
-              style={{ left: position + "px" }} />
-
+              style={{ left: this.position() + "px" }} />
     			</div>
-
         </div>
       </div>
     );
