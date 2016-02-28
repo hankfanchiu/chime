@@ -1,19 +1,15 @@
 var React = require("react");
-var History = require("react-router").History;
+var Link = require("react-router").Link;
 
 var Footer = React.createClass({
-  mixins: [History],
-
-  goToHome: function () {
-    this.history.pushState(null, "/");
-  },
-
   render: function () {
     return (
       <footer className="footer">
         <section className="footer-wrapper container">
           <ul className="footer-nav">
-            <a className="logo" onClick={ this.goToHome }>Chime</a>
+            <Link className="logo" to="/">
+              Chime
+            </Link>
           </ul>
 
           <ul className="footer-nav">
