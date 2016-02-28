@@ -8,11 +8,8 @@ var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
 var RoundPlayButton = require("../utility/round_play_button");
 var TrackThumbnail = require("../utility/track_thumbnail");
-var History = require("react-router").History;
 
 var DiscoverTrack = React.createClass({
-  mixins: [History],
-
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
@@ -25,19 +22,6 @@ var DiscoverTrack = React.createClass({
 
   addToQueue: function () {
     PlayerActions.addTrackToQueue(this.props.track);
-  },
-
-  goToTrack: function () {
-    var track = this.props.track;
-    var pathname = "/" + track.user.username + "/" + track.slug;
-
-    this.history.pushState(null, pathname);
-  },
-
-  goToUserProfile: function () {
-    var pathname = "/" + this.props.track.user.username;
-
-    this.history.pushState(null, pathname);
   },
 
   render: function () {
