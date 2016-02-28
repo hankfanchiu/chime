@@ -9,10 +9,6 @@ var Badge = require("./badge");
 
 var Player = React.createClass({
   getInitialState: function () {
-    return this.getStateFromStores();
-  },
-
-  getStateFromStores: function () {
     return { isEnded: AudioStore.isEnded() };
   },
 
@@ -31,7 +27,7 @@ var Player = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(this.getStateFromStores());
+    this.setState(this.getInitialState());
   },
 
   render: function () {
