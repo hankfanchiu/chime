@@ -7,6 +7,7 @@ var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
 var RoundPlayButton = require("../utility/round_play_button");
+var TrackThumbnail = require("../utility/track_thumbnail");
 var History = require("react-router").History;
 
 var DiscoverTrack = React.createClass({
@@ -54,22 +55,7 @@ var DiscoverTrack = React.createClass({
             <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
           </div>
 
-          <Thumbnail src={ track.img_square } alt={ track.title }>
-            <span className="username">
-              <a className="username username-small"
-                onClick={ this.goToUserProfile }>
-                { track.user.username }
-              </a>
-            </span>
-
-            <div className="title-container">
-              <span className="title">
-                <a className="title title-small" onClick={ this.goToTrack }>
-                  { track.title }
-                </a>
-              </span>
-            </div>
-          </Thumbnail>
+          <TrackThumbnail track={ track } />
         </div>
       </Col>
     );
