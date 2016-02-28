@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var PageHeader = require("react-bootstrap").PageHeader;
@@ -24,7 +25,7 @@ var Discover = React.createClass({
   componentDidMount: function () {
     this.discoverListener = DiscoverStore.addListener(this._onChange);
     this.sessionListener = SessionStore.addListener(this._onChange);
-    
+
     DiscoverActions.fetchTracks();
   },
 
@@ -87,7 +88,12 @@ var Discover = React.createClass({
             See what's trending. Play it now, queue it up, or add to your own playlist.
           </p>
 
-          { this.discoverRows() }
+          <ReactCSSTransitionGroup transitionName="fade"
+            transitionEnterTimeout={ 500 }
+            transitionLeaveTimeout={ 300 }>
+
+            { this.discoverRows() }
+          </ReactCSSTransitionGroup>
 
           <PlaylistModal track={ this.state.trackToAdd }
             clientUsername={ this.state.clientUsername } />

@@ -1,8 +1,10 @@
 var React = require("react");
+var ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var PageHeader = require("react-bootstrap").PageHeader;
 var RandomTrackItem = require("./random_track_item");
+var ExploreButton = require("./explore_button");
 
 var RandomTracks = React.createClass({
   _shuffleTracks: function (size) {
@@ -48,13 +50,14 @@ var RandomTracks = React.createClass({
       <Grid className="home-page-hits">
         <h2 className="home-page-heading">Listen to the latest hits</h2>
 
-        { noTracks ? "" : this.trackRows() }
+        <ReactCSSTransitionGroup transitionName="fade"
+          transitionEnterTimeout={ 500 }
+          transitionLeaveTimeout={ 300 }>
 
-        <section className="explore-button">
-          <a className="explore-button" onClick={ this.props.goToDiscover }>
-            Discover what else is trending
-          </a>
-        </section>
+          { noTracks ? "" : this.trackRows() }
+        </ReactCSSTransitionGroup>
+
+        <ExploreButton />
       </Grid>
     );
   }

@@ -28,10 +28,6 @@ var TracksIndexItem = React.createClass({
     }
   },
 
-  addToQueue: function () {
-    PlayerActions.addTrackToQueue(this.props.track);
-  },
-
   deleteButton: function () {
     return (
       <span className="btn btn-default delete"
@@ -112,7 +108,7 @@ var TracksIndexItem = React.createClass({
             </section>
 
             <section className="buttons">
-              <AddToQueue addToQueue={ this.addToQueue } />
+              <AddToQueue track={ track } />
               <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
               { this.props.isClient ? this.editButton() : "" }

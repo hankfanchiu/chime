@@ -1,14 +1,16 @@
 var React = require("react");
+var PlayerActions = require("../../actions/player_actions");
 
 var BackwardButton = React.createClass({
-  _playPreviousTrack: function () {
-    this.props.playPreviousTrack();
+  playPreviousTrack: function () {
+    PlayerActions.playPreviousTrack();
   },
 
   render: function () {
     return (
       <div className="controller-button">
-        <a onClick={ this._playPreviousTrack }>
+        <a onClick={ this.playPreviousTrack }>
+
           <i className="controller-button fa fa-backward"></i>
         </a>
       </div>

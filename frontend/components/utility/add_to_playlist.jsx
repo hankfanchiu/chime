@@ -6,6 +6,7 @@ var AddToPlaylist = React.createClass({
     return (
       <span className="btn btn-default add-to-playlist"
         onClick={ this.props.addToPlaylist }>
+        
         <Glyphicon glyph="th-list" className="playlist-icon"/> Add to playlist
       </span>
     );
