@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var PageHeader = require("react-bootstrap").PageHeader;
@@ -49,7 +50,12 @@ var RandomTracks = React.createClass({
       <Grid className="home-page-hits">
         <h2 className="home-page-heading">Listen to the latest hits</h2>
 
-        { noTracks ? "" : this.trackRows() }
+        <ReactCSSTransitionGroup transitionName="fade"
+          transitionEnterTimeout={ 500 }
+          transitionLeaveTimeout={ 300 }>
+
+          { noTracks ? "" : this.trackRows() }
+        </ReactCSSTransitionGroup>
 
         <ExploreButton />
       </Grid>
