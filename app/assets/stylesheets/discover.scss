@@ -1,4 +1,4 @@
-div.discover-track {
+.discover-track {
   position: relative;
 
   span.play-button {
@@ -70,7 +70,7 @@ div.title-container {
   text-overflow: ellipsis;
 }
 
-div.discover-track:hover {
+.discover-track:hover {
   span.btn {
     cursor: pointer;
     opacity: 1;

@@ -2,13 +2,11 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var ListGroup = require("react-bootstrap").ListGroup;
-var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Input = require("react-bootstrap").Input;
-var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
+var AddedTrack = require("./added_track");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
@@ -17,8 +15,6 @@ var PlaylistForm = React.createClass({
 
   getInitialState: function () {
     return {
-      isSaving: PlaylistModalsStore.isSaving(),
-      pathname: PlaylistModalsStore.getNewPlaylistPathname(),
       title: "",
       description: ""
     };
@@ -28,6 +24,16 @@ var PlaylistForm = React.createClass({
     this.listenerToken = PlaylistModalsStore.addListener(this._onChange);
   },
 
+  componentDidUpdate: function () {
+    var pathname = this.state.pathname;
+
+
+    if (pathname) {
+      this.setState(this.getInitialState());
+      this.history.pushState(null, pathname);
+    }
+  },
+
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
@@ -35,10 +41,8 @@ var PlaylistForm = React.createClass({
   _onChange: function () {
     this.setState({
       isSaving: PlaylistModalsStore.isSaving(),
-      pathname: PlaylistModalsStore.getNewPlaylistPathname(),
+      pathname: PlaylistModalsStore.getUserPlaylistPathname(),
     });
-
-    this._redirectIfSaved();
   },
 
   _buttonState: function () {
@@ -52,15 +56,6 @@ var PlaylistForm = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
     this.createPlaylist();
-  },
-
-  _redirectIfSaved: function () {
-    var pathname = this.state.pathname;
-
-    if (pathname) {
-      this.setState({ title: "", description: "" });
-      this.history.pushState(null, pathname);
-    }
   },
 
   createPlaylist: function () {
@@ -98,31 +93,7 @@ var PlaylistForm = React.createClass({
             placeholder="Describe your new playlist"
             valueLink={ this.linkState("description") } />
 
-          <Input label="Added Track">
-            <ListGroup>
-              <ListGroupItem>
-                <div className="playlist-form-track">
-                  <div className="track-thumbnail">
-                    <Image src={ this.props.track.img_thumb } thumbnail />
-                  </div>
-
-                  <section className="track-info">
-                    <header>
-                      <span className="username">
-                        { this.props.track.user.username }
-                      </span>
-                    </header>
-
-                    <header>
-                      <span className="title">
-                        { this.props.track.title }
-                      </span>
-                    </header>
-                  </section>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-          </Input>
+          <AddedTrack track={ this.props.track } />
         </Modal.Body>
 
         <Modal.Footer>
@@ -131,6 +102,7 @@ var PlaylistForm = React.createClass({
           <Button bsStyle="primary"
             disabled={ this._disabled() }
             type="submit">
+
             { this._buttonState() }
           </Button>
         </Modal.Footer>

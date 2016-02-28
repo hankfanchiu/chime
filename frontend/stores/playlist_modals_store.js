@@ -4,7 +4,7 @@ var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var _showCreateModal = false;
 var _isSaving = false;
-var _newPlaylistPathname = null;
+var _userPlaylistPathname = null;
 
 var _showDeleteModal = false;
 var _isDeleting = false;
@@ -12,7 +12,6 @@ var _playlistDeleted = false;
 
 var _showEditModal = false;
 var _isUpdating = false;
-var _updatedPlaylistPathname = null;
 
 var _errors = [];
 
@@ -22,9 +21,8 @@ PlaylistModalsStore.__onDispatch = function (payload) {
   var actionType = payload.actionType;
   var response = payload.response;
 
-  _newPlaylistPathname = null;
+  _userPlaylistPathname = null;
   _playlistDeleted = false;
-  _updatedPlaylistPathname = null;
   _errors = [];
 
   switch (actionType) {
@@ -130,16 +128,12 @@ PlaylistModalsStore.isUpdating = function () {
   return _isUpdating;
 };
 
-PlaylistModalsStore.getNewPlaylistPathname = function () {
-  return _newPlaylistPathname;
+PlaylistModalsStore.getUserPlaylistPathname = function () {
+  return _userPlaylistPathname;
 };
 
 PlaylistModalsStore.getPlaylistDeleted = function () {
   return _playlistDeleted;
-};
-
-PlaylistModalsStore.getUpdatedPlaylistPathname = function () {
-  return _updatedPlaylistPathname;
 };
 
 var setShowCreateModal = function (boolean) {
@@ -180,10 +174,9 @@ var setIsUpdating = function () {
 
 var recordPlaylistCreated = function (response) {
   var playlist = response.playlist;
-  var username = playlist.user.username;
-  var pathname = "/" + username + "/playlists/" + playlist.slug;
+  var pathname = "/" + playlist.user.username + "/playlists";
 
-  _newPlaylistPathname = pathname;
+  _userPlaylistPathname = pathname;
   _showCreateModal = false;
 
   PlaylistModalsStore.__emitChange();
@@ -198,10 +191,9 @@ var recordPlaylistDeleted = function () {
 
 var recordPlaylistUpdated = function (response) {
   var updatedPlaylist = response.playlist;
-  var newSlug = updatedPlaylist.slug;
-  var username = updatedPlaylist.user.username;
+  var pathname = "/" + updatedPlaylist.user.username + "/playlists";
 
-  _updatedPlaylistPathname = "/" + username + "/playlists/" + newSlug;
+  _userPlaylistPathname = pathname;
   _showEditModal = false;
 
   PlaylistModalsStore.__emitChange();

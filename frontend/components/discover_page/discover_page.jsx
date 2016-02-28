@@ -49,7 +49,7 @@ var Discover = React.createClass({
 
     for (var i = 0; i < tracks.length; i += 4) {
       row = (
-        <Row key={ i }>
+        <Row key={ "discover-row-" + i }>
           <DiscoverTrack key={ i }
             track={ tracks[i] }
             isLoggedIn={ this.state.isLoggedIn }

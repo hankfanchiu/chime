@@ -1,6 +1,5 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
-var Thumbnail = require("react-bootstrap").Thumbnail;
 var SessionActions = require("../../actions/session_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
