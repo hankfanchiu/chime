@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/hankfanchiu/chime#readme",
   "dependencies": {
+    "babel-core": "^6.3.17",
+    "babel-loader": "^6.2.0",
+    "babel-preset-react": "^6.3.13",
     "flux": "^2.1.1",
     "history": "^1.17.0",
     "keymirror": "^0.1.1",
@@ -33,11 +36,7 @@
     "react-router": "^1.0.3",
     "webpack": "^1.12.9"
   },
-  "devDependencies": {
-    "babel-core": "^6.3.17",
-    "babel-loader": "^6.2.0",
-    "babel-preset-react": "^6.3.13"
-  },
+  "devDependencies": {},
   "engines": {
     "node": "4.1.1",
     "npm": "2.1.x"
