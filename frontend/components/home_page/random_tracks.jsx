@@ -3,6 +3,7 @@ var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var PageHeader = require("react-bootstrap").PageHeader;
 var RandomTrackItem = require("./random_track_item");
+var ExploreButton = require("./explore_button");
 
 var RandomTracks = React.createClass({
   _shuffleTracks: function (size) {
@@ -50,11 +51,7 @@ var RandomTracks = React.createClass({
 
         { noTracks ? "" : this.trackRows() }
 
-        <section className="explore-button">
-          <a className="explore-button" onClick={ this.props.goToDiscover }>
-            Discover what else is trending
-          </a>
-        </section>
+        <ExploreButton />
       </Grid>
     );
   }

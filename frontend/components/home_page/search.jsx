@@ -83,7 +83,9 @@ var Search = React.createClass({
     return (
       <section className="home-page-search-container">
         <section className="home-page-search-bar">
-          <form onSubmit={ this._handleSubmit } onBlur={ this._clearResults }>
+          <form onSubmit={ this._handleSubmit }
+            onBlur={ this._clearResults }>
+
             <Input type="text"
               ref="input"
               value={ this.state.query }

@@ -1,9 +1,7 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Thumbnail = require("react-bootstrap").Thumbnail;
-var Glyphicon = require("react-bootstrap").Glyphicon;
-var Button = require("react-bootstrap").Button;
-var PlayerActions = require("../../actions/player_actions");
+var RoundPlayButton = require("../utility/round_play_button");
 var History = require("react-router").History;
 
 var RandomTrackItem = React.createClass({
@@ -22,10 +20,6 @@ var RandomTrackItem = React.createClass({
     this.history.pushState(null, pathname);
   },
 
-  playTrack: function () {
-    PlayerActions.playTrackNow(this.props.track);
-  },
-
   render: function () {
     var track = this.props.track;
 
@@ -34,9 +28,7 @@ var RandomTrackItem = React.createClass({
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 }>
         <div className="random-track">
-          <span className="btn play-button" onClick={ this.playTrack }>
-            <Glyphicon glyph="play" className="play-icon"/>
-          </span>
+          <RoundPlayButton track={ track } />
 
           <Thumbnail src={ track.img_square } alt={ track.title }>
             <span className="username">
