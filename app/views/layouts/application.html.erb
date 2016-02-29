@@ -8,9 +8,32 @@
   <%= javascript_include_tag 'application', cache: true %>
   <%= csrf_meta_tags %>
 
+  <!-- Begin Font Awesome -->
   <link rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- End Font Awesome -->
 
+  <!-- Begin Google Analytics -->
+  <script>
+    (function (i,s,o,g,r,a,m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a,m);
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-74430584-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <!-- End Google Analytics -->
+
+  <!-- Begin storing username in localStorage -->
   <script>
     <% if logged_in? %>
       var client = "<%= current_user.username %>";
@@ -19,6 +42,7 @@
       localStorage.removeItem("client");
     <% end %>
   </script>
+  <!-- End storing username in localStorage -->
 
 </head>
 <body>
