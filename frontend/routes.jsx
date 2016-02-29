@@ -5,6 +5,7 @@ var IndexRedirect = require("react-router").IndexRedirect;
 
 var App = require("./components/app");
 var HomePage = require("./components/home_page/home_page");
+var AboutPage = require("./components/about_page/about_page");
 var DiscoverPage = require("./components/discover_page/discover_page");
 var Logout = require("./components/session/logout");
 var UserPage = require("./components/user_page/user_page");
@@ -28,8 +29,9 @@ var requireLogin = function (nextState, replaceState) {
 module.exports = (
   <Route name="app" path="/" component={ App }>
     <IndexRoute component={ HomePage } onEnter={ preventIfLoggedIn }/>
+    <Route name="about" path="about" component={ AboutPage } />
     <Route name="discover" path="discover" component={ DiscoverPage } />
-    <Route name="logout" 
+    <Route name="logout"
       path="logout"
       component={ Logout }
       onEnter={ requireLogin } />

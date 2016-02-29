@@ -16,7 +16,10 @@ module.exports = React.createClass({
           <ul className="footer-nav">
             <h5>COMPANY</h5>
 
-            <li><a>About</a></li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            
             <li><a>Careers</a></li>
             <li><a>Press</a></li>
           </ul>
@@ -31,7 +34,7 @@ module.exports = React.createClass({
 
           <ul className="footer-nav">
             <h5>CONNECT</h5>
-            
+
             <ExternalLink name="GitHub"
               href="https://github.com/hankfanchiu/chime" />
 
