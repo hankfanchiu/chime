@@ -9,7 +9,7 @@ var LoggedOut = require("./logged_out");
 var Search = require("../search/search");
 var History = require("react-router").History;
 
-var Navigation = React.createClass({
+module.exports = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
@@ -39,12 +39,12 @@ var Navigation = React.createClass({
     this.history.pushState(null, "/discover");
   },
 
-  loggedIn: function () {
-    return <LoggedIn user={ this.state.user } />;
-  },
-
-  loggedOut: function () {
-    return <LoggedOut />;
+  loggedInOrOut: function () {
+    if (this.state.isLoggedIn) {
+      return <LoggedIn user={ this.state.user } />;
+    } else {
+      return <LoggedOut />;
+    }
   },
 
   render: function () {
@@ -68,11 +68,9 @@ var Navigation = React.createClass({
             </Navbar.Form>
           </Nav>
 
-          { this.state.isLoggedIn ? this.loggedIn() : this.loggedOut() }
+          { this.loggedInOrOut() }
         </div>
       </Navbar>
     );
   }
 });
-
-module.exports = Navigation;

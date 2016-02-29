@@ -8,7 +8,7 @@ var PlaylistActions = require("../../actions/playlist_actions");
 var PlaylistForm = require("./playlist_form");
 var PlaylistList = require("./playlist_list");
 
-var PlaylistModal = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     var state = this.getStateFromStore();
     state.showForm = false;
@@ -82,5 +82,3 @@ var PlaylistModal = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistModal;

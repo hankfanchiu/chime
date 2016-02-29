@@ -8,7 +8,7 @@ var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");
 var History = require("react-router").History;
 
-var PlaylistListItem = React.createClass({
+module.exports = React.createClass({
   mixins: [History],
 
   _disabled: function () {
@@ -123,5 +123,3 @@ var PlaylistListItem = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistListItem;

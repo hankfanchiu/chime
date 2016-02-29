@@ -1,7 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 
-var PlayButton = React.createClass({
+module.exports = React.createClass({
   togglePlayPause: function () {
     if (this.props.isPlaying) {
       PlayerActions.pauseAudio();
@@ -24,12 +24,9 @@ var PlayButton = React.createClass({
     return (
       <div className="controller-button">
         <a onClick={ this.togglePlayPause }>
-
           <i className={ this.playPauseClassName() }></i>
         </a>
       </div>
     );
   }
 });
-
-module.exports = PlayButton;

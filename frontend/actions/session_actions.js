@@ -4,8 +4,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var SessionActions = {
-  // Sign up modal actions
 
+  // Sign up modal actions
   showSignUpModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_SIGN_UP_MODAL
@@ -19,7 +19,6 @@ var SessionActions = {
   },
 
   // Login modal actions
-
   showLoginModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_LOGIN_MODAL
@@ -33,7 +32,6 @@ var SessionActions = {
   },
 
   // Request actions
-
   login: function (userData) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.LOGIN_INITIATED
@@ -51,7 +49,6 @@ var SessionActions = {
   },
 
   // Response actions
-
   receiveLogin: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.LOGIN_RESPONSE,

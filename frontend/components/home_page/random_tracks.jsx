@@ -5,7 +5,7 @@ var Row = require("react-bootstrap").Row;
 var RandomTrackItem = require("./random_track_item");
 var ExploreButton = require("./explore_button");
 
-var RandomTracks = React.createClass({
+module.exports = React.createClass({
   _shuffleTracks: function (size) {
     var shuffled = this.props.tracks.slice();
     var idx = shuffled.length;
@@ -63,5 +63,3 @@ var RandomTracks = React.createClass({
     );
   }
 });
-
-module.exports = RandomTracks;

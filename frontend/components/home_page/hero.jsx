@@ -2,7 +2,7 @@ var React = require("react");
 var HeroVideo = require("./hero_video");
 var ExploreButton = require("./explore_button");
 
-var Hero = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <section className="hero-module">
@@ -28,5 +28,3 @@ var Hero = React.createClass({
     );
   }
 });
-
-module.exports = Hero;

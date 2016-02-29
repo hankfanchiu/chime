@@ -6,7 +6,7 @@ var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
 var History = require("react-router").History;
 
-var DeleteTrackModal = React.createClass({
+module.exports = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
@@ -106,5 +106,3 @@ var DeleteTrackModal = React.createClass({
     );
   }
 });
-
-module.exports = DeleteTrackModal;

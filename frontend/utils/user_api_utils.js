@@ -1,4 +1,4 @@
-var UserAPIUtils = {
+module.exports = {
   fetchUser: function (username, callback) {
     $.ajax({
       url: "/api/users/" + username,
@@ -28,5 +28,3 @@ var UserAPIUtils = {
     });
   }
 };
-
-module.exports = UserAPIUtils;

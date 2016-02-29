@@ -1,4 +1,4 @@
-var SearchAPIUtils = {
+module.exports = {
   fetchResults: function (queryString, callback) {
     var url = "/api/search?q=" + queryString;
 
@@ -9,5 +9,3 @@ var SearchAPIUtils = {
     });
   }
 };
-
-module.exports = SearchAPIUtils;

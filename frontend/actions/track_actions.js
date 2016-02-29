@@ -3,8 +3,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var TrackActions = {
-  // UI actions
 
+  // UI actions
   showEditModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_EDIT_TRACK_MODAL
@@ -30,7 +30,6 @@ var TrackActions = {
   },
 
   // Request actions
-
   fetchTracks: function (username) {
     TrackAPIUtils.fetchTracks(
       username,
@@ -81,7 +80,6 @@ var TrackActions = {
   },
 
   // Response actions
-
   receiveTracks: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.TRACKS_RECEIVED,

@@ -9,7 +9,7 @@ var EditTrackModal = require("./edit_track_modal");
 var DeleteTrackModal = require("./delete_track_modal");
 var TracksIndexItem = require("./tracks_index_item");
 
-var TracksIndex = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -44,7 +44,7 @@ var TracksIndex = React.createClass({
   _setTrackToAdd: function (track) {
     this.setState({ trackToAdd: track });
   },
-  
+
   _setTrackToDelete: function (track) {
     this.setState({ trackToDelete: track });
   },
@@ -95,11 +95,8 @@ var TracksIndex = React.createClass({
           clientUsername={ this.state.clientUsername } />
 
         <EditTrackModal track={ this.state.trackToEdit } />
-
         <DeleteTrackModal track={ this.state.trackToDelete } />
       </ListGroup>
     );
   }
 });
-
-module.exports = TracksIndex;

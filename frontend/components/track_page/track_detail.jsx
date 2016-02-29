@@ -9,7 +9,7 @@ var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
 
-var TrackDetail = React.createClass({
+module.exports = React.createClass({
   trackDescription: function () {
     var track = this.props.track;
 
@@ -84,5 +84,3 @@ var TrackDetail = React.createClass({
     );
   }
 });
-
-module.exports = TrackDetail;

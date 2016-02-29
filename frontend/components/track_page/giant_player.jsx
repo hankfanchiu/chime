@@ -5,7 +5,7 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 
-var GiantPlayer = React.createClass({
+module.exports = React.createClass({
   playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
@@ -52,5 +52,3 @@ var GiantPlayer = React.createClass({
     );
   }
 });
-
-module.exports = GiantPlayer;

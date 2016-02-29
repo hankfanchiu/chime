@@ -25,11 +25,11 @@ var requireLogin = function (nextState, replaceState) {
   }
 };
 
-var routes = (
+module.exports = (
   <Route name="app" path="/" component={ App }>
     <IndexRoute component={ HomePage } onEnter={ preventIfLoggedIn }/>
     <Route name="discover" path="discover" component={ DiscoverPage } />
-    <Route name="logout"
+    <Route name="logout" 
       path="logout"
       component={ Logout }
       onEnter={ requireLogin } />
@@ -43,5 +43,3 @@ var routes = (
     <Route name="track" path=":username/:track" component={ TrackPage } />
   </Route>
 );
-
-module.exports = routes;

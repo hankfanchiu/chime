@@ -2,7 +2,7 @@ var React = require("react");
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var TrackActions = require("../../actions/track_actions");
 
-var DeleteButton = React.createClass({
+module.exports = React.createClass({
   showDeleteModal: function () {
     TrackActions.showDeleteModal();
   },
@@ -16,5 +16,3 @@ var DeleteButton = React.createClass({
     );
   }
 });
-
-module.exports = DeleteButton;

@@ -4,11 +4,8 @@ var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
 var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
-var History = require("react-router").History;
 
-var DeleteTrackModal = React.createClass({
-  mixins: [History],
-
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       errors: TrackModalsStore.getErrors(),
@@ -91,5 +88,3 @@ var DeleteTrackModal = React.createClass({
     );
   }
 });
-
-module.exports = DeleteTrackModal;

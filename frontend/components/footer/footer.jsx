@@ -1,7 +1,8 @@
 var React = require("react");
 var Link = require("react-router").Link;
+var ExternalLink = require("./external_link");
 
-var Footer = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <footer className="footer">
@@ -28,28 +29,18 @@ var Footer = React.createClass({
 
           <ul className="footer-nav">
             <h5>CONNECT</h5>
-            <li>
-              <a target="_blank" href="https://github.com/hankfanchiu/chime">
-                GitHub
-              </a>
-            </li>
+            
+            <ExternalLink name="GitHub"
+              href="https://github.com/hankfanchiu/chime" />
 
-            <li>
-              <a target="_blank" href="https://www.linkedin.com/in/hankfanchiu">
-                LinkedIn
-              </a>
-            </li>
+            <ExternalLink name="LinkedIn"
+              href="https://www.linkedin.com/in/hankfanchiu" />
 
-            <li>
-              <a target="_blank" href="http://hankfanchiu.tumblr.com/">
-                Blog
-              </a>
-            </li>
+            <ExternalLink name="Blog"
+              href="http://hankfanchiu.tumblr.com/" />
           </ul>
         </section>
       </footer>
     );
   }
 });
-
-module.exports = Footer;

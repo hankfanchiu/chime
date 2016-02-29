@@ -1,5 +1,5 @@
 var React = require("react");
-var ListGroup = require("react-bootstrap").ListGroup;
+var Link = require("react-router").Link;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
@@ -7,12 +7,9 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
-var PlaylistTrack = require("./playlist_track");
-var History = require("react-router").History;
+var PlaylistTrackList = require("./playlist_track_list");
 
-var PlaylistsIndexItem = React.createClass({
-  mixins: [History],
-
+module.exports = React.createClass({
   defaultImage: function () {
     var src = "https://s3-us-west-1.amazonaws.com/chime-audio-assets/blue.jpg";
 
@@ -51,18 +48,8 @@ var PlaylistsIndexItem = React.createClass({
     PlaylistActions.showEditModal();
   },
 
-  goToUser: function () {
-    var pathname = "/" + this.props.username;
-
-    this.history.pushState(null, pathname);
-  },
-
   playPlaylist: function () {
     PlayerActions.loadPlaylist(this.props.playlist);
-  },
-
-  sadMessage: function () {
-    return <p>This playlist has no tracks yet</p>
   },
 
   trackImage: function () {
@@ -77,20 +64,8 @@ var PlaylistsIndexItem = React.createClass({
     );
   },
 
-  tracksList: function () {
-    var playlist = this.props.playlist;
-    var tracks = playlist.tracks;
-
-    var tracksList = tracks.map(function (track, idx) {
-      return (
-        <PlaylistTrack key={ idx }
-          index={ idx + 1 }
-          track={ track }
-          playlistId={ playlist.id } />
-      );
-    });
-
-    return <ListGroup>{ tracksList }</ListGroup>;
+  trackList: function () {
+    return <PlaylistTrackList playlist={ this.props.playlist } />;
   },
 
   render: function () {
@@ -104,14 +79,16 @@ var PlaylistsIndexItem = React.createClass({
 
           <Col xs={ 9 } sm={ 9 } md={ 9 }>
             <section className="time">
-              <p className="time">Created { playlist.time_ago }</p>
+              <p className="time">
+                Created { playlist.time_ago }
+              </p>
             </section>
 
             <section className="playlist-info">
               <h5 className="username">
-                <a className="username" onClick={ this.goToUser }>
+                <Link className="username" to={"/" + this.props.username }>
                   { playlist.user.username }
-                </a>
+                </Link>
               </h5>
 
               <h4 className="title">
@@ -119,7 +96,7 @@ var PlaylistsIndexItem = React.createClass({
               </h4>
             </section>
 
-            { noTracks ? this.sadMessage() : this.tracksList() }
+            { noTracks ? null : this.trackList() }
 
             <section className="buttons">
               { this.props.isClient ? this.editButton() : "" }
@@ -131,5 +108,3 @@ var PlaylistsIndexItem = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistsIndexItem;

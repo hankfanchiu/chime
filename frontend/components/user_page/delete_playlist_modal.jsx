@@ -4,11 +4,8 @@ var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
-var History = require("react-router").History;
 
-var DeletePlaylistModal = React.createClass({
-  mixins: [History],
-
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       errors: PlaylistModalsStore.getErrors(),
@@ -89,5 +86,3 @@ var DeletePlaylistModal = React.createClass({
     );
   }
 });
-
-module.exports = DeletePlaylistModal;

@@ -3,24 +3,22 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var SearchActions = {
-  // Clear Search Store
 
+  // Clear Search Store
   clearResults: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.CLEAR_SEARCH_RESULTS
     });
   },
 
-  // Request actions
-
+  // Request action
   fetchResults: function (query) {
-    if (query === "") { return; }
-
-    SearchAPIUtils.fetchResults(query, SearchActions.receiveResults);
+    if (query !== "") {
+      SearchAPIUtils.fetchResults(query, SearchActions.receiveResults);
+    }
   },
 
-  // Response actions
-
+  // Response action
   receiveResults: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SEARCH_RESULTS_RECEIVED,

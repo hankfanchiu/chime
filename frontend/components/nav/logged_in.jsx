@@ -9,7 +9,7 @@ var UploadActions = require("../../actions/upload_actions");
 var UserActions = require("../../actions/user_actions");
 var History = require("react-router").History;
 
-var LoggedIn = React.createClass({
+module.exports = React.createClass({
   mixins: [History],
 
   goToPlaylists: function () {
@@ -34,7 +34,7 @@ var LoggedIn = React.createClass({
     return (
       <span>
         <Image src={ this.props.user.avatar_hero } style={ style } />
-        
+
         <span className="spacer spacer-small"></span>
 
         { this.props.user.username }
@@ -83,5 +83,3 @@ var LoggedIn = React.createClass({
     );
   }
 });
-
-module.exports = LoggedIn;

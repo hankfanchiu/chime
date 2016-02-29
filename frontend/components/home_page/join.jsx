@@ -1,7 +1,7 @@
 var React = require("react");
 var JoinButton = require("./join_button");
 
-var Join = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <section className="home-page-join">
@@ -26,5 +26,3 @@ var Join = React.createClass({
     );
   }
 });
-
-module.exports = Join;

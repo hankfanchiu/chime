@@ -3,8 +3,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var UploadActions = {
-  // UI actions
 
+  // UI actions
   showUpload: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_UPLOAD_MODAL
@@ -18,7 +18,6 @@ var UploadActions = {
   },
 
   // Request actions
-
   startDirectUpload: function (prefix, file) {
     UploadActions.fetchSignedUrls(prefix, file);
   },
@@ -41,7 +40,6 @@ var UploadActions = {
   },
 
   // Response actions
-
   receiveSignedUrls: function (response, file) {
     var presignedUrl = response.presigned_url;
     var publicUrl = response.public_url;

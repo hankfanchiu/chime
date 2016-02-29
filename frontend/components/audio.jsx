@@ -3,7 +3,7 @@ var PlayerStore = require("../stores/player_store");
 var PlayerActions = require("../actions/player_actions");
 var AudioActions = require("../actions/audio_actions");
 
-var Audio = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -121,5 +121,3 @@ var Audio = React.createClass({
     );
   }
 });
-
-module.exports = Audio;

@@ -2,7 +2,7 @@ var React = require("react");
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 
-var RoundPlayButton = React.createClass({
+module.exports = React.createClass({
   playTrack: function () {
     PlayerActions.playTrackNow(this.props.track);
   },
@@ -15,5 +15,3 @@ var RoundPlayButton = React.createClass({
     );
   }
 });
-
-module.exports = RoundPlayButton;

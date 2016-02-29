@@ -1,4 +1,5 @@
 var React = require("react");
+var Link = require("react-router").Link;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
@@ -10,15 +11,8 @@ var TrackActions = require("../../actions/track_actions");
 var PlaylistActions = require("../../actions/playlist_actions");
 var AddToQueue = require("../utility/add_to_queue");
 var AddToPlaylist = require("../utility/add_to_playlist");
-var History = require("react-router").History;
 
-var TracksIndexItem = React.createClass({
-  mixins: [History],
-
-  _pushState: function (pathname) {
-    this.history.pushState(null, pathname);
-  },
-
+module.exports = React.createClass({
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
@@ -56,16 +50,8 @@ var TracksIndexItem = React.createClass({
     TrackActions.showEditModal();
   },
 
-  goToTrack: function () {
-    var pathname = "/" + this.props.username + "/" + this.props.track.slug;
-
-    this._pushState(pathname);
-  },
-
-  goToUser: function () {
-    var pathname = "/" + this.props.username;
-
-    this._pushState(pathname);
+  trackPathname: function () {
+    return "/" + this.props.username + "/" + this.props.track.slug;
   },
 
   playTrack: function () {
@@ -95,15 +81,15 @@ var TracksIndexItem = React.createClass({
 
             <section className="track-heading">
               <h5 className="username">
-                <a className="username" onClick={ this.goToUser }>
+                <Link className="username" to={ "/" + this.props.username }>
                   { track.user.username }
-                </a>
+                </Link>
               </h5>
 
               <h4 className="title">
-                <a className="title" onClick={ this.goToTrack }>
+                <Link className="title" to={ this.trackPathname() }>
                   { track.title }
-                </a>
+                </Link>
               </h4>
             </section>
 
@@ -120,5 +106,3 @@ var TracksIndexItem = React.createClass({
     );
   }
 });
-
-module.exports = TracksIndexItem;

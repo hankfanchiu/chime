@@ -1,4 +1,4 @@
-var SessionAPIUtils = {
+module.exports = {
   login: function (userData, callback) {
     $.ajax({
       url: "/api/session",
@@ -16,5 +16,3 @@ var SessionAPIUtils = {
     });
   },
 };
-
-module.exports = SessionAPIUtils;

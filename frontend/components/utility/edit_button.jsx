@@ -2,7 +2,7 @@ var React = require("react");
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var TrackActions = require("../../actions/track_actions");
 
-var EditButton = React.createClass({
+module.exports = React.createClass({
   showEditModal: function () {
     TrackActions.showEditModal();
   },
@@ -16,5 +16,3 @@ var EditButton = React.createClass({
     );
   }
 });
-
-module.exports = EditButton;

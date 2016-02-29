@@ -4,8 +4,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var UserActions = {
-  // UI actions
 
+  // UI actions
   showSettingsModal: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.SHOW_SETTINGS_MODAL
@@ -63,7 +63,6 @@ var UserActions = {
   },
 
   // Response actions
-
   receiveUser: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.USER_RECEIVED,

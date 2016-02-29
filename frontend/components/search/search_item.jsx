@@ -3,7 +3,7 @@ var Image = require("react-bootstrap").Image;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var History = require("react-router").History;
 
-var SearchItem = React.createClass({
+module.exports = React.createClass({
   mixins: [History],
 
   goToPage: function () {
@@ -29,5 +29,3 @@ var SearchItem = React.createClass({
     );
   }
 });
-
-module.exports = SearchItem;

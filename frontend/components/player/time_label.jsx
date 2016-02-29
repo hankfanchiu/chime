@@ -1,7 +1,7 @@
 var React = require("react");
 var TimeFormatterMixin = require("../../mixins/time_formatter_mixin");
 
-var TimeLabel = React.createClass({
+module.exports = React.createClass({
   mixins: [TimeFormatterMixin],
 
   time: function () {
@@ -12,16 +12,11 @@ var TimeLabel = React.createClass({
     }
   },
 
-  spanClassName: function () {
-    return "audio-" + this.props.name;
-  },
-
 	render: function() {
 		return (
       <div className="audio-time-container">
         <div className="audio-time">
-
-    			<span className={ this.spanClassName() }>
+    			<span className={ "audio-" + this.props.name }>
             { this.time() }
           </span>
         </div>
@@ -29,5 +24,3 @@ var TimeLabel = React.createClass({
 		);
 	}
 });
-
-module.exports = TimeLabel;

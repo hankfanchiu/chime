@@ -1,7 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 
-var ProgressBar = React.createClass({
+module.exports = React.createClass({
   seekTo: function (e) {
 		var container = this.refs.progressBar;
 		var containerStartX = container.offsetLeft;
@@ -43,5 +43,3 @@ var ProgressBar = React.createClass({
     );
   }
 });
-
-module.exports = ProgressBar;

@@ -7,7 +7,7 @@ var Controller = require("./controller");
 var Timeline = require("./timeline");
 var Badge = require("./badge");
 
-var Player = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return { isEnded: AudioStore.isEnded() };
   },
@@ -44,5 +44,3 @@ var Player = React.createClass({
     );
   }
 });
-
-module.exports = Player;

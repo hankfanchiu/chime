@@ -1,4 +1,4 @@
-var PlaylistAPIUtils = {
+module.exports = {
   fetchPlaylists: function (username, callback) {
     var url = "/api/playlists"
     if (username) {
@@ -48,5 +48,3 @@ var PlaylistAPIUtils = {
     });
   }
 };
-
-module.exports = PlaylistAPIUtils;

@@ -3,7 +3,7 @@ var Link = require("react-router").Link;
 var Navbar = require("react-bootstrap").Navbar;
 var LoggedOut = require("./logged_out");
 
-var HomePageNavigation = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <Navbar className="home-page-nav">
@@ -20,5 +20,3 @@ var HomePageNavigation = React.createClass({
     );
   }
 });
-
-module.exports = HomePageNavigation;

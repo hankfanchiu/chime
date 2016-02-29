@@ -3,8 +3,8 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var PlaylistingActions = {
-  // Request actions
 
+  // Request actions
   createPlaylisting: function (ids) {
     PlaylistingAPIUtils.createPlaylisting(
       ids,
@@ -20,7 +20,6 @@ var PlaylistingActions = {
   },
 
   // Response actions
-
   receivePlaylistingCreated: function (response) {
     AppDispatcher.dispatch({
       actionType: ActionTypes.PLAYLISTING_CREATED,

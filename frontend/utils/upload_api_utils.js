@@ -1,4 +1,4 @@
-var UploadAPIUtils = {
+module.exports = {
   fetchSignedUrls: function (prefix, file, callback) {
     var url = "/api/aws?prefix=" + prefix + "&filename=" + file.name;
 
@@ -22,7 +22,7 @@ var UploadAPIUtils = {
     xhr.upload.onprogress = function (e) {
       var percent = e.loaded / e.total;
       progressCb(percent);
-    }
+    };
 
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -33,5 +33,3 @@ var UploadAPIUtils = {
     xhr.send(file);
   }
 };
-
-module.exports = UploadAPIUtils;

@@ -1,7 +1,7 @@
 var React = require("react");
 var Link = require("react-router").Link;
 
-var ExploreButton = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <figure className={ this.props.name }>
@@ -12,5 +12,3 @@ var ExploreButton = React.createClass({
     );
   }
 });
-
-module.exports = ExploreButton;

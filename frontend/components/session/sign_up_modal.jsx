@@ -6,11 +6,8 @@ var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
 var SignUpModalStore = require("../../stores/sign_up_modal_store");
-var History = require("react-router").History;
 
-var SignUpModal = React.createClass({
-  mixins: [History],
-
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       errors: SignUpModalStore.getErrors(),
@@ -192,5 +189,3 @@ var SignUpModal = React.createClass({
     );
   }
 });
-
-module.exports = SignUpModal;

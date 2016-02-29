@@ -12,7 +12,7 @@ var SettingsModalStore = require("../../stores/settings_modal_store");
 var SessionStore = require("../../stores/session_store");
 var UserActions = require("../../actions/user_actions");
 
-var Settings = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     var client = SessionStore.getClient();
 
@@ -175,5 +175,3 @@ var Settings = React.createClass({
     );
   }
 });
-
-module.exports = Settings;

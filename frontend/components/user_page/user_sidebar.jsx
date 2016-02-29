@@ -1,21 +1,10 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var UserSidebarAvatar = require("./user_sidebar_avatar");
+var UserSidebarCount = require("./user_sidebar_count");
 
-var UserSidebar = React.createClass({
-  playlistCount: function () {
-    var playlists = this.props.playlists;
-
-    return (playlists ? Object.keys(playlists).length : 0);
-  },
-
-  trackCount: function () {
-    var tracks = this.props.tracks;
-
-    return (tracks ? Object.keys(tracks).length : 0);
-  },
-
-  renderNoUser: function () {
+module.exports = React.createClass({
+  noUser: function () {
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar" />
     );
@@ -24,7 +13,7 @@ var UserSidebar = React.createClass({
   render: function () {
     var user = this.props.user;
 
-    if (!user) { return this.renderNoUser(); }
+    if (!user) { return this.noUser(); }
 
     return (
       <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar">
@@ -37,17 +26,8 @@ var UserSidebar = React.createClass({
         </section>
 
         <section className="user-asset-count">
-          <div className="user-asset">
-            <h4 className="grey-heading">
-              Tracks: { this.trackCount() }
-            </h4>
-          </div>
-
-          <div className="user-asset">
-            <h4 className="grey-heading">
-              Playlists: { this.playlistCount() }
-            </h4>
-          </div>
+          <UserSidebarCount title="Tracks" items={ this.props.tracks } />
+          <UserSidebarCount title="Playlists" items={ this.props.playlists } />
         </section>
 
         <section className="user-profile">
@@ -57,5 +37,3 @@ var UserSidebar = React.createClass({
     );
   }
 });
-
-module.exports = UserSidebar;

@@ -8,7 +8,7 @@ var PlaylistsIndexItem = require("./playlists_index_item");
 var EditPlaylistModal = require("./edit_playlist_modal");
 var DeletePlaylistModal = require("./delete_playlist_modal");
 
-var PlaylistsIndex = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -91,5 +91,3 @@ var PlaylistsIndex = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistsIndex;

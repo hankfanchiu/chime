@@ -3,7 +3,7 @@ var Nav = require("react-bootstrap").Nav;
 var NavItem = require("react-bootstrap").NavItem;
 var SessionActions = require("../../actions/session_actions");
 
-var LoggedOut = React.createClass({
+module.exports = React.createClass({
   render: function () {
     return (
       <Nav pullRight>
@@ -18,5 +18,3 @@ var LoggedOut = React.createClass({
     );
   }
 });
-
-module.exports = LoggedOut;

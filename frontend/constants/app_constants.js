@@ -1,8 +1,8 @@
 var keyMirror = require("keymirror");
 
 module.exports = {
-
   ActionTypes: keyMirror({
+
     // Search
     SEARCH_RESULTS_RECEIVED: null,
     CLEAR_SEARCH_RESULTS: null,
@@ -109,5 +109,4 @@ module.exports = {
     AUDIO_VOLUME_RECEIVED: null,
     AUDIO_DURATION_RECEIVED: null
   })
-
 };

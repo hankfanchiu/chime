@@ -2,7 +2,7 @@ var React = require("react");
 var SessionStore = require("../../stores/session_store");
 var SessionActions = require("../../actions/session_actions");
 
-var Logout = React.createClass({
+module.exports = React.createClass({
   componentWillMount: function () {
     if (SessionStore.isLoggedIn()) {
       SessionActions.logout();
@@ -17,5 +17,3 @@ var Logout = React.createClass({
     return <p>You have been logged out.</p>;
   }
 });
-
-module.exports = Logout;

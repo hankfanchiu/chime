@@ -5,7 +5,7 @@ var SearchStore = require("../../stores/search_store");
 var SearchActions = require("../../actions/search_actions");
 var SearchResults = require("../search/search_results");
 
-var HomeSearch = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       query: "",
@@ -103,5 +103,3 @@ var HomeSearch = React.createClass({
     );
   }
 });
-
-module.exports = HomeSearch;

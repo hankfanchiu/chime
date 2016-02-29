@@ -10,7 +10,7 @@ var AddedTrack = require("./added_track");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
-var PlaylistForm = React.createClass({
+module.exports = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
@@ -23,7 +23,6 @@ var PlaylistForm = React.createClass({
 
   componentDidUpdate: function () {
     var pathname = this.state.pathname;
-
 
     if (pathname) {
       this.setState(this.getInitialState());
@@ -99,5 +98,3 @@ var PlaylistForm = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistForm;

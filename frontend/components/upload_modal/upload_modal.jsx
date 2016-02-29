@@ -14,7 +14,7 @@ var UploadImage = require("./upload_image");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
-var UploadModal = React.createClass({
+module.exports = React.createClass({
   mixins: [LinkedStateMixin, History],
 
   getInitialState: function () {
@@ -187,5 +187,3 @@ var UploadModal = React.createClass({
     );
   }
 });
-
-module.exports = UploadModal;

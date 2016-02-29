@@ -2,7 +2,7 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Button = require("react-bootstrap").Button;
 
-var Dialog = React.createClass({
+module.exports = React.createClass({
   getDefaultProps: function () {
     return {
       header: "Are you sure?",
@@ -37,5 +37,3 @@ var Dialog = React.createClass({
     );
   }
 });
-
-module.exports = Dialog;

@@ -1,6 +1,6 @@
 var React = require("react");
 
-var HeroVideo = React.createClass({
+module.exports = React.createClass({
   render: function () {
     var root = "https://s3-us-west-1.amazonaws.com/chime-audio-assets";
 
@@ -18,5 +18,3 @@ var HeroVideo = React.createClass({
     );
   }
 });
-
-module.exports = HeroVideo;

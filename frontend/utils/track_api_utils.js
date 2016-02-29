@@ -1,4 +1,4 @@
-var TrackAPIUtils = {
+module.exports = {
   fetchTracks: function (username, callback) {
     var url = "/api/tracks";
     if (username) {
@@ -52,5 +52,3 @@ var TrackAPIUtils = {
     });
   }
 };
-
-module.exports = TrackAPIUtils;

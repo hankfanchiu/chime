@@ -1,7 +1,7 @@
 var React = require("react");
 var UploadActions = require("../../actions/upload_actions");
 
-var UploadAudio = React.createClass({
+module.exports = React.createClass({
   _handleFile: function () {
     var file = this.refs.file.files[0];
 
@@ -25,5 +25,3 @@ var UploadAudio = React.createClass({
     );
   }
 });
-
-module.exports = UploadAudio;

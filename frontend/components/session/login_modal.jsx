@@ -7,10 +7,9 @@ var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
 var LoginModalStore = require("../../stores/login_modal_store");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
-var History = require("react-router").History;
 
-var LoginModal = React.createClass({
-  mixins: [LinkedStateMixin, History],
+module.exports = React.createClass({
+  mixins: [LinkedStateMixin],
 
   getInitialState: function () {
     return {
@@ -120,5 +119,3 @@ var LoginModal = React.createClass({
     );
   }
 });
-
-module.exports = LoginModal;

@@ -1,4 +1,4 @@
-var TimeFormatterMixin = {
+module.exports = {
 	secondsToTime: function (secs) {
 		secs = Math.round(secs);
     var hours = Math.floor(secs / (60 * 60));
@@ -31,5 +31,3 @@ var TimeFormatterMixin = {
     }
   }
 };
-
-module.exports = TimeFormatterMixin;

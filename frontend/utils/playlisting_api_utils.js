@@ -1,4 +1,4 @@
-var PlaylistingAPIUtils = {
+module.exports = {
   createPlaylisting: function (playlistingData, callback) {
     $.ajax({
       url: "/api/playlistings",
@@ -17,5 +17,3 @@ var PlaylistingAPIUtils = {
     });
   }
 };
-
-module.exports = PlaylistingAPIUtils;

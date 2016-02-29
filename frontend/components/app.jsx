@@ -11,7 +11,7 @@ var Footer = require("./footer/footer");
 var Player = require("./player/player");
 var Audio = require("./audio");
 
-var App = React.createClass({
+module.exports = React.createClass({
   componentDidMount: function () {
     var username = SessionStore.getClientUsername();
 
@@ -42,5 +42,3 @@ var App = React.createClass({
     );
   }
 });
-
-module.exports = App;

@@ -3,7 +3,7 @@ var Col = require("react-bootstrap").Col;
 var RoundPlayButton = require("../utility/round_play_button");
 var TrackThumbnail = require("../utility/track_thumbnail");
 
-var RandomTrackItem = React.createClass({
+module.exports = React.createClass({
   render: function () {
     var track = this.props.track;
 
@@ -19,5 +19,3 @@ var RandomTrackItem = React.createClass({
     );
   }
 });
-
-module.exports = RandomTrackItem;

@@ -1,10 +1,8 @@
 var React = require("react");
+var Link = require("react-router").Link;
 var PlayerStore = require("../../stores/player_store");
-var History = require("react-router").History;
 
-var Badge = React.createClass({
-  mixins: [History],
-
+module.exports = React.createClass({
   getInitialState: function () {
     return { track: PlayerStore.getTrack() };
   },
@@ -21,21 +19,9 @@ var Badge = React.createClass({
     this.setState(this.getInitialState());
   },
 
-  goToTrack: function () {
-    var track = this.state.track;
-    var pathname = "/" + track.user.username + "/" + track.slug;
-
-    this.history.pushState(null, pathname);
-  },
-
-  goToUser: function () {
-    var pathname = "/" + this.state.track.user.username;
-
-    this.history.pushState(null, pathname);
-  },
-
 	render: function() {
     var track = this.state.track;
+    var username = track.user.username;
 
 		return (
       <figure className="audio-badge">
@@ -46,18 +32,17 @@ var Badge = React.createClass({
 
           <section className="audio-badge-text">
             <span className="username">
-              <a className="username username-small"
-                onClick={ this.goToUser }>
-                { track.user.username }
-              </a>
+              <Link className="username username-small" to={ "/" + username }>
+                { username }
+              </Link>
             </span>
 
             <div className="title-container">
               <span className="title">
-                <a className="title title-small"
-                  onClick={ this.goToTrack }>
+                <Link className="title title-small"
+                  to={ "/" + username + "/" + track.slug }>
                   { track.title }
-                </a>
+                </Link>
               </span>
             </div>
           </section>
@@ -66,5 +51,3 @@ var Badge = React.createClass({
 		);
 	}
 });
-
-module.exports = Badge;

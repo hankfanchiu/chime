@@ -1,7 +1,7 @@
 var React = require("react");
 var SearchItem = require("./search_item");
 
-var SearchResults = React.createClass({
+module.exports = React.createClass({
   trackResults: function () {
     var clearQuery = this.props.clearQuery;
 
@@ -41,5 +41,3 @@ var SearchResults = React.createClass({
     );
   }
 });
-
-module.exports = SearchResults;

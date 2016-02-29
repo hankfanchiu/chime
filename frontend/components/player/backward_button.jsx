@@ -1,7 +1,7 @@
 var React = require("react");
 var PlayerActions = require("../../actions/player_actions");
 
-var BackwardButton = React.createClass({
+module.exports = React.createClass({
   playPreviousTrack: function () {
     PlayerActions.playPreviousTrack();
   },
@@ -17,5 +17,3 @@ var BackwardButton = React.createClass({
     );
   }
 });
-
-module.exports = BackwardButton;

@@ -5,7 +5,7 @@ var Button = require("react-bootstrap").Button;
 var PlaylistingActions = require("../../actions/playlisting_actions");
 var PlaylistListItem = require("./playlist_list_item");
 
-var PlaylistList = React.createClass({
+module.exports = React.createClass({
   createPlaylisting: function (ids) {
     PlaylistingActions.createPlaylisting(ids);
   },
@@ -55,5 +55,3 @@ var PlaylistList = React.createClass({
     );
   }
 });
-
-module.exports = PlaylistList;

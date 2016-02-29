@@ -1,7 +1,7 @@
 var React = require("react");
 var SessionActions = require("../../actions/session_actions");
 
-var JoinButton = React.createClass({
+module.exports = React.createClass({
   signUp: function () {
     SessionActions.showSignUpModal();
   },
@@ -16,5 +16,3 @@ var JoinButton = React.createClass({
     );
   }
 });
-
-module.exports = JoinButton;

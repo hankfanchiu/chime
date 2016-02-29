@@ -2,6 +2,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var PlayerActions = {
+
   // Direct actions for the HTML audio element:
   playAudio: function () {
     AppDispatcher.dispatch({

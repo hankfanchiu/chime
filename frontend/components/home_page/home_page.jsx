@@ -7,7 +7,7 @@ var Search = require("../search/search");
 var RandomTracks = require("./random_tracks");
 var Join = require("./join");
 
-var HomePage = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -57,5 +57,3 @@ var HomePage = React.createClass({
     );
   }
 });
-
-module.exports = HomePage;

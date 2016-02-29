@@ -12,7 +12,7 @@ var EditTrackModal = require("./edit_track_modal");
 var DeleteTrackModal = require("./delete_track_modal");
 var PlaylistModal = require("../playlist_modal/playlist_modal");
 
-var TrackPage = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -88,12 +88,10 @@ var TrackPage = React.createClass({
 
           <EditTrackModal track={ this.state.track }
             pathname={ this.props.location.pathname } />
-          
+
           <DeleteTrackModal track={ this.state.track } />
         </Grid>
       </main>
     );
   }
 });
-
-module.exports = TrackPage;

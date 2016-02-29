@@ -3,7 +3,7 @@ var AudioStore = require("../../stores/audio_store");
 var TimeLabel = require("./time_label");
 var ProgressBar = require("./progress_bar");
 
-var Timeline = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       currentTime: AudioStore.getCurrentTime(),
@@ -36,5 +36,3 @@ var Timeline = React.createClass({
     );
   }
 });
-
-module.exports = Timeline;

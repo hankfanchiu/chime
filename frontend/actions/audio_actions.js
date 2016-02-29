@@ -2,6 +2,7 @@ var AppDispatcher = require("../dispatcher/dispatcher");
 var ActionTypes = require("../constants/app_constants").ActionTypes;
 
 var AudioActions = {
+
   setToIsPlaying: function () {
     AppDispatcher.dispatch({
       actionType: ActionTypes.AUDIO_SET_TO_PLAYING

@@ -11,7 +11,7 @@ var TrackStore = require("../../stores/track_store");
 var PlaylistStore = require("../../stores/playlist_store");
 var UserSidebar = require("./user_sidebar");
 
-var UserPage = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -98,5 +98,3 @@ var UserPage = React.createClass({
     );
   }
 });
-
-module.exports = UserPage;

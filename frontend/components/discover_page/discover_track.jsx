@@ -7,7 +7,7 @@ var AddToPlaylist = require("../utility/add_to_playlist");
 var RoundPlayButton = require("../utility/round_play_button");
 var TrackThumbnail = require("../utility/track_thumbnail");
 
-var DiscoverTrack = React.createClass({
+module.exports = React.createClass({
   addToPlaylist: function () {
     if (this.props.isLoggedIn) {
       this.props.setTrackToAdd(this.props.track);
@@ -39,5 +39,3 @@ var DiscoverTrack = React.createClass({
     );
   }
 });
-
-module.exports = DiscoverTrack;

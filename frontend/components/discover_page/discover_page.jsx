@@ -9,7 +9,7 @@ var DiscoverActions = require("../../actions/discover_actions");
 var DiscoverTrack = require("./discover_track");
 var PlaylistModal = require("../playlist_modal/playlist_modal");
 
-var Discover = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return this.getStateFromStore();
   },
@@ -102,5 +102,3 @@ var Discover = React.createClass({
     );
   }
 });
-
-module.exports = Discover;

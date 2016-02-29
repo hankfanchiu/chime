@@ -4,7 +4,7 @@ var BackwardButton = require("./backward_button");
 var PlayButton = require("./play_button");
 var ForwardButton = require("./forward_button");
 
-var Player = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       isPlaying: AudioStore.isPlaying(),
@@ -37,5 +37,3 @@ var Player = React.createClass({
     );
   }
 });
-
-module.exports = Player;

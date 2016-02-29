@@ -7,7 +7,7 @@ var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 
-var EditPlaylistModal = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       disabled: true,
@@ -119,5 +119,3 @@ var EditPlaylistModal = React.createClass({
     );
   }
 });
-
-module.exports = EditPlaylistModal;
