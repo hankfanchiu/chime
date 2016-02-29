@@ -98,7 +98,7 @@ module.exports = React.createClass({
           placeholder="Search for artists and tracks"
           onChange={ this.handleQueryChange } />
 
-        { this.state.showResults ? this.searchResults() : "" }
+        { this.state.showResults ? this.searchResults() : null }
       </form>
     );
   }

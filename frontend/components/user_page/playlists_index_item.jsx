@@ -99,8 +99,8 @@ module.exports = React.createClass({
             { noTracks ? null : this.trackList() }
 
             <section className="buttons">
-              { this.props.isClient ? this.editButton() : "" }
-              { this.props.isClient ? this.deleteButton() : "" }
+              { this.props.isClient ? this.editButton() : null }
+              { this.props.isClient ? this.deleteButton() : null }
             </section>
           </Col>
         </Row>

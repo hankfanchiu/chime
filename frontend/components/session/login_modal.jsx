@@ -89,7 +89,7 @@ module.exports = React.createClass({
 
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
-            { noErrors ? "" : this.errors() }
+            { noErrors ? null : this.errors() }
 
             <Input type="text"
               label="Username"

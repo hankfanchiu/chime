@@ -8,6 +8,7 @@ var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -87,19 +88,11 @@ module.exports = React.createClass({
   },
 
   errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    if (this.state.errors.length === 0) {
+      return null;
+    } else {
+      return <Errors errors={ this.state.errors } />;
     }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
   },
 
   titleLabel: function () {
@@ -121,8 +114,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal onHide={ this.close }
         dialogClassName="edit-track-modal"
@@ -133,7 +124,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? "" : this.errors() }
+          { this.errors() }
 
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>

@@ -19,7 +19,6 @@ var UserActions = {
   },
 
   // Request actions
-
   fetchUser: function (username) {
     UserAPIUtils.fetchUser(
       username,

@@ -149,7 +149,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? "" : this.errors() }
+          { noErrors ? null : this.errors() }
 
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>

@@ -64,7 +64,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? "" : this.errors() }
+          { noErrors ? null : this.errors() }
 
           <p>
             Are you sure you want to permanently delete this track?

@@ -76,8 +76,8 @@ module.exports = React.createClass({
             <AddToQueue track={ this.props.track } />
             <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
-            { this.props.isClient ? this.editButton() : "" }
-            { this.props.isClient ? this.deleteButton() : "" }
+            { this.props.isClient ? this.editButton() : null }
+            { this.props.isClient ? this.deleteButton() : null }
           </section>
         </Col>
       </Row>

@@ -6,6 +6,7 @@ var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -60,19 +61,11 @@ module.exports = React.createClass({
   },
 
   errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    if (this.state.errors.length === 0) {
+      return null;
+    } else {
+      return <Errors errors={ this.state.errors } />;
     }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
   },
 
   titleLabel: function () {
@@ -87,8 +80,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal onHide={ this.close } show={ this.state.show } bsSize="small">
         <Modal.Header closeButton>
@@ -96,7 +87,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? "" : this.errors() }
+          { this.errors() }
 
           <Input type="text"
             label={ this.titleLabel() }

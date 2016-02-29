@@ -15,6 +15,7 @@ module.exports = React.createClass({
 
           <ul className="footer-nav">
             <h5>COMPANY</h5>
+
             <li><a>About</a></li>
             <li><a>Careers</a></li>
             <li><a>Press</a></li>
@@ -22,6 +23,7 @@ module.exports = React.createClass({
 
           <ul className="footer-nav">
             <h5>COMMUNITIES</h5>
+
             <li><a>Artists</a></li>
             <li><a>Labels</a></li>
             <li><a>Developers</a></li>

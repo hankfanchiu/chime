@@ -51,7 +51,7 @@ module.exports = React.createClass({
   },
 
   trackPathname: function () {
-    return "/" + this.props.username + "/" + this.props.track.slug;
+    return
   },
 
   playTrack: function () {
@@ -60,6 +60,7 @@ module.exports = React.createClass({
 
   render: function () {
     var track = this.props.track;
+    var username = this.props.username;
 
     return (
       <ListGroupItem className="track-index-item">
@@ -81,13 +82,14 @@ module.exports = React.createClass({
 
             <section className="track-heading">
               <h5 className="username">
-                <Link className="username" to={ "/" + this.props.username }>
+                <Link className="username" to={ "/" + username }>
                   { track.user.username }
                 </Link>
               </h5>
 
               <h4 className="title">
-                <Link className="title" to={ this.trackPathname() }>
+                <Link className="title"
+                  to={ "/" + username + "/" + track.slug }>
                   { track.title }
                 </Link>
               </h4>
@@ -97,8 +99,8 @@ module.exports = React.createClass({
               <AddToQueue track={ track } />
               <AddToPlaylist addToPlaylist={ this.addToPlaylist } />
 
-              { this.props.isClient ? this.editButton() : "" }
-              { this.props.isClient ? this.deleteButton() : "" }
+              { this.props.isClient ? this.editButton() : null }
+              { this.props.isClient ? this.deleteButton() : null }
             </section>
           </Col>
         </Row>
