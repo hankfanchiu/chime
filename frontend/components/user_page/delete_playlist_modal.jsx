@@ -1,9 +1,9 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
-var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -18,14 +18,6 @@ module.exports = React.createClass({
     this.listenerToken = PlaylistModalsStore.addListener(this._onChange);
   },
 
-  componentWillReceiveProps: function (nextProps) {
-    var playlist = nextProps.playlist;
-
-    if (playlist) {
-      this.username = playlist.user.username;
-    }
-  },
-
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
@@ -35,11 +27,7 @@ module.exports = React.createClass({
   },
 
   _buttonState: function () {
-    if (this.state.isDeleting) {
-      return "Deleting Playlist...";
-    } else {
-      return "Delete Playlist";
-    }
+    return (this.state.isDeleting ? "Deleting Playlist..." : "Delete Playlist");
   },
 
   close: function () {
@@ -50,17 +38,7 @@ module.exports = React.createClass({
     PlaylistActions.deletePlaylist(this.props.playlist.id);
   },
 
-  errors: function () {
-    return (
-      <Alert bsStyle="danger">
-        An error has occurred. Please refresh the page and try again.
-      </Alert>
-    );
-  },
-
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal bsSize="small" onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -68,7 +46,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? null : this.errors() }
+          <Errors errors={ this.state.errors } />
 
           <p>Are you sure you want to permanently delete this playlist?</p>
         </Modal.Body>

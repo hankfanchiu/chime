@@ -1,12 +1,12 @@
 var React = require("react");
+var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var Modal = require("react-bootstrap").Modal;
-var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
 var LoginModalStore = require("../../stores/login_modal_store");
-var LinkedStateMixin = require("react-addons-linked-state-mixin");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   mixins: [LinkedStateMixin],
@@ -50,10 +50,6 @@ module.exports = React.createClass({
     this.login();
   },
 
-  errors: function () {
-    return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
-  },
-
   loginDemo: function () {
     var demoData = { username: "demo_user", password: "password" };
 
@@ -79,8 +75,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal bsSize="small" onHide={ this.reset } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -89,7 +83,7 @@ module.exports = React.createClass({
 
         <form onSubmit={ this._handleSubmit }>
           <Modal.Body>
-            { noErrors ? null : this.errors() }
+            <Errors errors={ this.state.errors } />
 
             <Input type="text"
               label="Username"

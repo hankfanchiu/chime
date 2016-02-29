@@ -2,7 +2,6 @@ var React = require("react");
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Thumbnail = require("react-bootstrap").Thumbnail;
 var Image = require("react-bootstrap").Image;
 var Button = require("react-bootstrap").Button;
 var SessionStore = require("../../stores/session_store");

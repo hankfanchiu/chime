@@ -5,9 +5,7 @@ var UserSidebarCount = require("./user_sidebar_count");
 
 module.exports = React.createClass({
   noUser: function () {
-    return (
-      <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar" />
-    );
+    return <Col xs={ 3 } sm={ 3 } md={ 3 } className="user-sidebar" />;
   },
 
   render: function () {

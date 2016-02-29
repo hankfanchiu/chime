@@ -1,11 +1,11 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
-var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var UserActions = require("../../actions/user_actions");
 var SessionActions = require("../../actions/session_actions");
 var SignUpModalStore = require("../../stores/sign_up_modal_store");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -84,22 +84,6 @@ module.exports = React.createClass({
     }
   },
 
-  errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
-    }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
-  },
-
   reset: function () {
     this.setState(this.getInitialState());
     SessionActions.closeSignUpModal();
@@ -133,8 +117,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal bsSize="small" onHide={ this.reset } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -143,7 +125,7 @@ module.exports = React.createClass({
 
         <form onSubmit={ this._handleSubmit } ref="form">
           <Modal.Body>
-            { noErrors ? null : this.errors() }
+            <Errors errors={ this.state.errors } />
 
             <Input type="text"
               value={ this.state.username }

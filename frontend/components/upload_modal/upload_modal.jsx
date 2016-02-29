@@ -2,15 +2,15 @@ var React = require("react");
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
-var ProgressBar = require("react-bootstrap").ProgressBar;
 var Button = require("react-bootstrap").Button;
 var UploadStore = require("../../stores/upload_store");
 var UploadActions = require("../../actions/upload_actions");
 var TrackActions = require("../../actions/track_actions");
 var UploadAudio = require("./upload_audio");
 var UploadImage = require("./upload_image");
+var UploadProgress = require("./upload_progress");
+var Errors = require("../utility/errors");
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 var History = require("react-router").History;
 
@@ -61,10 +61,6 @@ module.exports = React.createClass({
     );
   },
 
-  _progressState: function () {
-    if (this.state.progress === 100) { return "success"; }
-  },
-
   _redirectIfSaved: function () {
     var pathname = this.state.pathname;
 
@@ -82,34 +78,11 @@ module.exports = React.createClass({
   },
 
   audioUpload: function () {
-    if (!this.state.progress) { return <UploadAudio />; }
-
-    var isComplete = (this.state.progress === 100);
-
-    return (
-      <div>
-        { isComplete ? "Audio uploaded!" : "Uploading audio..." }
-
-        <ProgressBar now={ this.state.progress } active
-          bsStyle={ this._progressState() } />
-      </div>
-    );
-  },
-
-  errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
+    if (this.state.progress) {
+      return <UploadProgress progress={ this.state.progress } />;
+    } else {
+      return <UploadAudio />;
     }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
   },
 
   reset: function () {
@@ -136,8 +109,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal backdrop="static"
         dialogClassName="upload-modal"
@@ -149,7 +120,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? null : this.errors() }
+          <Errors errors={ this.state.errors } />
 
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>

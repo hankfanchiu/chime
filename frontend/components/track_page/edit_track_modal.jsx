@@ -1,14 +1,15 @@
 var React = require("react");
+var History = require("react-router").History;
 var Modal = require("react-bootstrap").Modal;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var Thumbnail = require("react-bootstrap").Thumbnail;
 var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
-var History = require("react-router").History;
+var UpdateTrackImage = require("../utility/update_track_image");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   mixins: [History],
@@ -67,21 +68,6 @@ module.exports = React.createClass({
     this.setState({ disabled: false, description: description });
   },
 
-  _handleFile: function () {
-    var img = this.refs.file.files[0];
-
-    if (img) {
-      var reader = new FileReader();
-
-      reader.onloadend = function () {
-        this.setState({ imgUrl: reader.result });
-      }.bind(this);
-
-      reader.readAsDataURL(img);
-      this.setState({ disabled: false, img: img });
-    }
-  },
-
   _handleTitleChange: function () {
     var title = this.refs.title.getValue();
 
@@ -98,24 +84,12 @@ module.exports = React.createClass({
     }
   },
 
-  close: function () {
-    TrackActions.closeEditModal();
+  _setState: function (state) {
+    this.setState(state);
   },
 
-  errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
-    }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
+  close: function () {
+    TrackActions.closeEditModal();
   },
 
   titleLabel: function () {
@@ -137,8 +111,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal onHide={ this.close }
         dialogClassName="edit-track-modal"
@@ -149,20 +121,12 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? null : this.errors() }
+          <Errors errors={ this.state.errors } />
 
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
-              <div className="upload-img">
-                <span className="btn btn-default btn-file">
-                  <i className="fa fa-file-image-o"></i> Update image
-
-                    <input type="file" accept="image/*" ref="file"
-                      onChange={ this._handleFile } />
-                  </span>
-
-                <Thumbnail src={ this.state.imgUrl } />
-              </div>
+              <UpdateTrackImage imgUrl={ this.state.imgUrl }
+                setState={ this._setState } />
             </Col>
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>

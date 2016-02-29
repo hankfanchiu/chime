@@ -1,4 +1,5 @@
 var React = require("react");
+var Link = require("react-router").Link;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
@@ -14,7 +15,7 @@ module.exports = React.createClass({
     var track = this.props.track;
 
     if (!track) {
-      return "";
+      return null;
     } else if (track.description === "") {
       return "This track has no description!";
     } else {
@@ -61,9 +62,9 @@ module.exports = React.createClass({
 
         <Col xs={ 6 } sm={ 6 } md={ 6 } className="track-description">
           <h5 className="username">
-            <a className="username" onClick={ this.props.goToUser }>
+            <Link className="username" to={ "/" + user.username }>
               { user.username }
-            </a>
+            </Link>
           </h5>
 
           <p className="track-description">

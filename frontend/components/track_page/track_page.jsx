@@ -64,22 +64,14 @@ module.exports = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
-  goToUser: function () {
-    var pathname = "/" + this.state.user.username;
-
-    this.props.history.pushState(null, pathname);
-  },
-
   render: function () {
     return (
       <main>
         <Grid>
-          <GiantPlayer track={ this.state.track }
-            goToUser={ this.goToUser } />
+          <GiantPlayer track={ this.state.track } />
 
           <TrackDetail track={ this.state.track }
             user={ this.state.user }
-            goToUser={ this.goToUser }
             isLoggedIn={ this.state.isLoggedIn }
             isClient={ this.state.isClient } />
 
@@ -88,7 +80,7 @@ module.exports = React.createClass({
 
           <EditTrackModal track={ this.state.track }
             pathname={ this.props.location.pathname } />
-
+          
           <DeleteTrackModal track={ this.state.track } />
         </Grid>
       </main>

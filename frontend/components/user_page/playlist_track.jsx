@@ -3,7 +3,6 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
-var Glyphicon = require("react-bootstrap").Glyphicon;
 var PlayerActions = require("../../actions/player_actions");
 
 module.exports = React.createClass({

@@ -1,4 +1,5 @@
 var React = require("react");
+var Link = require("react-router").Link;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Image = require("react-bootstrap").Image;
@@ -28,9 +29,9 @@ module.exports = React.createClass({
         <Col xs={ 7 } sm={ 7 } md={ 7 }>
           <section className="giant-track-heading">
             <h3 className="giant-username">
-              <a onClick={ this.props.goToUser }>
+              <Link to={ "/" + track.user.username }>
                 { track.user.username }
-              </a>
+              </Link>
             </h3>
 
             <h1 className="giant-title">

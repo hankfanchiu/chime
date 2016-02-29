@@ -1,9 +1,9 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
-var Alert = require("react-bootstrap").Alert;
 var Button = require("react-bootstrap").Button;
 var TrackModalsStore = require("../../stores/track_modals_store");
 var TrackActions = require("../../actions/track_actions");
+var Errors = require("../utility/errors");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -46,17 +46,7 @@ module.exports = React.createClass({
     TrackActions.deleteTrack(this.props.track.id);
   },
 
-  errors: function () {
-    return (
-      <Alert bsStyle="danger">
-        An error has occurred. Please refresh the page and try again.
-      </Alert>
-    );
-  },
-
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal bsSize="small" onHide={ this.close } show={ this.state.show }>
         <Modal.Header closeButton>
@@ -64,7 +54,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? null : this.errors() }
+          <Errors errors={ this.state.errors } isGeneric={ true } />
 
           <p>
             Are you sure you want to permanently delete this track?

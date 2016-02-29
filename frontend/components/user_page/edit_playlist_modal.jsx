@@ -1,9 +1,7 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
-var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
-var Thumbnail = require("react-bootstrap").Thumbnail;
 var PlaylistModalsStore = require("../../stores/playlist_modals_store");
 var PlaylistActions = require("../../actions/playlist_actions");
 var Errors = require("../utility/errors");
@@ -60,14 +58,6 @@ module.exports = React.createClass({
     PlaylistActions.closeEditModal();
   },
 
-  errors: function () {
-    if (this.state.errors.length === 0) {
-      return null;
-    } else {
-      return <Errors errors={ this.state.errors } />;
-    }
-  },
-
   titleLabel: function () {
     return <span className="required-label">Title</span>;
   },
@@ -87,7 +77,7 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { this.errors() }
+          <Errors errors={ this.state.errors } />
 
           <Input type="text"
             label={ this.titleLabel() }

@@ -1,16 +1,14 @@
 var React = require("react");
 var Modal = require("react-bootstrap").Modal;
-var PageHeader = require("react-bootstrap").PageHeader;
-var Alert = require("react-bootstrap").Alert;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
-var Thumbnail = require("react-bootstrap").Thumbnail;
-var Glyphicon = require("react-bootstrap").Glyphicon;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 var SettingsModalStore = require("../../stores/settings_modal_store");
 var SessionStore = require("../../stores/session_store");
 var UserActions = require("../../actions/user_actions");
+var Errors = require("../utility/errors");
+var SettingsAvatar = require("./settings_avatar");
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -52,20 +50,6 @@ module.exports = React.createClass({
     );
   },
 
-  _handleFile: function () {
-    var reader = new FileReader();
-    var img = this.refs.file.files[0];
-
-    if (img === null) { return; }
-
-    reader.onloadend = function () {
-      this.setState({ avatarUrl: reader.result });
-    }.bind(this);
-
-    reader.readAsDataURL(img);
-    this.setState({ disabled: false, img: img });
-  },
-
   _handleEmailChange: function () {
     var email = this.refs.email.getValue();
     this.setState({ disabled: false, email: email });
@@ -76,28 +60,16 @@ module.exports = React.createClass({
     this.setState({ disabled: false, description: description });
   },
 
+  _setState: function (state) {
+    this.setState(state);
+  },
+
   close: function () {
     UserActions.closeSettingsModal();
   },
 
   emailLabel: function () {
     return <span className="required-label">Email Address</span>;
-  },
-
-  errors: function () {
-    if (this.state.errors.length === 1) {
-      return <Alert bsStyle="danger">{ this.state.errors }</Alert>;
-    }
-
-    var errorList = this.state.errors.map(function (error, idx) {
-      return <li key={ idx }>{ error }</li>;
-    });
-
-    return (
-      <Alert bsStyle="danger">
-        <ul>{ errorList }</ul>
-      </Alert>
-    );
   },
 
   updateUser: function () {
@@ -114,8 +86,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var noErrors = (this.state.errors.length === 0);
-
     return (
       <Modal dialogClassName="settings-modal"
         onHide={ this.close }
@@ -126,20 +96,12 @@ module.exports = React.createClass({
         </Modal.Header>
 
         <Modal.Body>
-          { noErrors ? null : this.errors() }
+          <Errors errors={ this.state.errors } />
 
           <Row>
             <Col xs={ 5 } sm={ 5 } md={ 5 }>
-              <div className="avatar">
-                <span className="btn btn-default btn-file">
-                  <Glyphicon glyph="camera"/> Update avatar
-
-                  <input type="file" accept="image/*" ref="file"
-                    onChange={ this._handleFile } />
-                </span>
-
-                <Thumbnail src={ this.state.avatarUrl } />
-              </div>
+              <SettingsAvatar avatarUrl={ this.state.avatarUrl }
+                setState={ this._setState } />
             </Col>
 
             <Col xs={ 7 } sm={ 7 } md={ 7 }>
