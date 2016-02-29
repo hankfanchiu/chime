@@ -71,7 +71,7 @@ module.exports = React.createClass({
 
   showSignUp: function () {
     this.reset();
-    SessionActions.showSignUpModalModal();
+    SessionActions.showSignUpModal();
   },
 
   render: function () {
