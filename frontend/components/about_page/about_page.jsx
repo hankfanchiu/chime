@@ -14,11 +14,11 @@ module.exports = React.createClass({
           </p>
 
           <p className="lead">
-            Currently, Chime is a work-in-progress, with many new features still in the development process. For more information about how and why this site was built, as well as what's coming next, visit Chime's <a href="https://github.com/hankfanchiu/chime">GitHub repository</a>.
+            Currently, Chime is a work-in-progress, with many new features still in the development process. For more information about how and why this site was built, as well as what's coming next, visit Chime's <a target="_blank" href="https://github.com/hankfanchiu/chime">GitHub repository</a>.
           </p>
 
           <p className="lead">
-            For any questions or feedback (always welcomed!), connect with the <a href="http://fanchiu.com">site creator</a> through <a href="https://github.com/hankfanchiu">GitHub</a>, <a href="https://www.linkedin.com/in/hankfanchiu">LinkedIn</a>, or email.
+            For any questions or feedback (always welcomed!), connect with the <a target="_blank" href="http://fanchiu.com">site creator</a> through <a target="_blank" href="https://github.com/hankfanchiu">GitHub</a>, <a target="_blank"  href="https://www.linkedin.com/in/hankfanchiu">LinkedIn</a>, or email.
           </p>
         </Grid>
       </main>
