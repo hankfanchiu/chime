@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :prevent_if_logged_in, only: :create
   before_action :prevent_if_username_exists, only: :create
-  before_action :require_login, only: [:update , :show ]
+  before_action :require_login, only: :update
 
   def create
     @user = User.new(user_params)
