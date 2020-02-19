@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This project is no longer maintained.
+
 # Chime
 
 Chime is a web application for users to stream and share music. Inspired by SoundCloud, Chime allows users to upload their own audio tracks, create playlists, and discover music by other artists.
