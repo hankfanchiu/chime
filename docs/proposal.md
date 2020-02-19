@@ -1,7 +1,5 @@
 # Proposal
 
-[https://chime.audio](https://chime.audio)
-
 ## Minimum Viable Product
 
 Chime is a web application inspired by SoundCloud, built on Rails and React.js.

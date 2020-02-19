@@ -10,7 +10,7 @@ module.exports = React.createClass({
           <PageHeader>Experience amazing</PageHeader>
 
           <p className="lead">
-            Upload your own audio tracks, create playlists, or discover music by other artists. Inspired by SoundCloud, Chime.audio allows uninterrupted music streaming, even through registration, logging in, or logging out.
+            Upload your own audio tracks, create playlists, or discover music by other artists. Inspired by SoundCloud, Chime allows uninterrupted music streaming, even through registration, logging in, or logging out.
           </p>
 
           <p className="lead">

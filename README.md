@@ -1,10 +1,10 @@
 # Chime
 
-[Chime.audio][chime] is a web application for users to stream and share music. Inspired by SoundCloud, Chime allows users to upload their own audio tracks, create playlists, and discover music by other artists.
+Chime is a web application for users to stream and share music. Inspired by SoundCloud, Chime allows users to upload their own audio tracks, create playlists, and discover music by other artists.
 
 Chime is a personal project by Hank Fanchiu.
 
-![Chime home page: http://www.chime.audio][home page]
+![Chime home page][home page]
 
 ## Features
 
@@ -16,7 +16,7 @@ Chime is a personal project by Hank Fanchiu.
 - Playlists of music tracks to playback tunes in sequence
 - Searching for users and tracks
 
-![demo_user's tracks: http://www.chime.audio/demo_user/tracks][tracks]
+![demo_user's tracks][tracks]
 
 ## Project Design
 
@@ -40,7 +40,6 @@ Chime is only a few degrees above being considered an MVP.
 
 The features that will be added are listed in the [future implementations][future] outline.
 
-[chime]: https://chime.audio
 [home page]: ./docs/images/home_page.png "Chime home page"
 [tracks]: ./docs/images/tracks.png "A user's tracks"
 [proposal]: ./docs/proposal.md
