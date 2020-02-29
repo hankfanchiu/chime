@@ -27,6 +27,13 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
 
+
+    #if they're not logged in or its not thier account
+    if (!logged_in? || !is_current_user?(@user)) 
+      @user.email = nil              
+    end
+
+
     return not_found if @user.nil?
 
     render :show
